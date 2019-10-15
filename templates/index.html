@@ -1,52 +1,5 @@
-{% with messages=get_flashed_messages() %}
-{% if messages%}
-{% for message in messages %}
-    <p>{{ message }}</p>
-{% endfor %}
-{% endif %}
-{% endwith %}
-
-<form action="/add_dinerUser" method="POST">
-    <input type="text" name="numDocument" placeholder="Document">
-    <input type="text" name="firstname" placeholder="First Name">
-    <input type="text" name="secondname" placeholder="Second Name">
-    <input type="text" name="firstLastname" placeholder="First Last Name">
-    <input type="text" name="secondLastname" placeholder="Second Last Name">
-    <input type="text" name="address" placeholder="Address">
-    <input type="text" name="telephone" placeholder="Telephone">
-    <input type="text" name="payMethod" placeholder="Pay Method">
-    <button type="submit">Save</button>
-</form>
-
-<table class="table table-striped table-hover table-bordered table-sm bg-white">
-    <thead>
-      <tr>
-        <td>Document</td>
-        <td>First Name</td>
-        <td>Second Name</td>
-        <td>First Last Name</td>
-        <td>Second Last Name</td>
-        <td>Address</td>
-        <td>Telephone</td>
-        <td>Pay Method</td>
-      </tr>
-    </thead>
-    <tbody>
-      {% for contact in contacts %}
-      <tr>
-        <td>{{contact.2}}</td>
-        <td>{{contact.3}}</td>
-        <td>{{contact.4}}</td>
-        <td>{{contact.5}}</td>
-        <td>{{contact.6}}</td>
-        <td>{{contact.7}}</td>
-        <td>{{contact.8}}</td>
-        <td>{{contact.9}}</td>
-        <td>
-          <a href="/edit_dinerUser/{{contact.0}}" class="btn btn-secondary">Editar</a>
-          <a href="/delete_dinerUser/{{contact.0}}" class="btn btn-danger btn-delete">Eliminar</a>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+{% extends "base_template.html" %}
+{% block title %}Tutorial Flask: Miniblog{% endblock %}
+{% block content %}
+    {{ num_posts }} posts
+{% endblock %}
