@@ -15,7 +15,7 @@ from forms import SignupForm, LoginForm
 
 
 from reservation import reservation
-from models import dinerUser, users
+from models import DinerUser, users, get_user
 
 app=Flask(__name__) #web service
 
@@ -46,18 +46,10 @@ def get_dinerUserJson(id):
   
     try:
         data=data[0]
-        json=jsonify( idUser=id,
-                  numDocument=data[1],
-                  firstname=data[2],
-                  secondname=data[3],
-                  firstLastname=data[4],
-                  secondLastname=data[5],
-                  address=data[6],
-                  telephone=data[7],
-                  payMethod=data[8],
-                  status='1')
+        json=jsonify( status='1',
+                      content=data)
     except:
-	json=jsonify(status='0')
+	    json=jsonify(status='0')
     return json
 
 @app.route('/')
@@ -68,70 +60,68 @@ def Index():
 def add_dinerUser():
     if request.method == 'POST':
         numDocument=request.form['numDocument']
-        firstname=request.form['firstname']
-        secondname=request.form['secondname']
-        firstLastname=request.form['firstLastname']
-        secondLastname=request.form['secondLastname']
+        firstName=request.form['firstname']
+        secondName=request.form['secondname']
+        firstLastName=request.form['firstLastname']
+        secondLastName=request.form['secondLastname']
         address=request.form['address']
         telephone=request.form['telephone']
         payMethod=request.form['payMethod']
 
-        
         ############################################ ADD USER TO DB ############################################
-        cur=mySQL.connection.cursor()
-        cur.execute('CALL add_dinerUser(numDocument, firstname, secondname, firstLastname, secondLastname, address, telephone, payMethod)',
-                    (numDocument, firstname, secondname, firstLastname, secondLastname, address, telephone, payMethod))
-        mySQL.connection.commit()
-        #flash('User Added Succesfully')
-        
-        flash('User Added Succesfully')
-        print(numDocument, firstname)
+        try:
+            cur=mySQL.connection.cursor()
+            cur.execute('CALL add_dinerUser(numDocument, firstname, secondname, firstLastname, secondLastname, address, telephone, payMethod)',
+                       (numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod))
+            mySQL.connection.commit()
+            #flash('User Added Succesfully')
+            print("ADDED:", numDocument, firstName)
+        except Exception as e:
+            print("+++", e) 
+        ############################################ ADD USER TO DB ############################################
+
         return redirect(url_for('Index'))   #redirect
 
 
 @app.route('/edit_dinerUser/<string:id>')
-def get_dinerUser(id):
-    
-    cur=mySQL.connection.cursor()
-    cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(id))
-    data=cur.fetchall()
-    
-    #tmp=(1,1453487801,'pedro','pablo','leon','jaramillo','cra 44 #13-10',8295562,'tarjeta de credito')
-    #data=[tmp]
-    #print(data)
-    return render_template('editDinerUser.html', contact=data[0])
-
-@app.route('/edit_dinerUser/<string:id>')
-def edit_dinerUser():
+def edit_dinerUser(id):
     if request.method=='POST':
         numDocument=request.form['numDocument']
-        firstname=request.form['firstname']
-        secondname=request.form['secondname']
-        firstLastname=request.form['firstLastname']
-        secondLastname=request.form['secondLastname']
+        firstName=request.form['firstname']
+        secondName=request.form['secondname']
+        firstLastName=request.form['firstLastname']
+        secondLastName=request.form['secondLastname']
         address=request.form['address']
         telephone=request.form['telephone']
         payMethod=request.form['payMethod']
 
-        
-        cur=mySQL.connection.cursor()
-        cur.execute('CALL edit_dinerUser(numDocument, firstname, secondname, firstLastname, secondLastname, address, telephone, payMethod)'
-                    (numDocument, firstname, secondname, firstLastname, secondLastname, address, telephone, payMethod))
-        mySQL.connection.commit()
-        flash('User Edited Succesfully')
-        
-        #print(data)
+        ############################################ EDIT USER TO DB ############################################
+        try:
+            cur=mySQL.connection.cursor()
+            cur.execute('CALL edit_dinerUser({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8})'.format(
+                        id, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod))
+            mySQL.connection.commit()
+            #flash('User Edited Succesfully')
+            print("EDITED: ", numDocument, firstName)
+        except Exception as e:
+            print("+++", e)
+        ############################################ EDIT USER TO DB ############################################
+
     return redirect(url_for('Index'))   #redirect
 
 @app.route('/delete_dinerUser/<string:id>')
 def delete_dinerUser(id):
-    
-    cur=mySQL.connection.cursor()
-    cur.execute('DELETE FROM DinerUser WHERE PK_idDiner = {0}'.format(id))
-    mySQL.connection.commit()
-    flash('User Added Succesfully')
-    
-    #flash('User Deleted Succesfully')
+    ############################################ DELETE USER TO DB ############################################
+    try:
+        cur=mySQL.connection.cursor()
+        cur.execute('CALL delete_dinerUser({0})'.format(id))
+        mySQL.connection.commit()
+    except Exception as e:
+        print("+++", e)
+    ############################################ DELETE USER TO DB ############################################
+
+    flash('User Deleted Succesfully')
+    print("DELETED: ",id)
     return redirect(url_for('Index'))   #redirect
 
 
@@ -147,9 +137,9 @@ def login():
         return redirect(url_for('Index'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = get_user(form.email.data)
-        if user is not None and user.check_password(form.password.data):
-            login_user(user, remember=form.remember_me.data)
+        user = get_user(request.form['email'])
+        if user is not None and user.check_password(request.form['password']):
+            login_user(user, remember=False)
             next_page = request.args.get('next')
             if not next_page or url_parse(next_page).netloc != '':
                 next_page = url_for('Index')
@@ -162,18 +152,50 @@ def show_signup_form():
         return redirect(url_for('Index'))
     form = SignupForm()
     if form.validate_on_submit():
-        name = form.name.data
-        email = form.email.data
-        password = form.password.data
-        # Creamos el usuario y lo guardamos
-        user = dinerUser(len(users) + 1, name, email, password)
-        users.append(user)
-        # Dejamos al usuario logueado
-        login_user(user, remember=True)
-        next_page = request.args.get('next', None)
-        if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('Index')
-        return redirect(next_page)
+        """
+        name=form.name.data
+        email=form.email.data
+        password=form.password.data
+        """
+    
+        if request.method == 'POST':
+            numDocument=request.form['numDocument']
+            name=request.form['name']
+            firstName, secondName=map(name.split())
+            lastName=request.form['lastName']
+            firstLastName, secondLastName=map(lastName.split())
+            address=request.form['address']
+            telephone=request.form['telephone']
+            payMethod=request.form['payMethod']
+            userName=request.formm['userName']
+            email=request.form['email']
+            password=request.form['password']
+
+            
+            ############################################ ADD USER TO DB ############################################
+            try:
+                cur=mySQL.connection.cursor()
+                user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
+                password=user.password
+                cur.execute('CALL add_dinerUser({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8})'.format(
+                        (numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)))
+                mySQL.connection.commit()
+                #flash('User Added Succesfully')
+                users.append(user)
+                
+                print("ADDED:", numDocument, userName)
+            except Exception as e:
+                print("+++", e) 
+            ############################################ ADD USER TO DB ############################################
+            # Creamos el usuario y lo guardamos
+            #user = dinerUser(len(users) + 1, name, email, password)
+            #users.append(user)
+            # Dejamos al usuario logueado
+            login_user(user, remember=True)
+            next_page = request.args.get('next', None)
+            if not next_page or url_parse(next_page).netloc != '':
+                next_page = url_for('Index')
+            return redirect(next_page)
     return render_template("signup_form.html", form=form)
     
 
@@ -191,3 +213,4 @@ def load_dinerUser(id):
 
 if __name__=='__main__':
     app.run(port=3000, debug=True, host ='159.65.58.193') #rebug restart all
+    #app.run(port=3000, debug=True) #rebug restart all
