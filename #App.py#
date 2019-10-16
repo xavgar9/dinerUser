@@ -40,12 +40,12 @@ def get_dinerUserJson(id):
     cur=mySQL.connection.cursor()
     cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(id))
     data=cur.fetchall()
+    data=data[0]
     #data=(1,1453487801,'pedro','pablo','leon','jaramillo','cra 44 #13-10',8295562,'tarjeta de credito')
     print(data)
     json=None
   
     try:
-        data=data[0]
         json=jsonify( idUser=id,
                   numDocument=data[1],
                   firstname=data[2],
