@@ -17,11 +17,11 @@
 
         <!--########### Boton Conoce sobre nosotros #############################################################################-->
         <div id="regRectangle18">
-            <button class="ui inverted button">CONOCE SOBRE NOSOTROS</button>
+            <button onclick="window.location.href='{{ url_for('login') }}';" class="ui inverted button">CONOCE SOBRE NOSOTROS</button>
         </div>
         <!--########### Boton Iniciar Sesion #############################################################################-->
         <div id="regIniciaSesin">
-            <a href="ininiciar.html">
+            <a href="{{ url_for('login') }}">
                 <img src="{{ url_for('static', filename='images/IniciaSesin.png') }}">
             </a>
         </div>
