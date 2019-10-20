@@ -26,66 +26,81 @@
             </a>
         </div>
 
-        <!--########### Campo de nombre #############################################################################-->
-        <div id="regPath1893">
-            <div class="ui left icon input">
-                <input type="text" placeholder="NOMBRES">
-                <i class="user icon"></i>
+        <form action="" method="POST" novalidate>
+            {{ form.hidden_tag() }}
+            <!--########### Campo de nombre #############################################################################-->
+            <div id="regPath1893">
+                <div class="ui left icon input">
+                    {{ form.name(size=64) }}<br>
+                    {% for error in form.name.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                    <!--<input type="text" placeholder="NOMBRES">-->
+                    <i class="user icon"></i>
+                </div>
             </div>
-        </div>
-        <!--########### Campo Apellido #############################################################################-->
-        <div id="regRectangle213">
-            <div class="ui left icon input">
-                <input type="text" placeholder="APELLIDOS">
-                <i class="user secret icon"></i>
+            <!--########### Campo Apellido #############################################################################-->
+            <div id="regRectangle213">
+                <div class="ui left icon input">
+                    <input type="text" placeholder="APELLIDOS">
+                    <i class="user secret icon"></i>
+                </div>
             </div>
-        </div>
-        <!--########### Campo de Correo #############################################################################-->
-        <div id="regPath1894">
-            <div class="ui left icon input">
-                <input type="email" placeholder="CORREO ELECTRÓNICO">
-                <i class="at icon"></i>
+            <!--########### Campo de Correo #############################################################################-->
+            <div id="regPath1894">
+                <div class="ui left icon input">
+                    {{ form.email }}<br>
+                    {% for error in form.email.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                    <!--<input type="email" placeholder="CORREO ELECTRÓNICO">-->
+                    <i class="at icon"></i>
+                </div>
             </div>
-        </div>
-        <!--########### Campo nombre de usuario #############################################################################-->
-        <div id="regRectangle214">
-            <div class="ui left icon input">
-                <input type="text" placeholder="NOMBRE DE USUARIO">
-                <i class="user circle icon"></i>
+            <!--########### Campo nombre de usuario #############################################################################-->
+            <div id="regRectangle214">
+                <div class="ui left icon input">
+                    <input type="text" placeholder="NOMBRE DE USUARIO">
+                    <i class="user circle icon"></i>
+                </div>
             </div>
-        </div>
-        <!--########### Campo identificacion #############################################################################-->
-        <div id="regPath18932">
-            <div class="ui left icon input">
-                <input type="text" placeholder="NÚMERO DE IDENTIFICACIÓN">
-                <i class="id card icon"></i>
+            <!--########### Campo identificacion #############################################################################-->
+            <div id="regPath18932">
+                <div class="ui left icon input">
+                    <input type="text" placeholder="NÚMERO DE IDENTIFICACIÓN">
+                    <i class="id card icon"></i>
+                </div>
             </div>
-        </div>
-        <!--########### Campo de telefono celular #############################################################################-->
-        <div id="regPath1896">
-            <div class="ui left icon input">
-                <input type="tel" placeholder="TELÉFONO CELULAR">
-                <i class="mobile alternate icon"></i>
+            <!--########### Campo de telefono celular #############################################################################-->
+            <div id="regPath1896">
+                <div class="ui left icon input">
+                    <input type="tel" placeholder="TELÉFONO CELULAR">
+                    <i class="mobile alternate icon"></i>
+                </div>
             </div>
-        </div>
-        <!--########### Campo de Contraseña #############################################################################-->
-        <div id="regPath1897">
-            <div class="ui left icon input">
-                <input type="password" placeholder="CONTRASEÑA">
-                <i class="key icon"></i>
+            <!--########### Campo de Contraseña #############################################################################-->
+            <div id="regPath1897">
+                <div class="ui left icon input">
+                    {{ form.password }}<br>
+                    {% for error in form.password.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                    <!--<input type="password" placeholder="CONTRASEÑA">-->
+                    <i class="key icon"></i>
+                </div>
             </div>
-        </div>
-        <!--########### Campo de Confirmar contraseña #############################################################################-->
-        <div id="regRectangle21">
-            <div class="ui left icon input">
-                <input type="password" placeholder="CONFIRMAR CONTRASEÑA">
-                <i class="key icon"></i>
+            <!--########### Campo de Confirmar contraseña #############################################################################-->
+            <div id="regRectangle21">
+                <div class="ui left icon input">
+                    <input type="password" placeholder="CONFIRMAR CONTRASEÑA">
+                    <i class="key icon"></i>
+                </div>
             </div>
-        </div>
-        <!--########### Boton Registrarse #############################################################################-->
-        <div id="regRectangle212">
-            <button class="ui inverted secondary button">REGISTRARSE</button>
-        </div>
+            <!--########### Boton Registrarse #############################################################################-->
+            <div id="regRectangle212">
+                <button class="ui inverted secondary button">REGISTRARSE {{ form.submit() }}</button>
+            </div>
+        </form>
     </div>
 </body>
 {% endblock %}

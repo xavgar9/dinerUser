@@ -212,5 +212,5 @@ def load_dinerUser(id):
     return None
 
 if __name__=='__main__':
-    app.run(port=3000, debug=True, host ='159.65.58.193') #rebug restart all, add in server -> , host ='159.65.58.193'
+    app.run(port=3000, debug=True) #rebug restart all, add in server -> , host ='159.65.58.193'
     #app.run(port=3000, debug=True) #rebug restart all
