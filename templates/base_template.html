@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for("static", filename="toastr.min.css") }}">
     <link rel="stylesheet" href="{{ url_for("static", filename="base.css") }}">
     <link rel="stylesheet" href="{{ url_for("static", filename="styles.css") }}">
     <link rel="stylesheet" href="{{ url_for("static", filename="semantic/semantic.min.css") }}">
@@ -22,6 +23,9 @@
             {% endif %}
         </ul>
     </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.4.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='popper.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='toastr.min.js') }}"></script>
     {% block content %}{% endblock %}
     </body>
 </html>

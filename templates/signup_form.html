@@ -31,9 +31,16 @@
             <!--########### Campo de nombre #############################################################################-->
             <div id="regPath1893">
                 <div class="ui left icon input">
-                    {{ form.name(size=64) }}<br>
+                    {{ form.name(size=64) }}
                     {% for error in form.name.errors %}
-                    <span style="color: red;">{{ error }}</span>
+                    <script>
+                        toastr.error('{{ error }}','Error al ingresar Nombre',{
+                            "newestOnTop": true,
+                            "closeButton": true,
+                            "progressBar": true
+                        })
+                    </script>
+                    <!--<span style="color: red;">{{ error }}</span>-->
                     {% endfor %}
                     <!--<input type="text" placeholder="NOMBRES">-->
                     <i class="user icon"></i>
@@ -51,7 +58,14 @@
                 <div class="ui left icon input">
                     {{ form.email }}<br>
                     {% for error in form.email.errors %}
-                    <span style="color: red;">{{ error }}</span>
+                    <script>
+                        toastr.error('{{ error }}','Error al ingresar Correo',{
+                            "newestOnTop": true,
+                            "closeButton": true,
+                            "progressBar": true
+                        })
+                    </script>
+                    <!--<span style="color: red;">{{ error }}</span>-->
                     {% endfor %}
                     <!--<input type="email" placeholder="CORREO ELECTRÓNICO">-->
                     <i class="at icon"></i>
@@ -83,7 +97,14 @@
                 <div class="ui left icon input">
                     {{ form.password }}<br>
                     {% for error in form.password.errors %}
-                    <span style="color: red;">{{ error }}</span>
+                    <script>
+                        toastr.error('{{ error }}','Error al ingresar Contraseña',{
+                            "newestOnTop": true,
+                            "closeButton": true,
+                            "progressBar": true
+                        })
+                    </script>
+                    <!--<span style="color: red;">{{ error }}</span>-->
                     {% endfor %}
                     <!--<input type="password" placeholder="CONTRASEÑA">-->
                     <i class="key icon"></i>
@@ -102,5 +123,8 @@
             </div>
         </form>
     </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.4.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='popper.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='toastr.min.js') }}"></script>
 </body>
 {% endblock %}

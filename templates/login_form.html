@@ -50,7 +50,13 @@
                 <div class="ui left icon input">
                     {{ form.email }}
                     {% for error in form.email.errors %}
-                    <span style="color: red;">{{ error }}</span>
+                    <script>
+                        toastr.error('{{ error }}','Error al ingresar Correo',{
+                            "newestOnTop": true,
+                            "closeButton": true,
+                            "progressBar": true
+                        })
+                    </script>
                     {% endfor %}
                     <!--<input type="email" placeholder="CORREO ELECTRÓNICO">-->
                     <i class="at icon"></i>
@@ -61,7 +67,13 @@
                 <div class="ui left icon input">
                     {{ form.password }}
                     {% for error in form.password.errors %}
-                    <span style="color: red;">{{ error }}</span>
+                    <script>
+                        toastr.error('{{ error }}','Error al ingresar Contraseña',{
+                            "newestOnTop": true,
+                            "closeButton": true,
+                            "progressBar": true
+                        })
+                        </script>
                     {% endfor %}
                     <!--<input type="password" placeholder="CONTRASEÑA">-->
                     <i class="key icon"></i>
