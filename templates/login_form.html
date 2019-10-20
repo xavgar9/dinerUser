@@ -39,27 +39,39 @@
         </div>
         <!--########### Boton de Conoce sobre nosotros #############################################################################-->
         <div id="logRectangle182">
-            <button onclick="window.location.href='{{ url_for('login') }}';" class="ui inverted button">CONOCE SOBRE NOSOTROS</button>
+            <button onclick="window.location.href='https://resvit.wtechnology.co/';" class="ui inverted button">CONOCE SOBRE NOSOTROS</button>
         </div>
 
-        <!--########### Campo de Texto del correo #############################################################################-->
-        <div id="logRectangle21">
-            <div class="ui left icon input">
-                <input type="email" placeholder="CORREO ELECTRÓNICO">
-                <i class="at icon"></i>
+
+        <form action="" method="post" novalidate></form>
+            {{ form.hidden_tag() }}
+            <!--########### Campo de Texto del correo #############################################################################-->
+            <div id="logRectangle21">
+                <div class="ui left icon input">
+                    {{ form.email }}
+                    {% for error in form.email.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                    <!--<input type="email" placeholder="CORREO ELECTRÓNICO">-->
+                    <i class="at icon"></i>
+                </div>
             </div>
-        </div>
-        <!--########### Campo de Texto de la contraseña #############################################################################-->
-        <div id="logRectangle212">
-            <div class="ui left icon input">
-                    <input type="password" placeholder="CONTRASEÑA">
+            <!--########### Campo de Texto de la contraseña #############################################################################-->
+            <div id="logRectangle212">
+                <div class="ui left icon input">
+                    {{ form.password }}
+                    {% for error in form.password.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                    <!--<input type="password" placeholder="CONTRASEÑA">-->
                     <i class="key icon"></i>
+                </div>
             </div>
-        </div>
-        <!--########### Boton Iniciar Sesion #############################################################################-->
-        <div id="logRectangle213">
-            <button class="ui inverted secondary button">INICIAR SESIÓN</button>
-        </div>
+            <!--########### Boton Iniciar Sesion #############################################################################-->
+            <div id="logRectangle213">
+                <button class="ui inverted secondary button">INICIAR SESIÓN {{ form.submit() }}</button>
+            </div>
+        </form>
     </div>
 </body>
 {% endblock %}
