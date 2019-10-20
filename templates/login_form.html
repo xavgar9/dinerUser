@@ -1,28 +1,65 @@
 {% extends "base_template.html" %}
 {% block title %}Login{% endblock %}
 {% block content %}
-    <div>
-        <form action="" method="post" novalidate>
-            {{ form.hidden_tag() }}
-            <div>
-                {{ form.email.label }}
-                {{ form.email }}<br>
-                {% for error in form.email.errors %}
-                <span style="color: red;">{{ error }}</span>
-                {% endfor %}
+<body>
+    <div id="logbackground">
+        <div id="logFondoBlanco"><img src="{{ url_for('static', filename='images/FondoBlanco.png') }}"></div>
+        <div id="logImagendefondocolor"><img src="{{ url_for('static', filename='images/Imagendefondocolor.png') }}"></div>
+        <div id="logImagendeFondonegro"><img src="{{ url_for('static', filename='images/ImagendeFondonegro.png') }}"></div>
+        <div id="logLamejorformadeRealiz">
+            <p style="font-family:Roboto;color:white;font-size: 19px">
+                La mejor forma de Realizar Reservas de tus Restaurantes Favoritos
+                <br>!PRUÉBALO AHORA!
+            </p>
+            <!--<img src="{{ url_for('static', filename='images/LamejorformadeRealiz.png') }}">-->
+        </div>
+        <!--<div id="logPRUEBALOAHORA"><img src="{{ url_for('static', filename='images/PRUEBALOAHORA.png') }}"></div>-->
+        <div id="logLogoBlanco"><img src="{{ url_for('static', filename='images/LogoBlanco.png') }}"></div>
+        <div id="logLogonegro"><img src="{{ url_for('static', filename='images/Logonegro.png') }}"></div>
+        <div id="logOlvidastetuContrasea"><img src="{{ url_for('static', filename='images/OlvidastetuContrasea.png') }}"></div>
+        <div id="loglayer_11"><img src="{{ url_for('static', filename='images/layer_11.png') }}"></div>
+        <div id="logINICIARSESIN">
+            <p style="font-family:Roboto;color:#EFB810;font-size: 16px">INICIAR SESIÓN</p>
+            <!--<img src="{{ url_for('static', filename='images/INICIARSESIN.png') }}">-->
+        </div>
+        <div id="logBIENVENIDOSARESVIT">
+            <h1 style="font-family:Roboto;color:white;font-size: 38px">BIENVENIDOS A RESVIT</h1>
+            <!--<img src="{{ url_for('static', filename='images/BIENVENIDOSARESVIT.png') }}">-->
+        </div>
+        
+        <!--########### Boton de Recuperar Contraseña #############################################################################-->
+        <div id="logRecuprala">
+            <a href="hola.html">
+                <img src="{{ url_for('static', filename='images/Recuprala.png') }}">
+            </a>
+        </div>
+        <!--########### Boton de Registrarte Ahora #############################################################################-->
+        <div id="logRectangle18">
+            <button class="ui inverted button">REGÍSTRATE AHORA</button>
+        </div>
+        <!--########### Boton de Conoce sobre nosotros #############################################################################-->
+        <div id="logRectangle182">
+            <button class="ui inverted button">CONOCE SOBRE NOSOTROS</button>
+        </div>
+
+        <!--########### Campo de Texto del correo #############################################################################-->
+        <div id="logRectangle21">
+            <div class="ui left icon input">
+                <input type="email" placeholder="CORREO ELECTRÓNICO">
+                <i class="at icon"></i>
             </div>
-            <div>
-                {{ form.password.label }}
-                {{ form.password }}<br>
-                {% for error in form.password.errors %}
-                <span style="color: red;">{{ error }}</span>
-                {% endfor %}
+        </div>
+        <!--########### Campo de Texto de la contraseña #############################################################################-->
+        <div id="logRectangle212">
+            <div class="ui left icon input">
+                    <input type="password" placeholder="CONTRASEÑA">
+                    <i class="key icon"></i>
             </div>
-            <div>{{ form.remember_me() }} {{ form.remember_me.label }}</div>
-            <div>
-                {{ form.submit() }}
-            </div>
-        </form>
+        </div>
+        <!--########### Boton Iniciar Sesion #############################################################################-->
+        <div id="logRectangle213">
+            <button class="ui inverted secondary button">INICIAR SESIÓN</button>
+        </div>
     </div>
-    <div>Don't have account? <a href="{{ url_for('show_signup_form') }}">Resgister now</a></div>
+</body>
 {% endblock %}
