@@ -5,10 +5,10 @@ from wtforms.validators import DataRequired, Email, Length
 class SignupForm(FlaskForm):
     name = StringField('First Name', validators=[DataRequired(), Length(max=64)], render_kw={"placeholder": "NOMBRE"})
     lastName = StringField('Last Name', validators=[DataRequired(), Length(max=31)], render_kw={"placeholder": "APELLIDO"})
-    numDocument = StringField('Document', validators=[DataRequired(), Length(max=20)], render_kw={"placeholder": "NUMERO DE DOCUMENTO"})
+    numDocument = StringField('numDocument', validators=[DataRequired(), Length(max=20)], render_kw={"placeholder": "NUMERO DE DOCUMENTO"})
     telephone = StringField('Telephone', validators=[DataRequired(), Length(max=20)], render_kw={"placeholder": "TELEFONO"})
     userName = StringField('UserName', validators=[DataRequired(), Length(max=15)], render_kw={"placeholder": "NOMBRE DE USUARIO"})
-    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "CORREO ELECTRONIO"})
+    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "CORREO ELECTRONICO"})
     password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "CONTRASENA"})
     password2 = PasswordField('Password2', validators=[DataRequired()], render_kw={"placeholder": "CONFIRMAR CONTRASENA"})
     submit = SubmitField('Register')
