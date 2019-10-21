@@ -77,7 +77,7 @@ def add_dinerUser():
             #flash('User Added Succesfully')
             print("ADDED:", numDocument, firstName)
         except Exception as e:
-            print("+++", e) 
+            print("+++add", e) 
         ############################################ ADD USER TO DB ############################################
 
         return redirect(url_for('Index'))   #redirect
@@ -104,7 +104,7 @@ def edit_dinerUser(id):
             #flash('User Edited Succesfully')
             print("EDITED: ", numDocument, firstName)
         except Exception as e:
-            print("+++", e)
+            print("+++edit", e)
         ############################################ EDIT USER TO DB ############################################
 
     return redirect(url_for('Index'))   #redirect
@@ -117,7 +117,7 @@ def delete_dinerUser(id):
         cur.execute('CALL delete_dinerUser({0})'.format(id))
         mySQL.connection.commit()
     except Exception as e:
-        print("+++", e)
+        print("+++del", e)
     ############################################ DELETE USER TO DB ############################################
 
     flash('User Deleted Succesfully')
@@ -186,7 +186,7 @@ def show_signup_form():
                     
                     print("ADDED:", numDocument, userName)
                 except Exception as e:
-                    print("+++", e) 
+                    print("+++reg", e) 
                 ############################################ ADD USER TO DB ############################################
                 # Creamos el usuario y lo guardamos
                 #user = dinerUser(len(users) + 1, name, email, password)
