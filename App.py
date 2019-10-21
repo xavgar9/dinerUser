@@ -181,8 +181,8 @@ def show_signup_form():
                     print("2")
                     password=user.password
                     print("3")
-                    cur.execute('CALL add_dinerUser({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11})'.format(
-                            (PK_IdUser, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)))
+                    cur.execute('CALL add_dinerUser({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8})'.format(
+                            (userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod)))
                     print("4")
                     mySQL.connection.commit()
                     print("5")
@@ -199,6 +199,7 @@ def show_signup_form():
                 #users.append(user)
                 # Dejamos al usuario logueado
                 #user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password, False)
+                user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
                 login_user(user, remember=True)
                 next_page = request.args.get('next', None)
                 if not next_page or url_parse(next_page).netloc != '':
