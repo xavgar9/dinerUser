@@ -71,7 +71,18 @@
             <!--########### Campo Apellido #############################################################################-->
             <div id="regRectangle213">
                 <div class="ui left icon input">
-                    <input type="text" placeholder="APELLIDOS">
+                    {{ form.lastName }}
+                    {% for error in form.lastName.errors %}
+                    <script>
+                        toastr.error('{{ error }}','Error al ingresar Nombre',{
+                            "newestOnTop": true,
+                            "closeButton": true,
+                            "progressBar": true
+                        })
+                    </script>
+                    <!--<span style="color: red;">{{ error }}</span>-->
+                    {% endfor %}
+                    <!--<input type="text" placeholder="APELLIDOS">-->
                     <i class="user secret icon"></i>
                 </div>
             </div>
@@ -96,21 +107,55 @@
             <!--########### Campo nombre de usuario #############################################################################-->
             <div id="regRectangle214">
                 <div class="ui left icon input">
-                    <input type="text" placeholder="NOMBRE DE USUARIO">
+                    <div class="ui left icon input">
+                        {{ form.userName }}
+                        {% for error in form.userName.errors %}
+                        <script>
+                            toastr.error('{{ error }}','Error al ingresar Nombre',{
+                                "newestOnTop": true,
+                                "closeButton": true,
+                                "progressBar": true
+                            })
+                        </script>
+                        <!--<span style="color: red;">{{ error }}</span>-->
+                        {% endfor %}
+                    <!--<input type="text" placeholder="NOMBRE DE USUARIO">-->
                     <i class="user circle icon"></i>
                 </div>
             </div>
             <!--########### Campo identificacion #############################################################################-->
             <div id="regPath18932">
                 <div class="ui left icon input">
-                    <input type="text" placeholder="NÚMERO DE IDENTIFICACIÓN">
+                        {{ form.numDocument }}
+                        {% for error in form.numDocument.errors %}
+                        <script>
+                            toastr.error('{{ error }}','Error al ingresar Nombre',{
+                                "newestOnTop": true,
+                                "closeButton": true,
+                                "progressBar": true
+                            })
+                        </script>
+                        <!--<span style="color: red;">{{ error }}</span>-->
+                        {% endfor %}
+                    <!--<input type="text" placeholder="NÚMERO DE IDENTIFICACIÓN">-->
                     <i class="id card icon"></i>
                 </div>
             </div>
             <!--########### Campo de telefono celular #############################################################################-->
             <div id="regPath1896">
                 <div class="ui left icon input">
-                    <input type="tel" placeholder="TELÉFONO CELULAR">
+                        {{ form.telephone }}
+                        {% for error in form.telephone.errors %}
+                        <script>
+                            toastr.error('{{ error }}','Error al ingresar Nombre',{
+                                "newestOnTop": true,
+                                "closeButton": true,
+                                "progressBar": true
+                            })
+                        </script>
+                        <!--<span style="color: red;">{{ error }}</span>-->
+                        {% endfor %}
+                    <!--<input type="tel" placeholder="TELÉFONO CELULAR">-->
                     <i class="mobile alternate icon"></i>
                 </div>
             </div>
@@ -135,7 +180,18 @@
             <!--########### Campo de Confirmar contraseña #############################################################################-->
             <div id="regRectangle21">
                 <div class="ui left icon input">
-                    <input type="password" placeholder="CONFIRMAR CONTRASEÑA">
+                        {{ form.password2 }}
+                        {% for error in form.password2.errors %}
+                        <script>
+                            toastr.error('{{ error }}','Error al ingresar Nombre',{
+                                "newestOnTop": true,
+                                "closeButton": true,
+                                "progressBar": true
+                            })
+                        </script>
+                        <!--<span style="color: red;">{{ error }}</span>-->
+                        {% endfor %}
+                    <!--<input type="password" placeholder="CONFIRMAR CONTRASEÑA">-->
                     <i class="key icon"></i>
                 </div>
             </div>

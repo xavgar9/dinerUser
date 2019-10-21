@@ -3,15 +3,14 @@ from wtforms import StringField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Email, Length
 
 class SignupForm(FlaskForm):
-    name = StringField('First Name', validators=[DataRequired(), Length(max=64)])
-    lastName = ('Last Name', validators=[DataRequired(), Length(max=31)])
-    address = ('Address', validators=[DataRequired(), Length(max=30)])
-    telephone = ('Telephone', validators=[DataRequired(), Length(max=20)])
-    payMethod = ('Pay Method', validators=[DataRequired(), Length(max=30)])
-    userName = ('UserName', validators=[DataRequired(), Length(max=15)])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField('Password2', validators=[DataRequired()])
+    name = StringField('First Name', validators=[DataRequired(), Length(max=64)], render_kw={"placeholder": "NOMBRE"})
+    lastName = ('Last Name', validators=[DataRequired(), Length(max=31)], render_kw={"placeholder": "APELLIDO"})
+    numDocument = ('Document', validators=[DataRequired(), Length(max=20)], render_kw={"placeholder": "NUMERO DE DOCUMENTO"})
+    telephone = ('Telephone', validators=[DataRequired(), Length(max=20)], render_kw={"placeholder": "TELEFONO"})
+    userName = ('UserName', validators=[DataRequired(), Length(max=15)], render_kw={"placeholder": "NOMBRE DE USUARIO"})
+    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "CORREO ELECTRONIO"})
+    password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "CONTRASENA"})
+    password2 = PasswordField('Password2', validators=[DataRequired()], render_kw={"placeholder": "CONFIRMAR CONTRASENA"})
     submit = SubmitField('Register')
 
 
