@@ -176,13 +176,19 @@ def show_signup_form():
                 user=None
                 try:
                     cur=mySQL.connection.cursor()
+                    print("1")
                     user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
+                    print("2")
                     password=user.password
+                    print("3")
                     cur.execute('CALL add_dinerUser({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11})'.format(
                             (PK_IdUser, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)))
+                    print("4")
                     mySQL.connection.commit()
+                    print("5")
                     #flash('User Added Succesfully')
                     users.append(user)
+                    print("6")
                     
                     print("ADDED:", numDocument, userName)
                 except Exception as e:
