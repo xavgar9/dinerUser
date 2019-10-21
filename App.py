@@ -163,7 +163,7 @@ def show_signup_form():
             #address=request.form['address']
             telephone=request.form['telephone']
             #payMethod=request.form['payMethod']
-            userName=request.formm['userName']
+            userName=request.form['userName']
             email=request.form['email']
             password=request.form['password']
             password2=request.form['password2']
@@ -191,6 +191,7 @@ def show_signup_form():
                 #user = dinerUser(len(users) + 1, name, email, password)
                 #users.append(user)
                 # Dejamos al usuario logueado
+                user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
                 login_user(user, remember=True)
                 next_page = request.args.get('next', None)
                 if not next_page or url_parse(next_page).netloc != '':
