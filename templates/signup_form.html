@@ -126,18 +126,18 @@
             <!--########### Campo identificacion #############################################################################-->
             <div id="regPath18932">
                 <div class="ui left icon input">
-                        {{ form.numDocument }}
-                        {% for error in form.numDocument.errors %}
-                        <script>
-                            toastr.error('{{ error }}','Error al ingresar Nombre',{
-                                "newestOnTop": true,
-                                "closeButton": true,
-                                "progressBar": true
-                            })
-                        </script>
-                        <!--<span style="color: red;">{{ error }}</span>-->
-                        {% endfor %}
-                    <!--<input type="text" placeholder="NÚMERO DE IDENTIFICACIÓN">-->
+                    {{ form.numDocument }}
+                    {% for error in form.numDocument.errors %}
+                    <script>
+                        toastr.error('{{ error }}','Error al ingresar Nombre',{
+                            "newestOnTop": true,
+                            "closeButton": true,
+                            "progressBar": true
+                        })
+                    </script>
+                    <!--<span style="color: red;">{{ error }}</span>-->
+                    {% endfor %}
+                <!--<input type="text" placeholder="NÚMERO DE IDENTIFICACIÓN">-->
                     <i class="id card icon"></i>
                 </div>
             </div>
