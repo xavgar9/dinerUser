@@ -166,32 +166,36 @@ def show_signup_form():
             userName=request.formm['userName']
             email=request.form['email']
             password=request.form['password']
+            password2=request.form['password2']
 
-            
-            ############################################ ADD USER TO DB ############################################
-            try:
-                cur=mySQL.connection.cursor()
-                user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
-                password=user.password
-                cur.execute('CALL add_dinerUser({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8})'.format(
-                        (numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)))
-                mySQL.connection.commit()
-                #flash('User Added Succesfully')
-                users.append(user)
-                
-                print("ADDED:", numDocument, userName)
-            except Exception as e:
-                print("+++", e) 
-            ############################################ ADD USER TO DB ############################################
-            # Creamos el usuario y lo guardamos
-            #user = dinerUser(len(users) + 1, name, email, password)
-            #users.append(user)
-            # Dejamos al usuario logueado
-            login_user(user, remember=True)
-            next_page = request.args.get('next', None)
-            if not next_page or url_parse(next_page).netloc != '':
-                next_page = url_for('Index')
-            return redirect(next_page)
+            if password==password2:
+                ############################################ ADD USER TO DB ############################################
+                PK_IdUser=1 
+                try:
+                    cur=mySQL.connection.cursor()
+                    user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
+                    password=user.password
+                    cur.execute('CALL add_dinerUser({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10})'.format(
+                            (PK_IdUser, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password, password2)))
+                    mySQL.connection.commit()
+                    #flash('User Added Succesfully')
+                    users.append(user)
+                    
+                    print("ADDED:", numDocument, userName)
+                except Exception as e:
+                    print("+++", e) 
+                ############################################ ADD USER TO DB ############################################
+                # Creamos el usuario y lo guardamos
+                #user = dinerUser(len(users) + 1, name, email, password)
+                #users.append(user)
+                # Dejamos al usuario logueado
+                login_user(user, remember=True)
+                next_page = request.args.get('next', None)
+                if not next_page or url_parse(next_page).netloc != '':
+                    next_page = url_for('Index')
+                return redirect(next_page)
+            else:
+                flash('Las contrasenas no coinciden')
     return render_template("signup_form.html", form=form)
     
 
