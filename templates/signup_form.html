@@ -5,13 +5,35 @@
     <div id="regbackground">
         <div id="regFondoColor"><img src="{{ url_for('static', filename='images/FondoColor.png') }}"></div>
         <div id="regFondoNegro"><img src="{{ url_for('static', filename='images/FondoNegro.png') }}"></div>
-        <div id="regREGISTRARSE"><img src="{{ url_for('static', filename='images/REGISTRARSE.png') }}"></div>
+        <div id="regREGISTRARSE">
+            <p style="font-family:Roboto;color:#EFB810;font-size: 16px">REGISTRARSE</p>
+            <!--<img src="{{ url_for('static', filename='images/REGISTRARSE.png') }}">-->
+        </div>
         <div id="regREGSTRATEAHORA"><img src="{{ url_for('static', filename='images/REGSTRATEAHORA.png') }}"></div>
-        <div id="regBIENVENIDOSA"><img src="{{ url_for('static', filename='images/BIENVENIDOSA.png') }}"></div>
-        <div id="regLamejorformadeRealiz"><img src="{{ url_for('static', filename='images/regLamejorformadeRealiz.png') }}"></div>
-        <div id="regdetusRestaurantesFav"><img src="{{ url_for('static', filename='images/detusRestaurantesFav.png') }}"></div>
-        <div id="regPRUEBALOAHORA"><img src="{{ url_for('static', filename='images/regPRUEBALOAHORA.png') }}"></div>
-        <div id="regYatienesunaCuenta"><img src="{{ url_for('static', filename='images/YatienesunaCuenta.png') }}"></div>
+        <div id="regBIENVENIDOSA">
+            <h1 style="font-family:Roboto;color:white;font-size: 38px">BIENVENIDOS A</h1>
+            <!--<img src="{{ url_for('static', filename='images/BIENVENIDOSA.png') }}">-->
+        </div>
+        <div id="regLamejorformadeRealiz">
+            <center><p style="font-family:Roboto;color:white;font-size: 19px">
+                La mejor forma de Realizar Reservas<br>
+                de tus Restaurantes Favoritos<br>
+                !PRUÉBALO AHORA!
+            </p></center>
+            <!--<img src="{{ url_for('static', filename='images/regLamejorformadeRealiz.png') }}">-->
+        </div>
+        <!--<div id="regdetusRestaurantesFav">
+            <img src="{{ url_for('static', filename='images/detusRestaurantesFav.png') }}">
+        </div>
+        <div id="regPRUEBALOAHORA">
+            <img src="{{ url_for('static', filename='images/regPRUEBALOAHORA.png') }}">
+        </div>-->
+        <div id="regYatienesunaCuenta">
+            <p style="font-family:Roboto;color:#756e6e;font-size: 17px">
+                ¿Ya tienes una Cuenta? <b><a href="{{ url_for('login') }}"> Iniciar Sesión</a></b>
+            </p>
+            <!--<img src="{{ url_for('static', filename='images/YatienesunaCuenta.png') }}">-->
+        </div>
         <div id="regLogoBlanco"><img src="{{ url_for('static', filename='images/regLogoBlanco.png') }}"></div>
         <div id="regLogoNegro"><img src="{{ url_for('static', filename='images/regLogoNegro.png') }}"></div>
 
@@ -20,11 +42,11 @@
             <button onclick="window.location.href='https://resvit.wtechnology.co/';" class="ui inverted button">CONOCE SOBRE NOSOTROS</button>
         </div>
         <!--########### Boton Iniciar Sesion #############################################################################-->
-        <div id="regIniciaSesin">
+        <!--<div id="regIniciaSesin">
             <a href="{{ url_for('login') }}">
                 <img src="{{ url_for('static', filename='images/IniciaSesin.png') }}">
             </a>
-        </div>
+        </div>-->
 
         <form action="" method="POST" novalidate>
             {{ form.hidden_tag() }}
