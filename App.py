@@ -157,12 +157,12 @@ def show_signup_form():
         if request.method == 'POST':
             numDocument=request.form['numDocument']
             name=request.form['name']
-            firstName, secondName=map(name.split())
+            firstName, secondName=map(str,name.split())
             lastName=request.form['lastName']
-            firstLastName, secondLastName=map(lastName.split())
-            address=request.form['address']
+            firstLastName, secondLastName=map(str,lastName.split())
+            #address=request.form['address']
             telephone=request.form['telephone']
-            payMethod=request.form['payMethod']
+            #payMethod=request.form['payMethod']
             userName=request.formm['userName']
             email=request.form['email']
             password=request.form['password']
@@ -170,13 +170,15 @@ def show_signup_form():
 
             if password==password2:
                 ############################################ ADD USER TO DB ############################################
-                PK_IdUser=1 
+                PK_IdUser=1
+                address="Direccion"
+                payMethod="payMethoda"
                 try:
                     cur=mySQL.connection.cursor()
                     user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
                     password=user.password
-                    cur.execute('CALL add_dinerUser({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10})'.format(
-                            (PK_IdUser, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password, password2)))
+                    cur.execute('CALL add_dinerUser({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9})'.format(
+                            (PK_IdUser, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)))
                     mySQL.connection.commit()
                     #flash('User Added Succesfully')
                     users.append(user)
