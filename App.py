@@ -127,10 +127,6 @@ def delete_dinerUser(id):
 
 
 #Codigo tomado de: https://j2logo.com/tutorial-flask-leccion-4-login/
-#Codigo tomado de: https://j2logo.com/tutorial-flask-leccion-4-login/
-#Codigo tomado de: https://j2logo.com/tutorial-flask-leccion-4-login/
-#Codigo tomado de: https://j2logo.com/tutorial-flask-leccion-4-login/
-#Codigo tomado de: https://j2logo.com/tutorial-flask-leccion-4-login/
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -212,5 +208,5 @@ def load_dinerUser(id):
     return None
 
 if __name__=='__main__':
-    app.run(port=3000, debug=True) #rebug restart all, add in server -> , host ='159.65.58.193'
-    #app.run(port=3000, debug=True) #rebug restart all
+    app.run(port=3000, debug=True) #rebug restart all local
+    #app.run(port=3000, debug=True, host ='159.65.58.193') #rebug restart all in server

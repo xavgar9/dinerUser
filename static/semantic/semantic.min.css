@@ -8,7 +8,7 @@
  * http://opensource.org/licenses/MIT
  *
  */
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,400italic,700italic&subset=latin);
 /*!
  * # Semantic UI 2.4.0 - Reset
  * http://github.com/semantic-org/semantic-ui/
@@ -246,7 +246,7 @@ body {
  overflow-x:hidden;
  min-width:320px;
  background:#fff;
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto', 'Helvetica Neue', Arial, Helvetica, sans-serif;
  font-size:14px;
  line-height:1.4285em;
  color:rgba(0,0,0,.87);
@@ -257,7 +257,7 @@ h2,
 h3,
 h4,
 h5 {
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto', 'Helvetica Neue', Arial, Helvetica, sans-serif;
  line-height:1.28571429em;
  margin:calc(2rem - .14285714em) 0 1rem;
  font-weight:700;
@@ -389,7 +389,7 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
  vertical-align:baseline;
  background:#e0e1e2 none;
  color:rgba(0,0,0,.6);
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  margin:0 .25em 0 0;
  padding:.78571429em 1.5em .78571429em;
  text-transform:none;
@@ -3874,7 +3874,7 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
  }
 }
 .ui.text.container {
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  max-width:700px!important;
  line-height:1.5
 }
@@ -5100,7 +5100,7 @@ i.flag.zw:before {
  border:none;
  margin:calc(2rem - .14285714em) 0 1rem;
  padding:0 0;
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  font-weight:700;
  line-height:1.28571429em;
  text-transform:none;
@@ -6379,7 +6379,7 @@ i.icon.bus:before {
 i.icon.buysellads:before {
  content:"\f20d"
 }
-i.icon.calculator:before {
+i.icon.calcu'Roboto'r:before {
  content:"\f1ec"
 }
 i.icon.calendar:before {
@@ -10497,7 +10497,7 @@ img.ui.bordered.image {
  -webkit-tap-highlight-color:rgba(255,255,255,0);
  text-align:left;
  line-height:1.21428571em;
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  padding:.67857143em 1em;
  background:#fff;
  border:1px solid rgba(34,36,38,.15);
@@ -11952,7 +11952,7 @@ ul.ui.list ul li {
 .ui.list>.item .header {
  display:block;
  margin:0;
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  font-weight:700;
  color:rgba(0,0,0,.87)
 }
@@ -14108,7 +14108,7 @@ ol.ui.horizontal.list li:before {
  border-radius:.28571429rem
 }
 .ui.steps .step .title {
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  font-size:1.14285714em;
  font-weight:700
 }
@@ -14622,7 +14622,7 @@ ol.ui.horizontal.list li:before {
 .ui.form input[type=text],
 .ui.form input[type=time],
 .ui.form input[type=url] {
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  margin:0;
  outline:0;
  -webkit-appearance:none;
@@ -17147,7 +17147,7 @@ ol.ui.horizontal.list li:before {
  display:-ms-flexbox;
  display:flex;
  margin:1rem 0;
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  background:#fff;
  font-weight:400;
  border:1px solid rgba(34,36,38,.15);
@@ -18712,7 +18712,7 @@ ol.ui.horizontal.list li:before {
 }
 .ui.message .header {
  display:block;
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  font-weight:700;
  margin:-.14285714em 0 0 0
 }
@@ -20215,7 +20215,7 @@ ol.ui.horizontal.list li:before {
 .ui.cards>.card>.content>.header {
  display:block;
  margin:'';
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  color:rgba(0,0,0,.85)
 }
 .ui.card>.content>.header:not(.ui),
@@ -21367,7 +21367,7 @@ a.ui.card:hover {
 .ui.items>.item>.content>.header {
  display:inline-block;
  margin:-.21425em 0 0;
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  font-weight:700;
  color:rgba(0,0,0,.85)
 }
@@ -21663,7 +21663,7 @@ a.ui.card:hover {
 }
 .ui.statistic>.value,
 .ui.statistics .statistic>.value {
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  font-size:4rem;
  font-weight:400;
  line-height:1em;
@@ -21673,7 +21673,7 @@ a.ui.card:hover {
 }
 .ui.statistic>.label,
 .ui.statistics .statistic>.label {
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  font-size:1em;
  font-weight:700;
  color:rgba(0,0,0,.87);
@@ -22060,7 +22060,7 @@ a.ui.card:hover {
 }
 .ui.accordion .title:not(.ui) {
  padding:.5em 0;
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  font-size:1em;
  color:rgba(0,0,0,.87)
 }
@@ -24098,7 +24098,7 @@ select.ui.dropdown {
 }
 .ui.modal>.header {
  display:block;
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  background:#fff;
  margin:0;
  padding:1.25rem 1.5rem;
@@ -24645,7 +24645,7 @@ a.ui.nag {
 }
 .ui.popup>.header {
  padding:0;
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  font-size:1.14285714em;
  line-height:1.2;
  font-weight:700
@@ -25826,7 +25826,7 @@ a.ui.nag {
 }
 .ui.search>.results .result .title {
  margin:-.14285714em 0 0;
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  font-weight:700;
  font-size:1em;
  color:rgba(0,0,0,.85)
@@ -25844,7 +25844,7 @@ a.ui.nag {
  padding:1em 1em
 }
 .ui.search>.results>.message .header {
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  font-size:1rem;
  font-weight:700;
  color:rgba(0,0,0,.87)
@@ -25986,7 +25986,7 @@ a.ui.nag {
  width:100px;
  white-space:nowrap;
  background:0 0;
- font-family:Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+ font-family:'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
  font-size:1em;
  padding:.4em 1em;
  font-weight:700;

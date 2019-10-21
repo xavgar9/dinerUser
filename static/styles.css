@@ -2,6 +2,19 @@
 	margin: 0;
 	padding: 0;
  }
+
+ #miLetra {
+	font-family: 'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
+	font-size: 25px;
+	letter-spacing: 2px;
+	word-spacing: 2px;
+	color: rgb(250, 236, 236);
+	font-weight: 400;
+	text-decoration: none;
+	font-style: normal;
+	font-variant: normal;
+	text-transform: none;
+	}
  
  #logbackground 
 { 
