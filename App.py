@@ -3,6 +3,7 @@
 #pip install flask-mysql
 #pip install flask-login
 #pip install Flask-WTF
+#pip install requests
 
 ############################################ name ############################################
 ##########################################################################################################
@@ -11,6 +12,7 @@ from flask_mysqldb import MySQL
 from flask_login import LoginManager, current_user, logout_user, login_user
 from werkzeug.urls import url_parse
 from forms import SignupForm, LoginForm
+import requests
 
 
 
@@ -34,9 +36,39 @@ login_manager=LoginManager(app)
 login_manager.login_view = "login"
 ##########################################################################################################
 
+
+
+
+##########################################################################################################
+##########################################################################################################
+##################################APIS TEMPORALES DE OTROS MODULOS########################################
+##########################################################################################################
+##########################################################################################################
+@app.route('/loginLaverde/<string:email>/<string:password>', methods=['GET'])
+def loginLaverde(email,password):
+    data={"existe": 1}
+    json=jsonify(status='1',
+                 content=data)
+    return json
+
+@app.route('/registroLaverde/<string:userName>/<string:email>/<string:password>', methods=['GET'])
+def registroLaverde(userName, email, password):
+    data={"PK_User": 1}
+    #data=(userName, email, password)
+    json=jsonify(status='1',
+                 content=data)
+    return json
+
+
+
+##########################################################################################################
+##########################################################################################################
+##########################################################################################################
+##########################################################################################################
+##########################################################################################################
+
 @app.route('/edit_dinerUserJson/<string:id>', methods=['GET'])
 def get_dinerUserJson(id):
-    
     cur=mySQL.connection.cursor()
     cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(id))
     data=cur.fetchall()
@@ -52,35 +84,15 @@ def get_dinerUserJson(id):
 	    json=jsonify(status='0')
     return json
 
+
+@app.route('/chantateTuVIP/<string:id>', methods=['GET'])
+def chantateTuVIP(id):
+    #cursor.stored_results()
+    pass
+
 @app.route('/')
 def Index():
     return render_template('index.html')
-
-@app.route('/add_dinerUser/', methods=['POST'])
-def add_dinerUser():
-    if request.method == 'POST':
-        numDocument=request.form['numDocument']
-        firstName=request.form['firstname']
-        secondName=request.form['secondname']
-        firstLastName=request.form['firstLastname']
-        secondLastName=request.form['secondLastname']
-        address=request.form['address']
-        telephone=request.form['telephone']
-        payMethod=request.form['payMethod']
-
-        ############################################ ADD USER TO DB ############################################
-        try:
-            cur=mySQL.connection.cursor()
-            cur.execute('CALL add_dinerUser(numDocument, firstname, secondname, firstLastname, secondLastname, address, telephone, payMethod)',
-                       (numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod))
-            mySQL.connection.commit()
-            #flash('User Added Succesfully')
-            print("ADDED:", numDocument, firstName)
-        except Exception as e:
-            print("+++add", e) 
-        ############################################ ADD USER TO DB ############################################
-
-        return redirect(url_for('Index'))   #redirect
 
 
 @app.route('/edit_dinerUser/<string:id>')
@@ -114,7 +126,7 @@ def delete_dinerUser(id):
     ############################################ DELETE USER TO DB ############################################
     try:
         cur=mySQL.connection.cursor()
-        cur.execute('CALL delete_dinerUser({0})'.format(id))
+        cur.callproc('delete_dinerUser', [id])
         mySQL.connection.commit()
     except Exception as e:
         print("+++del", e)
@@ -125,24 +137,29 @@ def delete_dinerUser(id):
     return redirect(url_for('Index'))   #redirect
 
 
-
 #Codigo tomado de: https://j2logo.com/tutorial-flask-leccion-4-login/
 @app.route('/login/', methods=['GET', 'POST'])
-def login():
+def login():    
     if current_user.is_authenticated:
         return redirect(url_for('Index'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = get_user(request.form['email'])
-        print(user)
-        if user is not None and user.check_password(request.form['password']):
-            print("LOGIN AQUI")
-            login_user(user, remember=False)
-            print("LOGIN ALLA")
-            next_page = request.args.get('next')
-            if not next_page or url_parse(next_page).netloc != '':
-                next_page = url_for('Index')
-            return redirect(next_page)
+        ##############################################################################
+        email=request.form['email']
+        password=request.form['password']
+        url="http://127.0.0.1:3000/loginLaverde/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
+        response=requests.get(url, params=None)
+        if response.status_code==200:
+            response=response.json()
+            if response["status"]=='1':
+                user=get_user(email,password)
+                if user is not None and user.check_password(str(password)):
+                    login_user(user, remember=False)
+                    next_page = request.args.get('next')
+                    if not next_page or url_parse(next_page).netloc != '':
+                        next_page = url_for('Index')
+                    return redirect(next_page)
+        ##############################################################################
     return render_template('login_form.html', form=form)
 
 @app.route("/signup/", methods=["GET", "POST"])
@@ -176,6 +193,38 @@ def show_signup_form():
                 """
                 Aqui va el API de anderson que me da PK del usuario dado el 
                 nombre de usuario "_id" (string)
+                """
+                url="http://127.0.0.1:3000/registroLaverde/"+str(userName)+"/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
+                response=requests.get(url, params=None)
+                if response.status_code==200:
+                    response=response.json()
+                    if response["status"]=='1':
+                        address=" "; payMethod=" "
+                        user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
+                        password=user.password
+                        PK_IdUser=str(response["content"]["PK_User"])
+                        print("+++++++++")                
+                        print(user)
+                        print(PK_IdUser, address, payMethod)
+                        try:
+                            """
+                            cur=mySQL.connection.cursor()
+                            cur.callproc('add_dinerUser', [userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])
+                            #cur.callproc('add_dinerUser', [PK_IdUser, userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])
+                            mySQL.connection.commit()
+                            """
+                            print("ADDED:", numDocument, userName)
+                            login_user(user, remember=True)
+                            next_page = request.args.get('next', None)
+                            if not next_page or url_parse(next_page).netloc != '':
+                                next_page = url_for('Index')
+                            return redirect(next_page)
+                        except Exception as e:
+                            print("+++reg", e)
+                else:
+                    flash("La contrasenas no coinciden") 
+
+
                 """
                 PK_IdUser=1
                 address="Direccion"
@@ -214,6 +263,7 @@ def show_signup_form():
                 return redirect(next_page)
             else:
                 flash('Las contrasenas no coinciden')
+                """
     return render_template("signup_form.html", form=form)
     
 
@@ -222,26 +272,9 @@ def logout():
     logout_user()
     return redirect(url_for('Index'))  #redirect
 
-@app.route('/forgot', methods=['GET', 'POST'])
+@app.route('/forgot')
 def forgot():
-    """
-    if current_user.is_authenticated:
-        return redirect(url_for('Index'))"""
-    form = LoginForm()
-    """if form.validate_on_submit():
-        user = get_user(request.form['email'])
-        print(user)
-        if user is not None and user.check_password(request.form['password']):
-            print("LOGIN AQUI")
-            login_user(user, remember=False)
-            print("LOGIN ALLA")
-            next_page = request.args.get('next')
-            if not next_page or url_parse(next_page).netloc != '':
-                next_page = url_for('Index')
-            return redirect(next_page)"""
-    return render_template('forgot_form.html', form=form)
-    #return redirect('forgot_form.html')
-    #return render_template("forgot_form.html", form=form)  #redirect
+    return redirect(url_for('Index'))  #redirect
 
 @login_manager.user_loader
 def load_dinerUser(id):

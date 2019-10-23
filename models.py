@@ -23,7 +23,7 @@ class DinerUser(UserMixin):
         return check_password_hash(self.password, password)
     def __repr__(self):
         return '<User {}>'.format(self.email)
-    def get_id(self ):
+    def get_id(self):
         tmp=self.numDocument
         tmp=tmp.decode("utf-8")
         return tmp
@@ -31,15 +31,15 @@ class DinerUser(UserMixin):
 
 ##### PROVISIONAL
 users = []
-def get_user(email):
+def get_user(email,password):
     """
     buscar la password en base de datos
     password=SQL
     """
-    user=DinerUser(0, 0, 0, 0, 0, 0, 0, 0, email, 0, password, False)
+    user=DinerUser("0", 0, 0, 0, 0, 0, 0, 0, email, 0, password, False)
     """
     for user in users:
         if user.email == email:
             return user
     """
-    return None
+    return user
