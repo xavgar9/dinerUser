@@ -28,10 +28,18 @@ class DinerUser(UserMixin):
         tmp=tmp.decode("utf-8")
         return tmp
 
+
 ##### PROVISIONAL
 users = []
 def get_user(email):
+    """
+    buscar la password en base de datos
+    password=SQL
+    """
+    user=DinerUser(0, 0, 0, 0, 0, 0, 0, 0, email, 0, password, False)
+    """
     for user in users:
         if user.email == email:
             return user
+    """
     return None
