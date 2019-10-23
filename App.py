@@ -173,17 +173,27 @@ def show_signup_form():
 
             if password==password2:
                 ############################################ ADD USER TO DB ############################################
+                """
+                Aqui va el API de anderson que me da PK del usuario dado el 
+                nombre de usuario "_id" (string)
+                """
                 PK_IdUser=1
                 address="Direccion"
                 payMethod="payMethod"
                 user=None
                 userName=str(userName); address=str(address); telephone=str(telephone)
                 try:
+                    print(1)
                     cur=mySQL.connection.cursor()
+                    print(2)
                     user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
+                    print(3)
                     password=user.password
+                    print(4)
                     cur.callproc('add_dinerUser', [userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])
+                    print(5)
                     mySQL.connection.commit()
+                    print(6)
                     #flash('User Added Succesfully')
                     users.append(user)
                     
@@ -210,6 +220,10 @@ def show_signup_form():
 @app.route('/logout')
 def logout():
     logout_user()
+    return redirect(url_for('Index'))  #redirect
+
+@app.route('/forgot')
+def forgot():
     return redirect(url_for('Index'))  #redirect
 
 @login_manager.user_loader
