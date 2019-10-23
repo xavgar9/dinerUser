@@ -134,6 +134,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = get_user(request.form['email'])
+        print(user)
         if user is not None and user.check_password(request.form['password']):
             print("LOGIN AQUI")
             login_user(user, remember=False)
@@ -181,7 +182,7 @@ def show_signup_form():
                     cur=mySQL.connection.cursor()
                     user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
                     password=user.password
-                    cur.callproc('add_dinerUser', [userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod)))
+                    cur.callproc('add_dinerUser', [userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])
                     mySQL.connection.commit()
                     #flash('User Added Succesfully')
                     users.append(user)

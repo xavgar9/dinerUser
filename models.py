@@ -15,8 +15,8 @@ class DinerUser(UserMixin):
         self.password = generate_password_hash(password)
         self.is_admin = is_admin
     def __str__(self):
-        tmp=str(self.numDocument)+","str(self.firstName)+","str(self.userName)+","str(self.email)+","str(self.password)
-        return
+        tmp=str(self.numDocument)+","+str(self.firstName)+","+str(self.userName)+","+str(self.email)+","+str(self.password)
+        return tmp
     def set_password(self, password):
         self.password = generate_password_hash(password)
     def check_password(self, password):
