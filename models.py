@@ -14,13 +14,16 @@ class DinerUser(UserMixin):
         self.userName = userName
         self.password = generate_password_hash(password)
         self.is_admin = is_admin
+    def __str__(self):
+        tmp=str(self.numDocument)+","str(self.firstName)+","str(self.userName)+","str(self.email)+","str(self.password)
+        return
     def set_password(self, password):
         self.password = generate_password_hash(password)
     def check_password(self, password):
         return check_password_hash(self.password, password)
     def __repr__(self):
         return '<User {}>'.format(self.email)
-    def get_id():
+    def get_id(self ):
         tmp=self.numDocument
         tmp=tmp.decode("utf-8")
         return tmp

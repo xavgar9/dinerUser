@@ -137,7 +137,7 @@ def login():
         if user is not None and user.check_password(request.form['password']):
             print("LOGIN AQUI")
             login_user(user, remember=False)
-            print("LOGIN ALLÁ")
+            print("LOGIN ALLA")
             next_page = request.args.get('next')
             if not next_page or url_parse(next_page).netloc != '':
                 next_page = url_for('Index')
