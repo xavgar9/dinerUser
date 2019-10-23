@@ -89,16 +89,6 @@
 	 z-index:7;
 } 
 
- #logPRUEBALOAHORA 
-{ 
-	 left: 93px; 
-	 top: 504px; 
-	 position: absolute; 
-	 width: 181px;
-	 height: 15px;
-	 z-index:8;
-} 
-
  #logRectangle182 
 { 
 	 left: 429px; 
@@ -149,6 +139,16 @@
 	 z-index:13;
 } 
 
+#campoRecuperarCo 
+{ 
+	 left: 849px; 
+	 top: 282px; 
+	 position: absolute; 
+	 width: 419px;
+	 height: 56px;
+	 z-index:13;
+} 
+
  #logRectangle212 
 { 
 	 left: 849px; 
@@ -177,16 +177,6 @@
 	 width: 316px;
 	 height: 18px;
 	 z-index:22;
-} 
-
- #logRecuprala 
-{ 
-	 left: 1097px; 
-	 top: 676px; 
-	 position: absolute; 
-	 width: 94px;
-	 height: 17px;
-	 z-index:23;
 } 
 
  #logLogoBlanco 
@@ -345,26 +335,6 @@
 	 z-index:21;
 } 
 
- #regdetusRestaurantesFav 
-{ 
-	 left: 146px; 
-	 top: 487px; 
-	 position: absolute; 
-	 width: 251px;
-	 height: 16px;
-	 z-index:22;
-} 
-
- #regPRUEBALOAHORA 
-{ 
-	 left: 185px; 
-	 top: 515px; 
-	 position: absolute; 
-	 width: 172px;
-	 height: 15px;
-	 z-index:23;
-} 
-
  #regRectangle18 
 { 
 	 left: 116px; 
@@ -383,16 +353,6 @@
 	 width: 287px;
 	 height: 16px;
 	 z-index:26;
-} 
-
- #regIniciaSesin 
-{ 
-	 left: 753px; 
-	 top: 663px; 
-	 position: absolute; 
-	 width: 93px;
-	 height: 13px;
-	 z-index:27;
 } 
 
  #regRectangle212 

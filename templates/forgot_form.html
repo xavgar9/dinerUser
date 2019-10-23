@@ -11,33 +11,21 @@
                 La mejor forma de Realizar Reservas de tus Restaurantes Favoritos
                 <br>!PRUÉBALO AHORA!
             </p>
-            <!--<img src="{{ url_for('static', filename='images/LamejorformadeRealiz.png') }}">-->
         </div>
-        <!--<div id="logPRUEBALOAHORA"><img src="{{ url_for('static', filename='images/PRUEBALOAHORA.png') }}"></div>-->
         <div id="logLogoBlanco"><img src="{{ url_for('static', filename='images/LogoBlanco.png') }}"></div>
         <div id="logLogonegro"><img src="{{ url_for('static', filename='images/Logonegro.png') }}"></div>
         <div id="logOlvidastetuContrasea">
             <p style="font-family:Roboto;color:#756e6e;font-size: 17px">
                 ¿Ya tienes una Cuenta? <b><a href="{{ url_for('login') }}"> Iniciar Sesión</a></b>
             </p>
-            <!--<img src="{{ url_for('static', filename='images/OlvidastetuContrasea.png') }}">-->
         </div>
         <div id="loglayer_11"><img src="{{ url_for('static', filename='images/layer_11.png') }}"></div>
         <div id="recuperarContrasena">
             <p style="font-family:Roboto;color:#EFB810;font-size: 16px">OLVIDÉ CONTRASEÑA</p>
-            <!--<img src="{{ url_for('static', filename='images/INICIARSESIN.png') }}">-->
         </div>
         <div id="logBIENVENIDOSARESVIT">
             <h1 style="font-family:Roboto;color:white;font-size: 38px"><center>RECUPERAR SESIÓN</center></h1>
-            <!--<img src="{{ url_for('static', filename='images/BIENVENIDOSARESVIT.png') }}">-->
         </div>
-        
-        <!--########### Boton de Recuperar Contraseña #############################################################################-->
-        <!--<div id="logRecuprala">
-            <a href="{{ url_for('login') }}">
-                <img src="{{ url_for('static', filename='images/Recuprala.png') }}">
-            </a>
-        </div>-->
         <!--########### Boton de Registrarte Ahora #############################################################################-->
         <div id="logRectangle18">
             <button onclick="window.location.href='{{ url_for('show_signup_form') }}';" class="ui inverted button">REGÍSTRATE AHORA</button>
@@ -51,7 +39,7 @@
         <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
             <!--########### Campo de Texto del correo #############################################################################-->
-            <div id="logRectangle21">
+            <div id="campoRecuperarCo">
                 <div class="ui left icon input">
                     {{ form.email }}
                     {% for error in form.email.errors %}
@@ -63,25 +51,7 @@
                         })
                     </script>
                     {% endfor %}
-                    <!--<input type="email" placeholder="CORREO ELECTRÓNICO">-->
                     <i class="at icon"></i>
-                </div>
-            </div>
-            <!--########### Campo de Texto de la contraseña #############################################################################-->
-            <div id="logRectangle212">
-                <div class="ui left icon input">
-                    {{ form.password }}
-                    {% for error in form.password.errors %}
-                    <script>
-                        toastr.error('{{ error }}','Error al ingresar Contraseña',{
-                            "newestOnTop": true,
-                            "closeButton": true,
-                            "progressBar": true
-                        })
-                        </script>
-                    {% endfor %}
-                    <!--<input type="password" placeholder="CONTRASEÑA">-->
-                    <i class="user circle icon"></i>
                 </div>
             </div>
             <!--########### Boton Iniciar Sesion #############################################################################-->
