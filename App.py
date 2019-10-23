@@ -162,6 +162,11 @@ def login():
         ##############################################################################
     return render_template('login_form.html', form=form)
 
+@app.route('/forgot/', methods=['GET', 'POST'])
+def forgot():   
+    form = LoginForm()
+    return render_template('forgot_form.html', form=form)
+
 @app.route("/signup/", methods=["GET", "POST"])
 def show_signup_form():
     if current_user.is_authenticated:
