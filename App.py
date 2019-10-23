@@ -135,7 +135,9 @@ def login():
     if form.validate_on_submit():
         user = get_user(request.form['email'])
         if user is not None and user.check_password(request.form['password']):
+            print("LOGIN AQUI")
             login_user(user, remember=False)
+            print("LOGIN ALLÁ")
             next_page = request.args.get('next')
             if not next_page or url_parse(next_page).netloc != '':
                 next_page = url_for('Index')
@@ -172,23 +174,17 @@ def show_signup_form():
                 ############################################ ADD USER TO DB ############################################
                 PK_IdUser=1
                 address="Direccion"
-                payMethod="payMethoda"
+                payMethod="payMethod"
                 user=None
+                userName=str(userName); address=str(address); telephone=str(telephone)
                 try:
                     cur=mySQL.connection.cursor()
-                    print("1")
                     user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
-                    print("2")
                     password=user.password
-                    print("3")
-                    cur.execute('CALL add_dinerUser({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8})'.format(
-                            (userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod)))
-                    print("4")
+                    cur.callproc('add_dinerUser', [userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod)))
                     mySQL.connection.commit()
-                    print("5")
                     #flash('User Added Succesfully')
                     users.append(user)
-                    print("6")
                     
                     print("ADDED:", numDocument, userName)
                 except Exception as e:

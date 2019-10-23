@@ -20,6 +20,10 @@ class DinerUser(UserMixin):
         return check_password_hash(self.password, password)
     def __repr__(self):
         return '<User {}>'.format(self.email)
+    def get_id():
+        tmp=self.numDocument
+        tmp=tmp.decode("utf-8")
+        return tmp
 
 ##### PROVISIONAL
 users = []
