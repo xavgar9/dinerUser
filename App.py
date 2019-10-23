@@ -222,9 +222,26 @@ def logout():
     logout_user()
     return redirect(url_for('Index'))  #redirect
 
-@app.route('/forgot')
+@app.route('/forgot', methods=['GET', 'POST'])
 def forgot():
-    return redirect(url_for('Index'))  #redirect
+    """
+    if current_user.is_authenticated:
+        return redirect(url_for('Index'))"""
+    form = LoginForm()
+    """if form.validate_on_submit():
+        user = get_user(request.form['email'])
+        print(user)
+        if user is not None and user.check_password(request.form['password']):
+            print("LOGIN AQUI")
+            login_user(user, remember=False)
+            print("LOGIN ALLA")
+            next_page = request.args.get('next')
+            if not next_page or url_parse(next_page).netloc != '':
+                next_page = url_for('Index')
+            return redirect(next_page)"""
+    return render_template('forgot_form.html', form=form)
+    #return redirect('forgot_form.html')
+    #return render_template("forgot_form.html", form=form)  #redirect
 
 @login_manager.user_loader
 def load_dinerUser(id):
@@ -234,5 +251,5 @@ def load_dinerUser(id):
     return None
 
 if __name__=='__main__':
-    #app.run(port=3000, debug=True) #rebug restart all local
-    app.run(port=3000, debug=True, host ='159.65.58.193') #rebug restart all in server
+    app.run(port=3000, debug=True) #rebug restart all local
+    #app.run(port=3000, debug=True, host ='159.65.58.193') #rebug restart all in server

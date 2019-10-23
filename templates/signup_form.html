@@ -1,5 +1,5 @@
 {% extends "base_template.html" %}
-{% block title %}User register{% endblock %}
+{% block title %}Registrarse Resvit{% endblock %}
 {% block content %}
 <body>
     <div id="regbackground">
@@ -9,7 +9,10 @@
             <p style="font-family:Roboto;color:#EFB810;font-size: 16px">REGISTRARSE</p>
             <!--<img src="{{ url_for('static', filename='images/REGISTRARSE.png') }}">-->
         </div>
-        <div id="regREGSTRATEAHORA"><img src="{{ url_for('static', filename='images/REGSTRATEAHORA.png') }}"></div>
+        <div id="regREGSTRATEAHORA">
+            <p style="font-family:Roboto;color:black;font-size: 42px"><strong>¡REGISTRATE AHORA!</strong></p>
+            <!--<img src="{{ url_for('static', filename='images/REGSTRATEAHORA.png') }}">-->
+        </div>
         <div id="regBIENVENIDOSA">
             <h1 style="font-family:Roboto;color:white;font-size: 38px">BIENVENIDOS A</h1>
             <!--<img src="{{ url_for('static', filename='images/BIENVENIDOSA.png') }}">-->
@@ -62,9 +65,7 @@
                             "progressBar": true
                         })
                     </script>
-                    <!--<span style="color: red;">{{ error }}</span>-->
                     {% endfor %}
-                    <!--<input type="text" placeholder="NOMBRES">-->
                     <i class="user icon"></i>
                 </div>
             </div>
@@ -74,15 +75,13 @@
                     {{ form.lastName }}
                     {% for error in form.lastName.errors %}
                     <script>
-                        toastr.error('{{ error }}','Error al ingresar Nombre',{
+                        toastr.error('{{ error }}','Error al ingresar Apellido',{
                             "newestOnTop": true,
                             "closeButton": true,
                             "progressBar": true
                         })
                     </script>
-                    <!--<span style="color: red;">{{ error }}</span>-->
                     {% endfor %}
-                    <!--<input type="text" placeholder="APELLIDOS">-->
                     <i class="user secret icon"></i>
                 </div>
             </div>
@@ -98,9 +97,7 @@
                             "progressBar": true
                         })
                     </script>
-                    <!--<span style="color: red;">{{ error }}</span>-->
                     {% endfor %}
-                    <!--<input type="email" placeholder="CORREO ELECTRÓNICO">-->
                     <i class="at icon"></i>
                 </div>
             </div>
@@ -110,15 +107,13 @@
                     {{ form.userName }}
                     {% for error in form.userName.errors %}
                     <script>
-                        toastr.error('{{ error }}','Error al ingresar Nombre',{
+                        toastr.error('{{ error }}','Error al ingresar Nombre de Usuario',{
                             "newestOnTop": true,
                             "closeButton": true,
                             "progressBar": true
                         })
                     </script>
-                    <!--<span style="color: red;">{{ error }}</span>-->
                     {% endfor %}
-                    <!--<input type="text" placeholder="NOMBRE DE USUARIO">-->
                     <i class="user circle icon"></i>
                 </div>
             </div>
@@ -128,15 +123,13 @@
                     {{ form.numDocument }}
                     {% for error in form.numDocument.errors %}
                     <script>
-                        toastr.error('{{ error }}','Error al ingresar Nombre',{
+                        toastr.error('{{ error }}','Error al ingresar Número de Documento',{
                             "newestOnTop": true,
                             "closeButton": true,
                             "progressBar": true
                         })
                     </script>
-                    <!--<span style="color: red;">{{ error }}</span>-->
                     {% endfor %}
-                <!--<input type="text" placeholder="NÚMERO DE IDENTIFICACIÓN">-->
                     <i class="id card icon"></i>
                 </div>
             </div>
@@ -146,15 +139,13 @@
                         {{ form.telephone }}
                         {% for error in form.telephone.errors %}
                         <script>
-                            toastr.error('{{ error }}','Error al ingresar Nombre',{
+                            toastr.error('{{ error }}','Error al ingresar Teléfono',{
                                 "newestOnTop": true,
                                 "closeButton": true,
                                 "progressBar": true
                             })
                         </script>
-                        <!--<span style="color: red;">{{ error }}</span>-->
                         {% endfor %}
-                    <!--<input type="tel" placeholder="TELÉFONO CELULAR">-->
                     <i class="mobile alternate icon"></i>
                 </div>
             </div>
@@ -170,9 +161,7 @@
                             "progressBar": true
                         })
                     </script>
-                    <!--<span style="color: red;">{{ error }}</span>-->
                     {% endfor %}
-                    <!--<input type="password" placeholder="CONTRASEÑA">-->
                     <i class="key icon"></i>
                 </div>
             </div>
@@ -182,15 +171,13 @@
                         {{ form.password2 }}
                         {% for error in form.password2.errors %}
                         <script>
-                            toastr.error('{{ error }}','Error al ingresar Nombre',{
+                            toastr.error('{{ error }}','Error al ingresar Confirmar Contraseña',{
                                 "newestOnTop": true,
                                 "closeButton": true,
                                 "progressBar": true
                             })
                         </script>
-                        <!--<span style="color: red;">{{ error }}</span>-->
                         {% endfor %}
-                    <!--<input type="password" placeholder="CONFIRMAR CONTRASEÑA">-->
                     <i class="key icon"></i>
                 </div>
             </div>

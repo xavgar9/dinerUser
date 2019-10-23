@@ -129,6 +129,16 @@
 	 z-index:12;
 } 
 
+#recuperarContrasena 
+{ 
+	 left: 586px; 
+	 top: 35px; 
+	 position: absolute; 
+	 width: 160px;
+	 height: 18px;
+	 z-index:12;
+} 
+
  #logRectangle21 
 { 
 	 left: 849px; 

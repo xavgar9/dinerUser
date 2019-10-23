@@ -1,5 +1,5 @@
 {% extends "base_template.html" %}
-{% block title %}Login{% endblock %}
+{% block title %}Recuperar Contraseña Resvit{% endblock %}
 {% block content %}
 <body>
     <div id="logbackground">
@@ -18,17 +18,17 @@
         <div id="logLogonegro"><img src="{{ url_for('static', filename='images/Logonegro.png') }}"></div>
         <div id="logOlvidastetuContrasea">
             <p style="font-family:Roboto;color:#756e6e;font-size: 17px">
-                ¿Olvidaste tu Contraseña? <b><a href="{{ url_for('login') }}"> Recupérala</a></b>
+                ¿Ya tienes una Cuenta? <b><a href="{{ url_for('login') }}"> Iniciar Sesión</a></b>
             </p>
             <!--<img src="{{ url_for('static', filename='images/OlvidastetuContrasea.png') }}">-->
         </div>
         <div id="loglayer_11"><img src="{{ url_for('static', filename='images/layer_11.png') }}"></div>
-        <div id="logINICIARSESIN">
-            <p style="font-family:Roboto;color:#EFB810;font-size: 16px">INICIAR SESIÓN</p>
+        <div id="recuperarContrasena">
+            <p style="font-family:Roboto;color:#EFB810;font-size: 16px">OLVIDÉ CONTRASEÑA</p>
             <!--<img src="{{ url_for('static', filename='images/INICIARSESIN.png') }}">-->
         </div>
         <div id="logBIENVENIDOSARESVIT">
-            <h1 style="font-family:Roboto;color:white;font-size: 38px">BIENVENIDOS A RESVIT</h1>
+            <h1 style="font-family:Roboto;color:white;font-size: 38px"><center>RECUPERAR SESIÓN</center></h1>
             <!--<img src="{{ url_for('static', filename='images/BIENVENIDOSARESVIT.png') }}">-->
         </div>
         
@@ -81,12 +81,12 @@
                         </script>
                     {% endfor %}
                     <!--<input type="password" placeholder="CONTRASEÑA">-->
-                    <i class="key icon"></i>
+                    <i class="user circle icon"></i>
                 </div>
             </div>
             <!--########### Boton Iniciar Sesion #############################################################################-->
             <div id="logRectangle213">
-                <button class="ui inverted secondary button">INICIAR SESIÓN {{ form.submit() }}</button>
+                <button class="ui inverted secondary button">RECUPERAR CONTRASEÑA {{ form.submit() }}</button>
             </div>
         </form>
     </div>
