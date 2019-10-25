@@ -44,7 +44,7 @@
 		<button class="ui inverted secondary button w">BUSCAR RESTAURANTES</button>
 	</div>
 	<div id="player_27">
-		<button class="ui inverted secondary button w">HISTORIAL DE RESERVAS</button>
+		<button onclick="$('.ui.modal.historyReservas').modal('show');" class="ui inverted secondary button w">HISTORIAL DE RESERVAS</button>
 	</div>
 	<div id="player_29">
 		<button class="ui inverted secondary button w">MIS RESERVAS</button>
@@ -53,14 +53,16 @@
 		<button class="ui inverted secondary button w">BUSCAR RESERVAS PÚBLICAS</button>
 	</div>
 	<div id="pRectangle21">
-		<button onclick="$('.ui.modal').modal('show');" class="ui inverted button">MODIFICAR DATOS</button>
+		<button onclick="$('.ui.modal.modifyUser').modal('show');" class="ui inverted button">MODIFICAR DATOS</button>
 	</div>
 	<div id="pRectangle212">
 		<button onclick="" class="ui inverted button">CERRAR SESIÓN</button>
 	</div>
 </div>
+
+<!--##################### Modal popup Modificar Usuario ###########################################################################-->
 <div class="ui container">
-	<div class="ui modal">
+	<div class="ui modal modifyUser">
 		<i class="close icon"></i>
 		<div class="header">Modificar Datos de Usuario</div>
 		<div class="content">
@@ -154,6 +156,22 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="actions">
+			<div class="ui button">Neutral</div>
+			<div class="ui green approve button">Aceptar</div>
+			<div class="ui red cancel button">Cancelar</div>
+		</div>
+	</div>
+</div>
+
+<!--##################### Modal popup Historial de Reservas ###########################################################################-->
+<div class="ui container">
+	<div class="ui modal historyReservas">
+		<i class="close icon"></i>
+		<div class="header">Modificar Datos de Usuario</div>
+		<div class="content">
+			
 		</div>
 		<div class="actions">
 			<div class="ui button">Neutral</div>
