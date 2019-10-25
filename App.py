@@ -147,7 +147,7 @@ def login():
         ##############################################################################
         email=request.form['email']
         password=request.form['password']
-        url="http://159.65.58.193:3000/loginLaverde/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
+        url="http://127.0.0.1:3000/loginLaverde/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
         response=requests.get(url, params=None)
         if response.status_code==200:
             response=response.json()
@@ -195,7 +195,7 @@ def show_signup_form():
                 Aqui va el API de anderson que me da PK del usuario dado el 
                 nombre de usuario "_id" (string)
                 """
-                url="http://159.65.58.193:3000/registroLaverde/"+str(userName)+"/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
+                url="http://127.0.0.1:3000/registroLaverde/"+str(userName)+"/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
                 response=requests.get(url, params=None)
                 if response.status_code==200:
                     response=response.json()
@@ -295,6 +295,12 @@ def forgot():
     #return render_template("forgot_form.html", form=form)  #redirect
 
 
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+    form = LoginForm()
+    return render_template('profile_view.html', form=form)
+    
+
 @login_manager.user_loader
 def load_dinerUser(id):
     for user in users:
@@ -303,5 +309,5 @@ def load_dinerUser(id):
     return None
 
 if __name__=='__main__':
-    #app.run(port=3000, debug=True) #rebug restart all local
-    app.run(port=3000, debug=True, host ='159.65.58.193') #rebug restart all in server
+    app.run(port=3000, debug=True) #rebug restart all local
+    #app.run(port=3000, debug=True, host ='159.65.58.193') #rebug restart all in server

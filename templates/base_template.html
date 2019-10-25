@@ -6,7 +6,11 @@
     <link rel="stylesheet" href="{{ url_for("static", filename="toastr.min.css") }}">
     <link rel="stylesheet" href="{{ url_for("static", filename="semantic/semantic.min.css") }}">
     <link rel="stylesheet" href="{{ url_for("static", filename="styles.css") }}">
-    <link rel="stylesheet" href="{{ url_for("static", filename="base.css") }}">
+    <style type="text/css">
+        .ui.inverted.secondary.button.w{
+            height: inherit;
+        }
+    </style>
 </head>
 <body>
     <div>
@@ -20,7 +24,7 @@
                 <li> | </li>
                 <li><a href="{{ url_for('forgot') }}">Forgot</a></li>
                 <li> | </li>
-                <li><a href="{{ url_for('forgot') }}">Profile</a></li>
+                <li><a href="{{ url_for('profile') }}">Profile</a></li>
             {% else %}
                 <li>{{ current_user.name }}</li>
                 <li> | </li>
