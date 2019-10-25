@@ -1,7 +1,6 @@
 {% extends "base_template.html" %}
 {% block title %}Perfil de Usuario{% endblock %}
 {% block content %}
-<body>
 	<div id="pbackground">
 		<div id="player_1"><img src="{{ url_for('static', filename='images/layer_1.png') }}"></div>
 		<div id="pBackground8"><img src="{{ url_for('static', filename='images/Background8.png') }}"></div>
@@ -54,11 +53,32 @@
 			<button class="ui inverted secondary button w">BUSCAR RESERVAS PÚBLICAS</button>
 		</div>
 		<div id="pRectangle21">
-			<button onclick="" class="ui inverted button">MODIFICAR DATOS</button>
+			<button onclick="$('.ui.modal').modal('show');" class="ui inverted button">MODIFICAR DATOS</button>
 		</div>
 		<div id="pRectangle212">
 			<button onclick="" class="ui inverted button">CERRAR SESIÓN</button>
 		</div>
 	</div>
-</body>
+	<div class="ui container">
+		<div class="ui modal">
+			<i class="close icon"></i>
+			<div class="header">
+				Hola!
+			</div>
+			<div class="content">
+				<p>Holasadssasdfsnjdfjsndjfnsjdnfjsdnfjnsdjfnjdnvfdnjf</p>
+				sfggdfgdfg
+			</div>
+			<div class="actions">
+				<div class="ui button">Neutral</div>
+				<div class="ui green approve button">Aceptar</div>
+				<div class="ui red cancel button">Cancelar</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		
+	</script>
+	
+
 {% endblock %}
