@@ -1,84 +1,165 @@
 {% extends "base_template.html" %}
 {% block title %}Perfil de Usuario{% endblock %}
 {% block content %}
-	<div id="pbackground">
-		<div id="player_1"><img src="{{ url_for('static', filename='images/layer_1.png') }}"></div>
-		<div id="pBackground8"><img src="{{ url_for('static', filename='images/Background8.png') }}"></div>
-		<div id="pBackground10"><img src="{{ url_for('static', filename='images/Background10.png') }}"></div>
-		<div id="pdashboard3avatar"><img src="{{ url_for('static', filename='images/dashboard3avatar.png') }}"></div>
-		<div id="pSeparator"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
-		<div id="pSeparator2"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
-		<div id="pSeparator3"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
-		<div id="pSeparator4"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
-		<div id="pSeparator5"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
-		<div id="pCapa2"><img src="{{ url_for('static', filename='images/Capa2.png') }}"></div>
-		<div id="pCapa3"><img src="{{ url_for('static', filename='images/Capa3.png') }}"></div>
-		<div id="pBIENVENIDOXAVIHERNAN">
-			<center><p style="font-family:Roboto;color:black;font-size: 42px"><strong>BIENVENIDO XAVI GARZÓN</strong></p></center>
+<div id="pbackground">
+	<div id="player_1"><img src="{{ url_for('static', filename='images/layer_1.png') }}"></div>
+	<div id="pBackground8"><img src="{{ url_for('static', filename='images/Background8.png') }}"></div>
+	<div id="pBackground10"><img src="{{ url_for('static', filename='images/Background10.png') }}"></div>
+	<div id="pdashboard3avatar"><img src="{{ url_for('static', filename='images/dashboard3avatar.png') }}"></div>
+	<div id="pSeparator"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
+	<div id="pSeparator2"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
+	<div id="pSeparator3"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
+	<div id="pSeparator4"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
+	<div id="pSeparator5"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
+	<div id="pCapa2"><img src="{{ url_for('static', filename='images/Capa2.png') }}"></div>
+	<div id="pCapa3"><img src="{{ url_for('static', filename='images/Capa3.png') }}"></div>
+	<div id="pBIENVENIDOXAVIHERNAN">
+		<center><p style="font-family:Roboto;color:black;font-size: 42px"><strong>BIENVENIDO XAVI GARZÓN</strong></p></center>
+	</div>
+	<div id="pJuanitaPerez">
+		<p style="font-family:Roboto;color:white;font-size: 19px">
+			<i class="user icon"></i>
+			Xavi Garzón
+		</p>
+	</div>
+	<div id="pIngdeRequisitos">
+		<p style="font-family:Roboto;color:white;font-size: 19px">
+			<i class="user secret icon"></i>
+			xgusuario
+		</p>
+	</div>
+	<div id="pjuanitarequiml">
+		<p style="font-family:Roboto;color:white;font-size: 19px">
+			<i class="at icon"></i>
+			xg@javerianacali.edu.co
+		</p>
+	</div>
+	<div id="player_57302118294">
+		<p style="font-family:Roboto;color:white;font-size: 19px">
+			<i class="mobile alternate icon"></i>
+			3022118294
+		</p>
+	</div>
+	<div id="pGroup2764">
+		<button class="ui inverted secondary button w">BUSCAR RESTAURANTES</button>
+	</div>
+	<div id="player_27">
+		<button class="ui inverted secondary button w">HISTORIAL DE RESERVAS</button>
+	</div>
+	<div id="player_29">
+		<button class="ui inverted secondary button w">MIS RESERVAS</button>
+	</div>
+	<div id="player_25">
+		<button class="ui inverted secondary button w">BUSCAR RESERVAS PÚBLICAS</button>
+	</div>
+	<div id="pRectangle21">
+		<button onclick="$('.ui.modal').modal('show');" class="ui inverted button">MODIFICAR DATOS</button>
+	</div>
+	<div id="pRectangle212">
+		<button onclick="" class="ui inverted button">CERRAR SESIÓN</button>
+	</div>
+</div>
+<div class="ui container">
+	<div class="ui modal">
+		<i class="close icon"></i>
+		<div class="header">Modificar Datos de Usuario</div>
+		<div class="content">
+			<div class="ui form">
+				<div class="three fields">
+					<div class="field">
+						<label>Nombre</label>
+						<div class="ui left icon input">
+							<input type="text" placeholder="Nombre" value="Xavi Will">
+							<i class="user icon"></i>
+						</div>
+					</div>
+					<div class="field">
+						<label>Apellido</label>
+						<div class="ui left icon input">
+							<input type="text" placeholder="Apellido" value="Garzón Aguirre">
+							<i class="user secret icon"></i>
+						</div>
+					</div>
+					<div class="disabled field">
+						<label>Correo Electrónico</label>
+						<div class="ui left icon input">
+							<input type="text" placeholder="Correo Electrónico" value="xg@javerianacali.edu.co">
+							<i class="at icon"></i>
+						</div>
+					</div>
+				</div>
+				<div class="three fields">
+					<div class="disabled field">
+						<label>Nombre de Usuario</label>
+						<div class="ui left icon input">
+							<input type="text" placeholder="Nombre de Usuario" value="xgusuario">
+							<i class="user circle secret icon"></i>
+						</div>
+					</div>
+					<div class="field">
+						<label>Número de identificación</label>
+						<div class="ui left icon input">
+							<input type="text" placeholder="Número de identificación" value="1116273517">
+							<i class="id card icon"></i>
+						</div>
+					</div>
+					<div class="field">
+						<label>Teléfono</label>
+						<div class="ui left icon input">
+							<input type="text" placeholder="Teléfono" value="3022118294">
+							<i class="mobile alternate icon"></i>
+						</div>
+					</div>
+				</div>
+				<div class="three fields">
+					<div class="field">
+						<label>Dirección</label>
+						<div class="ui left icon input">
+							<input type="text" placeholder="Dirección">
+							<i class="home icon"></i>
+						</div>
+					</div>
+					<div class="field">
+						<label>Método de Pago</label>
+						<select class="ui fluid dropdown">
+							<option value="">Efectivo</option>
+							<option value="AL">Visa</option>
+							<option value="AK">Master Card</option>
+							<option value="AK">Maestro</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>Imágen de Perfil</label>
+						<button class="ui labeled icon button w">
+							<i class="cloud upload icon"></i>
+							Subir imágen de perfil
+						</button>
+						<input type="file" name="myfile" />
+					</div>
+				</div>
+				<div class="two fields">
+					<div class="field">
+						<label>Contraseña</label>
+						<div class="ui left icon input">
+							<input type="password" placeholder="Contraseña" value="1234">
+							<i class="key icon"></i>
+						</div>
+					</div>
+					<div class="field">
+						<label>Confirmar Contraseña</label>
+						<div class="ui left icon input">
+							<input type="password" placeholder="Confirmar Contraseña" value="1234">
+							<i class="key icon"></i>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div id="pJuanitaPerez">
-			<p style="font-family:Roboto;color:white;font-size: 19px">
-				<i class="user icon"></i>
-				Xavi Garzón
-			</p>
-		</div>
-		<div id="pIngdeRequisitos">
-			<p style="font-family:Roboto;color:white;font-size: 19px">
-				<i class="user secret icon"></i>
-				xgusuario
-			</p>
-		</div>
-		<div id="pjuanitarequiml">
-			<p style="font-family:Roboto;color:white;font-size: 19px">
-				<i class="at icon"></i>
-				xg@javerianacali.edu.co
-			</p>
-		</div>
-		<div id="player_57302118294">
-			<p style="font-family:Roboto;color:white;font-size: 19px">
-				<i class="mobile alternate icon"></i>
-				3022118294
-			</p>
-		</div>
-		<div id="pGroup2764">
-			<button class="ui inverted secondary button w">BUSCAR RESTAURANTES</button>
-		</div>
-		<div id="player_27">
-			<button class="ui inverted secondary button w">HISTORIAL DE RESERVAS</button>
-		</div>
-		<div id="player_29">
-			<button class="ui inverted secondary button w">MIS RESERVAS</button>
-		</div>
-		<div id="player_25">
-			<button class="ui inverted secondary button w">BUSCAR RESERVAS PÚBLICAS</button>
-		</div>
-		<div id="pRectangle21">
-			<button onclick="$('.ui.modal').modal('show');" class="ui inverted button">MODIFICAR DATOS</button>
-		</div>
-		<div id="pRectangle212">
-			<button onclick="" class="ui inverted button">CERRAR SESIÓN</button>
+		<div class="actions">
+			<div class="ui button">Neutral</div>
+			<div class="ui green approve button">Aceptar</div>
+			<div class="ui red cancel button">Cancelar</div>
 		</div>
 	</div>
-	<div class="ui container">
-		<div class="ui modal">
-			<i class="close icon"></i>
-			<div class="header">
-				Hola!
-			</div>
-			<div class="content">
-				<p>Holasadssasdfsnjdfjsndjfnsjdnfjsdnfjnsdjfnjdnvfdnjf</p>
-				sfggdfgdfg
-			</div>
-			<div class="actions">
-				<div class="ui button">Neutral</div>
-				<div class="ui green approve button">Aceptar</div>
-				<div class="ui red cancel button">Cancelar</div>
-			</div>
-		</div>
-	</div>
-	<script>
-		
-	</script>
-	
-
+</div>
 {% endblock %}
