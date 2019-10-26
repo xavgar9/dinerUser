@@ -31,12 +31,12 @@ class DinerUser(UserMixin):
 
 ##### PROVISIONAL
 users = []
-def get_user(email,password):
+def getUser(firstName, secondName, lastName, telephone, email,password):
     """
     buscar la password en base de datos
     password=SQL
     """
-    user=DinerUser("0", 0, 0, 0, 0, 0, 0, 0, email, 0, password, False)
+    user=DinerUser("0", firstName, secondName, lastName, 0, 0, telephone, 0, email, 0, password, False)
     """
     for user in users:
         if user.email == email:

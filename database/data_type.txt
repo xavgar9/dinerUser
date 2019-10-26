@@ -1,0 +1,93 @@
+/*TIPOS DE DATOS - ENTRADA DE FUNCIONES Y PROCEDIMIENTOS */
+
+
+/*Funcion que retorna booleano, si la cedula se encuentra registrada o no en la tabla de DinerUser*/
+function validarCedula(cedula int)
+select validarCedula(1045454);
+--------------------------------------------------------------------------------------
+/*Funcion que retorna booleano, si el username se encuentra registrado o no en la tabla User*/
+function validarNickname(user varchar(20))
+select validarNickname('amb18');
+--------------------------------------------------------------------------------------
+/*Funcion que busca el id de un username ingresado por parametro*/
+ function getUserIdByNick(user varchar(20))
+--------------------------------------------------------------------------------------
+/*Funcion que retorna booleano, si el id de usuario se encuentra registrado o no en la tabla User*/
+function validarUsuario(iduser int)
+select validarUsuario(1);
+--------------------------------------------------------------------------------------
+/*Funcion que retorna booleano, si el id de comensal se encuentra registrado o no en la tabla DinerUser*/
+function validarComensal(idDiner int)
+select validarComensal(1);
+--------------------------------------------------------------------------------------
+/*Funcion que retorna booleano, si la fecha es valida(es mayor a la fecha actual) o no en la tabla de membresias*/
+function validarFechaCorte(fecha date)
+select validarFechaCorte('2019-09-13'); --FORMATO FECHA: yyyy-mm-dd
+--------------------------------------------------------------------------------------
+/*Funcion que retorna booleano, si el id de convenio se encuentra registrado  o no en la tabla de convenios*/
+function validarConvenio(idConvenio int)
+select validarConvenio(2);
+--------------------------------------------------------------------------------------
+/*Funcion que retorna booleano, si el DinerUser tiene membresia o no*/
+function userVIP(idDinerUser int)
+/*------------------------------------------------------------------------------------------------------------------------*/
+--PROCEDIMIENTOS:
+/*Procedimiento que crea un usuario en la tabla User*/
+procedure addUser(tipo INT,IN usuario varchar(20) ,IN contrasena varchar(20),IN correo varchar(30))
+--------------------------------------------------------------------------------------------------------------------------- 
+/*Procedimiento que crea un usuario-comensal en la tabla DinerUser*/
+procedure add_dinerUser(IN userNick varchar(20), IN cedula INT,IN nombre char(15),IN segundoNombre char(15) ,IN apellido char(15),IN segundoApellido char(15),IN direccion char(30), IN telefono bigint, IN pago varchar(30))
+call add_dinerUser('amb18',1528439127,'carlos','andres','ramos','mendez','cll 5 #54bis-08',3016981201,'tarjeta de credito');
+------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Procedimiento que crea una membresia en la tabla VIPMembership*/
+procedure crearMembresia(IN idComensal INT, IN fechaCorte DATE)
+call crearMembresia(1, '2020-05-15');
+------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Procedimiento que crea un registro en la tabla transaccional Agreem_DinerU*/
+procedure crearAsociacionConvenio(IN idComensal INT, IN idConvenio INT)
+call crearAsociacionConvenio(1,2);
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Procedimiento que modifica la fecha de corte de una membresia conociendo el idDiner*/
+procedure modificarMembresia(IN usuario INT, IN fechaCorte DATE)
+call modificarMembresia(1,'2020-02-10');
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Procedimiento que modifica la fecha de corte de una membresia conociendo la cedula del usuario*/
+procedure modificarMembresiaCedula(IN cedula BIGINT, IN fechaCorte DATE)
+call modificarMembresiaCedula(1453487801,'2019-12-12');
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Procedimientos unitarios que modifican los datos de una cuenta de usuario comensal*/
+procedure modificarPrimerNombre(IN cedula INT,IN nuevoNombre char(15))
+
+procedure modificarSegundoNombre(IN cedula INT,IN nuevoSegundoNombre char(15))
+call modificarSegundoNombre(1453487801,'fernando');
+
+procedure modificarApellido(IN cedula INT,IN apellido char(15))
+
+procedure modificarSegundoApellido(IN cedula INT,IN segundoApellido char(15))
+
+procedure modificarDireccion(IN cedula INT,IN dir char(15))
+
+procedure modificarTelefono(IN cedula INT,IN tel char(15))
+
+procedure modificarMPago(IN cedula INT,IN metodo char(15))
+
+/*Procedimiento que modifica TODOS los atributos de una cuenta de usuario comensal*/
+procedure edit_dinerUser(IN cedula INT,IN nuevoNombre char(15), IN segundoNombre char(15) ,IN apellido char(15),IN segundoApellido char(15),IN direccion char(30), IN telefono bigint,IN pago varchar(30))
+call modificarComensal(1453487801,'carlos', 'andres', 'Berrio', 'Lazo', 'cll 22 #13bis-02',3005481201,'bitcoin');
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--DELETES:
+/*Procedimiento que elimina la cuenta de un usuario comensal*/
+procedure delete_dinerUser(IN cedula INT)
+call EliminarComensal(1528439127);
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Procedimiento que elimina la membresia actual de un usuario conociendo su id de usuario-comensal*/
+
+procedure EliminarMembresia(IN idDiner INT)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Procedimiento que elimina la membresia actual de un usuario conociendo su cedula*/
+
+procedure EliminarMembresiaCedula(IN cedula BIGINT)
+
+call EliminarMembresiaCedula(1453487801);
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------

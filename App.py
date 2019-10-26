@@ -17,7 +17,7 @@ import requests
 
 
 from reservation import reservation
-from models import DinerUser, users, get_user
+from models import DinerUser, users, getUser
 
 app=Flask(__name__) #web service
 
@@ -46,7 +46,7 @@ login_manager.login_view = "login"
 ##########################################################################################################
 @app.route('/loginLaverde/<string:email>/<string:password>', methods=['GET'])
 def loginLaverde(email,password):
-    data={"existe": 1}
+    data={"PK_IdUser": 1}
     json=jsonify(status='1',
                  content=data)
     return json
@@ -67,8 +67,8 @@ def registroLaverde(userName, email, password):
 ##########################################################################################################
 ##########################################################################################################
 
-@app.route('/edit_dinerUserJson/<string:id>', methods=['GET'])
-def get_dinerUserJson(id):
+@app.route('/getDinerUserById/<string:id>', methods=['GET'])
+def getDinerUserById(id):
     cur=mySQL.connection.cursor()
     cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(id))
     data=cur.fetchall()
@@ -85,18 +85,30 @@ def get_dinerUserJson(id):
     return json
 
 
-@app.route('/chantateTuVIP/<string:id>', methods=['GET'])
-def chantateTuVIP(id):
+@app.route('/isVIP/<string:id>/', methods=['GET'])
+def isVIP(id):
+    id=int(id)
+    json=None
+    try:
+        cur=mySQL.connection.cursor()
+        cur.callproc('idDinerUser', [id])
+        data=cur.stored_results()
+        json=jsonify( status='1',
+                      content=data[0])
+    except Exception as e:
+        json=jsonify( status='2',
+                      content=e)
+        print("+++isVIP", e)
     #cursor.stored_results()
-    pass
+    return json
 
 @app.route('/')
 def Index():
     return render_template('index.html')
 
 
-@app.route('/edit_dinerUser/<string:id>')
-def edit_dinerUser(id):
+@app.route('/editDinerUserById/<string:id>')
+def editDinerUserById(id):
     if request.method=='POST':
         numDocument=request.form['numDocument']
         firstName=request.form['firstname']
@@ -121,18 +133,17 @@ def edit_dinerUser(id):
 
     return redirect(url_for('Index'))   #redirect
 
-@app.route('/delete_dinerUser/<string:id>')
-def delete_dinerUser(id):
+@app.route('/deleteDinerUserById/<string:id>')
+def deleteDinerUserById(id):
     ############################################ DELETE USER TO DB ############################################
     try:
         cur=mySQL.connection.cursor()
         cur.callproc('delete_dinerUser', [id])
         mySQL.connection.commit()
     except Exception as e:
-        print("+++del", e)
+        print("+++deleteDinerUserById", e)
     ############################################ DELETE USER TO DB ############################################
-
-    flash('User Deleted Succesfully')
+    #flash('User Deleted Succesfully')
     print("DELETED: ",id)
     return redirect(url_for('Index'))   #redirect
 
@@ -152,29 +163,34 @@ def login():
         if response.status_code==200:
             response=response.json()
             if response["status"]=='1':
-                user=get_user(email,password)
-                if user is not None and user.check_password(str(password)):
-                    login_user(user, remember=False)
-                    next_page = request.args.get('next')
+                PK_IdUser=response["content"]["PK_IdUser"]
+                try:
+                    cur=mySQL.connection.cursor()
+                    cur.execute('SELECT firstName, secondName, lastName, telephone, email  FROM DinerUser WHERE PK_idDiner = {0}'.format(PK_IdUser))
+                    data=cur.fetchall()
+                    firstName=data[0][0]; secondName=data[0][1]
+                    lastName=data[0][2]; telephone=data[0][3]
+                    email=data[0][4]
+                    user=getUser(firstName, secondName, lastName, telephone, email,password)
+                    if user is not None and user.check_password(str(password)):
+                        login_user(user, remember=False)
+                        next_page = request.args.get('next')
                     if not next_page or url_parse(next_page).netloc != '':
                         next_page = url_for('Index')
                     return redirect(next_page)
+                except Exception as e:
+                    flash("datos incorrectos")
+                    print("+++login", e)                      
         ##############################################################################
     return render_template('login_form.html', form=form)
 
 
 @app.route("/signup/", methods=["GET", "POST"])
-def show_signup_form():
+def signup():
     if current_user.is_authenticated:
         return redirect(url_for('Index'))
     form = SignupForm()
     if form.validate_on_submit():
-        """
-        name=form.name.data
-        email=form.email.data
-        password=form.password.data
-        """
-    
         if request.method == 'POST':
             numDocument=request.form['numDocument']
             name=request.form['name']
@@ -191,10 +207,6 @@ def show_signup_form():
 
             if password==password2:
                 ############################################ ADD USER TO DB ############################################
-                """
-                Aqui va el API de anderson que me da PK del usuario dado el 
-                nombre de usuario "_id" (string)
-                """
                 url="http://127.0.0.1:3000/registroLaverde/"+str(userName)+"/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
                 response=requests.get(url, params=None)
                 if response.status_code==200:
@@ -207,8 +219,7 @@ def show_signup_form():
                         print("+++++++++")                
                         print(user)
                         print(PK_IdUser, address, payMethod)
-                        try:
-                            
+                        try:                            
                             cur=mySQL.connection.cursor()
                             cur.callproc('add_dinerUser', [userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])
                             #cur.callproc('add_dinerUser', [PK_IdUser, userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])
@@ -224,47 +235,6 @@ def show_signup_form():
                             print("+++reg", e)
                 else:
                     flash("La contrasenas no coinciden") 
-
-
-                """
-                PK_IdUser=1
-                address="Direccion"
-                payMethod="payMethod"
-                user=None
-                userName=str(userName); address=str(address); telephone=str(telephone)
-                try:
-                    print(1)
-                    cur=mySQL.connection.cursor()
-                    print(2)
-                    user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
-                    print(3)
-                    password=user.password
-                    print(4)
-                    cur.callproc('add_dinerUser', [userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])
-                    print(5)
-                    mySQL.connection.commit()
-                    print(6)
-                    #flash('User Added Succesfully')
-                    users.append(user)
-                    
-                    print("ADDED:", numDocument, userName)
-                except Exception as e:
-                    print("+++reg", e) 
-                ############################################ ADD USER TO DB ############################################
-                # Creamos el usuario y lo guardamos
-                #user = dinerUser(len(users) + 1, name, email, password)
-                #users.append(user)
-                # Dejamos al usuario logueado
-                #user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password, False)
-                user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
-                login_user(user, remember=True)
-                next_page = request.args.get('next', None)
-                if not next_page or url_parse(next_page).netloc != '':
-                    next_page = url_for('Index')
-                return redirect(next_page)
-            else:
-                flash('Las contrasenas no coinciden')
-                """
     return render_template("signup_form.html", form=form)
     
 
@@ -280,7 +250,7 @@ def forgot():
         return redirect(url_for('Index'))"""
     form = LoginForm()
     """if form.validate_on_submit():
-        user = get_user(request.form['email'])
+        user = getUser(request.form['email'])
         print(user)
         if user is not None and user.check_password(request.form['password']):
             print("LOGIN AQUI")
@@ -298,15 +268,19 @@ def forgot():
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     form = LoginForm()
-    return render_template('profile_view.html', form=form)
+    if current_user.is_authenticated:
+        return render_template('profile_view.html', form=form)
+    else:
+        return redirect(url_for('login'))
     
-
+    
 @login_manager.user_loader
-def load_dinerUser(id):
+def loadDinerUser(id):
     for user in users:
         if user.id == int(id):
             return user
     return None
+
 
 if __name__=='__main__':
     app.run(port=3000, debug=True) #rebug restart all local
