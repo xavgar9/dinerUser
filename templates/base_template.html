@@ -28,15 +28,31 @@
                 <li><a href="{{ url_for('forgot') }}">Forgot</a></li>
                 <li> | </li>
                 <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            {% else %}
+                <li>{{ current_user.name }}</li>
                 <li> | </li>
-                <li><a href="{{ url_for('logout') }}">Logout5</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% endif %}
         </ul>
     </div>
     <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.4.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='semantic/semantic.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='popper.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='toastr.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='toastr.min.js') }}"></script>>
     {% block content %}{% endblock %}
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <script>
+                    toastr.{{ category }}('{{ message }}',{
+                        "newestOnTop": true,
+                        "closeButton": true,
+                        "progressBar": true
+                    })
+                </script>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 </body>
 </html>
