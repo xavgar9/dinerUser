@@ -10,13 +10,12 @@ IP="127.0.0.1:3000"
 
 ############################################ name ############################################
 ##########################################################################################################
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
 from flask_mysqldb import MySQL
 from flask_login import LoginManager, current_user, logout_user, login_user
 from werkzeug.urls import url_parse
 from forms import SignupForm, LoginForm
 import requests
-
 
 
 from reservation import reservation
@@ -34,7 +33,7 @@ mySQL=MySQL(app)   #data base connection
 ##########################################################################################################
 
 ################################################ SETTINGS ################################################
-app.secret_key=' suPerLlavE'
+app.secret_key=' suMegAHiperPerLlavEs3Cr3t4'
 login_manager=LoginManager(app)
 login_manager.login_view = "login"
 ##########################################################################################################
@@ -49,7 +48,7 @@ login_manager.login_view = "login"
 ##########################################################################################################
 @app.route('/loginLaverde/<string:email>/<string:password>', methods=['GET'])
 def loginLaverde(email,password):
-    data={"PK_IdUser": 1}
+    data={"PK_IdUser": 1, "userName": "xg"}
     json=jsonify(status='1',
                  content=data)
     return json
@@ -61,7 +60,6 @@ def registroLaverde(userName, email, password):
     json=jsonify(status='1',
                  content=data)
     return json
-
 
 
 ##########################################################################################################
@@ -78,7 +76,6 @@ def getDinerUserById(id):
     #data=(1,1453487801,'pedro','pablo','leon','jaramillo','cra 44 #13-10',8295562,'tarjeta de credito')
     print(data)
     json=None
-  
     try:
         data=data[0]
         json=jsonify( status='1',
@@ -107,8 +104,9 @@ def isVIP(id):
 
 @app.route('/')
 def Index():
-    if current_user.is_authenticated:
-        print(user)
+    if "firstName" in session:
+        print("INDEX")
+        print(session)
     return render_template('index.html')
 
 
@@ -132,6 +130,7 @@ def editDinerUserById(id):
             mySQL.connection.commit()
             #flash('User Edited Succesfully')
             print("EDITED: ", numDocument, firstName)
+            flash("Informacion editada correctamente", "success")
         except Exception as e:
             print("+++edit", e)
         ############################################ EDIT USER TO DB ############################################
@@ -156,126 +155,149 @@ def deleteDinerUserById(id):
 #Codigo tomado de: https://j2logo.com/tutorial-flask-leccion-4-login/
 @app.route('/login/', methods=['GET', 'POST'])
 def login():    
-    if current_user.is_authenticated:
-        return redirect(url_for('Index'))
     form = LoginForm()
-    if form.validate_on_submit():
-        ##############################################################################
-        email=request.form['email']
-        password=request.form['password']
-        url="http://"+IP+"/loginLaverde/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
-        response=requests.get(url, params=None)
-        if response.status_code==200:
-            response=response.json()
-            if response["status"]=='1':
-                PK_IdUser=response["content"]["PK_IdUser"]
-                try:
-                    cur=mySQL.connection.cursor()
-                    cur.execute('SELECT firstName, secondName, firstLastName, telephone  FROM DinerUser WHERE PK_idDiner = {0}'.format(PK_IdUser))
-                    data=cur.fetchall()
-                    firstName=str(data[0][0]); secondName=str(data[0][1])
-                    lastName=str(data[0][2]); telephone=data[0][3]
-                    user=getUser(firstName, secondName, lastName, telephone, email, password)
-                    if user is not None and user.check_password(str(password)):
-                        login_user(user, remember=False)
-                        next_page = request.args.get('next')
-                    if not next_page or url_parse(next_page).netloc != '':
-                        next_page = url_for('Index')
-                    return redirect(next_page)
-                except Exception as e:
-                    flash("datos incorrectos")
-                    print("+++login", e)                      
+    print("BUENAS")
+    if "firstName" in session:
+        print("LOGIN")
+        print(session)
+        return redirect(url_for('Index'))
+    else:
+        if form.validate_on_submit():
+            ##############################################################################
+            email=request.form['email']
+            password=request.form['password']
+            url="http://"+IP+"/loginLaverde/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
+            response=requests.get(url, params=None)
+            if response.status_code==200:
+                response=response.json()
+                if response["status"]=='1':
+                    PK_IdUser=response["content"]["PK_IdUser"]
+                    userName=response["content"]["userName"]
+                    try:            
+      
+                        cur=mySQL.connection.cursor()
+                        cur.execute('SELECT firstName, secondName, firstLastName, telephone  FROM DinerUser WHERE PK_idDiner = {0}'.format(PK_IdUser))
+                        data=cur.fetchall()
+                        firstName=str(data[0][0]); secondName=str(data[0][1])
+                        lastName=str(data[0][2]); telephone=data[0][3]
+
+                        """
+                        firstName="Xavier"; secondName=""
+                        lastName="Garzon"; telephone=316455412
+                        """
+
+                        user=getUser(firstName, secondName, lastName, telephone, email, password)
+                        
+                        next_page=None
+                        if user is not None:
+                            login_user(user, remember=False)                            
+                            session["firstName"]=firstName
+                            session["secondName"]=secondName
+                            session["lastName"]=lastName
+                            session["telephone"]=telephone
+                            session["email"]=email    
+                            session["userName"]=userName                    
+                            
+                            next_page = request.args.get('next')
+                        if not next_page or url_parse(next_page).netloc != '':
+                            next_page = url_for('Index')
+                        return redirect(next_page)
+                    except Exception as e:
+                        flash("Datos incorrectos", "error")
+                        print("+++login", e)                      
         ##############################################################################
     return render_template('login_form.html', form=form)
 
 
 @app.route("/signup/", methods=["GET", "POST"])
 def signup():
-    if current_user.is_authenticated:
-        return redirect(url_for('Index'))
     form = SignupForm()
-    if form.validate_on_submit():
-        if request.method == 'POST':
-            numDocument=request.form['numDocument']
-            name=request.form['name']; name=name.split()
-            firstName, secondName = " ", " "
-            if len(name)>1:
-                firstName=str(name[0])
-                secondName=str(name[0]) 
-            else:
-                firstName=str(name[0])
-
-            lastName=request.form['lastName']; lastName=lastName.split()
-            firstLastName, secondLastName = " ", " "
-            if len(lastName)>1:
-                firstLastName=str(lastName[0])
-                secondLastName=str(lastName[0])
-            else:
-                firstLastName=str(lastName[0])
-
-            #address=request.form['address']
-            telephone=request.form['telephone']
-            #payMethod=request.form['payMethod']
-            userName=request.form['userName']
-            email=request.form['email']
-            password=request.form['password']
-            password2=request.form['password2']
-
-            if password==password2:
-                ############################################ ADD USER TO DB ############################################
-                url="http://"+IP+"/registroLaverde/"+str(userName)+"/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
-                response=requests.get(url, params=None)
-                if response.status_code==200:
-                    response=response.json()
-                    if response["status"]=='1':
-                        address=" "; payMethod=" "
-                        user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
-                        password=user.password
-                        PK_IdUser=str(response["content"]["PK_User"])
-                        print("+++++++++")                
-                        print("->", user.data())
-                        print(PK_IdUser, address, payMethod)
-                        try:                            
-                            cur=mySQL.connection.cursor()
-                            cur.callproc('add_dinerUser', [userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])
-                            #cur.callproc('add_dinerUser', [PK_IdUser, userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])
-                            mySQL.connection.commit()
-                            
-                            print("ADDED:", numDocument, userName)
-                            login_user(user, remember=True)
-                            next_page = request.args.get('next', None)
-                            if not next_page or url_parse(next_page).netloc != '':
-                                next_page = url_for('Index')
-                            return redirect(next_page)
-                        except Exception as e:
-                            print("+++reg", e)
+    if "firstName" in session:
+        print("SIGNUP")
+        print(session)
+        return redirect(url_for('Index'))
+    else:
+        if form.validate_on_submit():
+            if request.method == 'POST':
+                numDocument=request.form['numDocument']
+                name=request.form['name']; name=name.split()
+                firstName, secondName = " ", " "
+                if len(name)>1:
+                    firstName=str(name[0])
+                    secondName=str(name[0]) 
                 else:
-                    flash("La contrasenas no coinciden") 
+                    firstName=str(name[0])
+
+                lastName=request.form['lastName']; lastName=lastName.split()
+                firstLastName, secondLastName = " ", " "
+                if len(lastName)>1:
+                    firstLastName=str(lastName[0])
+                    secondLastName=str(lastName[0])
+                else:
+                    firstLastName=str(lastName[0])
+
+                #address=request.form['address']
+                telephone=request.form['telephone']
+                #payMethod=request.form['payMethod']
+                userName=request.form['userName']
+                email=request.form['email']
+                password=request.form['password']
+                password2=request.form['password2']
+
+                if password==password2:
+                    ############################################ ADD USER TO DB ############################################
+                    url="http://"+IP+"/registroLaverde/"+str(userName)+"/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
+                    response=requests.get(url, params=None)
+                    if response.status_code==200:
+                        response=response.json()
+                        if response["status"]=='1':
+                            address=" "; payMethod=" "
+                            user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
+                            password=user.password
+                            PK_IdUser=str(response["content"]["PK_User"])
+                            print("+++++++++")                
+                            print("->", user.data())
+                            print(PK_IdUser, address, payMethod)
+                            try:                            
+                                
+                                cur=mySQL.connection.cursor()
+                                cur.callproc('add_dinerUser', [userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])
+                                #cur.callproc('add_dinerUser', [PK_IdUser, userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])
+                                mySQL.connection.commit()
+                                            
+                                login_user(user, remember=True)
+                                
+                                session["firstName"]=firstName
+                                session["secondName"]=secondName
+                                session["lastName"]=lastName
+                                session["telephone"]=telephone
+                                session["email"]=email
+                                session["userName"]=userName
+                                next_page = request.args.get('next', None)
+                                if not next_page or url_parse(next_page).netloc != '':
+                                    next_page = url_for('Index')
+                                return redirect(next_page)
+                            except Exception as e:
+                                print("+++reg", e)
+                    else:
+                        flash("La contrasenas no coinciden", "error") 
     return render_template("signup_form.html", form=form)
     
 
 @app.route('/logout')
 def logout():
     logout_user()
+    print("LOGOUT")
+    try:
+        session.pop("firstName")
+    except:
+        pass
     return redirect(url_for('Index'))  #redirect
+
 
 @app.route('/forgot', methods=['GET', 'POST'])
 def forgot():
-    """
-    if current_user.is_authenticated:
-        return redirect(url_for('Index'))"""
     form = LoginForm()
-    """if form.validate_on_submit():
-        user = getUser(request.form['email'])
-        print(user)
-        if user is not None and user.check_password(request.form['password']):
-            print("LOGIN AQUI")
-            login_user(user, remember=False)
-            print("LOGIN ALLA")
-            next_page = request.args.get('next')
-            if not next_page or url_parse(next_page).netloc != '':
-                next_page = url_for('Index')
-            return redirect(next_page)"""
     return render_template('forgot_form.html', form=form)
     #return redirect('forgot_form.html')
     #return render_template("forgot_form.html", form=form)  #redirect
@@ -284,10 +306,10 @@ def forgot():
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     form = LoginForm()
-    if current_user.is_authenticated:
-        return render_template('profile_view.html', form=form)
-    else:
-        return redirect(url_for('login'))
+    if "firstName" in session:
+        tmp=session
+        return render_template('profile_view.html', form=form, tmp=tmp)
+    return redirect(url_for('login'))
     
     
 @login_manager.user_loader
