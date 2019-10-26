@@ -266,13 +266,18 @@ def signup():
                                 mySQL.connection.commit()
                                             
                                 login_user(user, remember=True)
-                                
+                                                                
+                                session["userName"]=userName
+                                session["numDocument"]=numDocument
                                 session["firstName"]=firstName
                                 session["secondName"]=secondName
-                                session["lastName"]=lastName
+                                session["firstLastName"]=firstLastName
+                                session["secondLastName"]=firsecondLastNamestName
+                                session["address"]=address
                                 session["telephone"]=telephone
+                                session["payMethod"]=payMethod                             
                                 session["email"]=email
-                                session["userName"]=userName
+                                
                                 next_page = request.args.get('next', None)
                                 if not next_page or url_parse(next_page).netloc != '':
                                     next_page = url_for('Index')
