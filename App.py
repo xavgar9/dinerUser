@@ -1,5 +1,5 @@
-IP="127.0.0.1:3000"
-#IP="159.65.58.193:3000"
+#IP="127.0.0.1:3000"
+IP="159.65.58.193:3000"
 
 #request.json['name'] para recibir y usar json de otras paginas
 #pip install flask
