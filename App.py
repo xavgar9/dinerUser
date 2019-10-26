@@ -36,7 +36,8 @@ login_manager=LoginManager(app)
 login_manager.login_view = "login"
 ##########################################################################################################
 
-
+IP="127.0.0.1:3000"
+#IP="159.65.58.193:3000"
 
 
 ##########################################################################################################
@@ -158,7 +159,7 @@ def login():
         ##############################################################################
         email=request.form['email']
         password=request.form['password']
-        url="http://127.0.0.1:3000/loginLaverde/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
+        url="http://"+IP+"/loginLaverde/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
         response=requests.get(url, params=None)
         if response.status_code==200:
             response=response.json()
@@ -193,10 +194,22 @@ def signup():
     if form.validate_on_submit():
         if request.method == 'POST':
             numDocument=request.form['numDocument']
-            name=request.form['name']
-            firstName, secondName=map(str,name.split())
-            lastName=request.form['lastName']
-            firstLastName, secondLastName=map(str,lastName.split())
+            name=request.form['name']; name=name.split()
+            firstName, secondName = " ", " "
+            if len(name)>1:
+                firstName=str(name[0])
+                secondName=str(name[0]) 
+            else:
+                firstName=str(name[0])
+
+            lastName=request.form['lastName']; lastName=lastName.split()
+            firstLastName, secondLastName = " ", " "
+            if len(lastName)>1:
+                firstLastName=str(lastName[0])
+                secondLastName=str(lastName[0])
+            else:
+                firstLastName=str(lastName[0])
+
             #address=request.form['address']
             telephone=request.form['telephone']
             #payMethod=request.form['payMethod']
@@ -207,7 +220,7 @@ def signup():
 
             if password==password2:
                 ############################################ ADD USER TO DB ############################################
-                url="http://127.0.0.1:3000/registroLaverde/"+str(userName)+"/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
+                url="http://"+IP+"/registroLaverde/"+str(userName)+"/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
                 response=requests.get(url, params=None)
                 if response.status_code==200:
                     response=response.json()
@@ -217,7 +230,7 @@ def signup():
                         password=user.password
                         PK_IdUser=str(response["content"]["PK_User"])
                         print("+++++++++")                
-                        print(user)
+                        print("->", user.data())
                         print(PK_IdUser, address, payMethod)
                         try:                            
                             cur=mySQL.connection.cursor()
@@ -283,5 +296,7 @@ def loadDinerUser(id):
 
 
 if __name__=='__main__':
-    app.run(port=3000, debug=True) #rebug restart all local
-    #app.run(port=3000, debug=True, host ='159.65.58.193') #rebug restart all in server
+    if IP=="159.65.58.193:3000": 
+        app.run(port=3000, debug=True, host ='159.65.58.193') #rebug restart all in server
+    else:
+        app.run(port=3000, debug=True) #rebug restart all local
