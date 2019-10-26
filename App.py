@@ -1,3 +1,6 @@
+IP="127.0.0.1:3000"
+#IP="159.65.58.193:3000"
+
 #request.json['name'] para recibir y usar json de otras paginas
 #pip install flask
 #pip install flask-mysql
@@ -36,8 +39,7 @@ login_manager=LoginManager(app)
 login_manager.login_view = "login"
 ##########################################################################################################
 
-IP="127.0.0.1:3000"
-#IP="159.65.58.193:3000"
+
 
 
 ##########################################################################################################
@@ -105,6 +107,8 @@ def isVIP(id):
 
 @app.route('/')
 def Index():
+    if current_user.is_authenticated:
+        print(user)
     return render_template('index.html')
 
 
@@ -167,12 +171,11 @@ def login():
                 PK_IdUser=response["content"]["PK_IdUser"]
                 try:
                     cur=mySQL.connection.cursor()
-                    cur.execute('SELECT firstName, secondName, lastName, telephone, email  FROM DinerUser WHERE PK_idDiner = {0}'.format(PK_IdUser))
+                    cur.execute('SELECT firstName, secondName, firstLastName, telephone  FROM DinerUser WHERE PK_idDiner = {0}'.format(PK_IdUser))
                     data=cur.fetchall()
-                    firstName=data[0][0]; secondName=data[0][1]
-                    lastName=data[0][2]; telephone=data[0][3]
-                    email=data[0][4]
-                    user=getUser(firstName, secondName, lastName, telephone, email,password)
+                    firstName=str(data[0][0]); secondName=str(data[0][1])
+                    lastName=str(data[0][2]); telephone=data[0][3]
+                    user=getUser(firstName, secondName, lastName, telephone, email, password)
                     if user is not None and user.check_password(str(password)):
                         login_user(user, remember=False)
                         next_page = request.args.get('next')
