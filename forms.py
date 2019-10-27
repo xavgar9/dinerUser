@@ -14,13 +14,14 @@ class SignupForm(FlaskForm):
     submit = SubmitField('Register')
 
 class EditForm(FlaskForm):
-    name = StringField('First Name', validators=[DataRequired(), Length(max=64)], render_kw={"placeholder": "NOMBRE"})
-    lastName = StringField('Last Name', validators=[DataRequired(), Length(max=31)], render_kw={"placeholder": "APELLIDO"})
-    numDocument = StringField('numDocument', validators=[DataRequired(), Length(max=20)], render_kw={"placeholder": "NUMERO DE DOCUMENTO"})
-    telephone = StringField('Telephone', validators=[DataRequired(), Length(max=20)], render_kw={"placeholder": "TELEFONO"})
-    userName = StringField('UserName', validators=[DataRequired(), Length(max=15)], render_kw={"placeholder": "NOMBRE DE USUARIO"})
-    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "CORREO ELECTRONICO"})
-    password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "CONTRASENA"})
+    name = StringField('First Name', validators=[DataRequired(), Length(max=64)], render_kw={"placeholder": "NOMBREw"})
+    lastName = StringField('Last Name', validators=[DataRequired(), Length(max=31)], render_kw={"placeholder": "APELLIDOw"})
+    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "CORREO ELECTRONICOw"})
+    userName = StringField('UserName', validators=[DataRequired(), Length(max=15)], render_kw={"placeholder": "NOMBRE DE USUARIOw"})
+    numDocument = StringField('numDocument', validators=[DataRequired(), Length(max=20)], render_kw={"placeholder": "NUMERO DE DOCUMENTOw"})
+    telephone = StringField('Telephone', validators=[DataRequired(), Length(max=20)], render_kw={"placeholder": "TELEFONOw"})
+    address = StringField('Address', validators=[DataRequired(), Length(max=20)], render_kw={"placeholder": "DIRECCIONw"})
+    password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "CONTRASENAw"})
     submit = SubmitField('Edit')
 
 class PasswordForm(FlaskForm):

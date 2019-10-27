@@ -173,7 +173,7 @@ def login():
                         lastName=str(data[0][2]); telephone=data[0][3]
 
                         """
-                        firstName="Xavier"; secondName=""
+                        firstName="Xavier"; secondName="William"
                         lastName="Garzon"; telephone=316455412
                         
 
@@ -311,7 +311,7 @@ def profile():
     form2=PasswordForm()
     print("PROFILE")
     if form1.validate_on_submit():
-        tmp=2
+        tmp1=2
         if request.method=='POST':
             print("GENERAL")
             numDocument=request.form1['numDocument']
@@ -348,7 +348,7 @@ def profile():
                     flash("Datos incorrectos", "error")
         #return redirect(url_for('profile'),form1=form1)
     elif form2.validate_on_submit():
-        tmp=3
+        tmp1=3
         if request.method=='POST':
             print("CONSTRASENAS")
             password1=request.form2['password1']
@@ -369,12 +369,14 @@ def profile():
                     else:
                         flash("Los datos no son validos", "error")
         #return redirect(url_for('profile'),form2=form2)
-    if tmp1 ==2:
+    """ 
+    if tmp1 == 2:
         form1=form1
     elif tmp1 == 3:
         form1=form2
     print(tmp1)
-    return render_template("profile_view.html", form1=form1, tmp=tmp)
+    """
+    return render_template("profile_view.html", form1=form1, form2=form2, tmp=tmp)
 
     
     

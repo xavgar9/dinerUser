@@ -56,13 +56,14 @@
 		<button onclick="$('.ui.modal.modifyUser').modal('show');" class="ui inverted button">MODIFICAR DATOS</button>
 	</div>
 	<div id="pRectangle212">
-		<button onclick="" class="ui inverted button">CERRAR SESIÓN</button>
+		<button onclick="window.location.href='{{ url_for('logout') }}';" class="ui inverted button">CERRAR SESIÓN</button>
 	</div>
 </div>
 
 <!--##################### Modal popup Modificar Usuario ###########################################################################-->
+<form action="" method="POST" novalidate>
+{{ form1.hidden_tag() }}
 <div class="ui container">
-	<form1 action="{{ url_for('profile') }}" method="post">
 	<div class="ui modal modifyUser">
 		<i class="close icon"></i>
 		<div class="header">Modificar Datos de Usuario</div>
@@ -72,22 +73,21 @@
 					<div class="field">
 						<label>Nombre</label>
 						<div class="ui left icon input">
-							<!--{{form1.name}}-->
-							<input type="text" name="firstname">
+							{{form1.name(value=tmp.firstName)}}
 							<i class="user icon"></i>
 						</div>
 					</div>
 					<div class="field">
 						<label>Apellido</label>
 						<div class="ui left icon input">
-							<input type="text" placeholder="Apellido" value="{{tmp.firtsLastName}}">
+							{{form1.lastName(value=tmp.firtsLastName)}}
 							<i class="user secret icon"></i>
 						</div>
 					</div>
 					<div class="disabled field">
 						<label>Correo Electrónico</label>
 						<div class="ui left icon input">
-							<input type="text" placeholder="Correo Electrónico" value="{{tmp.email}}">
+							{{form1.email(value=tmp.email)}}
 							<i class="at icon"></i>
 						</div>
 					</div>
@@ -96,21 +96,21 @@
 					<div class="disabled field">
 						<label>Nombre de Usuario</label>
 						<div class="ui left icon input">
-							<input type="text" placeholder="Nombre de Usuario" value="{{tmp.userName}}">
+							{{form1.userName(value=tmp.userName)}}
 							<i class="user circle secret icon"></i>
 						</div>
 					</div>
 					<div class="field">
 						<label>Número de identificación</label>
 						<div class="ui left icon input">
-							<input type="text" placeholder="Número de identificación" value="{{tmp.numDocument}}">
+							{{form1.numDocument(value=tmp.numDocument)}}
 							<i class="id card icon"></i>
 						</div>
 					</div>
 					<div class="field">
 						<label>Teléfono</label>
 						<div class="ui left icon input">
-							<input type="text" placeholder="Teléfono" value="{{tmp.telephone}}">
+							{{form1.telephone(value=tmp.telephone)}}
 							<i class="mobile alternate icon"></i>
 						</div>
 					</div>
@@ -119,7 +119,7 @@
 					<div class="field">
 						<label>Dirección</label>
 						<div class="ui left icon input">
-							<input type="text" placeholder="{{tmp.address}}">
+							{{form1.address(value=tmp.address)}}
 							<i class="home icon"></i>
 						</div>
 					</div>
@@ -156,11 +156,8 @@
 			<div class="ui red cancel button">Cancelar</div>
 		</div>
 	</div>
-	</form1>
 </div>
-
 <!--##################### Confirmar Contraseña ###########################################################################-->
-
 <div class="ui container">
 	<div class="ui modal confirmarContrasena">
 		<i class="close icon"></i>
@@ -170,7 +167,7 @@
 				<div class="field">
 					<label>Confirmar Contraseña</label>
 					<div class="ui left icon input">
-						<input type="password" placeholder="Confirmar Contraseña">
+						{{form1.password}}
 						<i class="key icon"></i>
 					</div>
 				</div>
@@ -182,9 +179,11 @@
 		</div>
 	</div>
 </div>
+</form>
 
 <!--##################### Cambiar Contraseña ###########################################################################-->
-
+<form action="" method="POST" novalidate>
+{{ form2.hidden_tag() }}
 <div class="ui container">
 		<div class="ui modal cambiarContrasena">
 			<i class="close icon"></i>
@@ -194,21 +193,24 @@
 					<div class="field">
 						<label>Contraseña Actual</label>
 						<div class="ui left icon input">
-							<input type="password" name="password1">
+							{{form2.password1}}
+							<!--<input type="password" name="password1">-->
 							<i class="key icon"></i>
 						</div>
 					</div>
 					<div class="field">
 						<label>Contraseña Nueva</label>
 						<div class="ui left icon input">
-							<input type="password" name="password2">
+							<!--<input type="password" name="password2">-->
+							{{form2.password2}}
 							<i class="key icon"></i>
 						</div>
 					</div>
 					<div class="field">
 						<label>Confirmar Contraseña Actual</label>
 						<div class="ui left icon input">
-							<input type="password" name="password3">
+							{{form2.password1}}
+							<!--<input type="password" name="password3">-->
 							<i class="key icon"></i>
 						</div>
 					</div>
@@ -220,6 +222,7 @@
 			</div>
 		</div>
 </div>
+</form>
 	
 
 
