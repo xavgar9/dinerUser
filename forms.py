@@ -13,6 +13,21 @@ class SignupForm(FlaskForm):
     password2 = PasswordField('Password2', validators=[DataRequired()], render_kw={"placeholder": "CONFIRMAR CONTRASENA"})
     submit = SubmitField('Register')
 
+class EditForm(FlaskForm):
+    name = StringField('First Name', validators=[DataRequired(), Length(max=64)], render_kw={"placeholder": "NOMBRE"})
+    lastName = StringField('Last Name', validators=[DataRequired(), Length(max=31)], render_kw={"placeholder": "APELLIDO"})
+    numDocument = StringField('numDocument', validators=[DataRequired(), Length(max=20)], render_kw={"placeholder": "NUMERO DE DOCUMENTO"})
+    telephone = StringField('Telephone', validators=[DataRequired(), Length(max=20)], render_kw={"placeholder": "TELEFONO"})
+    userName = StringField('UserName', validators=[DataRequired(), Length(max=15)], render_kw={"placeholder": "NOMBRE DE USUARIO"})
+    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "CORREO ELECTRONICO"})
+    password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "CONTRASENA"})
+    submit = SubmitField('Edit')
+
+class PasswordForm(FlaskForm):
+    password1 = PasswordField('Password1', validators=[DataRequired()], render_kw={"placeholder": "CONTRASENA ANTIGUA"})
+    password2 = PasswordField('Password2', validators=[DataRequired()], render_kw={"placeholder": "NUEVA CONTRASENA"})
+    password3 = PasswordField('Password3', validators=[DataRequired()], render_kw={"placeholder": "CONFIRMAR NUEVA CONTRASENA"})
+
 
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired(), Length(max=128)])

@@ -62,6 +62,7 @@
 
 <!--##################### Modal popup Modificar Usuario ###########################################################################-->
 <div class="ui container">
+	<form1 action="{{ url_for('profile') }}" method="post">
 	<div class="ui modal modifyUser">
 		<i class="close icon"></i>
 		<div class="header">Modificar Datos de Usuario</div>
@@ -71,21 +72,22 @@
 					<div class="field">
 						<label>Nombre</label>
 						<div class="ui left icon input">
-							<input type="text" placeholder="Nombre" value="{{wUser}}">
+							<!--{{form1.name}}-->
+							<input type="text" name="firstname">
 							<i class="user icon"></i>
 						</div>
 					</div>
 					<div class="field">
 						<label>Apellido</label>
 						<div class="ui left icon input">
-							<input type="text" placeholder="Apellido" value="Garzón Aguirre">
+							<input type="text" placeholder="Apellido" value="{{tmp.firtsLastName}}">
 							<i class="user secret icon"></i>
 						</div>
 					</div>
 					<div class="disabled field">
 						<label>Correo Electrónico</label>
 						<div class="ui left icon input">
-							<input type="text" placeholder="Correo Electrónico" value="xg@javerianacali.edu.co">
+							<input type="text" placeholder="Correo Electrónico" value="{{tmp.email}}">
 							<i class="at icon"></i>
 						</div>
 					</div>
@@ -94,21 +96,21 @@
 					<div class="disabled field">
 						<label>Nombre de Usuario</label>
 						<div class="ui left icon input">
-							<input type="text" placeholder="Nombre de Usuario" value="xgusuario">
+							<input type="text" placeholder="Nombre de Usuario" value="{{tmp.userName}}">
 							<i class="user circle secret icon"></i>
 						</div>
 					</div>
 					<div class="field">
 						<label>Número de identificación</label>
 						<div class="ui left icon input">
-							<input type="text" placeholder="Número de identificación" value="1116273517">
+							<input type="text" placeholder="Número de identificación" value="{{tmp.numDocument}}">
 							<i class="id card icon"></i>
 						</div>
 					</div>
 					<div class="field">
 						<label>Teléfono</label>
 						<div class="ui left icon input">
-							<input type="text" placeholder="Teléfono" value="3022118294">
+							<input type="text" placeholder="Teléfono" value="{{tmp.telephone}}">
 							<i class="mobile alternate icon"></i>
 						</div>
 					</div>
@@ -117,14 +119,14 @@
 					<div class="field">
 						<label>Dirección</label>
 						<div class="ui left icon input">
-							<input type="text" placeholder="Dirección">
+							<input type="text" placeholder="{{tmp.address}}">
 							<i class="home icon"></i>
 						</div>
 					</div>
 					<div class="field">
 						<label>Método de Pago</label>
 						<select class="ui fluid dropdown">
-							<option value="">Efectivo</option>
+							<option value="EF">Efectivo</option>
 							<option value="AL">Visa</option>
 							<option value="AK">Master Card</option>
 							<option value="AK">Maestro</option>
@@ -136,23 +138,40 @@
 							<i class="cloud upload icon"></i>
 							Subir imágen de perfil
 						</button>
-						<input type="file" name="myfile" />
+						<!--<input type="file" name="myfile" />-->
 					</div>
 				</div>
 				<div class="two fields">
 					<div class="field">
-						<label>Contraseña</label>
-						<div class="ui left icon input">
-							<input type="password" placeholder="Contraseña" value="{{wUser}}">
-							<i class="key icon"></i>
-						</div>
+						<button onclick="$('.ui.modal.cambiarContrasena').modal('show');" class="ui labeled icon button w">
+							<i class="cloud upload icon"></i>
+							Cambiar Contraseña
+						</button>
 					</div>
-					<div class="field">
-						<label>Confirmar Contraseña</label>
-						<div class="ui left icon input">
-							<input type="password" placeholder="Confirmar Contraseña" value="1234">
-							<i class="key icon"></i>
-						</div>
+				</div>
+			</div>
+		</div>
+		<div class="actions">
+			<div onclick="$('.ui.modal.confirmarContrasena').modal('show');" class="ui green approve button">Aceptar</div>
+			<div class="ui red cancel button">Cancelar</div>
+		</div>
+	</div>
+	</form1>
+</div>
+
+<!--##################### Confirmar Contraseña ###########################################################################-->
+
+<div class="ui container">
+	<div class="ui modal confirmarContrasena">
+		<i class="close icon"></i>
+		<div class="header">Confirmar Contraseña</div>
+		<div class="content">
+			<div class="ui form">
+				<div class="field">
+					<label>Confirmar Contraseña</label>
+					<div class="ui left icon input">
+						<input type="password" placeholder="Confirmar Contraseña">
+						<i class="key icon"></i>
 					</div>
 				</div>
 			</div>
@@ -163,6 +182,47 @@
 		</div>
 	</div>
 </div>
+
+<!--##################### Cambiar Contraseña ###########################################################################-->
+
+<div class="ui container">
+		<div class="ui modal cambiarContrasena">
+			<i class="close icon"></i>
+			<div class="header">Cambiar  Contraseña</div>
+			<div class="content">
+				<div class="ui form">
+					<div class="field">
+						<label>Contraseña Actual</label>
+						<div class="ui left icon input">
+							<input type="password" name="password1">
+							<i class="key icon"></i>
+						</div>
+					</div>
+					<div class="field">
+						<label>Contraseña Nueva</label>
+						<div class="ui left icon input">
+							<input type="password" name="password2">
+							<i class="key icon"></i>
+						</div>
+					</div>
+					<div class="field">
+						<label>Confirmar Contraseña Actual</label>
+						<div class="ui left icon input">
+							<input type="password" name="password3">
+							<i class="key icon"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="actions">
+				<div class="ui green approve button">Aceptar</div>
+				<div class="ui red cancel button">Cancelar</div>
+			</div>
+		</div>
+</div>
+	
+
+
 
 <!--##################### Modal popup Historial de Reservas ###########################################################################-->
 <div class="ui container">
@@ -180,15 +240,15 @@
 </div>
 
 
+
+
+
 <!--##################### Modal popup Reservas Actuales ###########################################################################-->
 <div class="ui container">
 	<div class="ui modal reservasActuales">
 		<i class="close icon"></i>
 		<div class="header">Reservas Actuales</div>
 		<div class="content">
-			<div class="elfsight-app-889ad0ac-c5ec-47a3-8f84-26ea680eb1a1"></div>
-			<!-- SnapWidget -->
-			<iframe src="https://snapwidget.com/embed/752556" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden;  width:500px; height:500px"></iframe>
 		</div>
 		<div class="actions">
 			<div class="ui green approve button">Aceptar</div>
