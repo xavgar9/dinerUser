@@ -22,13 +22,13 @@ class EditForm(FlaskForm):
     telephone = StringField('Telephone', validators=[DataRequired(), Length(max=20)], render_kw={"placeholder": "TELEFONOw"})
     address = StringField('Address', validators=[DataRequired(), Length(max=20)], render_kw={"placeholder": "DIRECCIONw"})
     password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "CONTRASENAw"})
-    submit = SubmitField('Edit')
+    submit1 = SubmitField('Edit')
 
 class PasswordForm(FlaskForm):
     password1 = PasswordField('Password1', validators=[DataRequired()], render_kw={"placeholder": "CONTRASENA ANTIGUA"})
     password2 = PasswordField('Password2', validators=[DataRequired()], render_kw={"placeholder": "NUEVA CONTRASENA"})
     password3 = PasswordField('Password3', validators=[DataRequired()], render_kw={"placeholder": "CONFIRMAR NUEVA CONTRASENA"})
-
+    submit2 = SubmitField('Cambiar')
 
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired(), Length(max=128)])

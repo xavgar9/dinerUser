@@ -174,7 +174,7 @@
 			</div>
 		</div>
 		<div class="actions">
-			<div class="ui green approve button">Aceptar</div>
+			{{ form1.submit1() }}
 			<div class="ui red cancel button">Cancelar</div>
 		</div>
 	</div>
@@ -194,30 +194,55 @@
 						<label>Contraseña Actual</label>
 						<div class="ui left icon input">
 							{{form2.password1}}
-							<!--<input type="password" name="password1">-->
+							{% for error in form2.password1.errors %}
+							<script>
+								toastr.error('{{ error }}','Error al ingresar Confirmar Contraseña',{
+									"newestOnTop": true,
+									"closeButton": true,
+									"progressBar": true
+								})
+							</script>
+							{% endfor %}
 							<i class="key icon"></i>
 						</div>
 					</div>
 					<div class="field">
 						<label>Contraseña Nueva</label>
 						<div class="ui left icon input">
-							<!--<input type="password" name="password2">-->
 							{{form2.password2}}
+							{% for error in form2.password2.errors %}
+							<script>
+								toastr.error('{{ error }}','Error al ingresar Confirmar Contraseña',{
+									"newestOnTop": true,
+									"closeButton": true,
+									"progressBar": true
+								})
+							</script>
+							{% endfor %}
 							<i class="key icon"></i>
 						</div>
 					</div>
 					<div class="field">
 						<label>Confirmar Contraseña Actual</label>
 						<div class="ui left icon input">
-							{{form2.password1}}
-							<!--<input type="password" name="password3">-->
+							{{form2.password3}}
+							{% for error in form2.password3.errors %}
+							<script>
+								toastr.error('{{ error }}','Error al ingresar Confirmar Contraseña',{
+									"newestOnTop": true,
+									"closeButton": true,
+									"progressBar": true
+								})
+							</script>
+							{% endfor %}
 							<i class="key icon"></i>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="actions">
-				<div class="ui green approve button">Aceptar</div>
+				{{form2.submit2()}}
+				<!--<div class="ui green approve button">Aceptar</div>-->
 				<div class="ui red cancel button">Cancelar</div>
 			</div>
 		</div>

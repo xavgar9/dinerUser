@@ -306,12 +306,10 @@ def profile():
     #global dic
     #dic["firstLastName"]=session["firstLastName"]
     tmp = session
-    tmp1=1
     form1=EditForm()
     form2=PasswordForm()
     print("PROFILE")
     if form1.validate_on_submit():
-        tmp1=2
         if request.method=='POST':
             print("GENERAL")
             numDocument=request.form1['numDocument']
@@ -323,11 +321,9 @@ def profile():
             telephone=request.form1['telephone']
             payMethod=request.form1['payMethod']
             password=request.form1['password']
-
             email=request.form1['email']
             user=getUser("", "", "", "", "",password)
             password=user.password
-
 
             url="http://"+IP+"/loginLaverde/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
             response=requests.get(url, params=None)
@@ -346,9 +342,8 @@ def profile():
                         print("+++edit", e)
                 else:
                     flash("Datos incorrectos", "error")
-        #return redirect(url_for('profile'),form1=form1)
+
     elif form2.validate_on_submit():
-        tmp1=3
         if request.method=='POST':
             print("CONSTRASENAS")
             password1=request.form2['password1']
@@ -368,17 +363,14 @@ def profile():
                         flash("Contrasena actualizada", "success")
                     else:
                         flash("Los datos no son validos", "error")
-        #return redirect(url_for('profile'),form2=form2)
-    """ 
-    if tmp1 == 2:
-        form1=form1
-    elif tmp1 == 3:
-        form1=form2
-    print(tmp1)
-    """
     return render_template("profile_view.html", form1=form1, form2=form2, tmp=tmp)
 
-    
+
+
+@app.route('/tinder', methods=['GET', 'POST'])
+def tinder():
+    return render_template("tinder.html")
+
     
 @login_manager.user_loader
 def loadDinerUser(id):
