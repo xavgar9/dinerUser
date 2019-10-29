@@ -148,7 +148,7 @@ def login():
     if "firstName" in session:
         print("LOGIN")
         print(session)
-        return redirect(url_for('Index'))
+        return redirect(url_for('profile'))
     else:
         if form.validate_on_submit():
             ##############################################################################
@@ -180,6 +180,7 @@ def login():
                         user=getUser(firstName, secondName, lastName, telephone, email, password)
                         
                         next_page=None
+                        flash("Bienvenido "+firstName, "success")
                         if user is not None:
                             login_user(user, remember=False)                            
                             session["firstName"]=firstName
@@ -284,6 +285,7 @@ def signup():
 
 @app.route('/logout')
 def logout():
+    flash("Sesion Cerrada Correctamente", "success")
     logout_user()
     print("LOGOUT")
     try:
@@ -297,8 +299,6 @@ def logout():
 def forgot():
     form = LoginForm()
     return render_template('forgot_form.html', form=form)
-    #return redirect('forgot_form.html')
-    #return render_template("forgot_form.html", form=form)  #redirect
 
 
 @app.route('/profile', methods=['GET', 'POST'])
@@ -369,6 +369,7 @@ def profile():
 
 @app.route('/tinder', methods=['GET', 'POST'])
 def tinder():
+    flash("Bienvenido a Tinder", "success")
     return render_template("tinder.html")
 
     

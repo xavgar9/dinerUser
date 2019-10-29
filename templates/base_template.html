@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ url_for("static", filename="toastr.min.css") }}">
     <link rel="stylesheet" href="{{ url_for("static", filename="semantic/semantic.min.css") }}">
     <link rel="stylesheet" href="{{ url_for("static", filename="styles.css") }}">
+    <!--<link rel="icon" type="image/png" href="{{ url_for("static", filename="LogoBlanco1.png") }}" sizes="64x64">-->
     <style type="text/css">
         .ui.inverted.secondary.button.w{
             height: inherit;
@@ -16,7 +17,26 @@
     </style>
 </head>
 <body>
-    <div>
+    <header class="App-header">
+        <div class="Menu">
+            <img src="{{ url_for('static', filename='images/LogoBlanco1.png') }}" class="App-logo" alt="logo"/>
+            <div class="ui inverted segment">
+                <div class="ui inverted pointing secondary menu">
+                    <a class="active item" href="{{ url_for('Index') }}">Home</a>
+                    {% if current_user.is_anonymous %}
+                    <a class="item" href="{{ url_for('login') }}">Login</a>
+                    <a class="item" href="{{ url_for('signup') }}">Register</a>
+                    <a class="item" href="{{ url_for('forgot') }}">Forgot</a>
+                    <a class="item" href="{{ url_for('profile') }}">Profile</a>
+                    <a class="item" href="{{ url_for('tinder') }}">Tinder</a>
+                    <a class="item" href="{{ url_for('logout') }}">Logout</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="decorBar"></div>
+    <!--<div>
         <ul class="user-info">
             <li><a href="{{ url_for('Index') }}">Home</a></li>
             {% if current_user.is_anonymous %}
@@ -34,11 +54,12 @@
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% endif %}
         </ul>
-    </div>
+    </div>-->
     <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.4.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='semantic/semantic.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='popper.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='toastr.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery.instagramFeed.min.js') }}"></script>
     {% block content %}{% endblock %}
 
     {% with messages = get_flashed_messages(with_categories=True) %}

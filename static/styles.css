@@ -1,4 +1,71 @@
- #miLetra {
+.App-logo {
+	height: 90px;
+	margin-right: 10px;
+	margin-left: 20px;
+	padding-bottom: 15px;
+  }
+  .Menu {
+	display: flex;
+	flex-direction: row;
+	width: 82%;
+  }
+  .columna {
+	padding-left:50px,
+  }
+  .LogOut {
+	margin-Top: 20px;
+	margin-left: 20px;
+	float: right;
+	align-Content: center;
+  }
+  .UserInformation {
+	flex-direction: column;
+	margin-top: 18px;
+	display: flex;
+	color: white;
+	text-align: center;
+  }
+  .App-header {
+	background-color: #1c1d1f;
+	height: 80px;
+	display: flex;
+	box-shadow: 2px 2px 5px #999;
+	flex-direction: row;
+  }
+  .decorBar{
+	width: 100%;
+	height: 3px;
+	background-color: #EFB810;
+	margin-bottom: 14px !important;
+  }
+  .horario {
+	padding-left: 17%;
+	padding-right: 17%;
+	align-self: auto;
+	align-items: center;
+  }
+  .Canvas{
+	margin: 0 !important;
+  }
+  .Pantalla{
+	height: 100% !important;
+  }
+  .Salto{
+	height: 14px;
+  }
+  
+  
+  .instagramGaleria { 
+	  left: 252px; 
+	  top: 111px; 
+	  position: absolute; 
+	  width: 555px;
+	  height: 538px;
+	  z-index:1;
+  } 
+
+
+#miLetra {
 	font-family: 'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
 	font-size: 25px;
 	letter-spacing: 2px;
@@ -25,7 +92,7 @@
 #pbackground 
 { 
 	left: 0px; 
-	top: 0px; 
+	top: -14px; 
 	position: relative; 
 	margin-left: auto; 
 	margin-right: auto; 
@@ -258,7 +325,7 @@
  #logbackground 
 { 
 	 left: 0px; 
-	 top: 0px; 
+	 top: -14px; 
 	 position: relative; 
 	 margin-left: auto; 
 	 margin-right: auto; 
@@ -454,7 +521,7 @@
 #regbackground 
 { 
 	 left: 0px; 
-	 top: 0px; 
+	 top: -14px; 
 	 position: relative; 
 	 margin-left: auto; 
 	 margin-right: auto; 

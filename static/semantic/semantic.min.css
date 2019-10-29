@@ -13905,7 +13905,8 @@ ol.ui.horizontal.list li:before {
 .ui.inverted.segment,
 .ui.primary.inverted.segment {
  background:#1b1c1d;
- color:rgba(255,255,255,.9)
+ color:rgba(255,255,255,.9);
+ top: -8px;
 }
 .ui.inverted.segment .segment {
  color:rgba(0,0,0,.87)

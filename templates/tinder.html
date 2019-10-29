@@ -1,5 +1,43 @@
 {% extends "base_template.html" %}
 {% block title %}Tinder{% endblock %}
 {% block content %}
+<script>
+    (function($){
+        $(window).on('load', function(){
+            $.instagramFeed({
+                'username': 'carol_alt',
+                'container': "#instagram-feed1",
+                'display_profile': true,
+                'display_biography': false,
+                'display_gallery': false,
+                'callback': null,
+                'styling': true,
+                'items': 8,
+                'items_per_row': 4,
+                'margin': 1 
+            });
+            $.instagramFeed({
+                'username': 'carol_alt',
+                'container': "#instagram-feed2",
+                'display_profile': false,
+                'display_biography': true,
+                'display_gallery': true,
+                'callback': null,
+                'styling': true,
+                'items': 8,
+                'items_per_row': 1,
+                'margin': 1
+            });
+        });
+    })(jQuery);
+</script>
+<!--<div id="instagram-feed1" class="instagram_feed">-->
+<div class="instagramGaleria" style="border:1px solid #ccc; overflow:auto;">
+    <div id="instagram-feed2" class="instagram_feed">
+</div>
+
+
+</div>
+
 
 {% endblock %}
