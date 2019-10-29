@@ -465,7 +465,7 @@ delimiter ;
 
 call EliminarMembresiaCedula(1453487801);
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*Procedimiento que consulta los nombres y apellidos de un usuario junto con su intagram sabiendo su idDiner/
+/*Procedimiento que consulta los nombres y apellidos de un usuario junto con su intagram sabiendo su idDiner*/
 delimiter $$
 CREATE procedure getNameIgUserByidUser(IN idUser int)
 BEGIN
