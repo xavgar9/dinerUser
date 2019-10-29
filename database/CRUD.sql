@@ -21,6 +21,7 @@ delete from User where username = 'elTito';
 --Updates:  
 update DinerUser set telephone=3154879520 where PK_idDiner = 1;
 update User set PK_idUser = 7 where username = 'elTito';
+update DinerUser set igUser = 'CBerrioL' where PK_idDiner = 2;
 --Comando utiles:
 SET GLOBAL log_bin_trust_function_creators = 1; --activar la creación de funciones en mysql
 SET SQL_SAFE_UPDATES = 0; --desactivar modo safe que impide eliminar y modificar registros
@@ -187,7 +188,38 @@ declare consulta int;
   end if;
 END$$
 delimiter ;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Funcion que retorna los nombres y apellidos de un usuario segun el idDiner pasado por parametro*/
+delimiter $$
+CREATE function getNamesAndLastnames(idUser int)
+RETURNS VARCHAR(50)
+BEGIN
+  declare consulta varchar(50);
+  
+  select concat_ws(' ', firstname, secondname, firstLastname, secondLastname) into consulta from DinerUser where PK_idDiner = idUser;
+  RETURN consulta;
+  
+END$$
+delimiter ;
 
+select getNamesAndLastnames(1);
+/*
+select concat_ws(' ', firstname, secondname, firstLastname, secondLastname) into firstN, secondN, firstL, secondL from DinerUser where PK_idUser = idUser;
+SELECT concat_ws(' ', nombre, apellidos) as persona FROM personas;
+*/
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Funcion que retorna el instagram de un usuario segun el idDiner pasado por parametro*/
+delimiter $$
+CREATE function getIgUser(idUser int)
+RETURNS VARCHAR(40)
+BEGIN
+  declare consulta varchar(40);
+  select igUser into consulta from DinerUser where PK_idDiner = idUser;
+  RETURN consulta;
+END$$
+delimiter ;
+
+select getIgUser(2);
 --*****************************************************************************************************************************************
 --PROCEDIMIENTOS:
 /*Procedimiento que crea un usuario en la tabla User*/
@@ -432,4 +464,18 @@ END$$
 delimiter ;
 
 call EliminarMembresiaCedula(1453487801);
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Procedimiento que consulta los nombres y apellidos de un usuario junto con su intagram sabiendo su idDiner/
+delimiter $$
+CREATE procedure getNameIgUserByidUser(IN idUser int)
+BEGIN
+  declare nombres varchar(50);
+  declare inst varchar(40);
+  
+  set nombres = getNamesAndLastnames(idUser);
+  set inst = getIgUser(idUser);
+  select nombres, inst;
+END$$
+delimiter ;
+call getNameIgUserByidUser(2);
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
