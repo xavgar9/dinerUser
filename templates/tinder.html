@@ -2,6 +2,10 @@
 {% block title %}Tinder{% endblock %}
 {% block content %}
 <script>
+    var y = $(window).scrollTop();  //your current y position on the page
+    $(window).scrollTop(y+150);
+</script>
+<script>
     (function($){
         $(window).on('load', function(){
             $.instagramFeed({
@@ -17,7 +21,7 @@
                 'margin': 1 
             });
             $.instagramFeed({
-                'username': 'carol_alt',
+                'username': 'wtechnology.co',
                 'container': "#instagram-feed2",
                 'display_profile': false,
                 'display_biography': true,
@@ -31,12 +35,11 @@
         });
     })(jQuery);
 </script>
-<!--<div id="instagram-feed1" class="instagram_feed">-->
-<div class="instagramGaleria" style="border:1px solid #ccc; overflow:auto;">
-    <div id="instagram-feed2" class="instagram_feed">
+<div class="instagramProfile">
+    <div id="instagram-feed1" class="instagram_feed"></div>
 </div>
-
-
+<div class="instagramGaleria" style="border:1px solid #ccc; overflow:auto;">
+    <div id="instagram-feed2" class="instagram_feed"> </div>
 </div>
 
 

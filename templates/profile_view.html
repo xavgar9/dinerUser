@@ -2,10 +2,10 @@
 {% block title %}Perfil de Usuario{% endblock %}
 {% block content %}
 <div id="pbackground">
-	<div id="player_1"><img src="{{ url_for('static', filename='images/layer_1.png') }}"></div>
+	<!--<div id="player_1"><img src="{{ url_for('static', filename='images/layer_1.png') }}"></div>-->
 	<div id="pBackground8"><img src="{{ url_for('static', filename='images/Background8.png') }}"></div>
 	<div id="pBackground10"><img src="{{ url_for('static', filename='images/Background10.png') }}"></div>
-	<div id="pdashboard3avatar"><img src="{{ url_for('static', filename='images/dashboard3avatar.png') }}"></div>
+	<!--<div id="pdashboard3avatar"><img src="{{ url_for('static', filename='images/dashboard3avatar.png') }}"></div>-->
 	<div id="pSeparator"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
 	<div id="pSeparator2"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
 	<div id="pSeparator3"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
@@ -14,7 +14,7 @@
 	<div id="pCapa2"><img src="{{ url_for('static', filename='images/Capa2.png') }}"></div>
 	<div id="pCapa3"><img src="{{ url_for('static', filename='images/Capa3.png') }}"></div>
 	<div id="pBIENVENIDOXAVIHERNAN">
-		<center><p style="font-family:Roboto;color:black;font-size: 42px"><strong>BIENVENIDO XAVI GARZÓN</strong></p></center>
+		<center><p style="font-family:Roboto;color:black;font-size: 42px"><strong>Bienvenido {{tmp.firstName}}</strong></p></center>
 	</div>
 	<div id="pJuanitaPerez">
 		<p style="font-family:Roboto;color:white;font-size: 19px">
@@ -284,4 +284,30 @@
 		</div>
 	</div>
 </div>
+
+
+<script>
+	(function($){
+		$(window).on('load', function(){
+			$.instagramFeed({
+				'username': 'xavgar9',
+				'container': "#instagram-feedpw",
+				'display_profile': true,
+				'display_biography': false,
+				'display_gallery': false,
+				'callback': null,
+				'styling': true,
+				'items': 8,
+				'items_per_row': 4,
+				'margin': 1 
+			});
+		});
+	})(jQuery);
+</script>
+<div class="instagramProfile">
+	<div id="instagram-feedpw" class="instagram_feedpw"></div>
+</div>
+
+
+
 {% endblock %}
