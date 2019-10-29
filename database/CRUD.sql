@@ -220,6 +220,21 @@ END$$
 delimiter ;
 
 select getIgUser(2);
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Funcion que retorna booleano, si el correo se encuentra registrado o no en la tabla User*/
+delimiter $$
+CREATE function verifyEmail(correo char(30))
+RETURNS BOOLEAN
+BEGIN
+  declare consulta char(30);
+  select PK_idUser into consulta from User where email = correo ;
+  if consulta is null then
+    RETURN False;
+  else
+    RETURN True;
+  end if;
+END$$
+delimiter ;
 --*****************************************************************************************************************************************
 --PROCEDIMIENTOS:
 /*Procedimiento que crea un usuario en la tabla User*/
