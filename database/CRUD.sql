@@ -32,6 +32,7 @@ alter table DinerUser modify numDocument bigint not null;
 alter table DinerUser modify telephone bigint not null;
 alter table Restaurant modify description varchar(100) not null;
 alter table Restaurant modify telephone bigint not null;
+alter table DinerUser add infoProfile varchar(200);
 -----------------------------------------------------------------------------------------------------------------------------------------------
 --ejemplo de funcion en mysql
 delimiter $$
