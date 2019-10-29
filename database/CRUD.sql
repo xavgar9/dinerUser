@@ -21,6 +21,7 @@ delete from User where username = 'elTito';
 --Updates:  
 update DinerUser set telephone=3154879520 where PK_idDiner = 1;
 update User set PK_idUser = 7 where username = 'elTito';
+update DinerUser set igUser = 'CBerrioL' where PK_idDiner = 2;
 --Comando utiles:
 SET GLOBAL log_bin_trust_function_creators = 1; --activar la creación de funciones en mysql
 SET SQL_SAFE_UPDATES = 0; --desactivar modo safe que impide eliminar y modificar registros
@@ -32,6 +33,7 @@ alter table DinerUser modify numDocument bigint not null;
 alter table DinerUser modify telephone bigint not null;
 alter table Restaurant modify description varchar(100) not null;
 alter table Restaurant modify telephone bigint not null;
+alter table DinerUser add infoProfile varchar(200);
 -----------------------------------------------------------------------------------------------------------------------------------------------
 --ejemplo de funcion en mysql
 delimiter $$
@@ -186,7 +188,77 @@ declare consulta int;
   end if;
 END$$
 delimiter ;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Funcion que retorna los nombres y apellidos de un usuario segun el idDiner pasado por parametro*/
+delimiter $$
+CREATE function getNamesAndLastnames(idUser int)
+RETURNS VARCHAR(50)
+BEGIN
+  declare consulta varchar(50);
+  
+  select concat_ws(' ', firstname, secondname, firstLastname, secondLastname) into consulta from DinerUser where PK_idDiner = idUser;
+  RETURN consulta;
+  
+END$$
+delimiter ;
 
+select getNamesAndLastnames(1);
+/*
+select concat_ws(' ', firstname, secondname, firstLastname, secondLastname) into firstN, secondN, firstL, secondL from DinerUser where PK_idUser = idUser;
+SELECT concat_ws(' ', nombre, apellidos) as persona FROM personas;
+*/
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Funcion que retorna el instagram de un usuario segun el idDiner pasado por parametro*/
+delimiter $$
+CREATE function getIgUser(idUser int)
+RETURNS VARCHAR(40)
+BEGIN
+  declare consulta varchar(40);
+  select igUser into consulta from DinerUser where PK_idDiner = idUser;
+  RETURN consulta;
+END$$
+delimiter ;
+
+select getIgUser(2);
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Funcion que retorna booleano, si el correo se encuentra registrado o no en la tabla User*/
+delimiter $$
+CREATE function verifyEmail(correo char(30))
+RETURNS BOOLEAN
+BEGIN
+  declare consulta char(30);
+  select PK_idUser into consulta from User where email = correo ;
+  if consulta is null then
+    RETURN False;
+  else
+    RETURN True;
+  end if;
+END$$
+delimiter ;
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Funcion que verifica los datos ingresados para crear una cuenta de usuario, retorna
+1 si no hay errores, 2 si el email ya se encuentra registrado ó 3 si el username ya se encuentra registrado */
+
+delimiter $$
+CREATE function verifyRegistration(tipo INT, usuario varchar(20) , contrasena varchar(20), correo varchar(30))
+RETURNS INT
+BEGIN
+  declare valueNick int;
+  declare valueEmail int;
+  set valueNick = validarNickname(usuario);
+  set valueEmail = verifyEmail(correo); 
+  if valueNick = 0 then
+    if valueEmail = 0 then
+      call addUser(tipo, usuario, contrasena, correo);
+      RETURN 1;
+    else 
+      RETURN 2; 
+    end if;
+  else
+    RETURN 3;
+  end if;
+END$$
+delimiter ;
 --*****************************************************************************************************************************************
 --PROCEDIMIENTOS:
 /*Procedimiento que crea un usuario en la tabla User*/
@@ -431,4 +503,18 @@ END$$
 delimiter ;
 
 call EliminarMembresiaCedula(1453487801);
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Procedimiento que consulta los nombres y apellidos de un usuario junto con su intagram sabiendo su idDiner*/
+delimiter $$
+CREATE procedure getNameIgUserByidUser(IN idUser int)
+BEGIN
+  declare nombres varchar(50);
+  declare inst varchar(40);
+  
+  set nombres = getNamesAndLastnames(idUser);
+  set inst = getIgUser(idUser);
+  select nombres, inst;
+END$$
+delimiter ;
+call getNameIgUserByidUser(2);
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
