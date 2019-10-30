@@ -235,30 +235,8 @@ BEGIN
   end if;
 END$$
 delimiter ;
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*Funcion que verifica los datos ingresados para crear una cuenta de usuario, retorna
-1 si no hay errores, 2 si el email ya se encuentra registrado ó 3 si el username ya se encuentra registrado */
 
-delimiter $$
-CREATE function verifyRegistration(tipo INT, usuario varchar(20) , contrasena varchar(20), correo varchar(30))
-RETURNS INT
-BEGIN
-  declare valueNick int;
-  declare valueEmail int;
-  set valueNick = validarNickname(usuario);
-  set valueEmail = verifyEmail(correo); 
-  if valueNick = 0 then
-    if valueEmail = 0 then
-      call addUser(tipo, usuario, contrasena, correo);
-      RETURN 1;
-    else 
-      RETURN 2; 
-    end if;
-  else
-    RETURN 3;
-  end if;
-END$$
-delimiter ;
+select verifyEmail('micorreoprueba@outlook.com');
 --*****************************************************************************************************************************************
 --PROCEDIMIENTOS:
 /*Procedimiento que crea un usuario en la tabla User*/
