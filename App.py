@@ -12,11 +12,12 @@ IP="127.0.0.1:3000"
 ##########################################################################################################
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
 from flask_mysqldb import MySQL
-from flask_login import LoginManager, current_user, logout_user, login_user
+from flask_login import LoginManager, current_user, logout_user, login_user, login_required
 from werkzeug.urls import url_parse
 from forms import SignupForm, LoginForm, EditForm, PasswordForm
+from datetime import timedelta
 import requests
-dic=dict()
+users=[]
 
 from reservation import reservation
 from models import DinerUser, users, getUser
@@ -33,9 +34,11 @@ mySQL=MySQL(app)   #data base connection
 ##########################################################################################################
 
 ################################################ SETTINGS ################################################
-app.secret_key=' suMegAHiperPerLlavEs3Cr3t4'
-login_manager=LoginManager(app)
+app.secret_key=' srguM44wgw45gewregkujfxhgzdgAHqgreggwwerigpewergWwERwrPegQ#$dgvsdgrLla%wg%Q24g5"vEssFDVSEv3Cr3t4SDFewr4tgsfdbvsd'
+login_manager=LoginManager()
 login_manager.login_view = "login"
+login_manager.init_app(app)
+
 ##########################################################################################################
 
 
@@ -55,7 +58,7 @@ def loginLaverde(email,password):
 
 @app.route('/registroLaverde/<string:userName>/<string:email>/<string:password>', methods=['GET'])
 def registroLaverde(userName, email, password):
-    data={"PK_User": 1}
+    data={"PK_User": 2}
     #data=(userName, email, password)
     json=jsonify(status='1',
                  content=data)
@@ -66,10 +69,70 @@ def cambiarContrasena(email, oldPassword, newPassword):
     json=jsonify(status='1')
     return json
 
+@app.route('/getPostulatedReservationByUserId/<string:userId>', methods=['GET'])
+def getPostulatedReservationByUserId(userId):
+    data=[
+        {"PK_idReservation": 1,
+         "FK_idRestaurant": 5,
+         "FK_reservationCreator": 2,
+         "personInCharge": "Xavier Garzon",
+         "reservationDate": "2019-10-28",
+         "reservationHour": "19:00"},
+
+        {"PK_idReservation": 2,
+         "FK_idRestaurant": 1,
+         "FK_reservationCreator": 3,
+         "personInCharge": "William Aguirre",
+         "reservationDate": "2019-11-18",
+         "reservationHour": "20:00"}
+        ]
+    json=jsonify(status='1',
+                 content=data)
+    return json
+
+
+@app.route('/getPostulatedByReservationId/<string:reservationId>', methods=['GET'])
+def getPostulatedByReservationId(reservationId):
+    """
+    status=1 accepted
+    status=0 stand by
+    """
+    data=[
+        {"PK_idUser": 1,
+         "status": 1
+        },
+        {"PK_idUser": 2,
+         "status": 1
+        },
+        {"PK_idUser": 3,
+         "status": 2    
+        }
+        ]
+    json=jsonify(status='1',
+                 content=data)
+    return json
+
+@app.route('/getRestaurantNameById/<string:restaurantId>', methods=['GET'])
+def getRestaurantNameById(restaurantId):
+    data=""
+    if restaurantId=="1"    :
+        data="Warner Foods"
+    else:
+        data="Salchiburguer"
+    json=jsonify(status='1',
+                 content=data)
+    return json
 
 ##########################################################################################################
 ##########################################################################################################
 ##########################################################################################################
+##########################################################################################################
+##########################################################################################################
+
+
+##########################################################################################################
+##########################################################################################################
+#########################################APIS DE ESTE MODULOS#############################################
 ##########################################################################################################
 ##########################################################################################################
 
@@ -117,11 +180,23 @@ def isVIP(id):
     #cursor.stored_results()
     return json
 
+
+##########################################################################################################
+##########################################################################################################
+##########################################################################################################
+##########################################################################################################
+##########################################################################################################
+"""
+@app.before_request
+def make_session_permanent():
+    session.permanent = True
+    app.permanent_session_lifetime = timedelta(seconds=5)
+"""
 @app.route('/')
 def Index():
     if "firstName" in session:
         print("INDEX")
-        print(session)
+        #print(session)
     return render_template('index.html')
 
     
@@ -144,11 +219,14 @@ def deleteDinerUserById(id):
 @app.route('/login/', methods=['GET', 'POST'])
 def login():    
     form = LoginForm()
-    print("BUENAS")
-    if "firstName" in session:
-        print("LOGIN")
-        print(session)
-        return redirect(url_for('profile'))
+    print("LOGIN")
+    ok=False
+    try:
+        print(session["PK_IdDiner"])
+    except KeyError:
+        ok=True
+    if not ok:
+        return redirect(url_for('Index'))
     else:
         if form.validate_on_submit():
             ##############################################################################
@@ -178,11 +256,22 @@ def login():
                         
 
                         user=getUser(firstName, secondName, lastName, telephone, email, password)
-                        
+
                         next_page=None
-                        flash("Bienvenido "+firstName, "success")
                         if user is not None:
-                            login_user(user, remember=False)                            
+                            login_user(user) 
+                            users.append(user)        
+                            try:
+                                """
+                                cur=mySQL.connection.cursor()
+                                cur.callproc('getDinerIdByIdUser', [PK_IdUser])
+                                mySQL.connection.commit()
+                                session["PK_IdDiner"]=str(cur.stored_results())
+                                """
+                                session["PK_IdDiner"]="1"
+                            except Exception as e:
+                                print("+++ Error al recuperar IdDiner", e)
+                            session["PK_IdUser"]=PK_IdUser
                             session["firstName"]=firstName
                             session["secondName"]=secondName
                             session["lastName"]=lastName
@@ -204,9 +293,12 @@ def login():
 @app.route("/signup/", methods=["GET", "POST"])
 def signup():
     form = SignupForm()
-    if "firstName" in session:
-        print("SIGNUP")
-        print(session)
+    ok=False
+    try:
+        print(session["PK_IdDiner"])
+    except KeyError:
+        ok=True
+    if not ok:
         return redirect(url_for('Index'))
     else:
         if form.validate_on_submit():
@@ -228,9 +320,7 @@ def signup():
                 else:
                     firstLastName=str(lastName[0])
 
-                #address=request.form['address']
                 telephone=request.form['telephone']
-                #payMethod=request.form['payMethod']
                 userName=request.form['userName']
                 email=request.form['email']
                 password=request.form['password']
@@ -251,134 +341,222 @@ def signup():
                             PK_IdUser=str(response["content"]["PK_User"])
                             print("+++++++++")                
                             print("->", user.data())
+                            print("EEEEEEEEE", password)
                             print(PK_IdUser, address, payMethod)
-                            try:                            
-                                
-                                cur=mySQL.connection.cursor()
-                                cur.callproc('add_dinerUser', [userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])
-                                #cur.callproc('add_dinerUser', [PK_IdUser, userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])
-                                mySQL.connection.commit()
-                                            
-                                login_user(user, remember=True)
-                                                                
-                                session["userName"]=userName
-                                session["numDocument"]=numDocument
-                                session["firstName"]=firstName
-                                session["secondName"]=secondName
-                                session["firstLastName"]=firstLastName
-                                session["secondLastName"]=secondLastName
-                                session["address"]=address
-                                session["telephone"]=telephone
-                                session["payMethod"]=payMethod                             
-                                session["email"]=email
-                                
-                                next_page = request.args.get('next', None)
-                                if not next_page or url_parse(next_page).netloc != '':
-                                    next_page = url_for('Index')
-                                return redirect(next_page)
+                            userOk=False; emailOk=False
+                            try:                           
+                                ### VERIFY EMAIL ###
+                                cur=mySQL.connection.cursor()                            
+                                cur.callproc('verifyEmail', [email])
+                                data=cur.stored_results()
+                                if data==1: emailOk=True
+                                ####################
+
+                                ### VERIFY USERNAME ###
+                                cur=mySQL.connection.cursor()                            
+                                cur.callproc('verifyEmail', [userName])
+                                data=cur.stored_results()
+                                if data==1: userOk=True
+                                #######################                             
+
+                                if emailOk and userOk:
+                                    cur=mySQL.connection.cursor()
+                                    cur.callproc('add_User', [1, userName, password, email])                                    
+                                    mySQL.connection.commit()
+
+                                    cur=mySQL.connection.cursor()
+                                    cur.callproc('add_dinerUser', [userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])                                    
+                                    mySQL.connection.commit()
+                                    
+                                    next_page = request.args.get('next', None)
+                                    if not next_page or url_parse(next_page).netloc != '':
+                                        next_page = url_for('login')
+                                    return redirect(next_page)
+                                else:
+                                    if not emailOk:
+                                        flash("Este email ya esta en uso", "error") 
+                                    if not userOk:
+                                        flash("Este nombre de usuario ya esta en uso", "error") 
                             except Exception as e:
                                 print("+++reg", e)
                     else:
                         flash("La contrasenas no coinciden", "error") 
     return render_template("signup_form.html", form=form)
-    
+
+
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+    ok=False
+    try:
+        print(session["PK_IdDiner"])
+    except KeyError:
+        ok=True
+    if ok:
+        return redirect(url_for('login'))   #redirect
+    else:
+        tmp = session
+        form1=EditForm()
+        form2=PasswordForm()
+        print("PROFILE")
+        if form1.validate_on_submit():
+            if request.method=='POST':
+                print("GENERAL")
+                numDocument=request.form1['numDocument']
+                firstName=request.form1['firstname']
+                secondName=request.form1['secondname']
+                firstLastName=request.form1['firstLastname']
+                secondLastName=request.form1['secondLastname']
+                address=request.form1['address']
+                telephone=request.form1['telephone']
+                payMethod=request.form1['payMethod']
+                password=request.form1['password']
+                email=request.form1['email']
+                user=getUser("", "", "", "", "",password)
+                password=user.password
+
+                url="http://"+IP+"/loginLaverde/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
+                response=requests.get(url, params=None)
+                if response.status_code==200:
+                    response=response.json()
+                    if response["status"]=='1':
+                        PK_IdUser=response["content"]["PK_IdUser"]
+                        ############################################ EDIT USER TO DB ############################################
+                        try:
+                            cur=mySQL.connection.cursor()
+                            cur.callproc('edit_dinerUser', [numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])           
+                            mySQL.connection.commit()
+                            print("EDITED: ", numDocument, firstName)
+                            flash("Informacion editada correctamente", "success")
+                        except Exception as e:
+                            print("+++edit", e)
+                    else:
+                        flash("Datos incorrectos", "error")
+
+        elif form2.validate_on_submit():
+            if request.method=='POST':
+                print("CONSTRASENAS")
+                password1=request.form2['password1']
+                password2=request.form2['password2']
+                password3=request.form2['password3']
+                if password2==password3:
+                    email=session["email"]
+                    user=getUser("", "", "", "", "",password1)
+                    password1=user.password
+                    user=getUser("", "", "", "", "",password2)
+                    password2=user.password
+                    url="http://"+IP+"/cambiarPassLaverde/"+str(email)+"/"+str(password1)+"/"+str(password2) #esta url cambia por la de laverde
+                    response=requests.get(url, params=None)
+                    if response.status_code==200:
+                        response=response.json()
+                        if response["status"]=='1':
+                            flash("Contrasena actualizada", "success")
+                        else:
+                            flash("Los datos no son validos", "error")
+    return render_template("profile_view.html", form1=form1, form2=form2, tmp=tmp)
+
+
+@app.route('/tinder', methods=['GET', 'POST'])
+def tinder():
+    ok=False
+    try:
+        print(session["PK_IdDiner"])
+    except KeyError:
+        ok=True
+    if ok:
+        return redirect(url_for('login'))
+    else:
+        res_final=None
+
+        ###
+        #   Lista las reservas publicas del usuario PK_IdDiner
+        ###
+
+        url="http://"+IP+"/getPostulatedReservationByUserId/"+str(session["PK_IdDiner"]) #esta url cambia por la de laverde
+        response=requests.get(url, params=None)
+        if response.status_code==200:
+            response=response.json()
+            if response["status"]=='1':
+                data=response["content"]
+                res_final=[len(data)]    #Final reservation with rest name
+                for reservation in data:
+                    idRestaurant=reservation["FK_idRestaurant"]
+                    url="http://"+IP+"/getRestaurantNameById/"+str(idRestaurant)
+                    tmp=requests.get(url, params=None)
+                    if tmp.status_code==200:
+                        tmp=tmp.json()
+                        if response["status"]=='1':
+                            res_final.append([str(tmp["content"]), str(reservation["reservationDate"]), str(reservation["reservationHour"])])
+        ###
+          #
+        ###
+
+        ###
+        #   Lista los usuarios que estan aplicando a una reserva del usuario PK_IdDiner
+        ###
+        usr_final=[]
+        url="http://"+IP+"/getPostulatedByReservationId/"+str(session["PK_IdDiner"]) #esta url cambia por la de laverde
+        response=requests.get(url, params=None)
+        if response.status_code==200:
+            response=response.json()
+            if response["status"]=='1':
+                data=response["content"]
+                usr_final=[len(data)] 
+                for usr in data:
+                    name=None; igUser=None
+                    try:
+                        """
+                        cur=mySQL.connection.cursor()
+                        cur.callproc('getNameIgUserByidUser', usr["PK_idUser"])
+                        tmp=cur.stored_results()
+                        name=str(tmp[0]); igUser=str(tmp[1])
+                        """
+                        name="Nicolle"; igUser="Nic"
+                    except Exception as e:
+                        print("+++tinder, error al traer el nombre del usuario y su instagram", e)
+                        usr_final=[] 
+                    if name!=None and igUser!=None:
+                        status=None
+                        if usr["status"]==1: status="Stand By"
+                        else: status="Accepted"                  
+                        usr_final.append([usr["PK_idUser"], name, igUser, status])
+
+        ###
+          #
+        ###
+
+          
+
+
+        print(res_final)
+        print(usr_final)
+
+
+        return render_template("tinder.html")
+        
+
+@login_manager.user_loader
+def loadDinerUser(id):
+    print("LOAD", users)
+    for user in users:
+        if user.id == int(id):
+            return user
+    return None
+
 
 @app.route('/logout')
 def logout():
-    flash("Sesion Cerrada Correctamente", "success")
-    logout_user()
-    print("LOGOUT")
-    try:
-        session.pop("firstName")
-    except:
-        pass
+    session.clear()
     return redirect(url_for('Index'))  #redirect
 
 
 @app.route('/forgot', methods=['GET', 'POST'])
 def forgot():
     form = LoginForm()
-    return render_template('forgot_form.html', form=form)
-
-
-@app.route('/profile', methods=['GET', 'POST'])
-def profile():
-    #global dic
-    #dic["firstLastName"]=session["firstLastName"]
-    tmp = session
-    form1=EditForm()
-    form2=PasswordForm()
-    print("PROFILE")
-    if form1.validate_on_submit():
-        if request.method=='POST':
-            print("GENERAL")
-            numDocument=request.form1['numDocument']
-            firstName=request.form1['firstname']
-            secondName=request.form1['secondname']
-            firstLastName=request.form1['firstLastname']
-            secondLastName=request.form1['secondLastname']
-            address=request.form1['address']
-            telephone=request.form1['telephone']
-            payMethod=request.form1['payMethod']
-            password=request.form1['password']
-            email=request.form1['email']
-            user=getUser("", "", "", "", "",password)
-            password=user.password
-
-            url="http://"+IP+"/loginLaverde/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
-            response=requests.get(url, params=None)
-            if response.status_code==200:
-                response=response.json()
-                if response["status"]=='1':
-                    PK_IdUser=response["content"]["PK_IdUser"]
-                    ############################################ EDIT USER TO DB ############################################
-                    try:
-                        cur=mySQL.connection.cursor()
-                        cur.callproc('edit_dinerUser', [numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])           
-                        mySQL.connection.commit()
-                        print("EDITED: ", numDocument, firstName)
-                        flash("Informacion editada correctamente", "success")
-                    except Exception as e:
-                        print("+++edit", e)
-                else:
-                    flash("Datos incorrectos", "error")
-
-    elif form2.validate_on_submit():
-        if request.method=='POST':
-            print("CONSTRASENAS")
-            password1=request.form2['password1']
-            password2=request.form2['password2']
-            password3=request.form2['password3']
-            if password2==password3:
-                email=session["email"]
-                user=getUser("", "", "", "", "",password1)
-                password1=user.password
-                user=getUser("", "", "", "", "",password2)
-                password2=user.password
-                url="http://"+IP+"/cambiarPassLaverde/"+str(email)+"/"+str(password1)+"/"+str(password2) #esta url cambia por la de laverde
-                response=requests.get(url, params=None)
-                if response.status_code==200:
-                    response=response.json()
-                    if response["status"]=='1':
-                        flash("Contrasena actualizada", "success")
-                    else:
-                        flash("Los datos no son validos", "error")
-    return render_template("profile_view.html", form1=form1, form2=form2, tmp=tmp)
-
-
-
-@app.route('/tinder', methods=['GET', 'POST'])
-def tinder():
-    flash("Bienvenido a Tinder", "success")
-    return render_template("tinder.html")
-
+    if len(users)==0:
+        return render_template('forgot_form.html', form=form)
     
-@login_manager.user_loader
-def loadDinerUser(id):
-    for user in users:
-        if user.id == int(id):
-            return user
-    return None
+    return redirect(url_for('Index'))
+
 
 
 if __name__=='__main__':
