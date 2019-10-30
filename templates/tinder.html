@@ -1,10 +1,7 @@
 {% extends "base_template.html" %}
 {% block title %}Tinder{% endblock %}
 {% block content %}
-<script>
-    var y = $(window).scrollTop();  //your current y position on the page
-    $(window).scrollTop(y+150);
-</script>
+<script type="text/javascript" src="{{ url_for('static', filename='test.js') }}"></script>
 <script>
     (function($){
         $(window).on('load', function(){
@@ -38,9 +35,12 @@
 <!--<div class="instagramProfile">
     <div id="instagram-feed1" class="instagram_feed"></div>
 </div>-->
-<div class="instagramGaleria" style="border:1px solid #ccc; overflow:auto;">
+<div id="holaaa" class="instagramGaleria" style="border:1px solid #ccc; overflow:auto;">
     <div id="instagram-feed2" class="instagram_feed"> </div>
 </div>
+
+<button onclick="$(holaaa).scrollTo('-=542px');" class="ui inverted secondary button">RETROCEDER</button>
+<button onclick="$(holaaa).scrollTo('+=542px');" class="ui inverted secondary button">AVANZAR</button>
 
 
 {% endblock %}

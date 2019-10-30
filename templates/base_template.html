@@ -25,7 +25,7 @@
             <img src="{{ url_for('static', filename='images/LogoBlanco1.png') }}" class="App-logo" alt="logo"/>
             <div class="ui inverted segment">
                 <div class="ui inverted pointing secondary menu">
-                    <a class="active item" href="{{ url_for('Index') }}">Home</a>
+                    <a class="item" href="{{ url_for('Index') }}">Home</a>
                     {% if current_user.is_anonymous %}
                     <a class="item" href="{{ url_for('login') }}">Login</a>
                     <a class="item" href="{{ url_for('signup') }}">Register</a>
@@ -64,6 +64,7 @@
     <script type="text/javascript" src="{{ url_for('static', filename='toastr.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='jquery.instagramFeed.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='jquery.scrollTo.js') }}"></script>
+
     {% block content %}{% endblock %}
 
     {% with messages = get_flashed_messages(with_categories=True) %}

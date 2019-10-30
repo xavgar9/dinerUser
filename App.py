@@ -475,7 +475,7 @@ def profile():
                             flash("Los datos no son validos", "error")
     return render_template("profile_view.html", form1=form1, form2=form2, tmp=tmp)
 
-
+""" esto hay que quitar
 @app.route('/tinder', methods=['GET', 'POST'])
 def tinder():
     ok=False
@@ -525,12 +525,12 @@ def tinder():
                 for usr in data:
                     name=None; igUser=None
                     try:
-                        """
+                        """ """esto hay que quitar
                         cur=mySQL.connection.cursor()
                         cur.callproc('getNameIgUserByidUser', usr["PK_idUser"])
                         tmp=cur.stored_results()
                         name=str(tmp[0]); igUser=str(tmp[1])
-                        """
+                        """ """esto hay que quitar
                         name="Nicolle"; igUser="Nic"
                     except Exception as e:
                         print("+++tinder, error al traer el nombre del usuario y su instagram", e)
@@ -553,7 +553,11 @@ def tinder():
 
 
         return render_template("tinder.html")
-        
+"""
+
+@app.route('/tinder', methods=['GET', 'POST'])
+def tinder():
+    return render_template("tinder.html")
 
 @login_manager.user_loader
 def loadDinerUser(id):
