@@ -73,6 +73,43 @@
   } 
 
 
+.iconInfo{
+	left: 702px; 
+	top: 91px; 
+	position: absolute; 
+	z-index:1;
+}
+
+.iconCheck{
+	left: 702px; 
+	top: 91px; 
+	position: absolute; 
+	z-index:1;
+}
+
+.iconX{
+	left: 702px; 
+	top: 91px; 
+	position: absolute; 
+	z-index:1;
+}
+
+.iconIz{
+	left: 702px; 
+	top: 91px; 
+	position: absolute; 
+	z-index:1;
+}
+
+
+.iconDr{
+	left: 702px; 
+	top: 91px; 
+	position: absolute; 
+	z-index:1;
+}
+
+
 #miLetra {
 	font-family: 'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
 	font-size: 25px;
@@ -143,7 +180,7 @@
 #pJuanitaPerez 
 { 
 	left: 53px; 
-	top: 293px; 
+	top: 203px; 
 	position: absolute; 
 	width: 272px;
 	height: 24px;
@@ -163,7 +200,7 @@
 #pjuanitarequiml 
 { 
 	left: 53px; 
-	top: 416px; 
+	top: 326px; 
 	position: absolute; 
 	width: 272px;
 	height: 27px;
@@ -173,7 +210,7 @@
 #player_57302118294 
 { 
 	left: 53px; 
-	top: 477px; 
+	top: 387px; 
 	position: absolute; 
 	width: 272px;
 	height: 19px;
@@ -183,7 +220,7 @@
 #pIngdeRequisitos 
 { 
 	left: 53px; 
-	top: 353px; 
+	top: 263px; 
 	position: absolute; 
 	width: 272px;
 	height: 25px;
@@ -193,7 +230,7 @@
 #pGroup2764 
 { 
 	left: 863px; 
-	top: 516px; 
+	top: 406px; 
 	position: absolute; 
 	width: 339px;
 	height: 136px;
@@ -213,7 +250,7 @@
 #pSeparator2 
 { 
 	left: 12px; 
-	top: 325px; 
+	top: 235px; 
 	position: absolute; 
 	width: 325px;
 	height: 6px;
@@ -223,7 +260,7 @@
 #pSeparator3 
 { 
 	left: 12px; 
-	top: 386px; 
+	top: 296px; 
 	position: absolute; 
 	width: 325px;
 	height: 6px;
@@ -233,7 +270,7 @@
 #pSeparator4
 { 
 	left: 12px; 
-	top: 450px; 
+	top: 360px; 
 	position: absolute; 
 	width: 325px;
 	height: 6px;
@@ -243,7 +280,7 @@
 #pSeparator5 
 { 
 	left: 12px; 
-	top: 507px; 
+	top: 417px; 
 	position: absolute; 
 	width: 325px;
 	height: 6px;
@@ -253,7 +290,7 @@
 #pRectangle21 
 { 
 	left: 54px; 
-	top: 552px; 
+	top: 462px; 
 	position: absolute; 
 	width: 241px;
 	height: 55px;
@@ -263,7 +300,7 @@
 #pRectangle212 
 { 
 	left: 78px; 
-	top: 623px; 
+	top: 533px; 
 	position: absolute; 
 	width: 193px;
 	height: 57px;
@@ -272,8 +309,8 @@
 
 #pBIENVENIDOXAVIHERNAN 
 { 
-	left: 477px; 
-	top: 243px; 
+	left: 432px; 
+	top: 82px; 
 	position: absolute; 
 	width: 628px;
 	height: 30px;
@@ -282,7 +319,7 @@
 
 #pCapa2 
 { 
-	left: 761px; 
+	left: 1097px; 
 	top: 7px; 
 	position: absolute; 
 	width: 155px;
@@ -303,7 +340,7 @@
 #player_25 
 { 
 	left: 465px; 
-	top: 328px; 
+	top: 207px; 
 	position: absolute; 
 	width: 339px;
 	height: 136px;
@@ -313,7 +350,7 @@
 #player_27 
 { 
 	left: 863px; 
-	top: 327px; 
+	top: 207px; 
 	position: absolute; 
 	width: 339px;
 	height: 135px;
@@ -323,7 +360,7 @@
 #player_29 
 { 
 	left: 465px; 
-	top: 516px; 
+	top: 406px; 
 	position: absolute; 
 	width: 339px;
 	height: 136px;

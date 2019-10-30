@@ -1,20 +1,29 @@
 {% extends "base_template.html" %}
 {% block title %}Tinder{% endblock %}
 {% block content %}
+<div class="lateralTinder">
+        <div class="ui inverted segment">
+                <div class="ui inverted secondary pointing menu">
+                  <a class="item active">Home </a>
+                  <a class="item">Messages </a>
+                </div>
+              </div>
+    </div>
+
 <script type="text/javascript" src="{{ url_for('static', filename='test.js') }}"></script>
 <script>
     (function($){
         $(window).on('load', function(){
             $.instagramFeed({
-                'username': 'carol_alt',
+                'username': 'themarket_col',
                 'container': "#instagram-feed1",
-                'display_profile': true,
+                'display_profile': false,
                 'display_biography': false,
-                'display_gallery': false,
+                'display_gallery': true,
                 'callback': null,
                 'styling': true,
                 'items': 8,
-                'items_per_row': 4,
+                'items_per_row': 1,
                 'margin': 1 
             });
             $.instagramFeed({
@@ -35,12 +44,47 @@
 <!--<div class="instagramProfile">
     <div id="instagram-feed1" class="instagram_feed"></div>
 </div>-->
-<div id="holaaa" class="instagramGaleria" style="border:1px solid #ccc; overflow:auto;">
+<div id="galeriaInsta" class="instagramGaleria" style="border:1px solid #ccc; overflow:auto;">
     <div id="instagram-feed2" class="instagram_feed"> </div>
 </div>
+<!--
+<div id="galeriaInsta" class="restauranteGaleria" style="border:1px solid #ccc; overflow:auto;">
+    <div id="instagram-feed1" class="instagram_feed"> </div>
+</div>-->
 
-<button onclick="$(holaaa).scrollTo('-=542px');" class="ui inverted secondary button">RETROCEDER</button>
-<button onclick="$(holaaa).scrollTo('+=542px');" class="ui inverted secondary button">AVANZAR</button>
+<div class="iconIz">
+    <div onclick="$(galeriaInsta).scrollTo('-=542px');" class="circular ui animated button" tabindex="0">
+        <div class="hidden content">
+            <i class="left arrow icon"></i>
+        </div>
+    </div>
+</div>
 
+
+<div class="iconDr">
+    <div onclick="$(galeriaInsta).scrollTo('+=542px');" class="circular ui animated button" tabindex="0">
+        <div class="hidden content">
+            <i class="right arrow icon"></i>
+        </div>
+    </div>
+</div>
+
+<div class="iconInfo">
+    <button class="massive circular ui icon button">
+        <i class="icon info circle"></i>
+    </button>
+</div>
+
+<div class="iconCheck">
+    <button class="massive circular ui icon button">
+        <i class="icon check"></i>
+    </button>
+</div>
+    
+<div class="iconX">
+    <button class="massive circular ui icon button">
+        <i class="icon x icon"></i>
+    </button>
+</div>
 
 {% endblock %}
