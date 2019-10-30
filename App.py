@@ -243,31 +243,45 @@ def login():
                     PK_IdUser=response["content"]["PK_IdUser"]
                     userName=response["content"]["userName"]
                     try:            
-                        """
+                        print(len(password), password)
                         cur=mySQL.connection.cursor()
-                        cur.execute('SELECT firstName, secondName, firstLastName, telephone  FROM DinerUser WHERE PK_idDiner = {0}'.format(PK_IdUser))
+                        cur.callproc('login', [email, password])                                        
                         data=cur.fetchall()
-                        firstName=str(data[0][0]); secondName=str(data[0][1])
-                        lastName=str(data[0][2]); telephone=data[0][3]
-
-                        """
-                        firstName="Xavier"; secondName="William"
-                        lastName="Garzon"; telephone=316455412
-                        
-
-                        user=getUser(firstName, secondName, lastName, telephone, email, password)
-
+                        data=data[0][0]
+                        cur.close()
+                        if data==1:
+                            print("VALIDO LOGIN")
+                            cur=mySQL.connection.cursor()
+                            cur.callproc("getDataDinerUserByEmail", [email])
+                            data=cur.fetchall()                                                        
+                            data=data[0]
+                            cur.close()
+                            if len(data)!=0:
+                                session["PK_IdUser"]=data[0]
+                                session["numDocument"]=data[2]
+                                session["firstName"]=data[3]
+                                session["secondName"]=data[4]
+                                session["firstLastName"]=data[5]
+                                session["secondLastName"]=data[6]                                
+                                session["address"]=data[7]
+                                session["telephone"]=data[8]
+                                session["infoProfile"]=data[10]    
+                                session["igUser"]=data[11]
+                                next_page = request.args.get('next')
+                    
                         next_page=None
+                        
+                        """
                         if user is not None:
                             login_user(user) 
                             users.append(user)        
                             try:
-                                """
-                                cur=mySQL.connection.cursor()
-                                cur.callproc('getDinerIdByIdUser', [PK_IdUser])
-                                mySQL.connection.commit()
-                                session["PK_IdDiner"]=str(cur.stored_results())
-                                """
+                                
+                                #cur=mySQL.connection.cursor()
+                                #cur.callproc('getDinerIdByIdUser', [PK_IdUser])
+                                #mySQL.connection.commit()
+                                #session["PK_IdDiner"]=str(cur.stored_results())
+                                
                                 session["PK_IdDiner"]="1"
                             except Exception as e:
                                 print("+++ Error al recuperar IdDiner", e)
@@ -280,6 +294,7 @@ def login():
                             session["userName"]=userName                    
                             
                             next_page = request.args.get('next')
+                        """
                         if not next_page or url_parse(next_page).netloc != '':
                             next_page = url_for('Index')
                         return redirect(next_page)
@@ -348,29 +363,31 @@ def signup():
                                 ### VERIFY EMAIL ###
                                 cur=mySQL.connection.cursor()                            
                                 cur.callproc('verifyEmail', [email])
-                                data=cur.stored_results()
                                 data=cur.fetchall()
                                 data=data[0][0]
+                                cur.close()
                                 if data==0: emailOk=True
                                 ####################
 
                                 ### VERIFY USERNAME ###
                                 cur=mySQL.connection.cursor()                            
                                 cur.callproc('verifyUserName', [userName])
-                                data=cur.stored_results()
                                 data=cur.fetchall()
                                 data=data[0][0]
+                                cur.close()
                                 if data==0: userOk=True
                                 #######################                             
 
                                 if emailOk and userOk:
                                     cur=mySQL.connection.cursor()
-                                    cur.callproc('add_User', [1, userName, password, email])                                        
+                                    cur.callproc('addUser', [1, userName, password, email])                                        
                                     mySQL.connection.commit()
+                                    cur.close()
 
                                     cur=mySQL.connection.cursor()
                                     cur.callproc('add_dinerUser', [userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])                                    
                                     mySQL.connection.commit()
+                                    cur.close() 
                                     
                                     next_page = request.args.get('next', None)
                                     if not next_page or url_parse(next_page).netloc != '':
