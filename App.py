@@ -349,19 +349,23 @@ def signup():
                                 cur=mySQL.connection.cursor()                            
                                 cur.callproc('verifyEmail', [email])
                                 data=cur.stored_results()
-                                if data==1: emailOk=True
+                                data=cur.fetchall()
+                                data=data[0][0]
+                                if data==0: emailOk=True
                                 ####################
 
                                 ### VERIFY USERNAME ###
                                 cur=mySQL.connection.cursor()                            
-                                cur.callproc('verifyEmail', [userName])
+                                cur.callproc('verifyUserName', [userName])
                                 data=cur.stored_results()
-                                if data==1: userOk=True
+                                data=cur.fetchall()
+                                data=data[0][0]
+                                if data==0: userOk=True
                                 #######################                             
 
                                 if emailOk and userOk:
                                     cur=mySQL.connection.cursor()
-                                    cur.callproc('add_User', [1, userName, password, email])                                    
+                                    cur.callproc('add_User', [1, userName, password, email])                                        
                                     mySQL.connection.commit()
 
                                     cur=mySQL.connection.cursor()
