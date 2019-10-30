@@ -496,3 +496,17 @@ END$$
 delimiter ;
 call getNameIgUserByidUser(2);
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Procedimiento que retorna un booleano, True si la contraseña y el correo ingresados estan registrados, False de lo contrario*/
+delimiter $$
+create procedure login(IN correo VARCHAR(50), IN contrasenia VARCHAR(150))
+BEGIN
+  declare consulta int;
+  set consulta = (select PK_idUser from User where email = correo AND password = contrasenia);
+  if consulta is null then
+    SELECT False;
+  else
+    SELECT True;
+  end if;
+END$$
+delimiter ;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
