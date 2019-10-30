@@ -36,6 +36,8 @@ CREATE TABLE DinerUser (
     address char(30) NOT NULL,
     telephone bigint NOT NULL,
     payMethod varchar(30) NOT NULL,
+    infoProfile varchar(200),
+    igUser varchar(40),
     CONSTRAINT UsuarioComensal_pk PRIMARY KEY (PK_idDiner)
 );
 
@@ -88,8 +90,8 @@ CREATE TABLE User (
     PK_idUser int NOT NULL AUTO_INCREMENT,
     userType int NOT NULL,
     username varchar(20) NOT NULL,
-    password varchar(20) NOT NULL,
-    email char(30) NOT NULL,
+    password varchar(150) NOT NULL,
+    email char(50) NOT NULL,
     CONSTRAINT User_pk PRIMARY KEY (PK_idUser)
 );
 
