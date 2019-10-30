@@ -30,6 +30,18 @@ select validarConvenio(2);
 --------------------------------------------------------------------------------------
 /*Funcion que retorna booleano, si el DinerUser tiene membresia o no*/
 function userVIP(idDinerUser int)
+----------------------------------------------------------------------------------------------------------------------------------------
+/*Funcion que retorna booleano, si el correo se encuentra registrado o no en la tabla User*/
+function verifyEmail(correo char(30))
+select verifyEmail('micorreoprueba@outlook.com');
+----------------------------------------------------------------------------------------------------------------------------------------
+/*Funcion que retorna los nombres y apellidos de un usuario segun el idDiner pasado por parametro*/
+function getNamesAndLastnames(idUser int)
+select getNamesAndLastnames(1);
+----------------------------------------------------------------------------------------------------------------------------------------
+/*Funcion que retorna el instagram de un usuario segun el idDiner pasado por parametro*/
+function getIgUser(idUser int)
+select getIgUser(2);
 /*------------------------------------------------------------------------------------------------------------------------*/
 --PROCEDIMIENTOS:
 /*Procedimiento que crea un usuario en la tabla User*/
@@ -90,4 +102,8 @@ procedure EliminarMembresia(IN idDiner INT)
 procedure EliminarMembresiaCedula(IN cedula BIGINT)
 
 call EliminarMembresiaCedula(1453487801);
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------
+/*Procedimiento que consulta los nombres y apellidos de un usuario junto con su instagram sabiendo su idDiner*/
+procedure getNameIgUserByidUser(IN idUser int)
+call getNameIgUserByidUser(2);
+----------------------------------------------------------------------------------------------------------------------------------------
