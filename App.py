@@ -525,12 +525,12 @@ def tinder():
                 for usr in data:
                     name=None; igUser=None
                     try:
-                        """ """esto hay que quitar
+                        """ 
                         cur=mySQL.connection.cursor()
                         cur.callproc('getNameIgUserByidUser', usr["PK_idUser"])
                         tmp=cur.stored_results()
                         name=str(tmp[0]); igUser=str(tmp[1])
-                        """ """esto hay que quitar
+                        """ 
                         name="Nicolle"; igUser="Nic"
                     except Exception as e:
                         print("+++tinder, error al traer el nombre del usuario y su instagram", e)
