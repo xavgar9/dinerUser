@@ -27,18 +27,51 @@
     </style>
 </head>
 <body>
+<script>
+menu = {};
+
+// ready event
+menu.ready = function() {
+
+  // selector cache
+  var
+    $menuItem = $('.menu a.item, .menu .link.item'),
+    // alias
+    handler = {
+      activate: function() {
+        $(this)
+        .addClass('active')
+        .closest('.ui.menu')
+        .find('.item')
+        .not($(this))
+        .removeClass('active');
+      }
+    }
+  ;
+
+  $menuItem
+    .on('click', handler.activate)
+  ;
+
+};    
+    
+</script>
+
+
+
+
     <header class="App-header">
         <div class="Menu">
             <img src="{{ url_for('static', filename='images/LogoBlanco1.png') }}" class="App-logo" alt="logo"/>
             <div class="ui inverted segment">
                 <div class="ui inverted pointing secondary menu">
-                    <a class="item" href="{{ url_for('Index') }}">Home</a>
+                    <a onclick="$(document).ready(menu.ready);" id="h111" class="item" href="{{ url_for('Index') }}">Home</a>
                     {% if current_user.is_anonymous %}
                     <a class="item" href="{{ url_for('login') }}">Login</a>
                     <a class="item" href="{{ url_for('signup') }}">Register</a>
                     <a class="item" href="{{ url_for('forgot') }}">Forgot</a>
                     <a class="item" href="{{ url_for('profile') }}">Profile</a>
-                    <a class="item" href="{{ url_for('tinder') }}">Tinder</a>
+                    <a class="item active" href="{{ url_for('tinder') }}">Tinder</a>
                     <a class="item" href="{{ url_for('logout') }}">Logout</a>
                     {% endif %}
                 </div>

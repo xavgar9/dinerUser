@@ -1,5 +1,5 @@
-IP="127.0.0.1:3000"
-#IP="159.65.58.193:3000"
+#IP="127.0.0.1:3000"
+IP="159.65.58.193:3000"
 
 #request.json['name'] para recibir y usar json de otras paginas
 #pip install flask
@@ -475,7 +475,7 @@ def profile():
                             flash("Los datos no son validos", "error")
     return render_template("profile_view.html", form1=form1, form2=form2, tmp=tmp)
 
-""" esto hay que quitar
+
 @app.route('/tinder', methods=['GET', 'POST'])
 def tinder():
     ok=False
@@ -557,7 +557,7 @@ def tinder():
 
 @app.route('/tinder', methods=['GET', 'POST'])
 def tinder():
-    return render_template("tinder.html")
+    return render_template("tinder.html")"""
 
 @login_manager.user_loader
 def loadDinerUser(id):
