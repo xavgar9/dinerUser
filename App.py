@@ -298,7 +298,8 @@ def login():
                             next_page = request.args.get('next')
                         """
                         if not next_page or url_parse(next_page).netloc != '':
-                            next_page = url_for('Index')
+                            flash("Bienvenido ", session["firstName"])
+                            next_page = url_for('profile')
                         return redirect(next_page)
                     except Exception as e:
                         flash("Datos incorrectos", "error")
@@ -526,7 +527,7 @@ def tinder():
                 data=response["content"]
                 usr_final=[len(data)] 
                 for usr in data:
-                    name=Session["firstName"]; igUser=session["igUser"]
+                    name=session["firstName"]; igUser=session["igUser"]
                     if name!=None and igUser!=None:
                         status=None
                         if usr["status"]==1: status="Stand By"
