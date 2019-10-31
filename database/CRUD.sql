@@ -477,10 +477,10 @@ delimiter $$
 Create procedure EliminarMembresiaCedula(IN cedula BIGINT)
 BEGIN
     if validarCedula(cedula) = 1 then
-        delete from VIPMembership inner join DinerUser on VIPMembership.FK_idDiner = DinerUser.PK_idDiner where numDocument = cedula;
+        delete VIPMembership from VIPMembership inner join DinerUser on VIPMembership.FK_idDiner = DinerUser.PK_idDiner where DinerUser.numDocument = cedula;
     else
       select 'Ese id no esta registrado';
-     end if;
+	end if;
 END$$
 delimiter ;
 
