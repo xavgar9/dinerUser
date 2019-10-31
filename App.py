@@ -403,8 +403,8 @@ def signup():
                                         flash("Este nombre de usuario ya esta en uso", "error") 
                             except Exception as e:
                                 print("+++reg", e)
-                    else:
-                        flash("La contrasenas no coinciden", "error") 
+                else:
+                    flash("La contrasenas no coinciden", "error") 
     return render_template("signup_form.html", form=form)
 
 
