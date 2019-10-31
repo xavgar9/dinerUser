@@ -264,7 +264,7 @@ delimiter $$
 Create procedure add_dinerUser(IN userNick varchar(20), IN cedula INT,IN nombre char(15),IN segundoNombre char(15) ,IN apellido char(15),IN segundoApellido char(15),IN direccion char(30), IN telefono bigint, IN pago varchar(30))
 BEGIN
   declare idUsuario int;
-  set idUsuario = getUserIdByNick(userNick)
+  set idUsuario = getUserIdByNick(userNick);
   if validarCedula(cedula) = 0 then
     insert into DinerUser (FK_idUser, numDocument, firstname, secondname, firstLastname, secondLastname, address, telephone, payMethod) VALUES(idUsuario,cedula , nombre,segundoNombre,apellido,segundoApellido, direccion, telefono, pago);
   else
