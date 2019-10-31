@@ -245,7 +245,11 @@ delimiter $$
 Create procedure addUser(tipo INT,IN usuario varchar(20) ,IN contrasena varchar(20),IN correo varchar(30))
 BEGIN
     if validarNickname(usuario) = 0 then
+      if verifyEmail(correo) = 0 then
         insert into User (userType, username, password, email) VALUES(tipo,usuario,contrasena,correo);
+	  else
+        select 'Ese correo ya se encuentra registrado';
+	  end if;
     else
         select 'Ese nombre de usuario ya existe';
     end if;
