@@ -206,6 +206,7 @@ def deleteDinerUserById(id):
     try:
         cur=mySQL.connection.cursor()
         cur.callproc('delete_dinerUser', [id])
+        cur.close()
         mySQL.connection.commit()
     except Exception as e:
         print("+++deleteDinerUserById", e)
@@ -233,7 +234,7 @@ def login():
             email=request.form['email']
             password=request.form['password']
             user=getUser("", "", "", "", "",password)
-            password=user.password
+            #password=user.password
 
             url="http://"+IP+"/loginLaverde/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
             response=requests.get(url, params=None)
@@ -258,6 +259,7 @@ def login():
                             cur.close()
                             if len(data)!=0:
                                 session["PK_IdUser"]=data[0]
+                                session["PK_IdDiner"]=data[1]
                                 session["numDocument"]=data[2]
                                 session["firstName"]=data[3]
                                 session["secondName"]=data[4]
@@ -446,6 +448,7 @@ def profile():
                             cur=mySQL.connection.cursor()
                             cur.callproc('edit_dinerUser', [numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])           
                             mySQL.connection.commit()
+                            cur.close()
                             print("EDITED: ", numDocument, firstName)
                             flash("Informacion editada correctamente", "success")
                         except Exception as e:
@@ -523,18 +526,7 @@ def tinder():
                 data=response["content"]
                 usr_final=[len(data)] 
                 for usr in data:
-                    name=None; igUser=None
-                    try:
-                        """ 
-                        cur=mySQL.connection.cursor()
-                        cur.callproc('getNameIgUserByidUser', usr["PK_idUser"])
-                        tmp=cur.stored_results()
-                        name=str(tmp[0]); igUser=str(tmp[1])
-                        """ 
-                        name="Nicolle"; igUser="Nic"
-                    except Exception as e:
-                        print("+++tinder, error al traer el nombre del usuario y su instagram", e)
-                        usr_final=[] 
+                    name=Session["firstName"]; igUser=session["igUser"]
                     if name!=None and igUser!=None:
                         status=None
                         if usr["status"]==1: status="Stand By"
