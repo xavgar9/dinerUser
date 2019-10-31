@@ -565,7 +565,7 @@ def loadDinerUser(id):
 def logout():
     flash("Sesion cerrada Correctamente", "success")
     session.clear()
-    return redirect(url_for('Index'))  #redirect
+    return redirect(url_for('login'))  #redirect
 
 
 @app.route('/forgot', methods=['GET', 'POST'])
