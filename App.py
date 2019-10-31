@@ -563,9 +563,8 @@ def loadDinerUser(id):
 
 @app.route('/logout')
 def logout():
-    flash("Sesion cerrada Correctamente", "success")
     session.clear()
-    flash("Sesion cerrada Correctamente1", "success")
+    flash("Sesion cerrada Correctamente", "success")
     return redirect(url_for('login'))  #redirect
 
 
