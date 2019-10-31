@@ -298,7 +298,7 @@ def login():
                             next_page = request.args.get('next')
                         """
                         if not next_page or url_parse(next_page).netloc != '':
-                            flash("Bienvenido ", session["firstName"])
+                            flash("Bienvenido "+ session["firstName"], "success")
                             next_page = url_for('profile')
                         return redirect(next_page)
                     except Exception as e:
