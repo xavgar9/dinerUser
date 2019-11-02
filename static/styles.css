@@ -67,7 +67,7 @@
 	background: #1c1d1f;
 	position: absolute; 
 	top: 91px;
-	width: 265px;
+	width: 293px;
 	height: 100%;
 	z-index:1;
 } 
@@ -83,11 +83,11 @@
   } 
 
   .restauranteGaleria { 
-	left: 93px; 
-	top: 91px; 
+	left: 83px; 
+	top: 102px; 
 	position: absolute; 
-	width: 555px;
-	height: 538px;
+	width: 835px;
+	height: 128px;
 	z-index:1;
 } 
 

@@ -25,10 +25,16 @@ from models import DinerUser, users, getUser
 app=Flask(__name__) #web service
 
 ############################################ MYSQL CONNECTION ############################################
-app.config['MYSQL_HOST']='localhost' #data base ubication -> localhost
-app.config['MYSQL_USER']='root' #-> admin
-app.config['MYSQL_PASSWORD']='' #->3ad853f1abc94a67dc9ceed07547d5aa6dd5ce129611feb2
-app.config['MYSQL_DB']='dinerUser' #data base name -> dinerUser
+if IP=="159.65.58.193:3000":
+    app.config['MYSQL_HOST']='localhost' #data base ubication -> localhost
+    app.config['MYSQL_USER']='admin' #-> admin
+    app.config['MYSQL_PASSWORD']='3ad853f1abc94a67dc9ceed07547d5aa6dd5ce129611feb2' #->3ad853f1abc94a67dc9ceed07547d5aa6dd5ce129611feb2
+    app.config['MYSQL_DB']='dinerUser' #data base name -> dinerUser
+else:
+    app.config['MYSQL_HOST']='localhost' #data base ubication -> localhost
+    app.config['MYSQL_USER']='root' #-> admin
+    app.config['MYSQL_PASSWORD']='' #->3ad853f1abc94a67dc9ceed07547d5aa6dd5ce129611feb2
+    app.config['MYSQL_DB']='dinerUser' #data base name -> dinerUser
 
 mySQL=MySQL(app)   #data base connection
 ##########################################################################################################
@@ -546,11 +552,8 @@ def tinder():
 
 
         return render_template("tinder.html")
-"""
 
-@app.route('/tinder', methods=['GET', 'POST'])
-def tinder():
-    return render_template("tinder.html")"""
+
 
 @login_manager.user_loader
 def loadDinerUser(id):
