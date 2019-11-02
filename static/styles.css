@@ -79,6 +79,7 @@
 	  width: 555px;
 	  height: 538px;
 	  z-index:1;
+	  box-shadow: 10px 10px 21px -6px rgba(0,0,0,0.52);
   } 
 
   .restauranteGaleria { 
@@ -113,16 +114,16 @@
 }
 
 .iconIz{
-	left: 652px; 
-	top: 91px; 
+	left: 708px; 
+	top: 97px; 
 	position: absolute; 
 	z-index:1;
 }
 
 
 .iconDr{
-	left: 1238px; 
-	top: 91px; 
+	left: 1128px; 
+	top: 97px; 
 	position: absolute; 
 	z-index:1;
 }
@@ -323,6 +324,17 @@
 	width: 193px;
 	height: 57px;
 	z-index:20;
+} 
+
+#NombreTinder 
+{ 
+	left: 707px; 
+	top: 483px; 
+	position: absolute; 
+	width: 545px;
+	height: 60px;
+	z-index:22;
+	text-shadow: -4px 3px 3px #000;
 } 
 
 #pBIENVENIDOXAVIHERNAN 

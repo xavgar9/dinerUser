@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+ 
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for("static", filename="toastr.min.css") }}">
@@ -18,92 +19,49 @@
             display : none;
         }
         .circular.ui.animated.button{
-            height: 540px;
-            width: 50px;
+            height: 532px;
+            width: 120px;
+            background: transparent;
+            color: white;
         }
         .ui.bottom.attached.segment{
             height: 540px;
         }
     </style>
+    <script type="text/javascript" src="{{ url_for('static', filename='test.js') }}"></script>
+
 </head>
 <body>
-<script>
-menu = {};
-
-// ready event
-menu.ready = function() {
-
-  // selector cache
-  var
-    $menuItem = $('.menu a.item, .menu .link.item'),
-    // alias
-    handler = {
-      activate: function() {
-        $(this)
-        .addClass('active')
-        .closest('.ui.menu')
-        .find('.item')
-        .not($(this))
-        .removeClass('active');
-      }
-    }
-  ;
-
-  $menuItem
-    .on('click', handler.activate)
-  ;
-
-};    
     
-</script>
-
-
-
-
+        <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.4.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='semantic/semantic.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='popper.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='toastr.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='jquery.instagramFeed.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='jquery.scrollTo.js') }}"></script>
+    
+    
     <header class="App-header">
         <div class="Menu">
             <img src="{{ url_for('static', filename='images/LogoBlanco1.png') }}" class="App-logo" alt="logo"/>
             <div class="ui inverted segment">
                 <div class="ui inverted pointing secondary menu">
-                    <a onclick="$(document).ready(menu.ready);" id="h111" class="item" href="{{ url_for('Index') }}">Home</a>
-                    {% if current_user.is_anonymous %}
+                    <a class="item" href="{{ url_for('Index') }}">Home</a>
                     <a class="item" href="{{ url_for('login') }}">Login</a>
                     <a class="item" href="{{ url_for('signup') }}">Register</a>
                     <a class="item" href="{{ url_for('forgot') }}">Forgot</a>
                     <a class="item" href="{{ url_for('profile') }}">Profile</a>
-                    <a class="item active" href="{{ url_for('tinder') }}">Tinder</a>
+                    <a class="item" href="{{ url_for('tinder') }}">Tinder</a>
                     <a class="item" href="{{ url_for('logout') }}">Logout</a>
-                    {% endif %}
                 </div>
             </div>
         </div>
+               
     </header>
     <div class="decorBar"></div>
-    <!--<div>
-        <ul class="user-info">
-            <li><a href="{{ url_for('Index') }}">Home</a></li>
-            {% if current_user.is_anonymous %}
-                <li> | </li>
-                <li><a href="{{ url_for('login') }}">Login</a></li>
-                <li> | </li>
-                <li><a href="{{ url_for('signup') }}">Register</a></li>
-                <li> | </li>
-                <li><a href="{{ url_for('forgot') }}">Forgot</a></li>
-                <li> | </li>
-                <li><a href="{{ url_for('profile') }}">Profile</a></li>
-                <li> | </li>
-                <li><a href="{{ url_for('tinder') }}">Tinder</a></li>
-                <li> | </li>
-                <li><a href="{{ url_for('logout') }}">Logout</a></li>
-            {% endif %}
-        </ul>
-    </div>-->
-    <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.4.1.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='semantic/semantic.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='popper.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='toastr.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='jquery.instagramFeed.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='jquery.scrollTo.js') }}"></script>
+    
+
+
 
     {% block content %}{% endblock %}
 
@@ -120,5 +78,8 @@ menu.ready = function() {
             {% endfor %}
         {% endif %}
     {% endwith %}
+
+    <script>$(document).ready(menu.ready);</script>
 </body>
+
 </html>

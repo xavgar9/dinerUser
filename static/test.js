@@ -1,21 +1,27 @@
-$.fn.test = function(){
-	// Hide title on iframes
-	if (window.self !== window.top) {
-		$('h1').hide();
-	}
+menu = {};
 
-	if (location.search === '?notest') {
-		return this;
-	}
+// ready event
+menu.ready = function() {
 
-	$.scrollTo.defaults.axis = 'xy';
-	
-	var root = this.is('iframe') ? this.contents() : $('body');
-	root.find('#ua').html(
-		navigator.userAgent +
-		'<br />' +
-		'document.compatMode is "' + document.compatMode + '"'
-	);
+  // selector cache
+  var
+    $menuItem = $('.menu a.item, .menu .link.item'),
+    // alias
+    handler = {
+      activate: function() {
+        $(this)
+        .addClass('active')
+        .closest('.ui.menu')
+        .find('.item')
+        .not($(this))
+        .removeClass('active');
+      }
+    }
+  ;
 
-	return this.scrollTo('max', 1000).scrollTo(0, 1000);
+  $menuItem
+    .on('click', handler.activate)
+  ;
+
 };
+
