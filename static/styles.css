@@ -67,13 +67,13 @@
 	background: #1c1d1f;
 	position: absolute; 
 	top: 91px;
-	width: 293px;
+	width: 343px;
 	height: 100%;
 	z-index:1;
 } 
 
   .instagramGaleria { 
-	  left: 702px; 
+	  left: 762px; 
 	  top: 91px; 
 	  position: absolute; 
 	  width: 555px;
@@ -83,7 +83,7 @@
   } 
 
   .restauranteGaleria { 
-	left: 83px; 
+	left: 143px; 
 	top: 102px; 
 	position: absolute; 
 	width: 835px;
@@ -93,28 +93,28 @@
 
 
 .iconInfo{
-	left: 956px; 
+	left: 1016px; 
 	top: 551px; 
 	position: absolute; 
 	z-index:1;
 }
 
 .iconCheck{
-	left: 1042px; 
+	left: 1102px; 
 	top: 551px; 
 	position: absolute; 
 	z-index:1;
 }
 
 .iconX{
-	left: 872px; 
+	left: 932px; 
 	top: 551px; 
 	position: absolute; 
 	z-index:1;
 }
 
 .iconIz{
-	left: 708px; 
+	left: 768px; 
 	top: 97px; 
 	position: absolute; 
 	z-index:1;
@@ -122,7 +122,7 @@
 
 
 .iconDr{
-	left: 1128px; 
+	left: 1193px; 
 	top: 97px; 
 	position: absolute; 
 	z-index:1;
@@ -266,6 +266,58 @@
 	z-index:10;
 } 
 
+.iconInstaMini 
+{ 
+	position: absolute; 
+	width: 45px;
+	height: 56px;
+	z-index:10;
+	top: 5px;
+} 
+
+.iconInstaMini1
+{ 
+	position: absolute; 
+	width: 45px;
+	height: 56px;
+	z-index:10;
+	top: 5px;
+	left: 51px;
+} 
+
+.textoPanelFecha { 
+	position: sticky; 
+	width: 215px;
+	height: 16px;
+	z-index:10;
+	left: 120px;
+} 
+.textoPanelNom { 
+	position: sticky; 
+	width: 215px;
+	height: 22px;
+	z-index:10;
+	left: 120px;
+} 
+.textoPanelEstado { 
+	position: sticky; 
+	width: 215px;
+	height: 22px;
+	z-index:10;
+	left: 120px;
+} 
+
+
+.misReservasPanel 
+{ 
+	left: 12px; 
+	top: 174px; 
+	position: absolute; 
+	width: 535px;
+	height: 80px;
+	z-index:10;
+} 
+
 #pSeparator2 
 { 
 	left: 12px; 
@@ -328,7 +380,7 @@
 
 #NombreTinder 
 { 
-	left: 707px; 
+	left: 767px; 
 	top: 483px; 
 	position: absolute; 
 	width: 545px;
