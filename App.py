@@ -549,9 +549,12 @@ def tinder():
 
         print(res_final)
         print(usr_final)
+        lista1 = [["Mr. Wings","Carol","10/11/2019","09:30 p.m","Pendiente","misterwings","carol_alt"],
+                  ["Martha","William","11/12/2019","10:30 p.m","Activo","americanpizzakw","williamaguirrezapata"],
+                  ["3 x mil","Xavi","11/12/2019","10:30 p.m","Pendiente","hamburguerperfeito","pedromorrot"],
+                  ["Warner","Alexa","11/12/2019","10:30 p.m","Activo","alitastogo","om7sein_"]]
 
-
-        return render_template("tinder.html")
+        return render_template("tinder.html",lista1=lista1)
 
 
 
