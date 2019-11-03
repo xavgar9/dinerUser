@@ -268,8 +268,8 @@
 
 .iconInstaMini 
 { 
-	position: absolute; 
-	width: 45px;
+	position: inherit; 
+	width: 73px;
 	height: 56px;
 	z-index:10;
 	top: 5px;
@@ -277,34 +277,37 @@
 
 .iconInstaMini1
 { 
-	position: absolute; 
-	width: 45px;
+	position: relative; 
+	width: 80px;
 	height: 56px;
 	z-index:10;
-	top: 5px;
-	left: 51px;
+	top: -55px;
+	left:  48px;
 } 
 
 .textoPanelFecha { 
-	position: sticky; 
+	position: relative; 
 	width: 215px;
 	height: 16px;
 	z-index:10;
 	left: 120px;
+	top: -108px;
 } 
 .textoPanelNom { 
-	position: sticky; 
-	width: 215px;
+	position: relative; 
+	width: 205px;
 	height: 22px;
 	z-index:10;
 	left: 120px;
+	top: -111px;
 } 
 .textoPanelEstado { 
-	position: sticky; 
+	position: relative; 
 	width: 215px;
 	height: 22px;
 	z-index:10;
 	left: 120px;
+	top: -108px;
 } 
 
 
@@ -312,9 +315,9 @@
 { 
 	left: 12px; 
 	top: 174px; 
-	position: absolute; 
-	width: 535px;
-	height: 80px;
+	position: initial; 
+	width: 487px;
+	height: 73px;
 	z-index:10;
 } 
 
