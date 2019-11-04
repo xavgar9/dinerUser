@@ -148,9 +148,9 @@ def getDinerUserById(id):
     cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(id))
     data=cur.fetchall()
     #data=(1,1453487801,'pedro','pablo','leon','jaramillo','cra 44 #13-10',8295562,'tarjeta de credito')
-    data=data[0]
     cur.close()
     try:
+        data=data[0]
         json=None
         tmp={"numDocument": data[2],         
             "firstname": data[3],
@@ -600,26 +600,30 @@ def tinder():
                         cur.callproc("getUserByIdUser", [usr["FK_idDinerU"]])
                         data2=cur.fetchall()    
                         print(data2)                            
-                        data2=data2[0]
                         cur.close()
-                        if len(data)!=0:
-                            usrName=str(data2[3])+" "+str(data2[4])+" "+str(data2[5])
-                            usrIgUser=data[11]
-                            usrInfo=data[10]
+                        try:
+                            data2=data2[0]
+                            if len(data)!=0:
+                                usrName=str(data2[3])+" "+str(data2[4])+" "+str(data2[5])
+                                usrIgUser=data[11]
+                                usrInfo=data[10]
 
-                        if usr["status"]==1:
-                            usrStatus="Pendiente"
-                        elif usr["status"]==2: 
-                            usrStatus="Aceptado"
-                        else:
-                            usrStatus="Rechazado"
-                        
-                        tmp=dic[idReservation]
-                        tmp.append(usrName)
-                        tmp.append(usrIgUser)
-                        tmp.append(usrInfo)
-                        tmp.append(usrStatus)
-                        dic[idReservation]=tmp
+                            if usr["status"]==1:
+                                usrStatus="Pendiente"
+                            elif usr["status"]==2: 
+                                usrStatus="Aceptado"
+                            else:
+                                usrStatus="Rechazado"
+                            
+                            tmp=dic[idReservation]
+                            tmp.append(usrName)
+                            tmp.append(usrIgUser)
+                            tmp.append(usrInfo)
+                            tmp.append(usrStatus)
+                            dic[idReservation]=tmp
+                        except:
+                            tmp="No hay usuario para: "+str(usr["FK_idDinerU"])
+                            flash(tmp, "error")
             else:
                 #esto es temporal porque Veronica no quiere llenar sus tablas con datos
                 print("VACIO getPostulatesByReservationId")
