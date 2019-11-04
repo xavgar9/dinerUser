@@ -15,8 +15,9 @@ RUN apt-get install -y \
     net-tools \
     vim
 # Project Files and Settings
-COPY . /opt/www
-WORKDIR /opt/www
+RUN mkdir -p $PROJECT_DIR
+WORKDIR $PROJECT_DIR
+COPY Pipfile Pipfile.lock ./
 RUN apt-get update && apt-get install jq vim nano curl -y
 RUN pip install -r requirements.txt
 # Server
