@@ -1,5 +1,5 @@
-IP="127.0.0.1:3000"
-#IP="159.65.58.193:3000"
+#IP="127.0.0.1:3000"
+IP="159.65.58.193:3000"
 
 #request.json['name'] para recibir y usar json de otras paginas
 #pip install flask
@@ -212,13 +212,14 @@ def isVIP(id):
 
 @app.route('/crypto/<string:data>/', methods=['GET'])
 def crypto(data):
-    tmp=getUser("a","b","c","d","e",str(data))
+    tmp=getUser("", "", "", "", "",data)
     pas=tmp.password
+    print(pas)
     json=None
     try:
-        data=pass
+        data=pas
         json=jsonify( Response=2,
-                      content=data[0])
+                      content=data)
     except Exception as e:
         json=jsonify( Response=1)
         print("+++isVIP", e)
@@ -614,6 +615,7 @@ def tinder():
         usr_final=[]
         print("*********************************************************************************************")
         for idReservation in dic.keys():
+            print("SUPER ID: ",idReservation)
             url="http://181.50.100.167:8000/api/getPostulatesByReservationId/"+str(idReservation) #esta url cambia por la de Laura
             response=requests.get(url, params=None)
             if response.status_code==200:
@@ -708,7 +710,8 @@ def tinder():
         
         lista1=[]
         for idReservation in dic.keys():
-            print()
+
+            print("Antes le:", idReservation)
             print(len(dic), "le dict", dic[idReservation])
             print()
             resName=dic[idReservation][0]
