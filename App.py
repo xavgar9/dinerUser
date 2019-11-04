@@ -11,7 +11,7 @@ IP="127.0.0.1:3000"
 ############################################ name ############################################
 ##########################################################################################################
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
-from flask_mysqldb import MySQL
+from flaskext.mysql import MySQL
 from flask_login import LoginManager, current_user, logout_user, login_user, login_required
 from werkzeug.urls import url_parse
 from forms import SignupForm, LoginForm, EditForm, PasswordForm
