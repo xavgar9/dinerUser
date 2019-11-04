@@ -11,11 +11,11 @@ services:
     volumes:
       - .:/var/www/myproject
     ports:
-      - "5008:5000"
+      - "9001:5000"
     links:
       - db
     environment:
-      - DATABASE_URL=mysql://root:itsasecret@db:3306/docker_tutorial_django_db
+      - DATABASE_URL=mysql://root:itsasecret@db:33060/docker_tutorial_django_db
   db:
     container_name: mysql_database
     image: mysql/mysql-server
@@ -25,3 +25,18 @@ services:
       - MYSQL_ROOT_PASSWORD=itsasecret
     volumes:
       - /Users/Adam/Development/data/mysql:/var/lib/mysql
+  flask:
+    container_name: pythonService
+    build: ./flask
+    image: python_service
+    command: python2 App.py
+    ports:
+      - "9000:5000"
+    volumes:
+      - ./python_api:/code
+    links:
+      - db
+    depends_on:
+      - db
+volumes:
+    persistent:
