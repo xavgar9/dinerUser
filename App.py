@@ -170,7 +170,7 @@ def getDinerUserById(id):
 
 
 @app.route('/getDinerNameTelByUserId/<string:id>', methods=['GET'])
-def getDinerUserById(id):
+def getDinerNameTelByUserId(id):
     cur=mySQL.connection.cursor()
     cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(id))
     data=cur.fetchall()
@@ -200,15 +200,30 @@ def isVIP(id):
         cur.callproc('idDinerUser', [id])
         cur.close()
         data=cur.stored_results()
-        json=jsonify( Response='1',
+        json=jsonify( Response=2,
                       content=data[0])
     except Exception as e:
-        json=jsonify( Response='2',
+        json=jsonify( Response=1,
                       content=e)
         print("+++isVIP", e)
     #cursor.stored_results()
     return json
 
+
+@app.route('/crypto/<string:data>/', methods=['GET'])
+def crypto(data):
+    tmp=getUser("a","b","c","d","e",str(data))
+    pas=tmp.password
+    json=None
+    try:
+        data=pass
+        json=jsonify( Response=2,
+                      content=data[0])
+    except Exception as e:
+        json=jsonify( Response=1)
+        print("+++isVIP", e)
+    #cursor.stored_results()
+    return json
 
 ##########################################################################################################
 ##########################################################################################################
@@ -690,11 +705,12 @@ def tinder():
 
         #print(res_final)
         #print(usr_final)
-        print(dic)
+        
         lista1=[]
         for idReservation in dic.keys():
             print()
-            print("le dict", dic)
+            print(len(dic), "le dict", dic[idReservation])
+            print()
             resName=dic[idReservation][0]
             usrName=dic[idReservation][6]
             date=dic[idReservation][3]
@@ -703,6 +719,7 @@ def tinder():
             resIgUser="tdt_hamburguesas" #dic[idReservation][1]
             usrIgUser=dic[idReservation][7]
             lista1.append([resName, usrName, date, hour, status, resIgUser, usrIgUser])
+            print(lista1)
         """
         lista1 = [["Mr. Wings","Carol","10/11/2019","09:30 p.m","Pendiente","misterwings","carol_alt"],
                   ["Martha","William","11/12/2019","10:30 p.m","Activo","americanpizzakw","williamaguirrezapata"],
