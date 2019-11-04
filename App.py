@@ -149,25 +149,23 @@ def getDinerUserById(id):
     data=cur.fetchall()
     #data=(1,1453487801,'pedro','pablo','leon','jaramillo','cra 44 #13-10',8295562,'tarjeta de credito')
     data=data[0]
-    tmp={"numDocument": data[2],         
-         "firstname": data[3],
-         "secondname": data[4],
-         "firstLastname": data[5],
-         "secondLastname": data[6],
-         "address": data[7],
-         "telephone": data[8],
-         "payMethod": data[9],
-         "infoProfile": data[10],
-         "igUser": data[11]}
-    data=tmp
-
-    json=None
+    cur.close()
     try:
-        data=data[0]
+        json=None
+        tmp={"numDocument": data[2],         
+            "firstname": data[3],
+            "secondname": data[4],
+            "firstLastname": data[5],
+            "secondLastname": data[6],
+            "address": data[7],
+            "telephone": data[8],
+            "payMethod": data[9],
+            "infoProfile": data[10],
+            "igUser": data[11]}
         json=jsonify( Response=2,
-                      Content=data)
+                      Content=tmp)
     except:
-	    json=jsonify(Response=1)
+        json=jsonify(Response=1)
     return json
 
 
@@ -178,6 +176,7 @@ def isVIP(id):
     try:
         cur=mySQL.connection.cursor()
         cur.callproc('idDinerUser', [id])
+        cur.close()
         data=cur.stored_results()
         json=jsonify( Response='1',
                       content=data[0])
@@ -596,9 +595,11 @@ def tinder():
                         usrStatus=None
 
                         cur=mySQL.connection.cursor()
-                        print("FK_idUserU", usr["FK_idUserU"])
-                        cur.callproc("getUserByIdUser", [usr["FK_idUserU"]])
-                        data2=cur.fetchall()                                
+                        print(usr)
+                        print("FK_idUserU", usr["FK_idDinerU"])
+                        cur.callproc("getUserByIdUser", [usr["FK_idDinerU"]])
+                        data2=cur.fetchall()    
+                        print(data2)                            
                         data2=data2[0]
                         cur.close()
                         if len(data)!=0:
