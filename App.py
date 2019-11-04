@@ -580,7 +580,7 @@ def tinder():
                             erda.append(str(reservation["reservationDate"]))
                             erda.append(str(reservation["reservationHour"]))
                             erda.append(str(reservation["availableChairs"]))
-                            dic[reservation["PK_idReservation"]]=erda
+                            dic[reservation["PK_idReservation"]]=[erda]
                                                                   #nombre del restaurante
                                                                   #ig del usuario
                                                                   #fecha de la reserva
@@ -627,6 +627,7 @@ def tinder():
                 print("RESPONSE:", response)
                 if response["Response"]==2:
                     data=response["Content"]
+                    people=[]
                     for usr in data:
                         usrName=""
                         usrIgUser=""
@@ -664,11 +665,18 @@ def tinder():
                             tmp.append(usrIgUser)
                             tmp.append(usrInfo)
                             tmp.append(usrStatus)
-                            dic[idReservation]=tmp
+                            people.append(tmp)
+
+                            
                         except Exception as e:
                             tmp="No hay usuario para: "+str(usr["FK_idDinerU"])
                             print("QUE HP ESTA PASANDO PUES GONORREA OME", e)
                             flash(tmp, "error")
+                            
+                        tmp2=dic[idReservation]
+                        tmp2=tmp2.append(people)
+                        dic[idReservation]=tmp2
+
             else:
                 #esto es temporal porque Veronica no quiere llenar sus tablas con datos
                 print("VACIO getPostulatesByReservationId")
