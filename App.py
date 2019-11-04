@@ -662,8 +662,9 @@ def tinder():
                             else:
                                 usrStatus="Rechazado"
                             
-                            tmp=dic[idReservation]
-                            print("****", tmp)
+                            #tmp=dic[idReservation]
+                            tmp=[]
+                            print("****", tmp)                            
                             tmp.append(usrName)
                             tmp.append(usrIgUser)
                             tmp.append(usrInfo)
@@ -676,19 +677,21 @@ def tinder():
                             print("QUE HP ESTA PASANDO PUES GONORREA OME", e)
                             flash(tmp, "error")
                             
-                        tmp2=dic[idReservation]
-                        tmp2=tmp2.append(people)
-                        dic[idReservation]=tmp2
+                    tmp2=dic[idReservation]
+                    tmp2.append(people)
+                    dic[idReservation]=tmp2
 
             else:
                 #esto es temporal porque Veronica no quiere llenar sus tablas con datos
                 print("VACIO getPostulatesByReservationId")
+                """
                 tmp=dic[idReservation]
                 tmp.append("usrName EPA")
                 tmp.append("usrIgUser EPA")
                 tmp.append("usrInfo EPA")
                 tmp.append("usrStatus EPA")
                 dic[idReservation]=tmp
+                """
         ###
           #
         ###
@@ -721,18 +724,25 @@ def tinder():
         
         lista1=[]
         for idReservation in dic.keys():
-
             print("Antes le:", idReservation)
             print(len(dic), "le dict", dic[idReservation])
             print()
-            resName=dic[idReservation][0]
-            usrName=dic[idReservation][6]
-            date=dic[idReservation][3]
-            hour=dic[idReservation][4]
-            status=dic[idReservation][9]
-            resIgUser="tdt_hamburguesas" #dic[idReservation][1]
-            usrIgUser=dic[idReservation][7]
-            lista1.append([resName, usrName, date, hour, status, resIgUser, usrIgUser])
+            tmp=dic[idReservation]
+
+
+            resName=tmp[0][0]
+            date=tmp[0][3]
+            hour=tmp[0][4]
+            resIgUser="tdt_hamburguesas" #tmp[0][4]
+
+
+            tmp=tmp[1]
+            for i in rang(len(dic[tmp))
+                usrName=tmp[i][0]
+                status=tmp[i][4]
+                usrIgUser=tmp[i][1]
+
+                lista1.append([resName, usrName, date, hour, status, resIgUser, usrIgUser])
             print(lista1)
         """
         lista1 = [["Mr. Wings","Carol","10/11/2019","09:30 p.m","Pendiente","misterwings","carol_alt"],
