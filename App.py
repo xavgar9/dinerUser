@@ -58,21 +58,21 @@ login_manager.init_app(app)
 @app.route('/loginLaverde/<string:email>/<string:password>', methods=['GET'])
 def loginLaverde(email,password):
     data={"PK_IdUser": 1, "userName": "xg"}
-    json=jsonify(status='1',
-                 content=data)
+    json=jsonify(Response=2,
+                 Content=data)
     return json
 
 @app.route('/registroLaverde/<string:userName>/<string:email>/<string:password>', methods=['GET'])
 def registroLaverde(userName, email, password):
     data={"PK_User": 2}
     #data=(userName, email, password)
-    json=jsonify(status='1',
-                 content=data)
+    json=jsonify(Response=2,
+                 Content=data)
     return json
 
 @app.route('/registroLaverde/<string:email>/<string:password>', methods=['GET'])
 def cambiarContrasena(email, oldPassword, newPassword):
-    json=jsonify(status='1')
+    json=jsonify(Response=2)
     return json
 
 @app.route('/getPostulatedReservationByUserId/<string:userId>', methods=['GET'])
@@ -92,8 +92,8 @@ def getPostulatedReservationByUserId(userId):
          "reservationDate": "2019-11-18",
          "reservationHour": "20:00"}
         ]
-    json=jsonify(status='1',
-                 content=data)
+    json=jsonify(Response=2,
+                 Content=data)
     return json
 
 
@@ -114,8 +114,8 @@ def getPostulatedByReservationId(reservationId):
          "status": 2    
         }
         ]
-    json=jsonify(status='1',
-                 content=data)
+    json=jsonify(Response=2,
+                 Content=data)
     return json
 
 @app.route('/getRestaurantNameById/<string:restaurantId>', methods=['GET'])
@@ -125,8 +125,8 @@ def getRestaurantNameById(restaurantId):
         data="Warner Foods"
     else:
         data="Salchiburguer"
-    json=jsonify(status='1',
-                 content=data)
+    json=jsonify(Response=2,
+                 Content=data)
     return json
 
 ##########################################################################################################
@@ -148,24 +148,24 @@ def getDinerUserById(id):
     cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(id))
     data=cur.fetchall()
     #data=(1,1453487801,'pedro','pablo','leon','jaramillo','cra 44 #13-10',8295562,'tarjeta de credito')
-    data=data[0]
-    tmp={"numDocument": data[2],
-         "firstname": data[3],
-         "secondname": data[4],
-         "firstLastname": data[5],
-         "secondLastname": data[6],
-         "address": data[7],
-         "telephone": data[8],
-         "payMethod": data[9]}
-    data=tmp
-
-    json=None
+    cur.close()
     try:
         data=data[0]
-        json=jsonify( status='1',
-                      content=data)
+        json=None
+        tmp={"numDocument": data[2],         
+            "firstname": data[3],
+            "secondname": data[4],
+            "firstLastname": data[5],
+            "secondLastname": data[6],
+            "address": data[7],
+            "telephone": data[8],
+            "payMethod": data[9],
+            "infoProfile": data[10],
+            "igUser": data[11]}
+        json=jsonify( Response=2,
+                      Content=tmp)
     except:
-	    json=jsonify(status='0')
+        json=jsonify(Response=1)
     return json
 
 
@@ -176,11 +176,12 @@ def isVIP(id):
     try:
         cur=mySQL.connection.cursor()
         cur.callproc('idDinerUser', [id])
+        cur.close()
         data=cur.stored_results()
-        json=jsonify( status='1',
+        json=jsonify( Response='1',
                       content=data[0])
     except Exception as e:
-        json=jsonify( status='2',
+        json=jsonify( Response='2',
                       content=e)
         print("+++isVIP", e)
     #cursor.stored_results()
@@ -246,10 +247,10 @@ def login():
             response=requests.get(url, params=None)
             if response.status_code==200:
                 response=response.json()
-                if response["status"]=='1':
-                    PK_IdUser=response["content"]["PK_IdUser"]
-                    userName=response["content"]["userName"]
-                    try:            
+                if response["Response"]==2:
+                    PK_IdUser=response["Content"]["PK_IdUser"]
+                    userName=response["Content"]["userName"]
+                    try:
                         print(len(password), password)
                         cur=mySQL.connection.cursor()
                         cur.callproc('login', [email, password])                                        
@@ -358,7 +359,7 @@ def signup():
                     response=requests.get(url, params=None)
                     if response.status_code==200:
                         response=response.json()
-                        if response["status"]=='1':
+                        if response["Response"]==2:
                             address=" "; payMethod=" "
                             user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
                             password=user.password
@@ -448,7 +449,7 @@ def profile():
                 response=requests.get(url, params=None)
                 if response.status_code==200:
                     response=response.json()
-                    if response["status"]=='1':
+                    if response["Response"]==2:
                         PK_IdUser=response["content"]["PK_IdUser"]
                         ############################################ EDIT USER TO DB ############################################
                         try:
@@ -479,7 +480,7 @@ def profile():
                     response=requests.get(url, params=None)
                     if response.status_code==200:
                         response=response.json()
-                        if response["status"]=='1':
+                        if response["Response"]==2:
                             flash("Contrasena actualizada", "success")
                         else:
                             flash("Los datos no son validos", "error")
@@ -489,6 +490,7 @@ def profile():
 @app.route('/tinder', methods=['GET', 'POST'])
 def tinder():
     ok=False
+    session["PK_IdDiner"]=1
     try:
         print(session["PK_IdDiner"])
     except KeyError:
@@ -501,48 +503,140 @@ def tinder():
         ###
         #   Lista las reservas publicas del usuario PK_IdDiner
         ###
+        dic=dict()
 
-        url="http://"+IP+"/getPostulatedReservationByUserId/"+str(session["PK_IdDiner"]) #esta url cambia por la de laverde
+        #1 no funciona
+        #2 funciona
+
+        url="http://"+"181.50.100.167:8000"+"/api/getActiveReservationsByUserIdAndType/"+str(session["PK_IdDiner"])+"/1" #esta url cambia por la de Laura
+        #me trae mis reservas publicas y privadas que no no han pasado
+        #type: 0 privadas, 1 publicas
+        print("Arroz")
         response=requests.get(url, params=None)
+        print("Con pollo")
         if response.status_code==200:
             response=response.json()
-            if response["status"]=='1':
-                data=response["content"]
+            if response["Response"]==2:
+                data=response["Content"]
+                #print("Reservas publicas activas: ", data)
                 res_final=[len(data)]    #Final reservation with rest name
                 for reservation in data:
                     idRestaurant=reservation["FK_idRestaurant"]
-                    url="http://"+IP+"/getRestaurantNameById/"+str(idRestaurant)
+                    url="http://"+"181.50.100.167:5000"+"/getRestaurant/"+str(idRestaurant)
                     tmp=requests.get(url, params=None)
                     if tmp.status_code==200:
                         tmp=tmp.json()
-                        if response["status"]=='1':
-                            res_final.append([str(tmp["content"]), str(reservation["reservationDate"]), str(reservation["reservationHour"])])
+                        if response["Response"]==2:
+                            tmp=tmp["Content"]
+                            print()
+                            print()
+                            print()
+                            print(tmp)
+                            print()
+                            print(reservation["PK_idReservation"])
+                            print()
+                            erda=[]  
+                            erda.append(str(tmp[0]["name"]))
+                            erda.append(str(tmp[0]["email"]))
+                            erda.append(str(tmp[0]["address"]))
+                            erda.append(str(reservation["reservationDate"]))
+                            erda.append(str(reservation["reservationHour"]))
+                            erda.append(str(reservation["availableChairs"]))
+                            dic[reservation["PK_idReservation"]]=erda
+                                                                  #nombre del restaurante
+                                                                  #ig del usuario
+                                                                  #fecha de la reserva
+                                                                  #hora de la reserva
+                                                                  #sillas disponibles
+                        else:
+                            flash("Response: 1", "error")
+                            print("*** Response: 0")
+                    else:
+                        flash("Cristian Status code:"+str(tmp.status_code), "error")
+                        print("*** Cristian Status code:"+str(tmp.status_code), data)
+                #else:
+                #    flash("No trajo nada el API de LAURA", "error")
+                #    print("*** No trajo nada el API de LAURA", data)
+            else:
+                flash("Fallo el API de LAURA", "error")
+        else:
+            flash("Laura Status code:"+str(response.status_code), "error")
+            print("*** Laura Status code:"+str(response.status_code), url)
+        
+
+                            #res_final.append([str(tmp["name"]), str(tmp["email"]), str(reservation["reservationDate"]), str(reservation["reservationHour"])])
+                                                  #nombre del restaurante
         ###
           #
         ###
+
 
         ###
         #   Lista los usuarios que estan aplicando a una reserva del usuario PK_IdDiner
         ###
         usr_final=[]
-        url="http://"+IP+"/getPostulatedByReservationId/"+str(session["PK_IdDiner"]) #esta url cambia por la de laverde
-        response=requests.get(url, params=None)
-        if response.status_code==200:
-            response=response.json()
-            if response["status"]=='1':
-                data=response["content"]
-                usr_final=[len(data)] 
-                for usr in data:
-                    name=session["firstName"]; igUser=session["igUser"]
-                    if name!=None and igUser!=None:
-                        status=None
-                        if usr["status"]==1: status="Stand By"
-                        else: status="Accepted"                  
-                        usr_final.append([usr["PK_idUser"], name, igUser, status])
+        print("*********************************************************************************************")
+        for idReservation in dic.keys():
+            url="http://181.50.100.167:8000/api/getPostulatesByReservationId/"+str(idReservation) #esta url cambia por la de Laura
+            response=requests.get(url, params=None)
+            if response.status_code==200:
+                response=response.json()
+                print()
+                print()
+                print()
+                print()
+                print("RESPONSE:", response)
+                if response["Response"]==2:
+                    data=response["Content"]
+                    for usr in data:
+                        usrName=""
+                        usrIgUser=""
+                        usrInfo=""
+                        usrStatus=None
 
+                        cur=mySQL.connection.cursor()
+                        print(usr)
+                        print("FK_idUserU", usr["FK_idDinerU"])
+                        cur.callproc("getUserByIdUser", [usr["FK_idDinerU"]])
+                        data2=cur.fetchall()    
+                        print(data2)                            
+                        cur.close()
+                        try:
+                            data2=data2[0]
+                            if len(data)!=0:
+                                usrName=str(data2[3])+" "+str(data2[4])+" "+str(data2[5])
+                                usrIgUser=data[11]
+                                usrInfo=data[10]
+
+                            if usr["status"]==1:
+                                usrStatus="Pendiente"
+                            elif usr["status"]==2: 
+                                usrStatus="Aceptado"
+                            else:
+                                usrStatus="Rechazado"
+                            
+                            tmp=dic[idReservation]
+                            tmp.append(usrName)
+                            tmp.append(usrIgUser)
+                            tmp.append(usrInfo)
+                            tmp.append(usrStatus)
+                            dic[idReservation]=tmp
+                        except:
+                            tmp="No hay usuario para: "+str(usr["FK_idDinerU"])
+                            flash(tmp, "error")
+            else:
+                #esto es temporal porque Veronica no quiere llenar sus tablas con datos
+                print("VACIO getPostulatesByReservationId")
+                tmp=dic[idReservation]
+                tmp.append("usrName EPA")
+                tmp.append("usrIgUser EPA")
+                tmp.append("usrInfo EPA")
+                tmp.append("usrStatus EPA")
+                dic[idReservation]=tmp
         ###
           #
         ###
+<<<<<<< HEAD
 
           
 
@@ -551,10 +645,45 @@ def tinder():
         print(usr_final)
         tinderlis = [["Mr. Wings", "Calle busquela # 25-48", "10/11/2019", "09:10 p.m.", "Carol", "Linda"],
                      ["Alitas Factory", "Calle San Millan 25", "31/02/2020", "03:50 p.m.", "Sofia", "Guzman"]]
+=======
+        """
+        [0] str(tmp["name"])
+        [1] str(tmp["email"])
+        [2] str(tmp["address"]) 
+        [3] str(reservation["reservationDate"])
+        [4] str(reservation["reservationHour"]) 
+        [5] str(reservation["avaibleChairs"])]
+        [6] append(usrName)
+        [7] append(usrIgUser)
+        [8] append(usrInfo)
+        [9] append(usrStatus)
+        """
+
+        
+
+
+        #print(res_final)
+        #print(usr_final)
+        print(dic)
+        lista1=[]
+        for idReservation in dic.keys():
+            print()
+            print("le dict", dic)
+            resName=dic[idReservation][0]
+            usrName=dic[idReservation][6]
+            date=dic[idReservation][3]
+            hour=dic[idReservation][4]
+            status=dic[idReservation][9]
+            resIgUser="tdt_hamburguesas" #dic[idReservation][1]
+            usrIgUser=dic[idReservation][7]
+            lista1.append([resName, usrName, date, hour, status, resIgUser, usrIgUser])
+        """
+>>>>>>> 2d3322ee6b5f1030dd4603100e8f6ddb79879700
         lista1 = [["Mr. Wings","Carol","10/11/2019","09:30 p.m","Pendiente","misterwings","carol_alt"],
                   ["Martha","William","11/12/2019","10:30 p.m","Activo","americanpizzakw","williamaguirrezapata"],
                   ["3 x mil","Xavi","11/12/2019","10:30 p.m","Pendiente","hamburguerperfeito","pedromorrot"],
                   ["Warner","Alexa","11/12/2019","10:30 p.m","Activo","alitastogo","om7sein_"]]
+        """
 
         return render_template("tinder.html",lista1=lista1)
 
