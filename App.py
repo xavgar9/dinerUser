@@ -615,6 +615,9 @@ def tinder():
         usr_final=[]
         print("*********************************************************************************************")
         for idReservation in dic.keys():
+            print(dic[idReservation])
+        print("*********************************************************************************************")
+        for idReservation in dic.keys():
             print("SUPER ID: ",idReservation)
             url="http://181.50.100.167:8000/api/getPostulatesByReservationId/"+str(idReservation) #esta url cambia por la de Laura
             response=requests.get(url, params=None)
