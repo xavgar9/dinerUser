@@ -21,7 +21,6 @@ RUN mkdir -p $PROJECT_DIR
 WORKDIR $PROJECT_DIR
 COPY requirements.txt .
 RUN pip install -r requirements.txt
-RUN pipenv install --system
 # Server
 EXPOSE 5000
 STOPSIGNAL SIGINT
