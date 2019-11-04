@@ -24,7 +24,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=itsasecret
     volumes:
-      - /Users/Adam/Development/data/mysql:/var/lib/mysql
+      - persistent:/var/lib/mysql
   flask:
     container_name: pythonService
     build: .

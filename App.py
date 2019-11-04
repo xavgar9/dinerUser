@@ -11,7 +11,7 @@ IP="127.0.0.1:3000"
 ############################################ name ############################################
 ##########################################################################################################
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
-from flask_mysqldb import MySQL
+from flaskext.mysql import MySQL
 from flask_login import LoginManager, current_user, logout_user, login_user, login_required
 from werkzeug.urls import url_parse
 from forms import SignupForm, LoginForm, EditForm, PasswordForm
@@ -643,6 +643,14 @@ def tinder():
         ###
           #
         ###
+
+          
+
+
+        print(res_final)
+        print(usr_final)
+        tinderlis = [["Mr. Wings", "Calle busquela # 25-48", "10/11/2019", "09:10 p.m.", "Carol", "Linda"],
+                     ["Alitas Factory", "Calle San Millan 25", "31/02/2020", "03:50 p.m.", "Sofia", "Guzman"]]
         """
         [0] str(tmp["name"])
         [1] str(tmp["email"])
