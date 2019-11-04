@@ -27,7 +27,7 @@ services:
       - /Users/Adam/Development/data/mysql:/var/lib/mysql
   flask:
     container_name: pythonService
-    build: ./
+    build: .
     image: python_service
     command: python2 App.py
     ports:
