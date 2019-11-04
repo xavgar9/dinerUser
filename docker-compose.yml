@@ -24,7 +24,6 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=itsasecret
     volumes:
-      - ./database:/docker-entrypoint-initdb.d
       - persistent:/var/lib/mysql
   flask:
     container_name: pythonService
