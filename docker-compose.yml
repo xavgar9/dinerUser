@@ -1,21 +1,5 @@
 version: "2"
 services:
-  django:
-    container_name: django_server
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: docker_tutorial_django
-    stdin_open: true
-    tty: true
-    volumes:
-      - .:/var/www/myproject
-    ports:
-      - "9001:5000"
-    links:
-      - db
-    environment:
-      - DATABASE_URL=mysql://root:itsasecret@db:33060/docker_tutorial_django_db
   db:
     container_name: mysql_database
     image: mysql/mysql-server
