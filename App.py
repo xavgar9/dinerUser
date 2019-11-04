@@ -11,7 +11,7 @@ IP="127.0.0.1:3000"
 ############################################ name ############################################
 ##########################################################################################################
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
-from flaskext.mysql import MySQL
+from flask_mysqldb import MySQL
 from flask_login import LoginManager, current_user, logout_user, login_user, login_required
 from werkzeug.urls import url_parse
 from forms import SignupForm, LoginForm, EditForm, PasswordForm
@@ -162,6 +162,28 @@ def getDinerUserById(id):
             "payMethod": data[9],
             "infoProfile": data[10],
             "igUser": data[11]}
+        json=jsonify( Response=2,
+                      Content=tmp)
+    except:
+        json=jsonify(Response=1)
+    return json
+
+
+@app.route('/getDinerNameTelByUserId/<string:id>', methods=['GET'])
+def getDinerUserById(id):
+    cur=mySQL.connection.cursor()
+    cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(id))
+    data=cur.fetchall()
+    #data=(1,1453487801,'pedro','pablo','leon','jaramillo','cra 44 #13-10',8295562,'tarjeta de credito')
+    cur.close()
+    try:
+        data=data[0]
+        json=None
+        tmp={"firstname": data[3],
+             "secondname": data[4],
+             "firstLastname": data[5],
+             "secondLastname": data[6],
+             "telephone": data[8]}
         json=jsonify( Response=2,
                       Content=tmp)
     except:
@@ -592,14 +614,13 @@ def tinder():
                         usrName=""
                         usrIgUser=""
                         usrInfo=""
-                        usrStatus=None
-
+                        usrStatus=""
                         cur=mySQL.connection.cursor()
                         print(usr)
                         print("FK_idUserU", usr["FK_idDinerU"])
                         cur.callproc("getUserByIdUser", [usr["FK_idDinerU"]])
-                        data2=cur.fetchall()    
-                        print(data2)                            
+                        data2=cur.fetchall()
+                        print(data2)                    
                         cur.close()
                         try:
                             data2=data2[0]
