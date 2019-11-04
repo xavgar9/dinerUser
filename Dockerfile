@@ -1,6 +1,6 @@
 # dinerUser
 # Version: 1.0
-FROM python:2
+FROM python:2.7
 # Install Python and Package Libraries
 RUN apt-get update && apt-get upgrade -y && apt-get autoremove && apt-get autoclean
 RUN apt-get install -y \
