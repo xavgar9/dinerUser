@@ -11,13 +11,13 @@ services:
       - persistent:/var/lib/mysql
   flask:
     container_name: pythonService
-    build: ./
+    build: .
     image: python_service
     command: python2 App.py
     ports:
       - "9000:5000"
     volumes:
-      - ./:/code
+      - .:/code
     links:
       - db
     depends_on:
