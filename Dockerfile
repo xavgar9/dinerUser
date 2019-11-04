@@ -15,14 +15,10 @@ RUN apt-get install -y \
     net-tools \
     vim
 # Project Files and Settings
-ARG PROJECT=myproject
-ARG PROJECT_DIR=/var/www/${PROJECT}
-RUN mkdir -p $PROJECT_DIR
-WORKDIR $PROJECT_DIR
-COPY requirements.txt .
+COPY . /opt/www
+WORKDIR /opt/www
+RUN apt-get update && apt-get install jq vim nano curl -y
 RUN pip install -r requirements.txt
 # Server
 EXPOSE 5000
-STOPSIGNAL SIGINT
-ENTRYPOINT ["python", "App.py"]
-CMD ["runserver", "0.0.0.0:5008"]
+CMD python2 App.py
