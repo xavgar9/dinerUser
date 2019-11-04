@@ -603,10 +603,15 @@ def tinder():
                         cur.close()
                         try:
                             data2=data2[0]
-                            if len(data)!=0:
+                            if len(data2)!=0:
+                                print()
+                                print()
+                                print(len(data2), data2)
+                                print()
+                                print()
                                 usrName=str(data2[3])+" "+str(data2[4])+" "+str(data2[5])
-                                usrIgUser=data[11]
-                                usrInfo=data[10]
+                                usrIgUser=data2[11]
+                                usrInfo=data2[10]
 
                             if usr["status"]==1:
                                 usrStatus="Pendiente"
@@ -616,13 +621,15 @@ def tinder():
                                 usrStatus="Rechazado"
                             
                             tmp=dic[idReservation]
+                            print("****", tmp)
                             tmp.append(usrName)
                             tmp.append(usrIgUser)
                             tmp.append(usrInfo)
                             tmp.append(usrStatus)
                             dic[idReservation]=tmp
-                        except:
+                        except Exception as e:
                             tmp="No hay usuario para: "+str(usr["FK_idDinerU"])
+                            print("QUE HP ESTA PASANDO PUES GONORREA OME", e)
                             flash(tmp, "error")
             else:
                 #esto es temporal porque Veronica no quiere llenar sus tablas con datos
@@ -673,6 +680,7 @@ def tinder():
                   ["3 x mil","Xavi","11/12/2019","10:30 p.m","Pendiente","hamburguerperfeito","pedromorrot"],
                   ["Warner","Alexa","11/12/2019","10:30 p.m","Activo","alitastogo","om7sein_"]]
         """
+        print("FIN", lista1)
 
         return render_template("tinder.html",lista1=lista1)
 
