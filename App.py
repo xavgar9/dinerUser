@@ -737,9 +737,9 @@ def tinder():
 
 
             tmp=tmp[1]
-            for i in rang(len(dic[tmp))
+            for i in range(len(tmp)):
                 usrName=tmp[i][0]
-                status=tmp[i][4]
+                status=tmp[i][3]
                 usrIgUser=tmp[i][1]
 
                 lista1.append([resName, usrName, date, hour, status, resIgUser, usrIgUser])
