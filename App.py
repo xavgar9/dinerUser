@@ -306,6 +306,7 @@ def login():
                         data=cur.fetchall()
                         data=data[0][0]
                         cur.close()
+                        print(data)
                         if data==1:
                             print("VALIDO LOGIN")
                             cur=mySQL.connection.cursor()
@@ -326,12 +327,14 @@ def login():
                                 session["infoProfile"]=data[10]    
                                 session["igUser"]=data[11]
                                 next_page = request.args.get('next')
-                    
-                        next_page=None
-                        if not next_page or url_parse(next_page).netloc != '':
-                            flash("Bienvenido "+ session["firstName"], "success")
-                            next_page = url_for('profile')
-                        return redirect(next_page)
+            
+                            next_page=None
+                            if not next_page or url_parse(next_page).netloc != '':
+                                flash("Bienvenido "+ session["firstName"], "success")
+                                next_page = url_for('profile')
+                            return redirect(next_page)
+                        else:
+                            flash("Datos incorrectos", "error")
                     except Exception as e:
                         flash("Datos incorrectos", "error")
                         print("+++login", e)                      
