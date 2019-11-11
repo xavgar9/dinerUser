@@ -246,17 +246,44 @@
 
 <!--##################### Modal popup Historial de Reservas ###########################################################################-->
 <div class="ui container">
-	<div class="ui modal historyReservas">
-		<i class="close icon"></i>
-		<div class="header">Historial de Reservas</div>
-		<div class="content">
-			
-		</div>
-		<div class="actions">
-			<div class="ui green approve button">Aceptar</div>
-			<div class="ui red cancel button">Cancelar</div>
-		</div>
-	</div>
+    <div class="ui modal historyReservas">
+        <i class="close icon"></i>
+        <div class="header">Historial de Reservas</div>
+        <div class="content">
+            {% if historialReservas|length != 0 %}
+            <table class="ui celled table">
+                <thead>
+                    <tr>
+                        <th>Restaurante</th>
+                        <th>Dirección</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Persona a Cargo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for elemento in historialReservas %}
+                    <tr>
+                        <td>{{elemento[0]}}</td>
+                        <td>{{elemento[1]}}</td>
+                        <td>{{elemento[2]}}</td>
+                        <td>{{elemento[3]}}</td>
+                        <td>{{elemento[4]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <center>
+                <p style="font-family:Roboto;color:black;font-size: 16px">No tienes Reservas Actualmente</p>
+            </center>
+            {% endif %}
+        </div>
+        <div class="actions">
+            <div class="ui green approve button">Aceptar</div>
+            <div class="ui red cancel button">Cancelar</div>
+        </div>
+    </div>
 </div>
 
 
