@@ -501,7 +501,7 @@ def profile():
                     else:
                         flash("Datos incorrectos", "error")
 
-        elif form2.validate_on_submit():    #cambiar la contraseña
+        elif form2.validate_on_submit():    #cambiar la contrasena
             if request.method=='POST':
                 print("CONSTRASENAS")
                 password1=request.form2['password1']
@@ -523,7 +523,134 @@ def profile():
                             flash("Contrasena actualizada", "success")
                         else:
                             flash("Los datos no son validos", "error")
-    return render_template("profile_view.html", form1=form1, form2=form2, tmp=tmp)
+
+        
+        ##########################################################################################################################
+        #############################################HISTORIAL DE RESERVAS########################################################
+        ##########################################################################################################################
+        url="http://"+"181.50.100.167:8000"+"/api/getReservationsRecordByUserId/"+session["PK_IdDiner"] #esta url cambia por la de Laura
+        #me trae TODAS las reservas publicas
+        historialReservas=list()
+        try:
+            response=requests.get(url, params=None, timeout=5)
+            if response.status_code==200:
+                response=response.json()
+                if response["Response"]==2:
+                    data=response["Content"]
+                    for restaurant in data:
+                        idRestaurant=restaurant["FK_idRestaurant"]
+                        url="http://"+"181.50.100.167:5000"+"/getRestaurant/"+str(idRestaurant)
+                        tmp=requests.get(url, params=None, timeout=5)
+                        if tmp.status_code==200:
+                            tmp=tmp.json()
+                            if tmp["Response"]==2:
+                                tmp=tmp["Content"]
+                                individual=list()
+                                #print(tmp)
+                                individual.append(str(tmp[0]["name"]))
+                                individual.append(str(restaurant["reservationDate"]))
+                                individual.append(str(restaurant["reservationHour"]))
+                                individual.append(str(tmp[0]["address"]))
+                                individual.append(str(restaurant["personInCharge"]))
+
+                                historialReservas.append(individual)
+                            else:
+                                flash("Response API de Cristian: 2", "error")
+                        else:
+                            flash("Fallo el API de Cristian", "error")                            
+                else:
+                    flash("Fallo el API de LAURA", "error")
+            else:
+                flash("HTTP error", "error")
+        except Exception as e:
+            print("+++profile ", e)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ##########################################################################################################################
+        #############################################LISTAR RESERVAS PUBLICAS########################################################
+        ##########################################################################################################################
+        url="http://"+"181.50.100.167:8000"+"/api/getReservationsRecordByUserId/"+session["PK_IdDiner"] #esta url cambia por la de Laura
+        #me trae TODAS las reservas publicas
+        try:
+            response=requests.get(url, params=None, timeout=5)
+            if response.status_code==200:
+                response=response.json()
+                if response["Response"]==2:
+                    data=response["Content"]
+                    lista1=list()
+                    for restaurant in data:
+                        idRestaurant=restaurant["FK_idRestaurant"]
+                        url="http://"+"181.50.100.167:5000"+"/getRestaurant/"+str(idRestaurant)
+                        tmp=requests.get(url, params=None, timeout=5)
+                        if tmp.status_code==200:
+                            tmp=tmp.json()
+                            if response["Response"]==2:
+                                tmp=tmp["Content"]
+                                individual=list()
+                                individual.append(str(tmp[0]["name"]))
+                                individual.append(str(restaurant["reservationDate"]))
+                                individual.append(str(restaurant["reservationHour"]))
+                                individual.append(str(tmp[0]["address"]))
+                                individual.append(str(restaurant["personInCharge"]))
+
+                                lista1.append(individual)
+                            else:
+                                flash("Response API de Cristian: 2", "error")
+                        else:
+                            flash("Fallo el API de Cristian", "error")                            
+                else:
+                    flash("Fallo el API de LAURA", "error")
+            else:
+                flash("HTTP error", "error")
+        except Exception as e:
+            print("+++profile ", e)
+
+        
+    return render_template("profile_view.html", form1=form1, form2=form2, tmp=tmp, historialReservas=historialReservas)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @app.route('/tinder', methods=['GET', 'POST'])
