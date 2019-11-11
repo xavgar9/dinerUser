@@ -264,7 +264,7 @@ call crearUsuarioComensal(4,1528439127,'carlos','andres','ramos','mendez','cll 5
 /*Procedimiento que crea una membresia en la tabla VIPMembership*/
 
 delimiter $$
-create procedure crearMembresia(IN idComensal INT, IN fechaCorte DATE)
+create procedure createVIPMembership(IN idComensal INT, IN fechaCorte DATE)
 BEGIN
   if validarComensal(idComensal) = 1 then
     if validarFechaCorte(fechaCorte) = 1 then
@@ -277,7 +277,7 @@ BEGIN
   end if;
 END$$
 delimiter ;
-call crearMembresia(1, '2020-05-15');
+call createVIPMembership(1, '2020-05-15');
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 /*Procedimiento que crea un registro en la tabla transaccional Agreem_DinerU*/
@@ -303,7 +303,7 @@ select * from Agreem_DinerU;
 /*Procedimiento que modifica la fecha de corte de una membresia conociendo el idDiner*/
 
 delimiter $$
-create procedure modificarMembresia(IN usuario INT, IN fechaCorte DATE)
+create procedure editMembership(IN usuario INT, IN fechaCorte DATE)
 BEGIN
   if validarFechaCorte(fechaCorte) = 1 then
       update VIPMembership set cutDate = fechaCorte where FK_idDiner = usuario;
@@ -313,7 +313,7 @@ BEGIN
 END$$
 delimiter ;
 
-call modificarMembresia(1,'2020-02-10');
+call editMembership(1,'2020-02-10');
 
 /*Procedimiento que modifica la fecha de corte de una membresia conociendo la cedula del usuario*/
 
@@ -444,7 +444,7 @@ call EliminarComensal(1528439127);
 /*Procedimiento que elimina la membresia actual de un usuario conociendo su id de usuario-comensal*/
 
 delimiter $$
-Create procedure EliminarMembresia(IN idDiner INT)
+Create procedure DeleteMembership(IN idDiner INT)
 BEGIN
     if validarComensal(idDiner) = 1 then
         delete from VIPMembership where FK_idDiner = idDiner;
