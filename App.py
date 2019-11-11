@@ -198,14 +198,14 @@ def isVIP(id):
     json=None
     try:
         cur=mySQL.connection.cursor()
-        cur.callproc('idDinerUser', [id])
+        cur.callproc('userVIP', [id])
+        #cur.close()
+        data=cur.fetchall()
         cur.close()
-        data=cur.stored_results()
         json=jsonify( Response=2,
                       content=data[0])
     except Exception as e:
-        json=jsonify( Response=1,
-                      content=e)
+        json=jsonify( Response=1)
         print("+++isVIP", e)
     #cursor.stored_results()
     return json
@@ -309,10 +309,14 @@ def login():
                         print(data)
                         if data==1:
                             print("VALIDO LOGIN")
+                            #cur=mySQL.connection.cursor()
+                            #cur.callproc("getDataDinerUserByEmail", [email])
+                            #data=cur.fetchall()                                                        
+                            #data=data[0]
+                            #cur.close()
                             cur=mySQL.connection.cursor()
-                            cur.callproc("getDataDinerUserByEmail", [email])
-                            data=cur.fetchall()                                                        
-                            data=data[0]
+                            cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(PK_IdUser))
+                            data=cur.fetchall()
                             cur.close()
                             if len(data)!=0:
                                 session["PK_IdUser"]=data[0]
@@ -394,8 +398,8 @@ def signup():
                         if response["Response"]==2:
                             address=" "; payMethod=" "
                             user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
-                            password=user.password
-                            PK_IdUser=str(response["content"]["PK_User"])
+                            #password=user.password
+                            PK_IdUser=str(response["Content"]["PK_User"])
                             print("+++++++++")                
                             print("->", user.data())
                             print("EEEEEEEEE", password)
