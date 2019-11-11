@@ -1,246 +1,239 @@
-{% extends "base_template.html" %}
-{% block title %}Perfil de Usuario{% endblock %}
-{% block content %}
+{% extends "base_template.html" %} {% block title %}Perfil de Usuario{% endblock %} {% block content %}
 <div id="pbackground">
-	<!--<div id="player_1"><img src="{{ url_for('static', filename='images/layer_1.png') }}"></div>-->
-	<div id="pBackground8"><img src="{{ url_for('static', filename='images/Background8.png') }}"></div>
-	<div id="pBackground10"><img src="{{ url_for('static', filename='images/Background10.png') }}"></div>
-	<!--<div id="pdashboard3avatar"><img src="{{ url_for('static', filename='images/dashboard3avatar.png') }}"></div>-->
-	<div id="pSeparator"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
-	<div id="pSeparator2"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
-	<div id="pSeparator3"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
-	<div id="pSeparator4"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
-	<div id="pSeparator5"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
-	<div id="pCapa2"><img src="{{ url_for('static', filename='images/Capa2.png') }}"></div>
-	<div id="pCapa3"><img src="{{ url_for('static', filename='images/Capa3.png') }}"></div>
-	<div id="pBIENVENIDOXAVIHERNAN">
-		<center><p style="font-family:Roboto;color:black;font-size: 42px"><strong>Bienvenido {{tmp.firstName}}</strong></p></center>
-	</div>
-	<div id="pJuanitaPerez">
-		<p style="font-family:Roboto;color:white;font-size: 19px">
-			<i class="user icon"></i>
-			{{tmp.firstName}}
-		</p>
-	</div>
-	<div id="pIngdeRequisitos">
-		<p style="font-family:Roboto;color:white;font-size: 19px">
-			<i class="user secret icon"></i>
-			{{tmp.userName}}
-		</p>
-	</div>
-	<div id="pjuanitarequiml">
-		<p style="font-family:Roboto;color:white;font-size: 19px">
-			<i class="at icon"></i>
-			{{tmp.email}}
-		</p>
-	</div>
-	<div id="player_57302118294">
-		<p style="font-family:Roboto;color:white;font-size: 19px">
-			<i class="mobile alternate icon"></i>
-			{{tmp.telephone}}
-		</p>
-	</div>
-	<div id="pGroup2764">
-		<button class="ui inverted secondary button w">BUSCAR RESTAURANTES</button>
-	</div>
-	<div id="player_27">
-		<button onclick="$('.ui.modal.historyReservas').modal('show');" class="ui inverted secondary button w">HISTORIAL DE RESERVAS</button>
-	</div>
-	<div id="player_29">
-		<button onclick="$('.ui.modal.reservasActuales').modal('show');" class="ui inverted secondary button w">MIS RESERVAS ACTUALES</button>
-	</div>
-	<div id="player_25">
-		<button onclick="window.location.href='{{url_for('tinder')}}';" class="ui inverted secondary button w">BUSCAR RESERVAS PÚBLICAS</button>
-	</div>
-	<div id="pRectangle21">
-		<button onclick="$('.ui.modal.modifyUser').modal('show');" class="ui inverted button">MODIFICAR DATOS</button>
-	</div>
-	<div id="pRectangle212">
-		<button onclick="window.location.href='{{ url_for('logout') }}';" class="ui inverted button">CERRAR SESIÓN</button>
-	</div>
+    <!--<div id="player_1"><img src="{{ url_for('static', filename='images/layer_1.png') }}"></div>-->
+    <div id="pBackground8"><img src="{{ url_for('static', filename='images/Background8.png') }}"></div>
+    <div id="pBackground10"><img src="{{ url_for('static', filename='images/Background10.png') }}"></div>
+    <!--<div id="pdashboard3avatar"><img src="{{ url_for('static', filename='images/dashboard3avatar.png') }}"></div>-->
+    <div id="pSeparator"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
+    <div id="pSeparator2"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
+    <div id="pSeparator3"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
+    <div id="pSeparator4"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
+    <div id="pSeparator5"><img src="{{ url_for('static', filename='images/Separator.png') }}"></div>
+    <div id="pCapa2"><img src="{{ url_for('static', filename='images/Capa2.png') }}"></div>
+    <div id="pCapa3"><img src="{{ url_for('static', filename='images/Capa3.png') }}"></div>
+    <div id="pBIENVENIDOXAVIHERNAN">
+        <center>
+            <p style="font-family:Roboto;color:black;font-size: 42px"><strong>Bienvenido {{tmp2.firstName}}</strong></p>
+        </center>
+    </div>
+    <div id="pJuanitaPerez">
+        <p style="font-family:Roboto;color:white;font-size: 19px">
+            <i class="user icon"></i> {{tmp2.firstName}}
+        </p>
+    </div>
+    <div id="pIngdeRequisitos">
+        <p style="font-family:Roboto;color:white;font-size: 19px">
+            <i class="user secret icon"></i> {{tmp2.userName}}
+        </p>
+    </div>
+    <div id="pjuanitarequiml">
+        <p style="font-family:Roboto;color:white;font-size: 19px">
+            <i class="at icon"></i> {{tmp2.email}}
+        </p>
+    </div>
+    <div id="player_57302118294">
+        <p style="font-family:Roboto;color:white;font-size: 19px">
+            <i class="mobile alternate icon"></i> {{tmp2.telephone}}
+        </p>
+    </div>
+    <div id="pGroup2764">
+        <button class="ui inverted secondary button w">BUSCAR RESTAURANTES</button>
+    </div>
+    <div id="player_27">
+        <button onclick="$('.ui.modal.historyReservas').modal('show');" class="ui inverted secondary button w">HISTORIAL DE RESERVAS</button>
+    </div>
+    <div id="player_29">
+        <button onclick="$('.ui.modal.reservasActuales').modal('show');" class="ui inverted secondary button w">MIS RESERVAS ACTUALES</button>
+    </div>
+    <div id="player_25">
+        <button onclick="window.location.href='{{url_for('tinder')}}';" class="ui inverted secondary button w">BUSCAR RESERVAS PÚBLICAS</button>
+    </div>
+    <div id="pRectangle21">
+        <button onclick="$('.ui.modal.modifyUser').modal('show');" class="ui inverted button">MODIFICAR DATOS</button>
+    </div>
+    <div id="pRectangle212">
+        <button onclick="window.location.href='{{ url_for('logout') }}';" class="ui inverted button">CERRAR SESIÓN</button>
+    </div>
 </div>
 
 <!--##################### Modal popup Modificar Usuario ###########################################################################-->
 <form action="" method="POST" novalidate>
-{{ form1.hidden_tag() }}
-<div class="ui container">
-	<div class="ui modal modifyUser">
-		<i class="close icon"></i>
-		<div class="header">Modificar Datos de Usuario</div>
-		<div class="content">
-			<div class="ui form">
-				<div class="three fields">
-					<div class="field">
-						<label>Nombre</label>
-						<div class="ui left icon input">
-							{{form1.name(value=tmp.firstName)}}
-							<i class="user icon"></i>
-						</div>
-					</div>
-					<div class="field">
-						<label>Apellido</label>
-						<div class="ui left icon input">
-							{{form1.lastName(value=tmp.firtsLastName)}}
-							<i class="user secret icon"></i>
-						</div>
-					</div>
-					<div class="disabled field">
-						<label>Correo Electrónico</label>
-						<div class="ui left icon input">
-							{{form1.email(value=tmp.email)}}
-							<i class="at icon"></i>
-						</div>
-					</div>
-				</div>
-				<div class="three fields">
-					<div class="disabled field">
-						<label>Nombre de Usuario</label>
-						<div class="ui left icon input">
-							{{form1.userName(value=tmp.userName)}}
-							<i class="user circle secret icon"></i>
-						</div>
-					</div>
-					<div class="field">
-						<label>Número de identificación</label>
-						<div class="ui left icon input">
-							{{form1.numDocument(value=tmp.numDocument)}}
-							<i class="id card icon"></i>
-						</div>
-					</div>
-					<div class="field">
-						<label>Teléfono</label>
-						<div class="ui left icon input">
-							{{form1.telephone(value=tmp.telephone)}}
-							<i class="mobile alternate icon"></i>
-						</div>
-					</div>
-				</div>
-				<div class="three fields">
-					<div class="field">
-						<label>Dirección</label>
-						<div class="ui left icon input">
-							{{form1.address(value=tmp.address)}}
-							<i class="home icon"></i>
-						</div>
-					</div>
-					<div class="field">
-						<label>Método de Pago</label>
-						<select class="ui fluid dropdown">
+    {{ form1.hidden_tag() }}
+    <div class="ui container">
+        <div class="ui modal modifyUser">
+            <i class="close icon"></i>
+            <div class="header">Modificar Datos de Usuario</div>
+            <div class="content">
+                <div class="ui form">
+                    <div class="three fields">
+                        <div class="field">
+                            <label>Nombre</label>
+                            <div class="ui left icon input">
+                                {{form1.name(value=tmp2.firstName)}}
+                                <i class="user icon"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Apellido</label>
+                            <div class="ui left icon input">
+                                {{form1.lastName(value=tmp2.firtsLastName)}}
+                                <i class="user secret icon"></i>
+                            </div>
+                        </div>
+                        <div class="disabled field">
+                            <label>Correo Electrónico</label>
+                            <div class="ui left icon input">
+                                {{form1.email(value=tmp2.email)}}
+                                <i class="at icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="three fields">
+                        <div class="disabled field">
+                            <label>Nombre de Usuario</label>
+                            <div class="ui left icon input">
+                                {{form1.userName(value=tmp2.userName)}}
+                                <i class="user circle secret icon"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Número de identificación</label>
+                            <div class="ui left icon input">
+                                {{form1.numDocument(value=tmp2.numDocument)}}
+                                <i class="id card icon"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Teléfono</label>
+                            <div class="ui left icon input">
+                                {{form1.telephone(value=tmp2.telephone)}}
+                                <i class="mobile alternate icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="three fields">
+                        <div class="field">
+                            <label>Dirección</label>
+                            <div class="ui left icon input">
+                                {{form1.address(value=tmp2.address)}}
+                                <i class="home icon"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Método de Pago</label>
+                            <select class="ui fluid dropdown">
 							<option value="EF">Efectivo</option>
 							<option value="AL">Visa</option>
 							<option value="AK">Master Card</option>
 							<option value="AK">Maestro</option>
 						</select>
-					</div>
-					<div class="field">
-						<label>Cambiar Contraseña</label>
-						<button onclick="$('.ui.modal.cambiarContrasena').modal('show');" class="ui labeled icon button w">
+                        </div>
+                        <div class="field">
+                            <label>Cambiar Contraseña</label>
+                            <button onclick="$('.ui.modal.cambiarContrasena').modal('show');" class="ui labeled icon button w">
 							<i class="key icon"></i>
 							Cambiar Contraseña
 						</button>
-						<!--<input type="file" name="myfile" />-->
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="actions">
-			<div onclick="$('.ui.modal.confirmarContrasena').modal('show');" class="ui green approve button">Aceptar</div>
-			<div class="ui red cancel button">Cancelar</div>
-		</div>
-	</div>
-</div>
-<!--##################### Confirmar Contraseña ###########################################################################-->
-<div class="ui container">
-	<div class="ui modal confirmarContrasena">
-		<i class="close icon"></i>
-		<div class="header">Confirmar Contraseña</div>
-		<div class="content">
-			<div class="ui form">
-				<div class="field">
-					<label>Confirmar Contraseña</label>
-					<div class="ui left icon input">
-						{{form1.password}}
-						<i class="key icon"></i>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="actions">
-			{{ form1.submit1() }}
-			<div class="ui red cancel button">Cancelar</div>
-		</div>
-	</div>
-</div>
+                            <!--<input type="file" name="myfile" />-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <div onclick="$('.ui.modal.confirmarContrasena').modal('show');" class="ui green approve button">Aceptar</div>
+                <div class="ui red cancel button">Cancelar</div>
+            </div>
+        </div>
+    </div>
+    <!--##################### Confirmar Contraseña ###########################################################################-->
+    <div class="ui container">
+        <div class="ui modal confirmarContrasena">
+            <i class="close icon"></i>
+            <div class="header">Confirmar Contraseña</div>
+            <div class="content">
+                <div class="ui form">
+                    <div class="field">
+                        <label>Confirmar Contraseña</label>
+                        <div class="ui left icon input">
+                            {{form1.password}}
+                            <i class="key icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                {{ form1.submit1() }}
+                <div class="ui red cancel button">Cancelar</div>
+            </div>
+        </div>
+    </div>
 </form>
 
 <!--##################### Cambiar Contraseña ###########################################################################-->
 <form action="" method="POST" novalidate>
-{{ form2.hidden_tag() }}
-<div class="ui container">
-		<div class="ui modal cambiarContrasena">
-			<i class="close icon"></i>
-			<div class="header">Cambiar  Contraseña</div>
-			<div class="content">
-				<div class="ui form">
-					<div class="field">
-						<label>Contraseña Actual</label>
-						<div class="ui left icon input">
-							{{form2.password1}}
-							{% for error in form2.password1.errors %}
-							<script>
-								toastr.error('{{ error }}','Error al ingresar Confirmar Contraseña',{
-									"newestOnTop": true,
-									"closeButton": true,
-									"progressBar": true
-								})
-							</script>
-							{% endfor %}
-							<i class="key icon"></i>
-						</div>
-					</div>
-					<div class="field">
-						<label>Contraseña Nueva</label>
-						<div class="ui left icon input">
-							{{form2.password2}}
-							{% for error in form2.password2.errors %}
-							<script>
-								toastr.error('{{ error }}','Error al ingresar Confirmar Contraseña',{
-									"newestOnTop": true,
-									"closeButton": true,
-									"progressBar": true
-								})
-							</script>
-							{% endfor %}
-							<i class="key icon"></i>
-						</div>
-					</div>
-					<div class="field">
-						<label>Confirmar Contraseña Actual</label>
-						<div class="ui left icon input">
-							{{form2.password3}}
-							{% for error in form2.password3.errors %}
-							<script>
-								toastr.error('{{ error }}','Error al ingresar Confirmar Contraseña',{
-									"newestOnTop": true,
-									"closeButton": true,
-									"progressBar": true
-								})
-							</script>
-							{% endfor %}
-							<i class="key icon"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="actions">
-				{{form2.submit2()}}
-				<!--<div class="ui green approve button">Aceptar</div>-->
-				<div class="ui red cancel button">Cancelar</div>
-			</div>
-		</div>
-</div>
+    {{ form2.hidden_tag() }}
+    <div class="ui container">
+        <div class="ui modal cambiarContrasena">
+            <i class="close icon"></i>
+            <div class="header">Cambiar Contraseña</div>
+            <div class="content">
+                <div class="ui form">
+                    <div class="field">
+                        <label>Contraseña Actual</label>
+                        <div class="ui left icon input">
+                            {{form2.password1}} {% for error in form2.password1.errors %}
+                            <script>
+                                toastr.error('{{ error }}', 'Error al ingresar Confirmar Contraseña', {
+                                    "newestOnTop": true,
+                                    "closeButton": true,
+                                    "progressBar": true
+                                })
+                            </script>
+                            {% endfor %}
+                            <i class="key icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Contraseña Nueva</label>
+                        <div class="ui left icon input">
+                            {{form2.password2}} {% for error in form2.password2.errors %}
+                            <script>
+                                toastr.error('{{ error }}', 'Error al ingresar Confirmar Contraseña', {
+                                    "newestOnTop": true,
+                                    "closeButton": true,
+                                    "progressBar": true
+                                })
+                            </script>
+                            {% endfor %}
+                            <i class="key icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Confirmar Contraseña Actual</label>
+                        <div class="ui left icon input">
+                            {{form2.password3}} {% for error in form2.password3.errors %}
+                            <script>
+                                toastr.error('{{ error }}', 'Error al ingresar Confirmar Contraseña', {
+                                    "newestOnTop": true,
+                                    "closeButton": true,
+                                    "progressBar": true
+                                })
+                            </script>
+                            {% endfor %}
+                            <i class="key icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                {{form2.submit2()}}
+                <!--<div class="ui green approve button">Aceptar</div>-->
+                <div class="ui red cancel button">Cancelar</div>
+            </div>
+        </div>
+    </div>
 </form>
-	
+
 
 
 
@@ -292,39 +285,39 @@
 
 <!--##################### Modal popup Reservas Actuales ###########################################################################-->
 <div class="ui container">
-	<div class="ui modal reservasActuales">
-		<i class="close icon"></i>
-		<div class="header">Reservas Actuales</div>
-		<div class="content">
-		</div>
-		<div class="actions">
-			<div class="ui green approve button">Aceptar</div>
-			<div class="ui red cancel button">Cancelar</div>
-		</div>
-	</div>
+    <div class="ui modal reservasActuales">
+        <i class="close icon"></i>
+        <div class="header">Reservas Actuales</div>
+        <div class="content">
+        </div>
+        <div class="actions">
+            <div class="ui green approve button">Aceptar</div>
+            <div class="ui red cancel button">Cancelar</div>
+        </div>
+    </div>
 </div>
 
 
 <script>
-	(function($){
-		$(window).on('load', function(){
-			$.instagramFeed({
-				'username': 'xavgar9',
-				'container': "#instagram-feedpw",
-				'display_profile': true,
-				'display_biography': false,
-				'display_gallery': false,
-				'callback': null,
-				'styling': true,
-				'items': 8,
-				'items_per_row': 4,
-				'margin': 1 
-			});
-		});
-	})(jQuery);
+    (function($) {
+        $(window).on('load', function() {
+            $.instagramFeed({
+                'username': 'xavgar9',
+                'container': "#instagram-feedpw",
+                'display_profile': true,
+                'display_biography': false,
+                'display_gallery': false,
+                'callback': null,
+                'styling': true,
+                'items': 8,
+                'items_per_row': 4,
+                'margin': 1
+            });
+        });
+    })(jQuery);
 </script>
 <div class="instagramProfile">
-	<div id="instagram-feedpw" class="instagram_feedpw"></div>
+    <div id="instagram-feedpw" class="instagram_feedpw"></div>
 </div>
 
 

@@ -1,5 +1,5 @@
-#IP="127.0.0.1:3000"
-IP="159.65.58.193:3000"
+IP="127.0.0.1:3000"
+#IP="159.65.58.193:3000"
 
 #request.json['name'] para recibir y usar json de otras paginas
 #pip install flask
@@ -280,6 +280,7 @@ def login():
     if not ok:
         return redirect(url_for('Index'))
     else:
+        print("Inicio")
         if form.validate_on_submit():
             ##############################################################################
             email=request.form['email']
@@ -292,10 +293,14 @@ def login():
             password=pas
             #user=getUser("", "", "", "", "",password)
             #password=user.password
+            print(password)
             url="http://"+IP+"/loginLaverde/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
             response=requests.get(url, params=None)
+            
             if response.status_code==200:
+                
                 response=response.json()
+
                 if response["Response"]==2:
                     PK_IdUser=response["Content"]["PK_IdUser"]
                     userName=response["Content"]["userName"]
@@ -317,6 +322,7 @@ def login():
                             cur=mySQL.connection.cursor()
                             cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(PK_IdUser))
                             data=cur.fetchall()
+                            data=data[0]
                             cur.close()
                             if len(data)!=0:
                                 session["PK_IdUser"]=data[0]
@@ -461,7 +467,7 @@ def profile():
     if ok:
         return redirect(url_for('login'))   #redirect
     else:
-        tmp = session
+        tmp2 = session
         form1=EditForm()
         form2=PasswordForm()
         print("PROFILE")
@@ -528,8 +534,9 @@ def profile():
         ##########################################################################################################################
         #############################################HISTORIAL DE RESERVAS########################################################
         ##########################################################################################################################
-        url="http://"+"181.50.100.167:8000"+"/api/getReservationsRecordByUserId/"+session["PK_IdDiner"] #esta url cambia por la de Laura
+        url="http://"+"181.50.100.167:8000"+"/api/getReservationsRecordByUserId/"+str(session["PK_IdDiner"]) #esta url cambia por la de Laura
         #me trae TODAS las reservas publicas
+        print(session["PK_IdDiner"])
         historialReservas=list()
         try:
             response=requests.get(url, params=None, timeout=5)
@@ -583,7 +590,7 @@ def profile():
         ##########################################################################################################################
         #############################################LISTAR RESERVAS PUBLICAS########################################################
         ##########################################################################################################################
-        url="http://"+"181.50.100.167:8000"+"/api/getReservationsRecordByUserId/"+session["PK_IdDiner"] #esta url cambia por la de Laura
+        url="http://"+"181.50.100.167:8000"+"/api/getReservationsRecordByUserId/"+str(session["PK_IdDiner"]) #esta url cambia por la de Laura
         #me trae TODAS las reservas publicas
         try:
             response=requests.get(url, params=None, timeout=5)
@@ -620,7 +627,7 @@ def profile():
             print("+++profile ", e)
 
         
-    return render_template("profile_view.html", form1=form1, form2=form2, tmp=tmp, historialReservas=historialReservas)
+    return render_template("profile_view.html", form1=form1, form2=form2, tmp2=tmp2, historialReservas=historialReservas)
 
 
 
