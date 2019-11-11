@@ -171,23 +171,6 @@ END$$
 delimiter ;
 
 select validarConvenio(2);
-
---------------------------------------------------------------------------------------
-/*Funcion que retorna booleano, si el DinerUser tiene membresia o no*/
-
-delimiter $$
-CREATE function userVIP(idDinerUser int)
-RETURNS BOOLEAN
-BEGIN
-declare consulta int;
-  select PK_idMembership into consulta from VIPMembership where FK_idDiner = idDinerUser;
-  if consulta is null then
-    RETURN False;
-  else
-    RETURN True;
-  end if;
-END$$
-delimiter ;
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*Funcion que retorna los nombres y apellidos de un usuario segun el idDiner pasado por parametro*/
 delimiter $$
@@ -513,4 +496,20 @@ BEGIN
   end if;
 END$$
 delimiter ;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Procedimiento para saber si el DinerUser tiene membresia VIP o no*/
+delimiter $$
+CREATE procedure userVIP(IN idDinerUser int)
+BEGIN
+  declare consulta int;
+  set consulta = (select PK_idMembership from VIPMembership where FK_idDiner = idDinerUser);
+  if consulta is null then
+    SELECT False;
+  else
+    SELECT True;
+  end if;
+END$$
+delimiter ;
+
+call userVIP(1);
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
