@@ -465,7 +465,7 @@ def profile():
         form1=EditForm()
         form2=PasswordForm()
         print("PROFILE")
-        if form1.validate_on_submit():
+        if form1.validate_on_submit():  #cambiar datos general
             if request.method=='POST':
                 print("GENERAL")
                 numDocument=request.form1['numDocument']
@@ -479,7 +479,8 @@ def profile():
                 password=request.form1['password']
                 email=request.form1['email']
                 user=getUser("", "", "", "", "",password)
-                password=user.password
+                h1=hashlib.sha1(); h1.update(password1)
+                password=h1; password=str(pas.hexdigest())
 
                 url="http://"+IP+"/loginLaverde/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
                 response=requests.get(url, params=None)
@@ -500,7 +501,7 @@ def profile():
                     else:
                         flash("Datos incorrectos", "error")
 
-        elif form2.validate_on_submit():
+        elif form2.validate_on_submit():    #cambiar la contraseña
             if request.method=='POST':
                 print("CONSTRASENAS")
                 password1=request.form2['password1']
@@ -508,11 +509,13 @@ def profile():
                 password3=request.form2['password3']
                 if password2==password3:
                     email=session["email"]
-                    user=getUser("", "", "", "", "",password1)
-                    password1=user.password
-                    user=getUser("", "", "", "", "",password2)
-                    password2=user.password
-                    url="http://"+IP+"/cambiarPassLaverde/"+str(email)+"/"+str(password1)+"/"+str(password2) #esta url cambia por la de laverde
+                    h1=hashlib.sha1(); h1.update(password1)
+                    pas1=h1; pas1=str(pas.hexdigest())
+
+                    h2=hashlib.sha1(); h2.update(password2)
+                    pas2=h2; pas2=str(pas.hexdigest())
+
+                    url="http://"+IP+"/cambiarPassLaverde/"+str(email)+"/"+str(pass1)+"/"+str(pass2) #esta url cambia por la de laverde
                     response=requests.get(url, params=None)
                     if response.status_code==200:
                         response=response.json()
