@@ -137,6 +137,16 @@
                             <!--<input type="file" name="myfile" />-->
                         </div>
                     </div>
+                    <div class="three fields">
+                        <div class="field">
+                            <label>Membresia VIP</label>
+                            <button onclick="$('.ui.modal.membresiaVip').modal('show');" class="ui labeled icon button w">
+							<i class="star icon"></i>
+							Adquiere una Membresia VIP
+						</button>
+                            <!--<input type="file" name="myfile" />-->
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="actions">
@@ -235,6 +245,67 @@
 </form>
 
 
+<!--##################### Modal Membresia VIP ###########################################################################-->
+<div class="ui container">
+    <div class="ui modal membresiaVip">
+        <i class="close icon"></i>
+        <div class="header">Adquirir Membresia VIP</div>
+        <div class="content">
+            <div class="ui three column grid">
+                <div class="column">
+                    <div class="ui cards">
+                        <div class="card">
+                            <div class="content">
+                                <div class="header">
+                                    <center>$99.900 COP</center>
+                                </div>
+                                <div class="description">Elliot Fu is a film-maker from New York. </div>
+                            </div>
+                            <div class="ui bottom attached button"><i class="add icon"></i> Añadir amigo </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui cards">
+                        <div class="card">
+                            <div class="content">
+                                <div class="header">
+                                    <center>$99.900 COP</center>
+                                </div>
+                                <div class="description">Veronika Ossi is a set designer living in New York who enjoys kittens, music, and partying. </div>
+                            </div>
+                            <div class="ui bottom attached button"><i class="add icon"></i> Añadir amigo </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui cards">
+                        <div class="card">
+                            <div class="content">
+                                <div class="header">
+                                    <center>$99.900 COP</center>
+                                </div>
+                                <div class="description">Jenny is a student studying Media Management at the New School </div>
+                            </div>
+                            <div class="ui bottom attached button"><i class="add icon"></i> Añadir amigo </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <!--<div class="ui green approve button">Aceptar</div>-->
+            <div class="ui red cancel button">Cancelar</div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
 
 
 <!--##################### Modal popup Historial de Reservas ###########################################################################-->
@@ -286,13 +357,50 @@
 <!--##################### Modal popup Reservas Actuales ###########################################################################-->
 <div class="ui container">
     <div class="ui modal reservasActuales">
+
         <i class="close icon"></i>
         <div class="header">Reservas Actuales</div>
         <div class="content">
+            {% if hReservasActuales|length != 0 %}
+            <table class="ui compact celled definition table">
+                <thead>
+                    <tr>
+                        <th>¿Reserva Pública?</th>
+                        <th>Restaurante</th>
+                        <th>Dirección</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>No. Sillas</th>
+                        <th>¿Reserva Pública?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for elemento in hReservasActuales %}
+                    <tr>
+                        <td>
+                            <form action="/botonPonerReservaPublica" method="POST">
+                                <button class="ui green approve button" type="submit" name="si" value="{{elemento[8]}}">Si</button>
+                                <button class="ui red approve button" type="submit" name="no" value="{{elemento[8]}}">No</button>
+                            </form>
+                        </td>
+                        <td>{{elemento[0]}}</td>
+                        <td>{{elemento[2]}}</td>
+                        <td>{{elemento[3]}}</td>
+                        <td>{{elemento[4]}}</td>
+                        <td>{{elemento[6]}}</td>
+                        <td>{{elemento[7]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <center>
+                <p style="font-family:Roboto;color:black;font-size: 16px">No tienes Reservas Actualmente</p>
+            </center>
+            {% endif %}
         </div>
         <div class="actions">
             <div class="ui green approve button">Aceptar</div>
-            <div class="ui red cancel button">Cancelar</div>
         </div>
     </div>
 </div>

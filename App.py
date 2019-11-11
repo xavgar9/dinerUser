@@ -626,8 +626,95 @@ def profile():
         except Exception as e:
             print("+++profile ", e)
 
+
+
+
+
+        ##########################################################################################################################
+        #############################################HISTORIAL DE RESERVAS########################################################
+        ##########################################################################################################################
+
+        url="http://181.50.100.167:8000/api/getActiveReservationsByUserIdAndType/"+str(session["PK_IdDiner"])+"/0/" #esta url cambia por la de Laura
+        #me trae TODAS las reservas publicas y orivadas actuales de un usuario
+        # 0 privada, 1 publica
+        hReservasActuales=list()
+        try:
+            response=requests.get(url, params=None, timeout=5)
+            if response.status_code==200:
+                response=response.json()
+                if response["Response"]==2:
+                    data=response["Content"]
+                    for restaurant in data:
+                        idRestaurant=restaurant["FK_idRestaurant"]
+                        url="http://"+"181.50.100.167:5000"+"/getRestaurant/"+str(idRestaurant)
+                        tmp=requests.get(url, params=None, timeout=5)
+                        if tmp.status_code==200:
+                            tmp=tmp.json()
+                            if tmp["Response"]==2:
+                                tmp=tmp["Content"]
+                                individual=list()
+                                individual.append(str(tmp[0]["name"]))
+                                individual.append(str(tmp[0]["email"]))
+                                individual.append(str(tmp[0]["address"]))
+                                individual.append(str(restaurant["reservationDate"]))
+                                individual.append(str(restaurant["reservationHour"]))                    
+                                individual.append(str(restaurant["availableChairs"]))
+                                individual.append("no")
+                                individual.append(str(restaurant["PK_idReservation"]))
+
+                                hReservasActuales.append(individual)
+                            else:
+                                flash("privadas Response API de Cristian: 2", "error")
+                        else:
+                            flash("privadas Fallo el API de Cristian", "error")                            
+                else:
+                    flash("privadas Fallo el API de LAURA", "error")
+            else:
+                flash("privadas HTTP error", "error")
+        except Exception as e:
+            print("+++profile privadas ", e)
+
+        url="http://181.50.100.167:8000/api/getActiveReservationsByUserIdAndType/"+str(session["PK_IdDiner"])+"/1/" #esta url cambia por la de Laura
+        try:
+            response=requests.get(url, params=None, timeout=5)
+            if response.status_code==200:
+                response=response.json()
+                if response["Response"]==2:
+                    data=response["Content"]
+                    for restaurant in data:
+                        idRestaurant=restaurant["FK_idRestaurant"]
+                        url="http://"+"181.50.100.167:5000"+"/getRestaurant/"+str(idRestaurant)
+                        tmp=requests.get(url, params=None, timeout=5)
+                        if tmp.status_code==200:
+                            tmp=tmp.json()
+                            if tmp["Response"]==2:
+                                tmp=tmp["Content"]
+                                individual=list()
+                                individual.append(str(tmp[0]["name"]))
+                                individual.append(str(tmp[0]["email"]))
+                                individual.append(str(tmp[0]["address"]))
+                                individual.append(str(restaurant["reservationDate"]))
+                                individual.append(str(restaurant["reservationHour"]))                    
+                                individual.append(str(restaurant["availableChairs"]))
+                                individual.append("si")
+                                individual.append(str(restaurant["PK_idReservation"]))
+
+                                hReservasActuales.append(individual)
+                            else:
+                                flash("publicas Response API de Cristian: 2", "error")
+                        else:
+                            flash("publicas Fallo el API de Cristian", "error")                            
+                else:
+                    flash("publicas Fallo el API de LAURA", "error")
+            else:
+                flash("publicas HTTP error", "error")
+        except Exception as e:
+            print("+++profile publicas ", e)
+
+
+
         
-    return render_template("profile_view.html", form1=form1, form2=form2, tmp2=tmp2, historialReservas=historialReservas)
+    return render_template("profile_view.html", form1=form1, form2=form2, tmp2=tmp2, historialReservas=historialReservas, hReservasActuales=hReservasActuales)
 
 
 
