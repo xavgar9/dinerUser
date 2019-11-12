@@ -1,15 +1,15 @@
-{% extends "base_template.html" %}
-{% block title %}Tinder{% endblock %}
-{% block content %}
+{% extends "base_template.html" %} {% block title %}Tinder{% endblock %} {% block content %}
 
 
 <!--##################### Script de la API de instagram ###########################################################################-->
 <script type="text/javascript" src="{{ url_for('static', filename='test.js') }}"></script>
+
+{% if lista1|length != 0 %}
 <script>
-    (function($){
-        $(window).on('load', function(){
+    (function($) {
+        $(window).on('load', function() {
             $.instagramFeed({
-                'username': 'misterwings',
+                'username': '{{lista1[0][6]}}',
                 'container': "#instagram-feed1",
                 'display_profile': true,
                 'display_biography': false,
@@ -21,10 +21,10 @@
                 'margin': 1
             });
             $.instagramFeed({
-                'username': 'carol_alt',
+                'username': '{{lista1[0][4]}}',
                 'container': "#instagram-feed2",
                 'display_profile': false,
-                'display_biography': true,
+                'display_biography': false,
                 'display_gallery': true,
                 'callback': null,
                 'styling': true,
@@ -41,42 +41,186 @@
 <!--##################### Parte del Restaurante ###########################################################################-->
 <div class="restauranteGaleria">
     <div id="instagram-feed1" class="instagram_feed1"> </div>
-    <center><p style="font-family:Roboto;color:black;font-size: 40px"><strong>Restaurante<br>
-        Mr. Wings</strong></p>
+    <center>
+        <p style="font-family:Roboto;color:black;font-size: 40px"><strong>Restaurante<br>
+        {{lista1[0][5]}}</strong></p>
         <p style="font-family:Roboto;color:black;font-size: 19px">
-            <i class="map marker alternate icon"></i>
-            Calle Busqueda # 25-59
+            <i class="map marker alternate icon"></i>Dirección:
+            <a href="https://www.google.com/maps/place/{{lista1[0][7]}}" target="_blank"> {{lista1[0][7]}}</a>
         </p>
         <p style="font-family:Roboto;color:black;font-size: 19px">
-            <i class="calendar alternate outline icon"></i>
-            10/11/2019
+            <i class="calendar alternate outline icon"></i>Fecha: {{lista1[0][8]}}
         </p>
         <p style="font-family:Roboto;color:black;font-size: 19px">
-            <i class="clock icon"></i>
-            09:30 p.m
+            <i class="clock icon"></i>Hora: {{lista1[0][9]}}
         </p>
-        <button onclick="" class="ui inverted secondary button">MIRA MÁS</button>
     </center>
 </div>
+<!--##################### Parte del instagram del perfil ###########################################################################-->
+<div id="galeriaInsta" class="instagramGaleria" style="overflow:hidden;">
+    <div id="instagram-feed2" class="instagram_feed"> </div>
+</div>
+<div class="iconIz">
+    <div onclick="$(galeriaInsta).scrollTo('-=555px');" class="circular ui animated button" tabindex="0">
+        <div class="visible content">
+            <i class="left arrow icon"></i>
+        </div>
+        <div class="hidden content">
+            <i class="left arrow icon"></i>
+        </div>
+    </div>
+</div>
+<div class="iconDr">
+    <div onclick="$(galeriaInsta).scrollTo('+=555px');" class="circular ui animated button" tabindex="0">
+        <div class="visible content">
+            <i class="right arrow icon"></i>
+        </div>
+        <div class="hidden content">
+            <i class="right arrow icon"></i>
+        </div>
+    </div>
+</div>
+<div id="NombreTinder">
+    <center>
+        <p style="font-family:Roboto;color:white;font-size: 50px"><strong>{{lista1[0][0]}} {{lista1[0][1]}}</strong></p>
+    </center>
+</div>
+<div class="iconInfo">
+    <button onclick="$('.ui.modal.infoPerfil').modal('show');" class="massive circular ui icon button">
+        <i class="icon info circle"></i>
+    </button>
+</div>
+<div class="iconCheck">
+    <a href=# id=test>
+        <button onclick="mensaje()" class="massive circular ui icon button">
+            <i class="icon check"></i>
+        </button>
+    </a>
+</div>
+<div class="iconX">
+    <a href="#" id=test1>
+        <button onclick="mensaje()" class="massive circular ui icon button">
+            <i class="icon x icon"></i>
+        </button>
+    </a>
+</div>
+<script>
+    (function($) {
+        $(window).on('load', function() {
+            $.instagramFeed({
+                'username': '{{lista1[0][6]}}',
+                'container': "#detallesR",
+                'display_profile': true,
+                'display_biography': false,
+                'display_gallery': false,
+                'callback': null,
+                'styling': true,
+                'items': 0,
+                'items_per_row': 1,
+                'margin': 1
+            });
+            $.instagramFeed({
+                'username': '{{lista1[0][4]}}',
+                'container': "#detallesP",
+                'display_profile': true,
+                'display_biography': false,
+                'display_gallery': false,
+                'callback': null,
+                'styling': true,
+                'items': 0,
+                'items_per_row': 1,
+                'margin': 1
+            });
+            $.instagramFeed({
+                'username': '{{lista1[0][4]}}',
+                'container': "#detallesPGale",
+                'display_profile': false,
+                'display_biography': false,
+                'display_gallery': true,
+                'callback': null,
+                'styling': true,
+                'items': 12,
+                'items_per_row': 4,
+                'margin': 0.5
+            });
+        });
+    })(jQuery);
+</script>
+<!--##################### Modal popup Info del perfil ###########################################################################-->
+<div class="ui container">
+    <div class="ui modal infoPerfil">
+        <i class="close icon"></i>
+        <div class="header">Ve al restaurante {{lista1[0][5]}} con {{lista1[0][0]}} {{lista1[0][1]}} </div>
+        <div class="content">
+            <div class="ui grid">
+                <div class="six wide column">
+                    <div id="detallesR" class="detallesR"> </div>
+                    <center>
+                        <p style="font-family:Roboto;color:black;font-size: 30px"><strong>{{lista1[0][5]}}</strong></p>
+                    </center>
+                    <p style="font-family:Roboto;color:black;font-size: 16px">
+                        <i class="map marker alternate icon"></i>
+                        <strong>Dirección: </strong><a href="https://www.google.com/maps/place/{{lista1[0][7]}}" target="_blank">{{lista1[0][7]}}</a><br>
+                        <i class="calendar alternate outline icon"></i>
+                        <strong>Fecha: </strong>{{lista1[0][8]}}<br>
+                        <i class="clock icon"></i>
+                        <strong>Hora: </strong>{{lista1[0][9]}}
+                    </p>
+                    <div id="detallesP" class="detallesP"> </div>
+                    <center>
+                        <p style="font-family:Roboto;color:black;font-size: 30px"><strong>{{lista1[0][0]}} {{lista1[0][1]}}</strong></p>
+                    </center>
+                    <p style="font-family:Roboto;color:black;font-size: 16px">
+                        <i class="envelope outline icon"></i>
+                        <strong>Email: </strong><a href="mailto:{{lista1[0][2]}}">{{lista1[0][2]}}</a><br>
+                        <i class="tty icon"></i>
+                        <strong>Teléfono: </strong><a href="tel:+57{{lista1[0][3]}}">{{lista1[0][3]}}</a><br>
+                        <i class="instagram icon"></i>
+                        <strong>Instagram: </strong><a href="https://www.instagram.com/{{lista1[0][4]}}" target="_blank">{{lista1[0][4]}}</a>
+                    </p>
+                </div>
+                <div class="ten wide column">
+                    <div id="detallesPGale" class="detallesPGale"></div>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui green approve button">Aceptar</div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div id="imgSinReservas"><img src="{{ url_for('static', filename='images/noReservasP.png') }}"></div>
+{% endif %}
+
+
+
 
 
 <!--##################### Menu lateral ###########################################################################-->
 <div class="lateralTinder">
     <div class="ui inverted segment">
         <div class="ui inverted secondary pointing menu">
-            <a onclick="myFunction1()" class="item active">Mis Solicitudes</a>
-            <a onclick="myFunction()" class="item">Mis Reservas</a>
-        </div>     
+            <div class="poppup" data-html="<p>Son las solicitudes que yo<br/> hice hacia otros usuarios</p>" data-position="bottom left">
+                <a onclick="myFunction1()" class="item active">Mis Solicitudes</a>
+            </div>
+            <div class="poppup" data-html="<p>Son las reservas públicas que <br/> 
+                yo tengo. Al presionar cada una <br/>
+                muestra los usuarios que quieren <br/>
+                aplicar a esta o ya los aceptaste</p>" data-position="bottom left">
+                <a onclick="myFunction()" class="item">Mis Reservas</a>
+            </div>
+        </div>
     </div>
     <!--##################### Menu Mis Solicitudes ###########################################################################-->
-    <div id="Hola11">
-        {% for elemento in lista1 %}
+    <div id="misSolicitudes">
+        {% if lista2|length != 0 %} {% for elemento in lista2 %}
         <script>
-            (function($){
-                $(window).on('load', function(){
+            (function($) {
+                $(window).on('load', function() {
                     $.instagramFeed({
-                        'username': '{{elemento[5]}}',
-                        'container': "#instagram-feed{{elemento[5]}}",
+                        'username': '{{elemento[7]}}',
+                        'container': "#restaurante{{elemento[7]}}{{elemento[5]}}",
                         'display_profile': true,
                         'display_biography': false,
                         'display_gallery': false,
@@ -87,8 +231,44 @@
                         'margin': 1
                     });
                     $.instagramFeed({
-                        'username': '{{elemento[6]}}',
-                        'container': "#instagram-feed{{elemento[6]}}",
+                        'username': '{{elemento[5]}}',
+                        'container': "#perfil{{elemento[5]}}{{elemento[7]}}",
+                        'display_profile': true,
+                        'display_biography': false,
+                        'display_gallery': false,
+                        'callback': null,
+                        'styling': true,
+                        'items': 0,
+                        'items_per_row': 1,
+                        'margin': 1
+                    });
+                    $.instagramFeed({
+                        'username': '{{elemento[5]}}',
+                        'container': "#galeriaMasInfo{{elemento[5]}}{{elemento[7]}}",
+                        'display_profile': false,
+                        'display_biography': false,
+                        'display_gallery': true,
+                        'callback': null,
+                        'styling': true,
+                        'items': 12,
+                        'items_per_row': 4,
+                        'margin': 0.5
+                    });
+                    $.instagramFeed({
+                        'username': '{{elemento[7]}}',
+                        'container': "#restauranteMasInfo{{elemento[5]}}{{elemento[7]}}",
+                        'display_profile': true,
+                        'display_biography': false,
+                        'display_gallery': false,
+                        'callback': null,
+                        'styling': true,
+                        'items': 0,
+                        'items_per_row': 1,
+                        'margin': 1
+                    });
+                    $.instagramFeed({
+                        'username': '{{elemento[5]}}',
+                        'container': "#perfilMasInfo{{elemento[5]}}{{elemento[7]}}",
                         'display_profile': true,
                         'display_biography': false,
                         'display_gallery': false,
@@ -102,119 +282,211 @@
             })(jQuery);
         </script>
         <div id="misSolicitudesPanel" class="misReservasPanel">
-                <div class="iconInstaMini">
-                    <div id="instagram-feed{{elemento[5]}}" class="instagram-feed{{elemento[5]}}"> </div>
-                </div>
-                <div class="iconInstaMini1">
-                    <div id="instagram-feed{{elemento[6]}}" class="instagram-feed{{elemento[6]}}"> </div>
-                </div>
-                    <div class="textoPanelNom">
-                    <p style="font-family:Roboto;color:white;font-size: 19px">
-                        {{elemento[0]}} con {{elemento[1]}}
-                    </p>
-                </div>
-                <div class="textoPanelFecha">
-                    <p style="font-family:Roboto;color:white;font-size: 12px">
-                        <i class="calendar alternate outline icon"></i>
-                        {{elemento[2]}}    
-                        <i class="clock icon"></i>
-                        {{elemento[3]}}
-                    </p>
-                </div>
-                <div class="textoPanelEstado">
-                        <p style="font-family:Roboto;color:white;font-size: 12px">
-                            <i class="question circle outline icon"></i>
-                            <strong>Estado: </strong>{{elemento[4]}}   
-                            <a onclick="$('.ui.modal.infoPerfil').modal('show');">|...Más info</a> 
-                        </p>
-                    </div>
-                <!--##################### Modal popup Info del perfil ###########################################################################-->
-                <div class="ui container">
-                    <div class="ui modal masInfo">
-                        <i class="close icon"></i>
-                        <div class="header">Más información</div>
-                        <div class="content">
-                            
+            <div class="iconInstaMini">
+                <div id="restaurante{{elemento[7]}}{{elemento[5]}}" class="restaurante{{elemento[7]}}{{elemento[5]}}"></div>
+            </div>
+            <div class="iconInstaMini1">
+                <div id="perfil{{elemento[5]}}{{elemento[7]}}" class="perfil{{elemento[5]}}{{elemento[7]}}"> </div>
+            </div>
+            <div class="textoPanelNom">
+                <p style="font-family:Roboto;color:white;font-size: 19px">
+                    {{elemento[6]}} con {{elemento[0]}}
+                </p>
+            </div>
+            <div class="textoPanelFecha">
+                <p style="font-family:Roboto;color:white;font-size: 12px">
+                    <i class="calendar alternate outline icon"></i> {{elemento[9]}}
+                    <i class="clock icon"></i> {{elemento[10]}}
+                </p>
+            </div>
+            <div class="textoPanelEstado">
+                <p style="font-family:Roboto;color:white;font-size: 12px">
+                    <i class="question circle outline icon"></i>
+                    <strong>Estado: </strong>{{elemento[12]}}
+                    <a onclick="$('.ui.modal.masInfo{{elemento[5]}}').modal('show');">|...Más info</a>
+                </p>
+            </div>
+            <!--##################### Modal popup Info del perfil ###########################################################################-->
+            <div class="ui container">
+                <div class="ui modal masInfo{{elemento[5]}}">
+                    <i class="close icon"></i>
+                    <div class="header">ESTADO: {{elemento[12]}} | De la Reserva en {{elemento[6]}} con {{elemento[0]}} </div>
+                    <div class="content">
+                        <div class="ui grid">
+                            <div class="six wide column">
+                                <div id="restauranteMasInfo{{elemento[5]}}{{elemento[7]}}" class="restauranteMasInfo{{elemento[5]}}{{elemento[7]}}"> </div>
+                                <center>
+                                    <p style="font-family:Roboto;color:black;font-size: 30px"><strong>{{elemento[6]}}</strong></p>
+                                </center>
+                                <p style="font-family:Roboto;color:black;font-size: 16px">
+                                    <i class="map marker alternate icon"></i>
+                                    <strong>Dirección: </strong><a href="https://www.google.com/maps/place/{{elemento[8]}}" target="_blank">{{elemento[8]}}</a><br>
+                                    <i class="calendar alternate outline icon"></i>
+                                    <strong>Fecha: </strong>{{elemento[9]}}<br>
+                                    <i class="clock icon"></i>
+                                    <strong>Hora: </strong>{{elemento[10]}}<br>
+                                    <i class="utensils icon"></i>
+                                    <strong>Disponibilidad: </strong>{{elemento[13]}} Silla(s)
+                                </p>
+                                <div id="perfilMasInfo{{elemento[5]}}{{elemento[7]}}" class="perfilMasInfo{{elemento[5]}}{{elemento[7]}}"> </div>
+                                <center>
+                                    <p style="font-family:Roboto;color:black;font-size: 30px"><strong>{{elemento[0]}} {{elemento[1]}}</strong></p>
+                                </center>
+                                <p style="font-family:Roboto;color:black;font-size: 16px">
+                                    <i class="envelope outline icon"></i>
+                                    <strong>Email: </strong><a href="mailto:{{elemento[2]}}">{{elemento[2]}}</a><br>
+                                    <i class="tty icon"></i>
+                                    <strong>Teléfono: </strong><a href="tel:+57{{elemento[3]}}">{{elemento[3]}}</a><br>
+                                    <i class="user circle icon"></i>
+                                    <strong>Usuario: </strong>{{elemento[4]}}<br>
+                                    <i class="instagram icon"></i>
+                                    <strong>Instagram: </strong><a href="https://www.instagram.com/{{elemento[5]}}" target="_blank">{{elemento[5]}}</a>
+                                </p>
+                            </div>
+                            <div class="ten wide column">
+                                <div id="galeriaMasInfo{{elemento[5]}}{{elemento[7]}}" class="galeriaMasInfo{{elemento[5]}}{{elemento[7]}}"></div>
+                            </div>
                         </div>
-                        <div class="actions">
-                            <div class="ui green approve button">Aceptar</div>
-                            <div class="ui red cancel button">Cancelar</div>
-                        </div>
+                    </div>
+                    <div class="actions">
+                        <div onclick="$('.ui.mini.modal.confirmarBorrado{{elemento[5]}}').modal('show');" class="ui red approve button">¿Deseas CANCELAR la solicitud con {{elemento[0]}}?</div>
+                        <div class="ui green approve button">Aceptar</div>
                     </div>
                 </div>
+            </div>
+            <div class="ui container">
+                <div class="ui mini modal confirmarBorrado{{elemento[5]}}">
+                    <i class="close icon"></i>
+                    <div class="header">Cancelar Solicitud</div>
+                    <div class="content">
+                        <p>¿Deseas CANCELAR la solicitud con {{elemento[0]}}?</p>
+                    </div>
+                    <div class="actions">
+                        <form action="/botonCancelarReserva" method="POST">
+                            <button class="ui green approve button" type="submit" name="delete" value="{{elemento[2]}}">
+                                    Si
+                                </button>
+                            <div class="ui red approve button">No</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        {% endfor %}
+        {% endfor %} {% else %}
+        <center>
+            <p style="font-family:Roboto;color:white;font-size: 16px">Sin Solicitudes Actualmente</p>
+        </center>
+        {% endif %}
+    </div>
+
+
+    <!--##################### Menu Mis Reservas ###########################################################################-->
+    <div id="misReservas" style="display: none;">
+        {% if lista3|length != 0 %} {% for elemento in lista3 %}
+        <script>
+            (function($) {
+                $(window).on('load', function() {
+                    $.instagramFeed({
+                        'username': '{{elemento[1]}}',
+                        'container': "#restaurante{{elemento[1]}}{{elemento[8]}}",
+                        'display_profile': true,
+                        'display_biography': false,
+                        'display_gallery': false,
+                        'callback': null,
+                        'styling': true,
+                        'items': 0,
+                        'items_per_row': 1,
+                        'margin': 1
+                    });
+                });
+            })(jQuery);
+        </script>
+        <div id="misSolicitudesPanel" class="misReservasPanel">
+            <div class="iconInstaMini">
+                <div id="restaurante{{elemento[8]}}{{elemento[1]}}" class="restaurante{{elemento[8]}}{{elemento[1]}}"></div>
+            </div>
+            <div class="iconInstaMini1">
+                <div id="restaurante{{elemento[1]}}{{elemento[8]}}" class="restaurante{{elemento[1]}}{{elemento[8]}}"> </div>
+            </div>
+            <div class="textoPanelNom">
+                <p style="font-family:Roboto;color:white;font-size: 19px">
+                    Rest. {{elemento[0]}}
+                </p>
+            </div>
+            <div class="textoPanelFecha">
+                <p style="font-family:Roboto;color:white;font-size: 12px">
+                    <i class="calendar alternate outline icon"></i> {{elemento[3]}}
+                    <i class="clock icon"></i> {{elemento[4]}}
+                </p>
+            </div>
+            <div class="textoPanelEstado">
+                <p style="font-family:Roboto;color:white;font-size: 12px">
+                    <i class="map marker alternate icon"></i> {{elemento[2]}}
+                    <i class="utensils icon"></i> {{elemento[6]}} Silla(s)
+                </p>
+            </div>
+        </div>
+        {% endfor %} {% else %}
+        <center>
+            <p style="font-family:Roboto;color:white;font-size: 16px">Sin Reservas Publicas Actualmente</p>
+        </center>
+        {% endif %}
     </div>
 </div>
 
 
+<script type=text/javascript>
+    $(function() {
+        $('a#test').bind('click', function() {
+            $.getJSON('/botonCheckReserva',
+                function(data) {
+                    //do nothing
+                });
+            return false;
+        });
+    });
+</script>
 
+<script type=text/javascript>
+    $(function() {
+        $('a#test1').bind('click', function() {
+            $.getJSON('/botonEquisReserva',
+                function(data) {
+                    //do nothing
+                });
+            return false;
+        });
+    });
+</script>
 
-
-
-
-<!--##################### Parte del instagram del perfil ###########################################################################-->
-<div id="galeriaInsta" class="instagramGaleria" style="overflow:hidden;">
-    <div id="instagram-feed2" class="instagram_feed"> </div>
-</div>
-<div class="iconIz">
-    <div onclick="$(galeriaInsta).scrollTo('-=555px');" class="circular ui animated button" tabindex="0">
-        <div class="hidden content">
-            <i class="left arrow icon"></i>
-        </div>
-    </div>
-</div>
-<div class="iconDr">
-    <div onclick="$(galeriaInsta).scrollTo('+=555px');" class="circular ui animated button" tabindex="0">
-        <div class="hidden content">
-            <i class="right arrow icon"></i>
-        </div>
-    </div>
-</div>
-<div id="NombreTinder">
-    <center><p style="font-family:Roboto;color:white;font-size: 50px"><strong>Carol Linda</strong></p></center>
-</div>
-<div class="iconInfo">
-    <button onclick="$('.ui.modal.infoPerfil').modal('show');" class="massive circular ui icon button">
-        <i class="icon info circle"></i>
-    </button>
-</div>
-<div class="iconCheck">
-    <button class="massive circular ui icon button">
-        <i class="icon check"></i>
-    </button>
-</div> 
-<div class="iconX">
-    <button class="massive circular ui icon button">
-        <i class="icon x icon"></i>
-    </button>
-</div>
-
-
-<!--##################### Modal popup Info del perfil ###########################################################################-->
-<div class="ui container">
-    <div class="ui modal infoPerfil">
-        <i class="close icon"></i>
-        <div class="header">Más información</div>
-        <div class="content">
-            
-        </div>
-        <div class="actions">
-            <div class="ui green approve button">Aceptar</div>
-            <div class="ui red cancel button">Cancelar</div>
-        </div>
-    </div>
-</div>
 
 
 <script>
     function myFunction() {
-        document.getElementById("Hola11").style.display = "none";
+        document.getElementById("misSolicitudes").style.display = "none";
+        document.getElementById("misReservas").style.display = "block";
     }
+
     function myFunction1() {
-        document.getElementById("Hola11").style.display = "block";
+        document.getElementById("misSolicitudes").style.display = "block";
+        document.getElementById("misReservas").style.display = "none";
     }
+
+    function mensaje() {
+        setInterval(function() {
+            toastr.success('funciono', 'Funciono', {
+                "newestOnTop": true,
+                "closeButton": true,
+                "progressBar": true
+            })
+        }, 3000);
+        javascript: window.location.reload();
+    }
+    $('.poppup')
+        .popup({
+            on: 'hover'
+        });
 </script>
-    
+
 
 {% endblock %}

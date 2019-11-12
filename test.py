@@ -6,79 +6,77 @@ from forms import SignupForm, LoginForm, EditForm, PasswordForm
 from datetime import timedelta
 import requests
 import hashlib
-"""
-Clasificacion VIP
-"""
-"""
-####
-#CREAR VIP
-procedure createVIPMembership(IN idComensal INT, IN fechaCorte DATE)
-id=int(id)
-json=None
-try:
-    cur=mySQL.connection.cursor()
-    cur.callproc('userVIP', [id])
-    #cur.close()
-    data=cur.fetchall()
-    cur.close()
-    json=jsonify( Response=2,
-                    content=data[0])
-except Exception as e:
-    json=jsonify( Response=1)
-    print("+++isVIP", e)
-#cursor.stored_results()
-return json
-####
+app=Flask(__name__) #web service
 
-####
-#ELIMINAR VIP
-DeleteMembership(IN IdDiner)
-####
+############################################ MYSQL CONNECTION ############################################
 
-####
-#ELIMINAR CUENTA USUARIO
-session["PK_IdDiner"]
-####
-"""
-"""
-LISTAR EL HISTORIAL DE RESERVAS DE UN USUARIO
-"""
-session=dict()
-session["PK_IdDiner"]="1"
-url="http://"+"181.50.100.167:8000"+"/api/getReservationsRecordByUserId/"+session["PK_IdDiner"] #esta url cambia por la de Laura
-#me trae TODAS las reservas publicas
-historialReservas=list()
+app.config['MYSQL_HOST']='localhost' #data base ubication -> localhost
+app.config['MYSQL_USER']='root' #-> admin
+app.config['MYSQL_PASSWORD']='' #->3ad853f1abc94a67dc9ceed07547d5aa6dd5ce129611feb2
+app.config['MYSQL_DB']='dinerUser' #data base name -> dinerUser
+
+app.secret_key=' srguM44wgw45gewregkujfxhgzdgAHqgreggwwerigpewergWwERwrPegQ#$dgvsdgrLla%wg%Q24g5"vEssFDVSEv3Cr3t4SDFewr4tgsfdbvsd'
+login_manager=LoginManager()
+login_manager.login_view = "login"
+login_manager.init_app(app)
+
+
+mySQL=MySQL(app)   #data base connection
+app.run(port=3000, debug=True)
+
+
+
+url="http://"+"181.50.100.167:8000"+"/api/getPublicReservationsWithPaging/666" #esta url cambia por la de Laura
+#me trae mis reservas publicas y privadas que no no han pasado
+#type: 0 privadas, 1 publicas
+lista1=list()
+usrName=None; usrLastName=None; UsrEmail=None; telephone=None; usrIg=None;
+resName=None; ResIg=None; resAddress=None; date=None; hour=None; status=None;
+availableChairs=None; idReservation=None
 try:
     response=requests.get(url, params=None, timeout=5)
     if response.status_code==200:
         response=response.json()
         if response["Response"]==2:
             data=response["Content"]
-            for restaurant in data:
-                idRestaurant=restaurant["FK_idRestaurant"]
+            res_final=[len(data)]    #Final reservation with rest name
+            for reservation in data:
+                idRestaurant=reservation["FK_idRestaurant"]
                 url="http://"+"181.50.100.167:5000"+"/getRestaurant/"+str(idRestaurant)
-                tmp=requests.get(url, params=None, timeout=5)
-                if tmp.status_code==200:
-                    tmp=tmp.json()
-                    if tmp["Response"]==2:
-                        tmp=tmp["Content"]
-                        individual=list()
-                        #print(tmp)
-                        individual.append(str(tmp[0]["name"]))
-                        individual.append(str(restaurant["reservationDate"]))
-                        individual.append(str(restaurant["reservationHour"]))
-                        individual.append(str(tmp[0]["address"]))
-                        individual.append(str(restaurant["personInCharge"]))
-
-                        historialReservas.append(individual)
+                restaurant=requests.get(url, params=None, timeout=5)
+                if restaurant.status_code==200:
+                    restaurant=restaurant.json()
+                    if response["Response"]==2:
+                        restaurant=restaurant["Content"]
+                        cur=mySQL.connection.cursor()
+                        cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(str(reservation["FK_reservationCreator"])))
+                        data=cur.fetchall(); data=data[0]
+                        cur.close()
+                        print(reservation)
+                        print(restaurant)
+                        print(data)
+                        usrName=data[3]+data[4]
+                        usrLastName=data[5]+data[6]
+                        UsrEmail="email@email.com"
+                        telephone=data[8]
+                        usrIg=data[11]                  
+                        resName=restaurant["name"]
+                        ResIg=restaurant["email"]
+                        resAddress=restaurant["address"]
+                        date=reservation["reservationDate"]
+                        hour=reservation["reservationHour"]
+                        status="Pendiente"
+                        availableChairs=reservation["availableChairs"]
+                        idReservation=reservation["idReservation"]
+                        lista1.append([usrName, usrLastName, UsrEmail, telephone, usrIg, resName, ResIg, resAddress, date, hour, status, availableChairs, idReservation])
                     else:
-                        flash("Response API de Cristian: 2", "error")
+                        flash("Response 2 el API de CRISTIAN 1", "error")    
                 else:
-                    flash("Fallo el API de Cristian", "error")                            
+                    flash("Fallo el API de CRISTIAN 1", "error")   
         else:
-            flash("Fallo el API de LAURA", "error")
+            flash("Response 2 el API de LAURA 1", "error")    
     else:
-        flash("HTTP error", "error")
+        flash("Fallo el API de LAURA 1", "error")
 except Exception as e:
-    print("+++profile ", e)
-print(historialReservas)
+    print("Erda", e)
+
