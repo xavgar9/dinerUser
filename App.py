@@ -233,6 +233,33 @@ def isVIP(id):
         print("+++isVIP", e)
     #cursor.stored_results()
     return json
+  
+@app.route('/createVIPMembership/<string:id>/', methods=['POST'])
+def createVIPMembership(idComensal, opc):
+    fechaInicio=datetime.date.today()
+    idComensal=int(idComensal)
+    json=None
+    m = 0
+    try:
+        cur=mySQL.connection.cursor()
+        if opc == 1:
+            m = datetime.timedelta(months=1)
+            fechaCorte = fechaInicio+m
+        elif opc == 2:
+            m = datetime.timedelta(months=2)
+            fechaCorte = fechaInicio+m            
+        elif opc == 3:
+            m = datetime.timedelta(months=3)
+            fechaCorte = fechaInicio+m            
+        cur.callproc('createVIPMembership', [idComensal, fechaCorte])
+        cur.commit()
+        cur.close()
+        json=jsonify( Response=2,
+                      content=data[0])
+    except Exception as e:
+        json=jsonify( Response=1)
+        print("+++isVIP", e)
+    return json
 
 
 @app.route('/crypto/<string:data>/', methods=['GET'])
