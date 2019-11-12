@@ -128,6 +128,14 @@
 	z-index:1;
 }
 
+#imgSinReservas 
+{ 
+	 left: 360px; 
+	 top: 70px; 
+	 position: absolute; 
+	 z-index:2;
+}
+
 
 #miLetra {
 	font-family: 'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
@@ -285,6 +293,7 @@
 	left:  48px;
 } 
 
+
 .textoPanelFecha { 
 	position: relative; 
 	width: 215px;
@@ -295,7 +304,7 @@
 } 
 .textoPanelNom { 
 	position: relative; 
-	width: 205px;
+	width: 325px;
 	height: 22px;
 	z-index:10;
 	left: 120px;
@@ -484,6 +493,8 @@
 	 height: 723px;
 	 z-index:2;
 } 
+
+ 
 
  #logImagendeFondonegro 
 { 
