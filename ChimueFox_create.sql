@@ -134,12 +134,12 @@ ALTER TABLE Agreem_DinerU ADD CONSTRAINT userXConve_Usuario FOREIGN KEY userXCon
     REFERENCES DinerUser (PK_idDiner);
 
 -- Inserciones:
-insert into User (userType, username, password, email) VALUES(1,'usuarioPrueba','1234','micorreoprueba@outlook.com');
-insert into User (userType, username, password, email) VALUES(1,'Elxavier','yisus','xavi@outlook.com');
-insert into User (userType, username, password, email) VALUES(1,'amb18','amb','alejandroMeza@outlook.com');
-insert into User (userType, username, password, email) VALUES(1,'willi','front','william@yahoo.es');
-insert into User (userType, username, password, email) VALUES(1,'cucho','roman','christiandany@gmail.com');
-insert into User (userType, username, password, email) VALUES(1,'SebasT','toro50','storo@hotmail.com');
+insert into User (PK_idUser, userType, username, password, email) VALUES(1,1,'usuarioPrueba','1234','micorreoprueba@outlook.com');
+insert into User (PK_idUser, userType, username, password, email) VALUES(2,1,'Elxavier','yisus','xavi@outlook.com');
+insert into User (PK_idUser, userType, username, password, email) VALUES(3,1,'amb18','amb','alejandroMeza@outlook.com');
+insert into User (PK_idUser, userType, username, password, email) VALUES(4,1,'willi','front','william@yahoo.es');
+insert into User (PK_idUser, userType, username, password, email) VALUES(5,1,'cucho','roman','christiandany@gmail.com');
+insert into User (PK_idUser, userType, username, password, email) VALUES(6,1,'SebasT','toro50','storo@hotmail.com');
 -----------------------------------------------------------------------------------------------------------------------------------------------
 insert into DinerUser (PK_idDiner, FK_idUser,numDocument, firstname, secondname, firstLastname, secondLastname, address, telephone, payMethod) VALUES(1, 1,1453487801,'pedro','pablo','leon','jaramillo','cra 44 #13-10',8295562,'tarjeta de credito');
 -----------------------------------------------------------------------------------------------------------------------------------------------
