@@ -1076,6 +1076,40 @@ def botonPonerReservaPublica():
     return redirect(url_for('profile'))
 
 
+@app.route('/actualizarDatos', methods=["GET","POST"])
+def actualizarDatos():
+    if request.method == 'POST':
+        print("wwwwEntra")
+        nombre = request.form.get('nombre')
+        apellido = request.form.get('apellido')
+        correo = request.form.get('correo')
+        identificacion = request.form.get('identificacion')
+        telefono = request.form.get('telefono')
+        direccion = request.form.get('direccion')
+        contrasena = request.form.get('contrasena')
+
+        h1=hashlib.sha1(); h1.update(contrasena)
+        contrasena=h1; contrasena=str(contrasena.hexdigest())
+
+        url="http://"+IP+"/loginLaverde/"+str(correo)+"/"+str(contrasena) #esta url cambia por la de laverde
+        response=requests.get(url, params=None)
+        if response.status_code==200:
+            response=response.json()
+            if response["Response"]==2:
+                PK_IdUser=response["Content"]["PK_IdUser"]
+                ############################################ EDIT USER TO DB ############################################
+                try:
+                    cur=mySQL.connection.cursor()
+                    cur.callproc('edit_dinerUser', [identificacion, nombre, nombre, apellido, apellido, direccion, telefono, telefono])           
+                    mySQL.connection.commit()
+                    cur.close()
+                    print("EDITED: ", identificacion, nombre)
+                    flash("Informacion editada correctamente", "success")
+                except Exception as e:
+                    print("+++edit", e)
+            else:
+                flash("Datos incorrectos", "error")
+    return redirect(url_for('profile'))
 
 if __name__=='__main__':
     if IP=="159.65.58.193:3000": 

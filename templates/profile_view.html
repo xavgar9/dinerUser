@@ -57,33 +57,36 @@
 </div>
 
 <!--##################### Modal popup Modificar Usuario ###########################################################################-->
-<form action="" method="POST" novalidate>
-    {{ form1.hidden_tag() }}
-    <div class="ui container">
-        <div class="ui modal modifyUser">
-            <i class="close icon"></i>
-            <div class="header">Modificar Datos de Usuario</div>
-            <div class="content">
-                <div class="ui form">
+<!--<form action="/actualizarDatos" method="POST">-->
+<div class="ui container">
+    <div class="ui modal modifyUser">
+        <i class="close icon"></i>
+        <div class="header">Modificar Datos de Usuario</div>
+        <div class="content">
+            <div class="ui form">
+                <form action="/actualizarDatos" method="POST">
                     <div class="three fields">
                         <div class="field">
                             <label>Nombre</label>
                             <div class="ui left icon input">
-                                {{form1.name(value=tmp2.firstName+' '+tmp2.secondName)}}
+                                <input type="text" name="nombre" value="{{tmp2.firstName}}">
+                                <!--{{form1.name(value=tmp2.firstName+' '+tmp2.secondName)}}-->
                                 <i class="user icon"></i>
                             </div>
                         </div>
                         <div class="field">
                             <label>Apellido</label>
                             <div class="ui left icon input">
-                                {{form1.lastName(value=tmp2.firstLastName+' '+tmp2.secondLastName)}}
+                                <input type="text" name="apellido" value="{{tmp2.firstLastName}}">
+                                <!--{{form1.lastName(value=tmp2.firstLastName+' '+tmp2.secondLastName)}}-->
                                 <i class="user secret icon"></i>
                             </div>
                         </div>
                         <div class="disabled field">
                             <label>Correo Electrónico</label>
                             <div class="ui left icon input">
-                                {{form1.email(value=tmp2.email)}}
+                                <input type="text" name="correo" value="{{tmp2.email}}">
+                                <!--{{form1.email(value=tmp2.email)}}-->
                                 <i class="at icon"></i>
                             </div>
                         </div>
@@ -99,14 +102,16 @@
                         <div class="field">
                             <label>Número de identificación</label>
                             <div class="ui left icon input">
-                                {{form1.numDocument(value=tmp2.numDocument)}}
+                                <input type="text" name="identificacion" value="{{tmp2.numDocument}}">
+                                <!--{{form1.numDocument(value=tmp2.numDocument)}}-->
                                 <i class="id card icon"></i>
                             </div>
                         </div>
                         <div class="field">
                             <label>Teléfono</label>
                             <div class="ui left icon input">
-                                {{form1.telephone(value=tmp2.telephone)}}
+                                <input type="text" name="telefono" value="{{tmp2.telephone}}">
+                                <!--{{form1.telephone(value=tmp2.telephone)}}-->
                                 <i class="mobile alternate icon"></i>
                             </div>
                         </div>
@@ -115,7 +120,8 @@
                         <div class="field">
                             <label>Dirección</label>
                             <div class="ui left icon input">
-                                {{form1.address(value=tmp2.address)}}
+                                <input type="text" name="direccion" value="{{tmp2.address}}">
+                                <!--{{form1.address(value=tmp2.address)}}-->
                                 <i class="home icon"></i>
                             </div>
                         </div>
@@ -141,43 +147,60 @@
                         <div class="field">
                             <label>Membresia VIP</label>
                             <button onclick="$('.ui.modal.membresiaVip').modal('show');" class="ui labeled icon button w">
-							<i class="star icon"></i>
-							Adquiere una Membresia VIP
-						</button>
+                            <i class="star icon"></i> Adquiere una Membresia VIP
+                            </button>
+                            <!--<input type="file" name="myfile" />-->
+                        </div>
+                        <div class="field">
+                            <label>Confirmar Contraseña</label>
+                            <div class="ui left icon input">
+                                <input type="text" name="contrasena">
+                                <!--{{form1.address(value=tmp2.address)}}-->
+                                <i class="home icon"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Boton Aceptar</label>
+                            <button class="ui labeled icon button w">
+                            <i class="star icon"></i> Aceptar
+                            </button>
                             <!--<input type="file" name="myfile" />-->
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="actions">
-                <div onclick="$('.ui.modal.confirmarContrasena').modal('show');" class="ui green approve button">Aceptar</div>
-                <div class="ui red cancel button">Cancelar</div>
+                </form>
             </div>
         </div>
+        <div class="actions">
+            <div class="ui green approve button" type="submit">Aceptar</div>
+            <div class="ui red cancel button">Cancelar</div>
+        </div>
     </div>
-    <!--##################### Confirmar Contraseña ###########################################################################-->
-    <div class="ui container">
-        <div class="ui modal confirmarContrasena">
-            <i class="close icon"></i>
-            <div class="header">Confirmar Contraseña</div>
-            <div class="content">
-                <div class="ui form">
-                    <div class="field">
-                        <label>Confirmar Contraseña</label>
-                        <div class="ui left icon input">
-                            {{form1.password}}
-                            <i class="key icon"></i>
-                        </div>
+</div>
+<!--##################### Confirmar Contraseña ###########################################################################-->
+<div class="ui container">
+    <div class="ui modal confirmarContrasena">
+        <i class="close icon"></i>
+        <div class="header">Confirmar Contraseña</div>
+        <div class="content">
+            <div class="ui form">
+                <div class="field">
+                    <label>Confirmar Contraseña</label>
+                    <div class="ui left icon input">
+                        <input type="text" name="contrasena">
+                        <!--{{form1.password}}-->
+                        <i class="key icon"></i>
                     </div>
                 </div>
             </div>
-            <div class="actions">
-                {{ form1.submit() }}
-                <div class="ui red cancel button">Cancelar</div>
-            </div>
+        </div>
+        <div class="actions">
+            <button class="ui green approve button" type="submit">Aceptar</button>
+            <!--{{ form1.submit() }}-->
+            <div class="ui red cancel button">Cancelar</div>
         </div>
     </div>
-</form>
+</div>
+<!--</form>-->
 
 <!--##################### Cambiar Contraseña ###########################################################################-->
 <form action="" method="POST" novalidate>
@@ -404,7 +427,7 @@
     (function($) {
         $(window).on('load', function() {
             $.instagramFeed({
-                'username': 'tmp2.igUser',
+                'username': '{{tmp2.igUser}}',
                 'container': "#instagram-feedpw",
                 'display_profile': true,
                 'display_biography': false,
