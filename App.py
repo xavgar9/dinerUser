@@ -318,7 +318,6 @@ def deleteDinerUserById(id):
     return redirect(url_for('Index'))   #redirect
 
 
-
 #Codigo tomado de: https://j2logo.com/tutorial-flask-leccion-4-login/
 @app.route('/login/', methods=['GET', 'POST'])
 def login(): 
@@ -375,6 +374,7 @@ def login():
                 if response["response"]==2:
                     PK_IdUser=response["content"]["id"]
                     userName=response["content"]["userName"]
+                    userType=response["content"]["userType"]
                     try:
                         """
                         print(len(password), password)
@@ -398,6 +398,7 @@ def login():
                             print(data)
                             data=data[0]
                             cur.close()
+                            print(data)
                             if len(data)!=0:
                                 print("DATA mayor a cero")
                                 session["PK_IdUser"]=data[0]
@@ -411,12 +412,19 @@ def login():
                                 session["telephone"]=data[8]
                                 session["infoProfile"]=data[10]    
                                 session["igUser"]=data[11]
+                                session["email"]=email
                                 next_page = request.args.get('next')
-            
+                                print(session)
                             next_page=None
                             if not next_page or url_parse(next_page).netloc != '':
                                 flash("Bienvenido "+ session["firstName"], "success")
-                                next_page = url_for('profile')
+                                #userType=3
+                                if userType==1:
+                                    next_page = url_for('profile')
+                                elif userType==2:
+                                    return redirect('http://181.50.100.167:3000/?id='+str(session["PK_IdUser"]))
+                                else:
+                                    return redirect('http://181.50.100.167:4001/Principal/?id='+str(session["PK_IdUser"])+'?pass='+str(password)+'?ciudad=2')
 
 
 
@@ -486,7 +494,6 @@ def login():
                                 except Exception as e:
                                     print("Erda", e)
                                 print(lista1)
-
 
 
 
@@ -642,16 +649,17 @@ def profile():
                 numDocument=request.form1['numDocument']
                 firstName=request.form1['firstname']
                 secondName=request.form1['secondname']
-                firstLastName=request.form1['firstLastname']
-                secondLastName=request.form1['secondLastname']
+                firstLastName=request.form1['firstlastname']
+                secondLastName=request.form1['secondlastname']
                 address=request.form1['address']
                 telephone=request.form1['telephone']
                 payMethod=request.form1['payMethod']
                 password=request.form1['password']
                 email=request.form1['email']
-                user=getUser("", "", "", "", "",password)
-                h1=hashlib.sha1(); h1.update(password1)
-                password=h1; password=str(pas.hexdigest())
+                instagram=request.form1['instagram']
+                #user=getUser("", "", "", "", "",password)
+                h1=hashlib.sha1(); h1.update(password)
+                password=h1; password=str(password.hexdigest())
 
                 url="http://"+IP+"/loginLaverde/"+str(email)+"/"+str(password) #esta url cambia por la de laverde
                 response=requests.get(url, params=None)
@@ -721,7 +729,8 @@ def profile():
                             if tmp["Response"]==2:
                                 tmp=tmp["Content"]
                                 individual=list()
-                                #print(tmp)
+                                print(tmp)
+                                print(restaurant)
                                 individual.append(str(tmp[0]["name"]))
                                 individual.append(str(restaurant["reservationDate"]))
                                 individual.append(str(restaurant["reservationHour"]))

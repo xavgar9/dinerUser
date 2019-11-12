@@ -17,12 +17,12 @@ class EditForm(FlaskForm):
     name = StringField('First Name', validators=[DataRequired(), Length(max=64)], render_kw={"placeholder": "NOMBREw"})
     lastName = StringField('Last Name', validators=[DataRequired(), Length(max=31)], render_kw={"placeholder": "APELLIDOw"})
     email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "CORREO ELECTRONICOw"})
-    userName = StringField('UserName', validators=[DataRequired(), Length(max=15)], render_kw={"placeholder": "NOMBRE DE USUARIOw"})
+    instagram = StringField('Instagram', validators=[DataRequired(), Length(max=15)], render_kw={"placeholder": "INSTAGRAMw"})
     numDocument = StringField('numDocument', validators=[DataRequired(), Length(max=20)], render_kw={"placeholder": "NUMERO DE DOCUMENTOw"})
     telephone = StringField('Telephone', validators=[DataRequired(), Length(max=20)], render_kw={"placeholder": "TELEFONOw"})
     address = StringField('Address', validators=[DataRequired(), Length(max=20)], render_kw={"placeholder": "DIRECCIONw"})
     password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "CONTRASENAw"})
-    submit1 = SubmitField('Edit')
+    submit = SubmitField('Editar')
 
 class PasswordForm(FlaskForm):
     password1 = PasswordField('Password1', validators=[DataRequired()], render_kw={"placeholder": "CONTRASENA ANTIGUA"})

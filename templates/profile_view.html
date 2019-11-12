@@ -18,12 +18,12 @@
     </div>
     <div id="pJuanitaPerez">
         <p style="font-family:Roboto;color:white;font-size: 19px">
-            <i class="user icon"></i> {{tmp2.firstName}}
+            <i class="user icon"></i> {{tmp2.firstName}} {{tmp2.secondName}}
         </p>
     </div>
     <div id="pIngdeRequisitos">
         <p style="font-family:Roboto;color:white;font-size: 19px">
-            <i class="user secret icon"></i> {{tmp2.userName}}
+            <i class="instagram icon"></i> {{tmp2.igUser}}
         </p>
     </div>
     <div id="pjuanitarequiml">
@@ -69,14 +69,14 @@
                         <div class="field">
                             <label>Nombre</label>
                             <div class="ui left icon input">
-                                {{form1.name(value=tmp2.firstName)}}
+                                {{form1.name(value=tmp2.firstName+' '+tmp2.secondName)}}
                                 <i class="user icon"></i>
                             </div>
                         </div>
                         <div class="field">
                             <label>Apellido</label>
                             <div class="ui left icon input">
-                                {{form1.lastName(value=tmp2.firtsLastName)}}
+                                {{form1.lastName(value=tmp2.firstLastName+' '+tmp2.secondLastName)}}
                                 <i class="user secret icon"></i>
                             </div>
                         </div>
@@ -89,11 +89,11 @@
                         </div>
                     </div>
                     <div class="three fields">
-                        <div class="disabled field">
-                            <label>Nombre de Usuario</label>
+                        <div class="field">
+                            <label>Instagram</label>
                             <div class="ui left icon input">
-                                {{form1.userName(value=tmp2.userName)}}
-                                <i class="user circle secret icon"></i>
+                                {{form1.instagram(value=tmp2.igUser)}}
+                                <i class="instagram icon"></i>
                             </div>
                         </div>
                         <div class="field">
@@ -172,7 +172,7 @@
                 </div>
             </div>
             <div class="actions">
-                {{ form1.submit1() }}
+                {{ form1.submit() }}
                 <div class="ui red cancel button">Cancelar</div>
             </div>
         </div>
@@ -404,7 +404,7 @@
     (function($) {
         $(window).on('load', function() {
             $.instagramFeed({
-                'username': 'xavgar9',
+                'username': 'tmp2.igUser',
                 'container': "#instagram-feedpw",
                 'display_profile': true,
                 'display_biography': false,
