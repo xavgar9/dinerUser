@@ -174,6 +174,7 @@ def getDinerUserById(id):
     cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(id))
     data=cur.fetchall()
     #data=(1,1453487801,'pedro','pablo','leon','jaramillo','cra 44 #13-10',8295562,'tarjeta de credito')
+    cur.commit()
     cur.close()
     try:
         data=data[0]
@@ -201,6 +202,7 @@ def getDinerNameTelByUserId(id):
     cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(id))
     data=cur.fetchall()
     #data=(1,1453487801,'pedro','pablo','leon','jaramillo','cra 44 #13-10',8295562,'tarjeta de credito')
+    cur.commit()
     cur.close()
     try:
         data=data[0]
@@ -226,6 +228,7 @@ def isVIP(id):
         cur.callproc('userVIP', [id])
         #cur.close()
         data=cur.fetchall()
+        cur.commit()
         cur.close()
         json=jsonify( Response=2,
                       content=data[0])
@@ -310,7 +313,7 @@ def deleteDinerUserById(id):
         cur=mySQL.connection.cursor()
         cur.callproc('delete_dinerUser', [id])
         cur.close()
-        mySQL.connection.commit()
+        cur.commit()
     except Exception as e:
         print("+++deleteDinerUserById", e)
     ############################################ DELETE USER TO DB ############################################
@@ -397,6 +400,7 @@ def login():
                             cur=mySQL.connection.cursor()
                             cur.execute('SELECT * FROM DinerUser WHERE FK_idUser = {0}'.format(PK_IdUser))
                             data=cur.fetchall()
+                            cur.commit()
                             print(data)                            
                             cur.close()
                             if len(data)!=0:
@@ -418,6 +422,11 @@ def login():
                                     session["email"]=email
                                     next_page = request.args.get('next')
                                     print(session)
+                            else:
+                                flash("Error base de datos Meza", "error")
+                                return redirect(url_for('login'))
+
+                            return redirect(next_page)
                             next_page=None
                             if (not next_page or url_parse(next_page).netloc != '') and len(data)!=0:
                                 flash("Bienvenido "+ session["firstName"], "success")
@@ -468,6 +477,7 @@ def login():
                                                         cur=mySQL.connection.cursor()
                                                         cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(str(reservation["FK_reservationCreator"])))
                                                         data=cur.fetchall(); data=data[0]
+                                                        cur.commit()
                                                         cur.close()
                                                         #print(reservation)
                                                         #print(restaurant)
@@ -497,10 +507,7 @@ def login():
                                 except Exception as e:
                                     print("Erda", e)
                                 print(lista1)
-                            else:
-                                flash("Error base de datos", "error")
-                                return redirect(url_for('login'))
-                            return redirect(next_page)
+                            
                         else:
                             flash("Datos incorrectos", "error")
                     except Exception as e:
@@ -576,37 +583,17 @@ def signup():
                             print("EEEEEEEEE", password)
                             print(PK_IdUser, address, payMethod)
                             userOk=False; emailOk=False
-                            try:
-                                """                           
-                                ### VERIFY EMAIL ###
-                                
-                                cur=mySQL.connection.cursor()                            
-                                cur.callproc('verifyEmail', [email])
-                                data=cur.fetchall()
-                                data=data[0][0]
-                                cur.close()
-                                if data==0: emailOk=True
-                                ####################
-
-                                ### VERIFY USERNAME ###
-                                cur=mySQL.connection.cursor()                            
-                                cur.callproc('verifyUserName', [userName])
-                                data=cur.fetchall()
-                                data=data[0][0]
-                                cur.close()
-                                if data==0: userOk=True
-                                #######################  
-                                """                           
+                            try:          
                                 print("Maquina")
                                 cur=mySQL.connection.cursor()
                                 cur.callproc('addUser', [PK_IdUser, 1, userName, password, email])                                        
-                                mySQL.connection.commit()
+                                cur.commit()
                                 cur.close()
                                 print("Buenas")
 
                                 cur=mySQL.connection.cursor()
-                                cur.callproc('add_dinerUser', [PK_IdUser, userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, userName])                                    
-                                mySQL.connection.commit()
+                                cur.callproc('add_dinerUser', [PK_IdUser, userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, "", userName])                                    
+                                cur.commit()
                                 cur.close() 
                                 print("Erda")
                                 
@@ -627,7 +614,7 @@ def signup():
                         response=response["content"]
                         print("error 3", response["message"])
                         flash(str(response["message"]), "error")
-                        print("error 4", response.status_code)
+                        #print("error 4", response.status_code)
                 else:
                     flash("La contrasenas no coinciden", "error") 
     return render_template("signup_form.html", form=form)
@@ -676,7 +663,7 @@ def profile():
                         try:
                             cur=mySQL.connection.cursor()
                             cur.callproc('edit_dinerUser', [numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])           
-                            mySQL.connection.commit()
+                            cur.commit()
                             cur.close()
                             print("EDITED: ", numDocument, firstName)
                             flash("Informacion editada correctamente", "success")
@@ -985,9 +972,9 @@ def loadDinerUser(id):
 @app.route('/logout')
 def logout():
     idUser=session["PK_IdUser"]
-    url="http://181.50.100.167:4000/logout?id="+idUser
-    requests.post(url, params=None)
-    if requests.status_code==200:
+    url="http://181.50.100.167:4000/logout?id="+str(idUser)
+    response=requests.post(url, params=None)
+    if response.status_code==200:
         session.clear()
         flash("Sesion cerrada Correctamente", "success")
     else:
@@ -1088,7 +1075,7 @@ def actualizarDatos():
                     try:
                         cur=mySQL.connection.cursor()
                         cur.callproc('edit_dinerUser', [identificacion, nombre, nombre, apellido, apellido, direccion, telefono, telefono])           
-                        mySQL.connection.commit()
+                        cur.commit()
                         cur.close()
                         print("EDITED: ", identificacion, nombre)
                         flash("Informacion editada correctamente", "success")
