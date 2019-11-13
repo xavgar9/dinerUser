@@ -505,7 +505,10 @@ def login():
                             flash("Datos incorrectos", "error")
                     except Exception as e:
                         flash("Datos incorrectos", "error")
-                        print("+++login", e)                      
+                        print("+++login 1", e)    
+            else:
+                flash("El usuario o contrasena no estan correctos", "error")
+                print("+++login 2", e)                   
         ##############################################################################
 
     return render_template('login_form.html', form=form)
