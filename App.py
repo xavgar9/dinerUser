@@ -419,7 +419,7 @@ def login():
                                     next_page = request.args.get('next')
                                     print(session)
                             next_page=None
-                            if not next_page or url_parse(next_page).netloc != '' and len(data)!=0:
+                            if (not next_page or url_parse(next_page).netloc != '') and len(data)!=0:
                                 flash("Bienvenido "+ session["firstName"], "success")
                                 #userType=3
                                 if userType==1:
@@ -497,15 +497,9 @@ def login():
                                 except Exception as e:
                                     print("Erda", e)
                                 print(lista1)
-
-
-
-
-
-
-
-
-
+                            else:
+                                flash("Error base de datos", "error")
+                                return redirect(url_for('login'))
                             return redirect(next_page)
                         else:
                             flash("Datos incorrectos", "error")
