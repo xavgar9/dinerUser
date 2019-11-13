@@ -572,7 +572,7 @@ def signup():
                             address=" "; payMethod=" "
                             #user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
                             #password=user.password
-                            PK_IdUser=str(response["content"]["_id"])
+                            PK_IdUser=str(response["content"]["id"])
                             print("+++++++++")                
                             #print("->", user.data())
                             print("EEEEEEEEE", password)
@@ -607,7 +607,7 @@ def signup():
                                     cur.close()
 
                                     cur=mySQL.connection.cursor()
-                                    cur.callproc('add_dinerUser', [PK_IdUser, userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])                                    
+                                    cur.callproc('add_dinerUser', [PK_IdUser, userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, userName])                                    
                                     mySQL.connection.commit()
                                     cur.close() 
                                     
@@ -623,14 +623,15 @@ def signup():
                             except Exception as e:
                                 print("+++reg", e)
                         else:
-                            print("Response", response["Response"])
-                    else:
-                        response.json()
+                            print("Response", response["response"])
+                    else:                        
+                        response=response.json()
+                        print("error 0", response)
                         print("error 1", response["content"])
                         print()
                         response=response["content"]
                         print("error 3", response["message"])
-                        flash("El correo ya esta en uso", "error")
+                        flash(str(response["message"]), "error")
                         print("error 4", response.status_code)
                 else:
                     flash("La contrasenas no coinciden", "error") 
