@@ -1,863 +1,790 @@
 .App-logo {
-	height: 90px;
-	margin-right: 10px;
-	margin-left: 20px;
-	padding-bottom: 15px;
-  }
-  .Menu {
-	display: flex;
-	flex-direction: row;
-	width: 82%;
-  }
-  .columna {
-	padding-left:50px,
-  }
-  .LogOut {
-	margin-Top: 20px;
-	margin-left: 20px;
-	float: right;
-	align-Content: center;
-  }
-  .UserInformation {
-	flex-direction: column;
-	margin-top: 18px;
-	display: flex;
-	color: white;
-	text-align: center;
-  }
-  .App-header {
-	background-color: #1c1d1f;
-	height: 80px;
-	display: flex;
-	box-shadow: 2px 2px 5px #999;
-	flex-direction: row;
-  }
-  .decorBar{
-	width: 100%;
-	height: 3px;
-	background-color: #EFB810;
-	margin-bottom: 14px !important;
-  }
-  .horario {
-	padding-left: 17%;
-	padding-right: 17%;
-	align-self: auto;
-	align-items: center;
-  }
-  .Canvas{
-	margin: 0 !important;
-  }
-  .Pantalla{
-	height: 100% !important;
-  }
-  .Salto{
-	height: 14px;
-  }
-  
-.instagramProfile{
-	left: -248px; 
-	top: 31px; 
-	position: absolute; 
-	width: 845px;
-	height: 128px;
-	z-index:1;
+    height: 90px;
+    margin-right: 10px;
+    margin-left: 20px;
+    padding-bottom: 15px;
 }
 
-.lateralTinder { 
-	background: #1c1d1f;
-	position: absolute; 
-	top: 91px;
-	width: 343px;
-	height: 100%;
-	z-index:1;
-} 
-
-  .instagramGaleria { 
-	  left: 762px; 
-	  top: 91px; 
-	  position: absolute; 
-	  width: 555px;
-	  height: 538px;
-	  z-index:1;
-	  box-shadow: 10px 10px 21px -6px rgba(0,0,0,0.52);
-  } 
-
-  .restauranteGaleria { 
-	left: 143px; 
-	top: 102px; 
-	position: absolute; 
-	width: 835px;
-	height: 128px;
-	z-index:1;
-} 
-
-
-.iconInfo{
-	left: 1016px; 
-	top: 551px; 
-	position: absolute; 
-	z-index:1;
+.Menu {
+    display: flex;
+    flex-direction: row;
+    width: 82%;
 }
 
-.iconCheck{
-	left: 1102px; 
-	top: 551px; 
-	position: absolute; 
-	z-index:1;
+.columna {
+    padding-left: 50px,
 }
 
-.iconX{
-	left: 932px; 
-	top: 551px; 
-	position: absolute; 
-	z-index:1;
+.LogOut {
+    margin-Top: 20px;
+    margin-left: 20px;
+    float: right;
+    align-Content: center;
 }
 
-.iconIz{
-	left: 768px; 
-	top: 97px; 
-	position: absolute; 
-	z-index:1;
+.UserInformation {
+    flex-direction: column;
+    margin-top: 18px;
+    display: flex;
+    color: white;
+    text-align: center;
 }
 
-
-.iconDr{
-	left: 1193px; 
-	top: 97px; 
-	position: absolute; 
-	z-index:1;
+.App-header {
+    background-color: #1c1d1f;
+    height: 80px;
+    display: flex;
+    box-shadow: 2px 2px 5px #999;
+    flex-direction: row;
 }
 
-#imgSinReservas 
-{ 
-	 left: 360px; 
-	 top: 70px; 
-	 position: absolute; 
-	 z-index:2;
+.decorBar {
+    width: 100%;
+    height: 3px;
+    background-color: #EFB810;
+    margin-bottom: 14px !important;
 }
 
+.horario {
+    padding-left: 17%;
+    padding-right: 17%;
+    align-self: auto;
+    align-items: center;
+}
+
+.Canvas {
+    margin: 0 !important;
+}
+
+.Pantalla {
+    height: 100% !important;
+}
+
+.Salto {
+    height: 14px;
+}
+
+.instagramProfile {
+    left: -238px;
+    top: 31px;
+    position: absolute;
+    width: 845px;
+    height: 128px;
+    z-index: 1;
+}
+
+.lateralTinder {
+    background: #1c1d1f;
+    position: absolute;
+    top: 91px;
+    width: 343px;
+    height: 100%;
+    z-index: 1;
+}
+
+.instagramGaleria {
+    left: 762px;
+    top: 91px;
+    position: absolute;
+    width: 555px;
+    height: 538px;
+    z-index: 1;
+    box-shadow: 10px 10px 21px -6px rgba(0, 0, 0, 0.52);
+}
+
+.restauranteGaleria {
+    left: 143px;
+    top: 102px;
+    position: absolute;
+    width: 835px;
+    height: 128px;
+    z-index: 1;
+}
+
+.iconInfo {
+    left: 1016px;
+    top: 551px;
+    position: absolute;
+    z-index: 1;
+}
+
+.iconCheck {
+    left: 1102px;
+    top: 551px;
+    position: absolute;
+    z-index: 1;
+}
+
+.iconX {
+    left: 932px;
+    top: 551px;
+    position: absolute;
+    z-index: 1;
+}
+
+.iconIz {
+    left: 768px;
+    top: 97px;
+    position: absolute;
+    z-index: 1;
+}
+
+.iconDr {
+    left: 1193px;
+    top: 97px;
+    position: absolute;
+    z-index: 1;
+}
+
+#imgSinReservas {
+    left: 360px;
+    top: 70px;
+    position: absolute;
+    z-index: 2;
+}
 
 #miLetra {
-	font-family: 'Roboto','Helvetica Neue',Arial,Helvetica,sans-serif;
-	font-size: 25px;
-	letter-spacing: 2px;
-	word-spacing: 2px;
-	color: rgb(250, 236, 236);
-	font-weight: 400;
-	text-decoration: none;
-	font-style: normal;
-	font-variant: normal;
-	text-transform: none;
-	}
+    font-family: 'Roboto', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: rgb(250, 236, 236);
+    font-weight: 400;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+}
 
 .user-info {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
+
 .user-info li {
-	display: inline-block;
-	margin: 0;
-	padding: 0 10px 0 0;
+    display: inline-block;
+    margin: 0;
+    padding: 0 10px 0 0;
 }
 
-#pbackground 
-{ 
-	left: 0px; 
-	top: -14px; 
-	position: relative; 
-	margin-left: auto; 
-	margin-right: auto; 
-	width: 1313px;
-	height: 750px; 
-	overflow: hidden;
-	z-index:0;
-} 
-
-#player_1 
-{ 
-	left: 0px; 
-	top: 0px; 
-	position: absolute; 
-	width: 1313px;
-	height: 750px;
-	z-index:1;
-} 
-
-#pBackground8 
-{ 
-	left: 0px; 
-	top: 0px; 
-	position: absolute; 
-	width: 347px;
-	height: 750px;
-	z-index:2;
-} 
-
-#pBackground10 
-{ 
-	left: 0px; 
-	top: 0px; 
-	position: absolute; 
-	width: 347px;
-	height: 750px;
-	z-index:3;
-} 
-
-#pJuanitaPerez 
-{ 
-	left: 53px; 
-	top: 203px; 
-	position: absolute; 
-	width: 272px;
-	height: 24px;
-	z-index:4;
-} 
-
-#pdashboard3avatar 
-{ 
-	left: 87px; 
-	top: 52px; 
-	position: absolute; 
-	width: 174px;
-	height: 175px;
-	z-index:5;
-} 
-
-#pjuanitarequiml 
-{ 
-	left: 53px; 
-	top: 326px; 
-	position: absolute; 
-	width: 272px;
-	height: 27px;
-	z-index:6;
-} 
-
-#player_57302118294 
-{ 
-	left: 53px; 
-	top: 387px; 
-	position: absolute; 
-	width: 272px;
-	height: 19px;
-	z-index:7;
-} 
-
-#pIngdeRequisitos 
-{ 
-	left: 53px; 
-	top: 263px; 
-	position: absolute; 
-	width: 272px;
-	height: 25px;
-	z-index:8;
-} 
-
-#pGroup2764 
-{ 
-	left: 863px; 
-	top: 406px; 
-	position: absolute; 
-	width: 339px;
-	height: 136px;
-	z-index:9;
-} 
-
-#pSeparator 
-{ 
-	left: 12px; 
-	top: 174px; 
-	position: absolute; 
-	width: 325px;
-	height: 6px;
-	z-index:10;
-} 
-
-.iconInstaMini 
-{ 
-	position: inherit; 
-	width: 73px;
-	height: 56px;
-	z-index:10;
-	top: 5px;
-} 
-
-.iconInstaMini1
-{ 
-	position: relative; 
-	width: 80px;
-	height: 56px;
-	z-index:10;
-	top: -55px;
-	left:  48px;
-} 
-
-
-.textoPanelFecha { 
-	position: relative; 
-	width: 215px;
-	height: 16px;
-	z-index:10;
-	left: 120px;
-	top: -108px;
-} 
-.textoPanelNom { 
-	position: relative; 
-	width: 325px;
-	height: 22px;
-	z-index:10;
-	left: 120px;
-	top: -111px;
-} 
-.textoPanelEstado { 
-	position: relative; 
-	width: 215px;
-	height: 22px;
-	z-index:10;
-	left: 120px;
-	top: -108px;
-} 
-
-
-.misReservasPanel 
-{ 
-	left: 12px; 
-	top: 174px; 
-	position: initial; 
-	width: 487px;
-	height: 73px;
-	z-index:10;
-} 
-
-#pSeparator2 
-{ 
-	left: 12px; 
-	top: 235px; 
-	position: absolute; 
-	width: 325px;
-	height: 6px;
-	z-index:11;
-} 
-
-#pSeparator3 
-{ 
-	left: 12px; 
-	top: 296px; 
-	position: absolute; 
-	width: 325px;
-	height: 6px;
-	z-index:12;
-} 
-
-#pSeparator4
-{ 
-	left: 12px; 
-	top: 360px; 
-	position: absolute; 
-	width: 325px;
-	height: 6px;
-	z-index:12;
-} 
-
-#pSeparator5 
-{ 
-	left: 12px; 
-	top: 417px; 
-	position: absolute; 
-	width: 325px;
-	height: 6px;
-	z-index:17;
-} 
-
-#pRectangle21 
-{ 
-	left: 54px; 
-	top: 462px; 
-	position: absolute; 
-	width: 241px;
-	height: 55px;
-	z-index:18;
-} 
-
-#pRectangle212 
-{ 
-	left: 78px; 
-	top: 533px; 
-	position: absolute; 
-	width: 193px;
-	height: 57px;
-	z-index:20;
-} 
-
-#NombreTinder 
-{ 
-	left: 767px; 
-	top: 483px; 
-	position: absolute; 
-	width: 545px;
-	height: 60px;
-	z-index:22;
-	text-shadow: -4px 3px 3px #000;
-} 
-
-#pBIENVENIDOXAVIHERNAN 
-{ 
-	left: 432px; 
-	top: 82px; 
-	position: absolute; 
-	width: 628px;
-	height: 30px;
-	z-index:22;
-} 
-
-#pCapa2 
-{ 
-	left: 1097px; 
-	top: 7px; 
-	position: absolute; 
-	width: 155px;
-	height: 191px;
-	z-index:23;
-} 
-
-#pCapa3 
-{ 
-	left: 343px; 
-	top: 0px; 
-	position: absolute; 
-	width: 7px;
-	height: 750px;
-	z-index:24;
-} 
-
-#player_25 
-{ 
-	left: 465px; 
-	top: 207px; 
-	position: absolute; 
-	width: 339px;
-	height: 136px;
-	z-index:25;
-} 
-
-#player_27 
-{ 
-	left: 863px; 
-	top: 207px; 
-	position: absolute; 
-	width: 339px;
-	height: 135px;
-	z-index:27;
-} 
-
-#player_29 
-{ 
-	left: 465px; 
-	top: 406px; 
-	position: absolute; 
-	width: 339px;
-	height: 136px;
-	z-index:29;
-} 
-
- #logbackground 
-{ 
-	 left: 0px; 
-	 top: -14px; 
-	 position: relative; 
-	 margin-left: auto; 
-	 margin-right: auto; 
-	 width: 1313px;
-	 height: 723px; 
-	 overflow: hidden;
-	 z-index:0;
-	} 
-
- #logFondoBlanco 
-{ 
-	 left: 0px; 
-	 top: 0px; 
-	 position: absolute; 
-	 width: 1313px;
-	 height: 722px;
-	 z-index:1;
-} 
-
- #logImagendefondocolor 
-{ 
-	 left: 0px; 
-	 top: 0px; 
-	 position: absolute; 
-	 width: 792px;
-	 height: 723px;
-	 z-index:2;
-} 
-
- 
-
- #logImagendeFondonegro 
-{ 
-	 left: 0px; 
-	 top: 0px; 
-	 position: absolute; 
-	 width: 792px;
-	 height: 723px;
-	 z-index:3;
-} 
-
- #logBIENVENIDOSARESVIT 
-{ 
-	 left: 187px; 
-	 top: 69px; 
-	 position: absolute; 
-	 width: 418px;
-	 height: 27px;
-	 z-index:4;
-} 
-
- #logRectangle18 
-{ 
-	 left: 91px; 
-	 top: 566px; 
-	 position: absolute; 
-	 width: 281px;
-	 height: 56px;
-	 z-index:5;
-} 
-
- #logLamejorformadeRealiz 
-{ 
-	 left: 93px; 
-	 top: 475px; 
-	 position: absolute; 
-	 width: 592px;
-	 height: 21px;
-	 z-index:7;
-} 
-
- #logRectangle182 
-{ 
-	 left: 429px; 
-	 top: 566px; 
-	 position: absolute; 
-	 width: 281px;
-	 height: 56px;
-	 z-index:9;
-} 
-
- #loglayer_11 
-{ 
-	 left: 396px; 
-	 top: 574px; 
-	 position: absolute; 
-	 width: 11px;
-	 height: 16px;
-	 z-index:11;
-} 
-
- #logINICIARSESIN 
-{ 
-	 left: 622px; 
-	 top: 35px; 
-	 position: absolute; 
-	 width: 120px;
-	 height: 18px;
-	 z-index:12;
-} 
-
-#recuperarContrasena 
-{ 
-	 left: 586px; 
-	 top: 35px; 
-	 position: absolute; 
-	 width: 160px;
-	 height: 18px;
-	 z-index:12;
-} 
-
- #logRectangle21 
-{ 
-	 left: 849px; 
-	 top: 282px; 
-	 position: absolute; 
-	 width: 419px;
-	 height: 56px;
-	 z-index:13;
-} 
-
-#campoRecuperarCo 
-{ 
-	 left: 849px; 
-	 top: 320px; 
-	 position: absolute; 
-	 width: 419px;
-	 height: 56px;
-	 z-index:13;
-} 
-
- #logRectangle212 
-{ 
-	 left: 849px; 
-	 top: 354px; 
-	 position: absolute; 
-	 width: 419px;
-	 height: 56px;
-	 z-index:17;
-} 
-
- #logRectangle213 
-{ 
-	 left: 849px; 
-	 top: 444px; 
-	 position: absolute; 
-	 width: 419px;
-	 height: 57px;
-	 z-index:20;
-} 
-
- #logOlvidastetuContrasea 
-{ 
-	 left: 893px; 
-	 top: 675px; 
-	 position: absolute; 
-	 width: 316px;
-	 height: 18px;
-	 z-index:22;
-} 
-
- #logLogoBlanco 
-{ 
-	 left: 281px; 
-	 top: 141px; 
-	 position: absolute; 
-	 width: 231px;
-	 height: 285px;
-	 z-index:24;
-} 
-
- #logLogonegro 
-{ 
-	 left: 980px; 
-	 top: 26px; 
-	 position: absolute; 
-	 width: 187px;
-	 height: 230px;
-	 z-index:25;
-} 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#regbackground 
-{ 
-	 left: 0px; 
-	 top: -14px; 
-	 position: relative; 
-	 margin-left: auto; 
-	 margin-right: auto; 
-	 width: 1313px;
-	 height: 724px; 
-	 overflow: hidden;
-	 z-index:0;
-	} 
-
- #regFondoColor 
-{ 
-	 left: 0px; 
-	 top: 0px; 
-	 position: absolute; 
-	 width: 1313px;
-	 height: 724px;
-	 z-index:1;
-} 
-
- #regPath1894 
-{ 
-	 left: 592px; 
-	 top: 284px; 
-	 position: absolute; 
-	 width: 303px;
-	 height: 56px;
-	 z-index:2;
-} 
-
- #regPath1893 
-{ 
-	 left: 592px; 
-	 top: 213px; 
-	 position: absolute; 
-	 width: 303px;
-	 height: 56px;
-	 z-index:5;
-} 
-
- #regPath1897 
-{ 
-	 left: 592px; 
-	 top: 426px; 
-	 position: absolute; 
-	 width: 610px;
-	 height: 56px;
-	 z-index:8;
-} 
-
- #regPath1896 
-{ 
-	 left: 905px; 
-	 top: 355px; 
-	 position: absolute; 
-	 width: 297px;
-	 height: 56px;
-	 z-index:11;
-} 
-
- #regRectangle21 
-{ 
-	 left: 592px; 
-	 top: 496px; 
-	 position: absolute; 
-	 width: 610px;
-	 height: 56px;
-	 z-index:14;
-} 
-
- #regFondoNegro 
-{ 
-	 left: 0px; 
-	 top: 0px; 
-	 position: absolute; 
-	 width: 549px;
-	 height: 724px;
-	 z-index:17;
-} 
-
- #regREGISTRARSE 
-{ 
-	 left: 426px; 
-	 top: 20px; 
-	 position: absolute; 
-	 width: 104px;
-	 height: 13px;
-	 z-index:18;
-} 
-
- #regREGSTRATEAHORA 
-{ 
-	 left: 602px; 
-	 top: 93px; 
-	 position: absolute; 
-	 width: 431px;
-	 height: 45px;
-	 z-index:19;
-} 
-
- #regBIENVENIDOSA 
-{ 
-	 left: 142px; 
-	 top: 81px; 
-	 position: absolute; 
-	 width: 278px;
-	 height: 25px;
-	 z-index:20;
-} 
-
- #regLamejorformadeRealiz 
-{ 
-	 left: 121px; 
-	 top: 460px; 
-	 position: absolute; 
-	 width: 310px;
-	 height: 20px;
-	 z-index:21;
-} 
-
- #regRectangle18 
-{ 
-	 left: 116px; 
-	 top: 586px; 
-	 position: absolute; 
-	 width: 281px;
-	 height: 56px;
-	 z-index:24;
-} 
-
- #regYatienesunaCuenta 
-{ 
-	 left: 593px; 
-	 top: 663px; 
-	 position: absolute; 
-	 width: 287px;
-	 height: 16px;
-	 z-index:26;
-} 
-
- #regRectangle212 
-{ 
-	 left: 592px; 
-	 top: 567px; 
-	 position: absolute; 
-	 width: 610px;
-	 height: 56px;
-	 z-index:28;
-} 
-
- #regRectangle213 
-{ 
-	 left: 905px; 
-	 top: 212px; 
-	 position: absolute; 
-	 width: 304px;
-	 height: 56px;
-	 z-index:30;
-} 
-
- #regLogoBlanco 
-{ 
-	 left: 160px; 
-	 top: 142px; 
-	 position: absolute; 
-	 width: 230px;
-	 height: 286px;
-	 z-index:33;
-} 
-
- #regPath18932 
-{ 
-	 left: 592px; 
-	 top: 355px; 
-	 position: absolute; 
-	 width: 303px;
-	 height: 55px;
-	 z-index:34;
-} 
-
- #regRectangle214 
-{ 
-	 left: 905px; 
-	 top: 284px; 
-	 position: absolute; 
-	 width: 304px;
-	 height: 56px;
-	 z-index:37;
-} 
-
- #regLogoNegro 
-{ 
-	 left: 1078px; 
-	 top: 22px; 
-	 position: absolute; 
-	 width: 143px;
-	 height: 177px;
-	 z-index:39;
-} 
+#pbackground {
+    left: 0px;
+    top: -14px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1313px;
+    height: 750px;
+    overflow: hidden;
+    z-index: 0;
+}
+
+#player_1 {
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    width: 1313px;
+    height: 750px;
+    z-index: 1;
+}
+
+#pBackground8 {
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    width: 347px;
+    height: 750px;
+    z-index: 2;
+}
+
+#pBackground10 {
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    width: 347px;
+    height: 750px;
+    z-index: 3;
+}
+
+#pJuanitaPerez {
+    left: 53px;
+    top: 203px;
+    position: absolute;
+    width: 272px;
+    height: 24px;
+    z-index: 4;
+}
+
+#pdashboard3avatar {
+    left: 87px;
+    top: 52px;
+    position: absolute;
+    width: 174px;
+    height: 175px;
+    z-index: 5;
+}
+
+#pjuanitarequiml {
+    left: 53px;
+    top: 326px;
+    position: absolute;
+    width: 272px;
+    height: 27px;
+    z-index: 6;
+}
+
+#player_57302118294 {
+    left: 53px;
+    top: 387px;
+    position: absolute;
+    width: 272px;
+    height: 19px;
+    z-index: 7;
+}
+
+#pIngdeRequisitos {
+    left: 53px;
+    top: 263px;
+    position: absolute;
+    width: 272px;
+    height: 25px;
+    z-index: 8;
+}
+
+#pGroup2764 {
+    left: 863px;
+    top: 406px;
+    position: absolute;
+    width: 339px;
+    height: 136px;
+    z-index: 9;
+}
+
+#pSeparator {
+    left: 12px;
+    top: 174px;
+    position: absolute;
+    width: 325px;
+    height: 6px;
+    z-index: 10;
+}
+
+.iconInstaMini {
+    position: inherit;
+    width: 73px;
+    height: 56px;
+    z-index: 10;
+    top: 5px;
+}
+
+.iconInstaMini1 {
+    position: relative;
+    width: 80px;
+    height: 56px;
+    z-index: 10;
+    top: -55px;
+    left: 48px;
+}
+
+.textoPanelFecha {
+    position: relative;
+    width: 215px;
+    height: 16px;
+    z-index: 10;
+    left: 120px;
+    top: -108px;
+}
+
+.textoPanelNom {
+    position: relative;
+    width: 325px;
+    height: 22px;
+    z-index: 10;
+    left: 120px;
+    top: -111px;
+}
+
+.textoPanelEstado {
+    position: relative;
+    width: 215px;
+    height: 22px;
+    z-index: 10;
+    left: 120px;
+    top: -108px;
+}
+
+.misReservasPanel {
+    left: 12px;
+    top: 174px;
+    position: initial;
+    width: 487px;
+    height: 73px;
+    z-index: 10;
+}
+
+#pSeparator2 {
+    left: 12px;
+    top: 235px;
+    position: absolute;
+    width: 325px;
+    height: 6px;
+    z-index: 11;
+}
+
+#pSeparator3 {
+    left: 12px;
+    top: 296px;
+    position: absolute;
+    width: 325px;
+    height: 6px;
+    z-index: 12;
+}
+
+#pSeparator4 {
+    left: 12px;
+    top: 360px;
+    position: absolute;
+    width: 325px;
+    height: 6px;
+    z-index: 12;
+}
+
+#pSeparator5 {
+    left: 12px;
+    top: 417px;
+    position: absolute;
+    width: 325px;
+    height: 6px;
+    z-index: 17;
+}
+
+#pRectangle21 {
+    left: 54px;
+    top: 462px;
+    position: absolute;
+    width: 241px;
+    height: 55px;
+    z-index: 18;
+}
+
+#pRectangle212 {
+    left: 78px;
+    top: 533px;
+    position: absolute;
+    width: 193px;
+    height: 57px;
+    z-index: 20;
+}
+
+#NombreTinder {
+    left: 767px;
+    top: 483px;
+    position: absolute;
+    width: 545px;
+    height: 60px;
+    z-index: 22;
+    text-shadow: -4px 3px 3px #000;
+}
+
+#pBIENVENIDOXAVIHERNAN {
+    left: 432px;
+    top: 82px;
+    position: absolute;
+    width: 628px;
+    height: 30px;
+    z-index: 22;
+}
+
+#pCapa2 {
+    left: 1097px;
+    top: 7px;
+    position: absolute;
+    width: 155px;
+    height: 191px;
+    z-index: 23;
+}
+
+#pCapa3 {
+    left: 343px;
+    top: 0px;
+    position: absolute;
+    width: 7px;
+    height: 750px;
+    z-index: 24;
+}
+
+#player_25 {
+    left: 465px;
+    top: 207px;
+    position: absolute;
+    width: 339px;
+    height: 136px;
+    z-index: 25;
+}
+
+#player_27 {
+    left: 863px;
+    top: 207px;
+    position: absolute;
+    width: 339px;
+    height: 135px;
+    z-index: 27;
+}
+
+#player_29 {
+    left: 465px;
+    top: 406px;
+    position: absolute;
+    width: 339px;
+    height: 136px;
+    z-index: 29;
+}
+
+#logbackground {
+    left: 0px;
+    top: -14px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1313px;
+    height: 723px;
+    overflow: hidden;
+    z-index: 0;
+}
+
+#logFondoBlanco {
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    width: 1313px;
+    height: 722px;
+    z-index: 1;
+}
+
+#logImagendefondocolor {
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    width: 792px;
+    height: 723px;
+    z-index: 2;
+}
+
+#logImagendeFondonegro {
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    width: 792px;
+    height: 723px;
+    z-index: 3;
+}
+
+#logBIENVENIDOSARESVIT {
+    left: 187px;
+    top: 69px;
+    position: absolute;
+    width: 418px;
+    height: 27px;
+    z-index: 4;
+}
+
+#logRectangle18 {
+    left: 91px;
+    top: 566px;
+    position: absolute;
+    width: 281px;
+    height: 56px;
+    z-index: 5;
+}
+
+#logLamejorformadeRealiz {
+    left: 93px;
+    top: 475px;
+    position: absolute;
+    width: 592px;
+    height: 21px;
+    z-index: 7;
+}
+
+#logRectangle182 {
+    left: 429px;
+    top: 566px;
+    position: absolute;
+    width: 281px;
+    height: 56px;
+    z-index: 9;
+}
+
+#loglayer_11 {
+    left: 396px;
+    top: 574px;
+    position: absolute;
+    width: 11px;
+    height: 16px;
+    z-index: 11;
+}
+
+#logINICIARSESIN {
+    left: 622px;
+    top: 35px;
+    position: absolute;
+    width: 120px;
+    height: 18px;
+    z-index: 12;
+}
+
+#recuperarContrasena {
+    left: 586px;
+    top: 35px;
+    position: absolute;
+    width: 160px;
+    height: 18px;
+    z-index: 12;
+}
+
+#logRectangle21 {
+    left: 849px;
+    top: 282px;
+    position: absolute;
+    width: 419px;
+    height: 56px;
+    z-index: 13;
+}
+
+#campoRecuperarCo {
+    left: 849px;
+    top: 320px;
+    position: absolute;
+    width: 419px;
+    height: 56px;
+    z-index: 13;
+}
+
+#logRectangle212 {
+    left: 849px;
+    top: 354px;
+    position: absolute;
+    width: 419px;
+    height: 56px;
+    z-index: 17;
+}
+
+#logRectangle213 {
+    left: 849px;
+    top: 444px;
+    position: absolute;
+    width: 419px;
+    height: 57px;
+    z-index: 20;
+}
+
+#logOlvidastetuContrasea {
+    left: 893px;
+    top: 675px;
+    position: absolute;
+    width: 316px;
+    height: 18px;
+    z-index: 22;
+}
+
+#logLogoBlanco {
+    left: 281px;
+    top: 141px;
+    position: absolute;
+    width: 231px;
+    height: 285px;
+    z-index: 24;
+}
+
+#logLogonegro {
+    left: 980px;
+    top: 26px;
+    position: absolute;
+    width: 187px;
+    height: 230px;
+    z-index: 25;
+}
+
+#regbackground {
+    left: 0px;
+    top: -14px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1313px;
+    height: 724px;
+    overflow: hidden;
+    z-index: 0;
+}
+
+#regFondoColor {
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    width: 1313px;
+    height: 724px;
+    z-index: 1;
+}
+
+#regPath1894 {
+    left: 592px;
+    top: 284px;
+    position: absolute;
+    width: 303px;
+    height: 56px;
+    z-index: 2;
+}
+
+#regPath1893 {
+    left: 592px;
+    top: 213px;
+    position: absolute;
+    width: 303px;
+    height: 56px;
+    z-index: 5;
+}
+
+#regPath1897 {
+    left: 592px;
+    top: 426px;
+    position: absolute;
+    width: 610px;
+    height: 56px;
+    z-index: 8;
+}
+
+#regPath1896 {
+    left: 905px;
+    top: 355px;
+    position: absolute;
+    width: 297px;
+    height: 56px;
+    z-index: 11;
+}
+
+#regRectangle21 {
+    left: 592px;
+    top: 496px;
+    position: absolute;
+    width: 610px;
+    height: 56px;
+    z-index: 14;
+}
+
+#regFondoNegro {
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    width: 549px;
+    height: 724px;
+    z-index: 17;
+}
+
+#regREGISTRARSE {
+    left: 426px;
+    top: 20px;
+    position: absolute;
+    width: 104px;
+    height: 13px;
+    z-index: 18;
+}
+
+#regREGSTRATEAHORA {
+    left: 602px;
+    top: 93px;
+    position: absolute;
+    width: 431px;
+    height: 45px;
+    z-index: 19;
+}
+
+#regBIENVENIDOSA {
+    left: 142px;
+    top: 81px;
+    position: absolute;
+    width: 278px;
+    height: 25px;
+    z-index: 20;
+}
+
+#regLamejorformadeRealiz {
+    left: 121px;
+    top: 460px;
+    position: absolute;
+    width: 310px;
+    height: 20px;
+    z-index: 21;
+}
+
+#regRectangle18 {
+    left: 116px;
+    top: 586px;
+    position: absolute;
+    width: 281px;
+    height: 56px;
+    z-index: 24;
+}
+
+#regYatienesunaCuenta {
+    left: 593px;
+    top: 663px;
+    position: absolute;
+    width: 287px;
+    height: 16px;
+    z-index: 26;
+}
+
+#regRectangle212 {
+    left: 592px;
+    top: 567px;
+    position: absolute;
+    width: 610px;
+    height: 56px;
+    z-index: 28;
+}
+
+#regRectangle213 {
+    left: 905px;
+    top: 212px;
+    position: absolute;
+    width: 304px;
+    height: 56px;
+    z-index: 30;
+}
+
+#regLogoBlanco {
+    left: 160px;
+    top: 142px;
+    position: absolute;
+    width: 230px;
+    height: 286px;
+    z-index: 33;
+}
+
+#regPath18932 {
+    left: 592px;
+    top: 355px;
+    position: absolute;
+    width: 303px;
+    height: 55px;
+    z-index: 34;
+}
+
+#regRectangle214 {
+    left: 905px;
+    top: 284px;
+    position: absolute;
+    width: 304px;
+    height: 56px;
+    z-index: 37;
+}
+
+#regLogoNegro {
+    left: 1078px;
+    top: 22px;
+    position: absolute;
+    width: 143px;
+    height: 177px;
+    z-index: 39;
+}
