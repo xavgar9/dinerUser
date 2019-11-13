@@ -984,8 +984,15 @@ def loadDinerUser(id):
 
 @app.route('/logout')
 def logout():
-    session.clear()
-    flash("Sesion cerrada Correctamente", "success")
+    idUser=session["PK_IdUser"]
+    url="http://181.50.100.167:4000/logout?id="+idUser
+    requests.post(url, params=None)
+    if requests.status_code==200:
+        session.clear()
+        flash("Sesion cerrada Correctamente", "success")
+    else:
+        flash("Error al cerrar sesion", "error")
+    
     return redirect(url_for('login'))  #redirect
 
 
