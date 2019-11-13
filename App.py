@@ -23,6 +23,8 @@ lista2 = []
 
 lista3 = []
 
+hReservasActuales=[]
+historialReservas=[]
 
 
 
@@ -495,7 +497,8 @@ def login():
                                         flash("Fallo el API de LAURA 1", "error")
                                 except Exception as e:
                                     print("Erda", e)
-                                print(lista1)
+                                print(lista1)   
+                                return redirect(url_for('login'))
                             
                         else:
                             flash("Datos incorrectos", "error")
@@ -612,7 +615,8 @@ def signup():
 
 
 @app.route('/profile', methods=['GET', 'POST'])
-def profile():
+def profile():}
+    global hReservasActuales, historialReservas
     ok=False
     try:
         print(session["PK_IdDiner"])
@@ -1019,24 +1023,35 @@ def botonCancelarReserva():
 
 @app.route('/botonPonerReservaPublica', methods=["GET","POST"])
 def botonPonerReservaPublica():
+    global hReservasActuales, historialReservas
     if request.method == 'POST':
         id_si = request.form.get('si')
         id_no = request.form.get('no')
         i=0
-        """
+        #http://181.50.100.167:8000/api/updateReservationTypeByReservationId/idReserva
+
+        
+
         while i in range(len(hReservasActuales)):
             if hReservasActuales[i][8] == id_si and hReservasActuales[i][7] =="No" :
                 hReservasActuales[i][7] = "Si"
+                id_reserva=str(hReservasActuales[i][-1])
+                url="http://181.50.100.167:8000/api/updateReservationTypeByReservationId/"+id_reserva
+                response=requests.post(url, params=None)
+                if response.status_code==200:
+                    response=response.json() 
                 lista3.append(hReservasActuales[i])
             if hReservasActuales[i][8] == id_no and hReservasActuales[i][7] =="Si":
                 hReservasActuales[i][7] = "No"
+                id_reserva=str(hReservasActuales[i][-1])
+                url="http://181.50.100.167:8000/api/updateReservationTypeByReservationId/"+id_reserva
                 j=0
                 while j in range(len(lista3)):
                     if lista3[j][8]==id_no:
                         lista3.pop(j)
                     j+=1
             i+=1
-        """
+        
     return redirect(url_for('profile'))
 
 
