@@ -244,21 +244,20 @@ delimiter ;
 /*Procedimiento que crea un usuario-comensal en la tabla DinerUser*/
 
 delimiter $$
-Create procedure add_dinerUser(IN userNick varchar(20), IN cedula INT,IN nombre char(15),IN segundoNombre char(15) ,IN apellido char(15),IN segundoApellido char(15),IN direccion char(30), IN telefono bigint, IN pago varchar(30))
+Create procedure add_dinerUser(IN idDiUser int, IN userNick varchar(20), IN cedula INT,IN nombre char(15),IN segundoNombre char(15) ,IN apellido char(15),IN segundoApellido char(15),IN direccion char(30), IN telefono bigint, IN pago varchar(30), IN infoProf varchar(200), IN instUser varchar(40) )
 BEGIN
   declare idUsuario int;
   set idUsuario = getUserIdByNick(userNick);
   if validarCedula(cedula) = 0 then
-    insert into DinerUser (FK_idUser, numDocument, firstname, secondname, firstLastname, secondLastname, address, telephone, payMethod) VALUES(idUsuario,cedula , nombre,segundoNombre,apellido,segundoApellido, direccion, telefono, pago);
+    insert into DinerUser (PK_idDiner, FK_idUser, numDocument, firstname, secondname, firstLastname, secondLastname, address, telephone, payMethod, infoProfile, igUser) VALUES(idDiUser, idUsuario,cedula , nombre,segundoNombre,apellido,segundoApellido, direccion, telefono, pago, infoProf, instUser);
   else
     select 'Esa identificacion ya esta registrada';
   end if;
 END$$
 delimiter ;
 
-call add_dinerUser('amb18',1528439127,'carlos','andres','ramos','mendez','cll 5 #54bis-08',3016981201,'tarjeta de credito');
-call crearUsuarioComensal(1,1453487801,'pedro','pablo','leon','jaramillo','cra 44 #13-10',3135487452,'tarjeta de credito');
-call crearUsuarioComensal(4,1528439127,'carlos','andres','ramos','mendez','cll 5 #54bis-08',3016981201,'tarjeta de credito');
+
+call add_dinerUser('amb18',1528439127,'carlos','andres','ramos','mendez','cll 5 #54bis-08',3016981201,'tarjeta de credito', 'InfoProfileee', 'carl10');
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 /*Procedimiento que crea una membresia en la tabla VIPMembership*/
@@ -413,17 +412,17 @@ delimiter ;
 
 /*Procedimiento que modifica TODOS los atributos de una cuenta de usuario comensal*/
 delimiter $$
-Create procedure edit_dinerUser(IN cedula INT,IN nuevoNombre char(15), IN segundoNombre char(15) ,IN apellido char(15),IN segundoApellido char(15),IN direccion char(30), IN telefono bigint,IN pago varchar(30))
+Create procedure edit_dinerUser(IN idUsuario int, IN cedula INT,IN nuevoNombre char(15), IN segundoNombre char(15) ,IN apellido char(15),IN segundoApellido char(15),IN direccion char(30), IN telefono bigint,IN pago varchar(30), IN infoProf varchar(200), IN instUser varchar(40))
 BEGIN
-    if validarCedula(cedula) = 1 then
-        update DinerUser set firstname = nuevoNombre, secondname = segundoNombre, firstLastname = apellido, secondLastname = segundoApellido, address = direccion, telephone = telefono, payMethod = pago where numDocument = cedula;
+    if validarUsuario(idUsuario) = 1 then
+      update DinerUser inner join User on (FK_idUser = PK_idUser) set numDocument = cedula, firstname = nuevoNombre, secondname = segundoNombre, firstLastname = apellido, secondLastname = segundoApellido, address = direccion, telephone = telefono, payMethod = pago, infoProfile = infoProf, igUser = instUser where PK_idUser = idUsuario;
     else
-      select 'Esa identificacion no esta registrada';
+      select 'El id de Usuario no esta registrado';
      end if;
 END$$
 delimiter ;
 
-call modificarComensal(1453487801,'carlos', 'andres', 'Berrio', 'Lazo', 'cll 22 #13bis-02',3005481201,'bitcoin');
+call edit_dinerUser(1453487801,'carlos', 'andres', 'Berrio', 'Lazo', 'cll 22 #13bis-02',3005481201,'bitcoin','infoo', 'ig');
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --DELETES:
 /*Procedimiento que elimina la cuenta de un usuario comensal*/
