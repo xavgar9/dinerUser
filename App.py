@@ -402,6 +402,7 @@ def login():
                             if len(data)!=0:
                                 data=data[0]
                                 print("DATA mayor a cero")
+                                print(data)
                                 if len(data)!=0:
                                     session["PK_IdUser"]=data[0]
                                     session["PK_IdDiner"]=data[1]
@@ -418,7 +419,7 @@ def login():
                                     next_page = request.args.get('next')
                                     print(session)
                             next_page=None
-                            if not next_page or url_parse(next_page).netloc != '':
+                            if not next_page or url_parse(next_page).netloc != '' and len(data)!=0:
                                 flash("Bienvenido "+ session["firstName"], "success")
                                 #userType=3
                                 if userType==1:
