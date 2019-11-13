@@ -397,26 +397,26 @@ def login():
                             cur=mySQL.connection.cursor()
                             cur.execute('SELECT * FROM DinerUser WHERE FK_idUser = {0}'.format(PK_IdUser))
                             data=cur.fetchall()
-                            print(data)
-                            data=data[0]
+                            print(data)                            
                             cur.close()
-                            print(data)
                             if len(data)!=0:
+                                data=data[0]
                                 print("DATA mayor a cero")
-                                session["PK_IdUser"]=data[0]
-                                session["PK_IdDiner"]=data[1]
-                                session["numDocument"]=data[2]
-                                session["firstName"]=data[3]
-                                session["secondName"]=data[4]
-                                session["firstLastName"]=data[5]
-                                session["secondLastName"]=data[6]                                
-                                session["address"]=data[7]
-                                session["telephone"]=data[8]
-                                session["infoProfile"]=data[10]    
-                                session["igUser"]=data[11]
-                                session["email"]=email
-                                next_page = request.args.get('next')
-                                print(session)
+                                if len(data)!=0:
+                                    session["PK_IdUser"]=data[0]
+                                    session["PK_IdDiner"]=data[1]
+                                    session["numDocument"]=data[2]
+                                    session["firstName"]=data[3]
+                                    session["secondName"]=data[4]
+                                    session["firstLastName"]=data[5]
+                                    session["secondLastName"]=data[6]                                
+                                    session["address"]=data[7]
+                                    session["telephone"]=data[8]
+                                    session["infoProfile"]=data[10]    
+                                    session["igUser"]=data[11]
+                                    session["email"]=email
+                                    next_page = request.args.get('next')
+                                    print(session)
                             next_page=None
                             if not next_page or url_parse(next_page).netloc != '':
                                 flash("Bienvenido "+ session["firstName"], "success")
