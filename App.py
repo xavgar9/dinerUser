@@ -582,13 +582,15 @@ def signup():
                                 print("Maquina")
                                 cur=mySQL.connection.cursor()
                                 cur.callproc('addUser', [PK_IdUser, 1, userName, password, email])                                        
-                                mySQL.connection.commit()
-                                #cur.close()
+                                #mySQL.connection.commit()
+                                cur.fetchall()
+                                cur.close()
                                 print("Buenas")
 
                                 #cur=mySQL.connection.cursor()
                                 cur.callproc('add_dinerUser', [PK_IdUser, userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, "", userName])                                    
                                 mySQL.connection.commit()
+                                cur.fetchall()
                                 cur.close() 
                                 print("Erda")
                                 
