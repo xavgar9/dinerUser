@@ -599,27 +599,24 @@ def signup():
                                 if data==0: userOk=True
                                 #######################  
                                 """                           
+                                print("Maquina")
+                                cur=mySQL.connection.cursor()
+                                cur.callproc('addUser', [PK_IdUser, 1, userName, password, email])                                        
+                                mySQL.connection.commit()
+                                cur.close()
+                                print("Buenas")
 
-                                if True and True:
-                                    cur=mySQL.connection.cursor()
-                                    cur.callproc('addUser', [PK_IdUser, 1, userName, password, email])                                        
-                                    mySQL.connection.commit()
-                                    cur.close()
+                                cur=mySQL.connection.cursor()
+                                cur.callproc('add_dinerUser', [PK_IdUser, userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, userName])                                    
+                                mySQL.connection.commit()
+                                cur.close() 
+                                print("Erda")
+                                
+                                next_page = request.args.get('next', None)
+                                if not next_page or url_parse(next_page).netloc != '':
+                                    next_page = url_for('login')
+                                return redirect(next_page)
 
-                                    cur=mySQL.connection.cursor()
-                                    cur.callproc('add_dinerUser', [PK_IdUser, userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, userName])                                    
-                                    mySQL.connection.commit()
-                                    cur.close() 
-                                    
-                                    next_page = request.args.get('next', None)
-                                    if not next_page or url_parse(next_page).netloc != '':
-                                        next_page = url_for('login')
-                                    return redirect(next_page)
-                                else:
-                                    if not emailOk:
-                                        flash("Este email ya esta en uso", "error") 
-                                    if not userOk:
-                                        flash("Este nombre de usuario ya esta en uso", "error") 
                             except Exception as e:
                                 print("+++reg", e)
                         else:
