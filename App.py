@@ -422,7 +422,7 @@ def login():
                                 flash("Error base de datos Meza", "error")
                                 return redirect(url_for('login'))
 
-                            return redirect(next_page)
+                            #return redirect(next_page)
                             next_page=None
                             if (not next_page or url_parse(next_page).netloc != '') and len(data)!=0:
                                 flash("Bienvenido "+ session["firstName"], "success")
@@ -433,12 +433,6 @@ def login():
                                     return redirect('http://181.50.100.167:3000/?id='+str(session["PK_IdUser"]))
                                 else:
                                     return redirect('http://181.50.100.167:4001/Principal/?id='+str(session["PK_IdUser"])+'?pass='+str(password)+'?ciudad=2')
-
-
-
-
-
-
 
 
                                                         ########### Tinder ##########################################################
@@ -587,7 +581,7 @@ def signup():
                                 cur.close()
                                 print("Buenas")
 
-                                #cur=mySQL.connection.cursor()
+                                cur=mySQL.connection.cursor()
                                 cur.callproc('add_dinerUser', [PK_IdUser, userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, "", userName])                                    
                                 mySQL.connection.commit()
                                 cur.fetchall()
