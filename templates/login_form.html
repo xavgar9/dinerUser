@@ -1,6 +1,4 @@
-{% extends "base_template.html" %}
-{% block title %}Iniciar Sesion Resvit{% endblock %}
-{% block content %}
+{% extends "base_template.html" %} {% block title %}Iniciar Sesion Resvit{% endblock %} {% block content %}
 <div id="logbackground">
     <!--<div id="logFondoBlanco"><img src="{{ url_for('static', filename='images/FondoBlanco.png') }}"></div>-->
     <div id="logImagendefondocolor"><img src="{{ url_for('static', filename='images/Imagendefondocolor.png') }}"></div>
@@ -25,7 +23,7 @@
     <div id="logBIENVENIDOSARESVIT">
         <h1 style="font-family:Roboto;color:white;font-size: 38px">BIENVENIDOS A RESVIT</h1>
     </div>
-    
+
     <!--########### Boton de Registrarte Ahora #############################################################################-->
     <div id="logRectangle18">
         <button onclick="window.location.href='{{ url_for('signup') }}';" class="ui inverted button">REGÍSTRATE AHORA</button>
@@ -41,10 +39,9 @@
         <!--########### Campo de Texto del correo #############################################################################-->
         <div id="logRectangle21">
             <div class="ui left icon input">
-                {{ form.email }}
-                {% for error in form.email.errors %}
+                {{ form.email }} {% for error in form.email.errors %}
                 <script>
-                    toastr.error('{{ error }}','Error al ingresar Correo',{
+                    toastr.error('{{ error }}', 'Error al ingresar Correo', {
                         "newestOnTop": true,
                         "closeButton": true,
                         "progressBar": true
@@ -57,22 +54,22 @@
         <!--########### Campo de Texto de la contraseña #############################################################################-->
         <div id="logRectangle212">
             <div class="ui left icon input">
-                {{ form.password }}
-                {% for error in form.password.errors %}
+                {{ form.password }} {% for error in form.password.errors %}
                 <script>
-                    toastr.error('{{ error }}','Error al ingresar Contraseña',{
+                    toastr.error('{{ error }}', 'Error al ingresar Contraseña', {
                         "newestOnTop": true,
                         "closeButton": true,
                         "progressBar": true
                     })
-                    </script>
+                </script>
                 {% endfor %}
                 <i class="key icon"></i>
             </div>
         </div>
         <!--########### Boton Iniciar Sesion #############################################################################-->
         <div id="logRectangle213">
-            <button class="ui inverted secondary button">INICIAR SESIÓN {{ form.submit() }}</button>
+            <!--<button class="ui inverted secondary button">INICIAR SESIÓN </button>-->
+            {{ form.submit(class='ui inverted secondary button') }}
         </div>
     </form>
 </div>

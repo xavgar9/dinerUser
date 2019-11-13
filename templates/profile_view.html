@@ -57,7 +57,6 @@
 </div>
 
 <!--##################### Modal popup Modificar Usuario ###########################################################################-->
-<!--<form action="/actualizarDatos" method="POST">-->
 <div class="ui container">
     <div class="ui modal modifyUser">
         <i class="close icon"></i>
@@ -69,24 +68,21 @@
                         <div class="field">
                             <label>Nombre</label>
                             <div class="ui left icon input">
-                                <input type="text" name="nombre" value="{{tmp2.firstName}}">
-                                <!--{{form1.name(value=tmp2.firstName+' '+tmp2.secondName)}}-->
+                                <input type="text" name="nombre" value="{{tmp2.firstName}} {{tmp2.firstName}}" required>
                                 <i class="user icon"></i>
                             </div>
                         </div>
                         <div class="field">
                             <label>Apellido</label>
                             <div class="ui left icon input">
-                                <input type="text" name="apellido" value="{{tmp2.firstLastName}}">
-                                <!--{{form1.lastName(value=tmp2.firstLastName+' '+tmp2.secondLastName)}}-->
+                                <input type="text" name="apellido" value="{{tmp2.firstLastName}} {{tmp2.firstLastName}}" required>
                                 <i class="user secret icon"></i>
                             </div>
                         </div>
                         <div class="disabled field">
                             <label>Correo Electrónico</label>
                             <div class="ui left icon input">
-                                <input type="text" name="correo" value="{{tmp2.email}}">
-                                <!--{{form1.email(value=tmp2.email)}}-->
+                                <input type="email" name="correo" value="{{tmp2.email}}" required>
                                 <i class="at icon"></i>
                             </div>
                         </div>
@@ -95,23 +91,21 @@
                         <div class="field">
                             <label>Instagram</label>
                             <div class="ui left icon input">
-                                {{form1.instagram(value=tmp2.igUser)}}
+                                <input type="text" name="instagram" value="{{tmp2.igUser}}">
                                 <i class="instagram icon"></i>
                             </div>
                         </div>
                         <div class="field">
                             <label>Número de identificación</label>
                             <div class="ui left icon input">
-                                <input type="text" name="identificacion" value="{{tmp2.numDocument}}">
-                                <!--{{form1.numDocument(value=tmp2.numDocument)}}-->
+                                <input type="number" name="identificacion" value="{{tmp2.numDocument}}" required>
                                 <i class="id card icon"></i>
                             </div>
                         </div>
                         <div class="field">
                             <label>Teléfono</label>
                             <div class="ui left icon input">
-                                <input type="text" name="telefono" value="{{tmp2.telephone}}">
-                                <!--{{form1.telephone(value=tmp2.telephone)}}-->
+                                <input type="tel" name="telefono" value="{{tmp2.telephone}}" required>
                                 <i class="mobile alternate icon"></i>
                             </div>
                         </div>
@@ -120,152 +114,99 @@
                         <div class="field">
                             <label>Dirección</label>
                             <div class="ui left icon input">
-                                <input type="text" name="direccion" value="{{tmp2.address}}">
-                                <!--{{form1.address(value=tmp2.address)}}-->
+                                <input type="text" name="direccion" value="{{tmp2.address}}" required>
                                 <i class="home icon"></i>
                             </div>
                         </div>
                         <div class="field">
                             <label>Método de Pago</label>
                             <select class="ui fluid dropdown">
-							<option value="EF">Efectivo</option>
-							<option value="AL">Visa</option>
-							<option value="AK">Master Card</option>
-							<option value="AK">Maestro</option>
-						</select>
-                        </div>
-                        <div class="field">
-                            <label>Cambiar Contraseña</label>
-                            <button onclick="$('.ui.modal.cambiarContrasena').modal('show');" class="ui labeled icon button w">
-							<i class="key icon"></i>
-							Cambiar Contraseña
-						</button>
-                            <!--<input type="file" name="myfile" />-->
-                        </div>
-                    </div>
-                    <div class="three fields">
-                        <div class="field">
-                            <label>Membresia VIP</label>
-                            <button onclick="$('.ui.modal.membresiaVip').modal('show');" class="ui labeled icon button w">
-                            <i class="star icon"></i> Adquiere una Membresia VIP
-                            </button>
-                            <!--<input type="file" name="myfile" />-->
+                                <option value="EF">Efectivo</option>
+                                <option value="AL">Visa</option>
+                                <option value="AK">Master Card</option>
+                                <option value="AK">Maestro</option>
+						    </select>
                         </div>
                         <div class="field">
                             <label>Confirmar Contraseña</label>
                             <div class="ui left icon input">
-                                <input type="text" name="contrasena">
-                                <!--{{form1.address(value=tmp2.address)}}-->
-                                <i class="home icon"></i>
+                                <input type="password" name="contrasena" placeholder="Confirma tu contraseña para guardar cambios" required>
+                                <i class="key icon"></i>
                             </div>
                         </div>
+                    </div>
+                    <div class="three fields">
                         <div class="field">
-                            <label>Boton Aceptar</label>
-                            <button class="ui labeled icon button w">
-                            <i class="star icon"></i> Aceptar
-                            </button>
-                            <!--<input type="file" name="myfile" />-->
+                        </div>
+                        <div class="field">
+                            <button class="ui green cancel button" name="btn" value="aceptar">Actualizar Datos</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
         <div class="actions">
-            <div class="ui green approve button" type="submit">Aceptar</div>
-            <div class="ui red cancel button">Cancelar</div>
-        </div>
-    </div>
-</div>
-<!--##################### Confirmar Contraseña ###########################################################################-->
-<div class="ui container">
-    <div class="ui modal confirmarContrasena">
-        <i class="close icon"></i>
-        <div class="header">Confirmar Contraseña</div>
-        <div class="content">
             <div class="ui form">
-                <div class="field">
-                    <label>Confirmar Contraseña</label>
-                    <div class="ui left icon input">
-                        <input type="text" name="contrasena">
-                        <!--{{form1.password}}-->
-                        <i class="key icon"></i>
+                <div class="three fields">
+                    <div class="field">
+                        <button onclick="$('.ui.modal.membresiaVip').modal('show');" class="ui labeled icon button w" type="button">
+                            <i class="star icon"></i> Adquiere una Membresia VIP
+                        </button>
+                    </div>
+                    <div class="field">
+                        <button onclick="$('.mini.modal.cambiarContrasena').modal('show');" class="ui labeled icon button w" type="button">
+							<i class="key icon"></i>
+							Cambiar Contraseña
+						</button>
+                    </div>
+                    <div class="field">
+                        <button class="ui red cancel button">Cancelar</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="actions">
-            <button class="ui green approve button" type="submit">Aceptar</button>
-            <!--{{ form1.submit() }}-->
-            <div class="ui red cancel button">Cancelar</div>
-        </div>
     </div>
 </div>
-<!--</form>-->
+
 
 <!--##################### Cambiar Contraseña ###########################################################################-->
-<form action="" method="POST" novalidate>
-    {{ form2.hidden_tag() }}
-    <div class="ui container">
-        <div class="ui modal cambiarContrasena">
-            <i class="close icon"></i>
-            <div class="header">Cambiar Contraseña</div>
-            <div class="content">
-                <div class="ui form">
+<div class="ui container">
+    <div class="ui mini modal cambiarContrasena">
+
+        <i class="close icon"></i>
+        <div class="header">Cambiar Contraseña</div>
+        <div class="content">
+            <div class="ui form">
+                <form action="/cambiarContrasenaa" method="POST">
                     <div class="field">
                         <label>Contraseña Actual</label>
                         <div class="ui left icon input">
-                            {{form2.password1}} {% for error in form2.password1.errors %}
-                            <script>
-                                toastr.error('{{ error }}', 'Error al ingresar Confirmar Contraseña', {
-                                    "newestOnTop": true,
-                                    "closeButton": true,
-                                    "progressBar": true
-                                })
-                            </script>
-                            {% endfor %}
+                            <input type="password" name="contraActual" placeholder="CONTRASEÑA ANTIGUA" required>
                             <i class="key icon"></i>
                         </div>
                     </div>
                     <div class="field">
                         <label>Contraseña Nueva</label>
                         <div class="ui left icon input">
-                            {{form2.password2}} {% for error in form2.password2.errors %}
-                            <script>
-                                toastr.error('{{ error }}', 'Error al ingresar Confirmar Contraseña', {
-                                    "newestOnTop": true,
-                                    "closeButton": true,
-                                    "progressBar": true
-                                })
-                            </script>
-                            {% endfor %}
+                            <input type="password" name="contraNueva" placeholder="NUEVA CONTRASEÑA" required>
                             <i class="key icon"></i>
                         </div>
                     </div>
                     <div class="field">
                         <label>Confirmar Contraseña Actual</label>
                         <div class="ui left icon input">
-                            {{form2.password3}} {% for error in form2.password3.errors %}
-                            <script>
-                                toastr.error('{{ error }}', 'Error al ingresar Confirmar Contraseña', {
-                                    "newestOnTop": true,
-                                    "closeButton": true,
-                                    "progressBar": true
-                                })
-                            </script>
-                            {% endfor %}
+                            <input type="password" name="contraNuevaConf" placeholder="CONFIRMAR NUEVA CONTRASEÑA" required>
                             <i class="key icon"></i>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="actions">
-                {{form2.submit2()}}
-                <!--<div class="ui green approve button">Aceptar</div>-->
-                <div class="ui red cancel button">Cancelar</div>
+                    <div class="field" style="text-align: center;">
+                        <button class="ui green cancel button" name="btn1" value="cambiar">Cambiar Contraseña</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</form>
+</div>
 
 
 <!--##################### Modal Membresia VIP ###########################################################################-->
@@ -444,6 +385,7 @@
 <div class="instagramProfile">
     <div id="instagram-feedpw" class="instagram_feedpw"></div>
 </div>
+
 
 
 
