@@ -376,6 +376,7 @@ def login():
                     PK_IdUser=response["content"]["id"]
                     userName=response["content"]["userName"]
                     userType=response["content"]["userType"]
+                    print("Hola", response["content"])
                     try:
                         """
                         print(len(password), password)
@@ -569,11 +570,11 @@ def signup():
                         response=response.json()
                         if response["response"]==2:
                             address=" "; payMethod=" "
-                            user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
+                            #user=DinerUser(numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, email, userName, password)
                             #password=user.password
                             PK_IdUser=str(response["content"]["_id"])
                             print("+++++++++")                
-                            print("->", user.data())
+                            #print("->", user.data())
                             print("EEEEEEEEE", password)
                             print(PK_IdUser, address, payMethod)
                             userOk=False; emailOk=False
@@ -624,7 +625,9 @@ def signup():
                         else:
                             print("Response", response["Response"])
                     else:
-                        print("error", response.status_code)
+                        print("error 1", response.json())
+                        flash("El correo ya esta en uso", "error")
+                        print("error 2", response.status_code)
                 else:
                     flash("La contrasenas no coinciden", "error") 
     return render_template("signup_form.html", form=form)
@@ -812,7 +815,7 @@ def profile():
 
 
         ##########################################################################################################################
-        #############################################HISTORIAL DE RESERVAS########################################################
+        #############################################  RESERVAS ACTUALES  ########################################################
         ##########################################################################################################################
 
         url="http://181.50.100.167:8000/api/getActiveReservationsByUserIdAndType/"+str(session["PK_IdDiner"])+"/0/" #esta url cambia por la de Laura
@@ -893,33 +896,6 @@ def profile():
             print("+++profile publicas ", e)
 
     return render_template("profile_view.html", tmp2=tmp2, historialReservas=historialReservas, hReservasActuales=hReservasActuales)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
