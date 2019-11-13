@@ -174,7 +174,6 @@ def getDinerUserById(id):
     cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(id))
     data=cur.fetchall()
     #data=(1,1453487801,'pedro','pablo','leon','jaramillo','cra 44 #13-10',8295562,'tarjeta de credito')
-    cur.commit()
     cur.close()
     try:
         data=data[0]
@@ -202,7 +201,6 @@ def getDinerNameTelByUserId(id):
     cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(id))
     data=cur.fetchall()
     #data=(1,1453487801,'pedro','pablo','leon','jaramillo','cra 44 #13-10',8295562,'tarjeta de credito')
-    cur.commit()
     cur.close()
     try:
         data=data[0]
@@ -228,7 +226,6 @@ def isVIP(id):
         cur.callproc('userVIP', [id])
         #cur.close()
         data=cur.fetchall()
-        cur.commit()
         cur.close()
         json=jsonify( Response=2,
                       content=data[0])
@@ -313,7 +310,7 @@ def deleteDinerUserById(id):
         cur=mySQL.connection.cursor()
         cur.callproc('delete_dinerUser', [id])
         cur.close()
-        cur.commit()
+        mySQL.connection.commit()
     except Exception as e:
         print("+++deleteDinerUserById", e)
     ############################################ DELETE USER TO DB ############################################
@@ -400,7 +397,6 @@ def login():
                             cur=mySQL.connection.cursor()
                             cur.execute('SELECT * FROM DinerUser WHERE FK_idUser = {0}'.format(PK_IdUser))
                             data=cur.fetchall()
-                            cur.commit()
                             print(data)                            
                             cur.close()
                             if len(data)!=0:
@@ -477,7 +473,6 @@ def login():
                                                         cur=mySQL.connection.cursor()
                                                         cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(str(reservation["FK_reservationCreator"])))
                                                         data=cur.fetchall(); data=data[0]
-                                                        cur.commit()
                                                         cur.close()
                                                         #print(reservation)
                                                         #print(restaurant)
@@ -583,17 +578,17 @@ def signup():
                             print("EEEEEEEEE", password)
                             print(PK_IdUser, address, payMethod)
                             userOk=False; emailOk=False
-                            try:          
+                            try:                     
                                 print("Maquina")
                                 cur=mySQL.connection.cursor()
                                 cur.callproc('addUser', [PK_IdUser, 1, userName, password, email])                                        
-                                cur.commit()
-                                cur.close()
+                                mySQL.connection.commit()
+                                #cur.close()
                                 print("Buenas")
 
-                                cur=mySQL.connection.cursor()
+                                #cur=mySQL.connection.cursor()
                                 cur.callproc('add_dinerUser', [PK_IdUser, userName, numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod, "", userName])                                    
-                                cur.commit()
+                                mySQL.connection.commit()
                                 cur.close() 
                                 print("Erda")
                                 
@@ -663,7 +658,7 @@ def profile():
                         try:
                             cur=mySQL.connection.cursor()
                             cur.callproc('edit_dinerUser', [numDocument, firstName, secondName, firstLastName, secondLastName, address, telephone, payMethod])           
-                            cur.commit()
+                            mySQL.connection.commit()
                             cur.close()
                             print("EDITED: ", numDocument, firstName)
                             flash("Informacion editada correctamente", "success")
@@ -1075,7 +1070,7 @@ def actualizarDatos():
                     try:
                         cur=mySQL.connection.cursor()
                         cur.callproc('edit_dinerUser', [identificacion, nombre, nombre, apellido, apellido, direccion, telefono, telefono])           
-                        cur.commit()
+                        mySQL.connection.commit()
                         cur.close()
                         print("EDITED: ", identificacion, nombre)
                         flash("Informacion editada correctamente", "success")
