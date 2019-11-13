@@ -412,17 +412,17 @@ delimiter ;
 
 /*Procedimiento que modifica TODOS los atributos de una cuenta de usuario comensal*/
 delimiter $$
-Create procedure edit_dinerUser(IN cedula INT,IN nuevoNombre char(15), IN segundoNombre char(15) ,IN apellido char(15),IN segundoApellido char(15),IN direccion char(30), IN telefono bigint,IN pago varchar(30))
+Create procedure edit_dinerUser(IN idUsuario int, IN cedula INT,IN nuevoNombre char(15), IN segundoNombre char(15) ,IN apellido char(15),IN segundoApellido char(15),IN direccion char(30), IN telefono bigint,IN pago varchar(30), IN infoProf varchar(200), IN instUser varchar(40))
 BEGIN
-    if validarCedula(cedula) = 1 then
-        update DinerUser set firstname = nuevoNombre, secondname = segundoNombre, firstLastname = apellido, secondLastname = segundoApellido, address = direccion, telephone = telefono, payMethod = pago where numDocument = cedula;
+    if validarUsuario(idUsuario) = 1 then
+      update DinerUser inner join User on (FK_idUser = PK_idUser) set numDocument = cedula, firstname = nuevoNombre, secondname = segundoNombre, firstLastname = apellido, secondLastname = segundoApellido, address = direccion, telephone = telefono, payMethod = pago, infoProfile = infoProf, igUser = instUser where PK_idUser = idUsuario;
     else
-      select 'Esa identificacion no esta registrada';
+      select 'El id de Usuario no esta registrado';
      end if;
 END$$
 delimiter ;
 
-call modificarComensal(1453487801,'carlos', 'andres', 'Berrio', 'Lazo', 'cll 22 #13bis-02',3005481201,'bitcoin');
+call edit_dinerUser(1453487801,'carlos', 'andres', 'Berrio', 'Lazo', 'cll 22 #13bis-02',3005481201,'bitcoin','infoo', 'ig');
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --DELETES:
 /*Procedimiento que elimina la cuenta de un usuario comensal*/
