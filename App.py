@@ -1,5 +1,5 @@
-IP="127.0.0.1:3000"
-#IP="159.65.58.193:3000"
+#IP="127.0.0.1:3000"
+IP="159.65.58.193:3000"
 """
 historialReservas = [["Cheers Pizza","Calle 10 #36-12","15/12/2020","08:30 p.m.","Manuel Turizo"],
                     ["American Pizza","Carrera 56 #43-09","15/12/2020","08:30 p.m.","Gabriela Ortiz"],
@@ -625,9 +625,13 @@ def signup():
                         else:
                             print("Response", response["Response"])
                     else:
-                        print("error 1", response.json())
+                        response.json()
+                        print("error 1", response["content"])
+                        print()
+                        response=response["content"]
+                        print("error 3", response["message"])
                         flash("El correo ya esta en uso", "error")
-                        print("error 2", response.status_code)
+                        print("error 4", response.status_code)
                 else:
                     flash("La contrasenas no coinciden", "error") 
     return render_template("signup_form.html", form=form)
