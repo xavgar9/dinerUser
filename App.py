@@ -1129,7 +1129,7 @@ def cambiarContrasenaa():
             else:
                 flash("Contrasenas deben ser iguales", "warning")
             return redirect(url_for('profile'))
-    return 0
+    return "nothing"
 
 
 

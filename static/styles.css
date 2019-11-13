@@ -55,11 +55,11 @@
   }
   
 .instagramProfile{
-	left: -218px; 
-	top: 111px; 
+	left: -248px; 
+	top: 31px; 
 	position: absolute; 
-	width: 835px;
-	height: 168px;
+	width: 845px;
+	height: 128px;
 	z-index:1;
 }
 

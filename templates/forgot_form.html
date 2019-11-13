@@ -1,64 +1,64 @@
-{% extends "base_template.html" %}
-{% block title %}Recuperar Contraseña Resvit{% endblock %}
-{% block content %}
-<body>
-    <div id="logbackground">
-        <!--<div id="logFondoBlanco"><img src="{{ url_for('static', filename='images/FondoBlanco.png') }}"></div>-->
-        <div id="logImagendefondocolor"><img src="{{ url_for('static', filename='images/Imagendefondocolor.png') }}"></div>
-        <div id="logImagendeFondonegro"><img src="{{ url_for('static', filename='images/ImagendeFondonegro.png') }}"></div>
-        <div id="logLamejorformadeRealiz">
-            <p style="font-family:Roboto;color:white;font-size: 19px">
-                La mejor forma de Realizar Reservas de tus Restaurantes Favoritos
-                <br>!PRUÉBALO AHORA!
-            </p>
-        </div>
-        <div id="logLogoBlanco"><img src="{{ url_for('static', filename='images/LogoBlanco.png') }}"></div>
-        <div id="logLogonegro"><img src="{{ url_for('static', filename='images/Logonegro.png') }}"></div>
-        <div id="logOlvidastetuContrasea">
-            <p style="font-family:Roboto;color:#756e6e;font-size: 17px">
-                ¿Ya tienes una Cuenta? <b><a href="{{ url_for('login') }}"> Iniciar Sesión</a></b>
-            </p>
-        </div>
-        <div id="loglayer_11"><img src="{{ url_for('static', filename='images/layer_11.png') }}"></div>
-        <div id="recuperarContrasena">
-            <p style="font-family:Roboto;color:#EFB810;font-size: 16px">OLVIDÉ CONTRASEÑA</p>
-        </div>
-        <div id="logBIENVENIDOSARESVIT">
-            <h1 style="font-family:Roboto;color:white;font-size: 38px"><center>RECUPERAR SESIÓN</center></h1>
-        </div>
-        <!--########### Boton de Registrarte Ahora #############################################################################-->
-        <div id="logRectangle18">
-            <button onclick="window.location.href='{{ url_for('signup') }}';" class="ui inverted button">REGÍSTRATE AHORA</button>
-        </div>
-        <!--########### Boton de Conoce sobre nosotros #############################################################################-->
-        <div id="logRectangle182">
-            <button onclick="window.location.href='https://resvit.wtechnology.co/';" class="ui inverted button">CONOCE SOBRE NOSOTROS</button>
-        </div>
+{% extends "base_template.html" %} {% block title %}Recuperar Contraseña Resvit{% endblock %} {% block content %}
 
 
-        <form action="" method="post" novalidate>
-            {{ form.hidden_tag() }}
-            <!--########### Campo de Texto del correo #############################################################################-->
-            <div id="campoRecuperarCo">
-                <div class="ui left icon input">
-                    {{ form.email }}
-                    {% for error in form.email.errors %}
-                    <script>
-                        toastr.error('{{ error }}','Error al ingresar Correo',{
-                            "newestOnTop": true,
-                            "closeButton": true,
-                            "progressBar": true
-                        })
-                    </script>
-                    {% endfor %}
-                    <i class="at icon"></i>
-                </div>
-            </div>
-            <!--########### Boton Iniciar Sesion #############################################################################-->
-            <div id="logRectangle213">
-                <button class="ui inverted secondary button">RECUPERAR CONTRASEÑA {{ form.submit() }}</button>
-            </div>
-        </form>
+<div id="logbackground">
+    <!--<div id="logFondoBlanco"><img src="{{ url_for('static', filename='images/FondoBlanco.png') }}"></div>-->
+    <div id="logImagendefondocolor"><img src="{{ url_for('static', filename='images/Imagendefondocolor.png') }}"></div>
+    <div id="logImagendeFondonegro"><img src="{{ url_for('static', filename='images/ImagendeFondonegro.png') }}"></div>
+    <div id="logLamejorformadeRealiz">
+        <p style="font-family:Roboto;color:white;font-size: 19px">
+            La mejor forma de Realizar Reservas de tus Restaurantes Favoritos
+            <br>!PRUÉBALO AHORA!
+        </p>
     </div>
-</body>
+    <div id="logLogoBlanco"><img src="{{ url_for('static', filename='images/LogoBlanco.png') }}"></div>
+    <div id="logLogonegro"><img src="{{ url_for('static', filename='images/Logonegro.png') }}"></div>
+    <div id="logOlvidastetuContrasea">
+        <p style="font-family:Roboto;color:#756e6e;font-size: 17px">
+            ¿Ya tienes una Cuenta? <b><a href="{{ url_for('login') }}"> Iniciar Sesión</a></b>
+        </p>
+    </div>
+    <div id="loglayer_11"><img src="{{ url_for('static', filename='images/layer_11.png') }}"></div>
+    <div id="recuperarContrasena">
+        <p style="font-family:Roboto;color:#EFB810;font-size: 16px">OLVIDÉ CONTRASEÑA</p>
+    </div>
+    <div id="logBIENVENIDOSARESVIT">
+        <h1 style="font-family:Roboto;color:white;font-size: 38px">
+            <center>RECUPERAR SESIÓN</center>
+        </h1>
+    </div>
+    <!--########### Boton de Registrarte Ahora #############################################################################-->
+    <div id="logRectangle18">
+        <button onclick="window.location.href='{{ url_for('signup') }}';" class="ui inverted button">REGÍSTRATE AHORA</button>
+    </div>
+    <!--########### Boton de Conoce sobre nosotros #############################################################################-->
+    <div id="logRectangle182">
+        <button onclick="window.location.href='https://resvit.wtechnology.co/';" class="ui inverted button">CONOCE SOBRE NOSOTROS</button>
+    </div>
+
+
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <!--########### Campo de Texto del correo #############################################################################-->
+        <div id="campoRecuperarCo">
+            <div class="ui left icon input">
+                {{ form.email }} {% for error in form.email.errors %}
+                <script>
+                    toastr.error('{{ error }}', 'Error al ingresar Correo', {
+                        "newestOnTop": true,
+                        "closeButton": true,
+                        "progressBar": true
+                    })
+                </script>
+                {% endfor %}
+                <i class="at icon"></i>
+            </div>
+        </div>
+        <!--########### Boton Iniciar Sesion #############################################################################-->
+        <div id="logRectangle213">
+            {{ form.submit(class='ui inverted secondary button') }}
+        </div>
+    </form>
+</div>
+
 {% endblock %}

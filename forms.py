@@ -28,7 +28,7 @@ class PasswordForm(FlaskForm):
     password1 = PasswordField('Password1', validators=[DataRequired()], render_kw={"placeholder": "CONTRASENA ANTIGUA"})
     password2 = PasswordField('Password2', validators=[DataRequired()], render_kw={"placeholder": "NUEVA CONTRASENA"})
     password3 = PasswordField('Password3', validators=[DataRequired()], render_kw={"placeholder": "CONFIRMAR NUEVA CONTRASENA"})
-    submit2 = SubmitField('Cambiar')
+    submit = SubmitField('Cambiar')
 
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired(), Length(max=128)])
