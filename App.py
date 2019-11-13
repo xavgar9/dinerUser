@@ -296,6 +296,7 @@ def make_session_permanent():
 """
 @app.route('/')
 def Index():
+    print(session)
     if "firstName" in session:
         print("INDEX")
         #print(session)
@@ -343,7 +344,7 @@ def login():
     except KeyError:
         ok=True
     if not ok:
-        return redirect(url_for('Index'))
+        return redirect(url_for('profile'))
     else:
         print("Inicio")
         if form.validate_on_submit():
@@ -523,7 +524,7 @@ def signup():
     except KeyError:
         ok=True
     if not ok:
-        return redirect(url_for('Index'))
+        return redirect(url_for('profile'))
     else:
         if form.validate_on_submit():
             if request.method == 'POST':
