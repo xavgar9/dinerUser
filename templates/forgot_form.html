@@ -1,7 +1,7 @@
 {% extends "base_template.html" %} {% block title %}Recuperar Contraseña Resvit{% endblock %} {% block content %}
 
 
-<div id="logbackground">
+<!--<div id="logbackground">-->
     <!--<div id="logFondoBlanco"><img src="{{ url_for('static', filename='images/FondoBlanco.png') }}"></div>-->
     <div id="logImagendefondocolor"><img src="{{ url_for('static', filename='images/Imagendefondocolor.png') }}"></div>
     <div id="logImagendeFondonegro"><img src="{{ url_for('static', filename='images/ImagendeFondonegro.png') }}"></div>
@@ -19,9 +19,9 @@
         </p>
     </div>
     <div id="loglayer_11"><img src="{{ url_for('static', filename='images/layer_11.png') }}"></div>
-    <div id="recuperarContrasena">
+    <!--<div id="recuperarContrasena">
         <p style="font-family:Roboto;color:#EFB810;font-size: 16px">OLVIDÉ CONTRASEÑA</p>
-    </div>
+    </div>-->
     <div id="logBIENVENIDOSARESVIT">
         <h1 style="font-family:Roboto;color:white;font-size: 38px">
             <center>RECUPERAR SESIÓN</center>
@@ -59,6 +59,6 @@
             {{ form.submit(class='ui inverted secondary button') }}
         </div>
     </form>
-</div>
+<!--</div>-->
 
 {% endblock %}

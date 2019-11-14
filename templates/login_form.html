@@ -1,5 +1,5 @@
 {% extends "base_template.html" %} {% block title %}Iniciar Sesion Resvit{% endblock %} {% block content %}
-<div id="logbackground">
+<!--<div id="logbackground">-->
     <!--<div id="logFondoBlanco"><img src="{{ url_for('static', filename='images/FondoBlanco.png') }}"></div>-->
     <div id="logImagendefondocolor"><img src="{{ url_for('static', filename='images/Imagendefondocolor.png') }}"></div>
     <div id="logImagendeFondonegro"><img src="{{ url_for('static', filename='images/ImagendeFondonegro.png') }}"></div>
@@ -17,9 +17,9 @@
         </p>
     </div>
     <div id="loglayer_11"><img src="{{ url_for('static', filename='images/layer_11.png') }}"></div>
-    <div id="logINICIARSESIN">
+    <!--<div id="logINICIARSESIN">
         <p style="font-family:Roboto;color:#EFB810;font-size: 16px">INICIAR SESIÓN</p>
-    </div>
+    </div>-->
     <div id="logBIENVENIDOSARESVIT">
         <h1 style="font-family:Roboto;color:white;font-size: 38px">BIENVENIDOS A RESVIT</h1>
     </div>
@@ -72,5 +72,5 @@
             {{ form.submit(class='ui inverted secondary button') }}
         </div>
     </form>
-</div>
+<!--</div>-->
 {% endblock %}

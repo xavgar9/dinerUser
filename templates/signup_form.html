@@ -1,12 +1,140 @@
 {% extends "base_template.html" %} {% block title %}Registrarse Resvit{% endblock %} {% block content %}
 
-<body>
-    <div id="regbackground">
-        <div id="regFondoColor"><img src="{{ url_for('static', filename='images/FondoColor.png') }}"></div>
-        <div id="regFondoNegro"><img src="{{ url_for('static', filename='images/FondoNegro.png') }}"></div>
-        <div id="regREGISTRARSE">
+    <!--<div id="regbackground">-->
+            <div id="regFondoColor"><img src="{{ url_for('static', filename='images/FondoColor.png') }}"></div>
+            <div id="regFondoNegro"><img src="{{ url_for('static', filename='images/FondoNegro.png') }}"></div>
+            <form action="" method="POST" novalidate>
+                    {{ form.hidden_tag() }}
+                    <!--########### Campo de nombre #############################################################################-->
+                    <div id="regPath1893">
+                        <div class="ui left icon input">
+                            {{ form.name(size=64) }} {% for error in form.name.errors %}
+                            <script>
+                                toastr.error('{{ error }}', 'Error al ingresar Nombre', {
+                                    "newestOnTop": true,
+                                    "closeButton": true,
+                                    "progressBar": true
+                                })
+                            </script>
+                            {% endfor %}
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                    <!--########### Campo Apellido #############################################################################-->
+                    <div id="regRectangle213">
+                        <div class="ui left icon input">
+                            {{ form.lastName }} {% for error in form.lastName.errors %}
+                            <script>
+                                toastr.error('{{ error }}', 'Error al ingresar Apellido', {
+                                    "newestOnTop": true,
+                                    "closeButton": true,
+                                    "progressBar": true
+                                })
+                            </script>
+                            {% endfor %}
+                            <i class="user secret icon"></i>
+                        </div>
+                    </div>
+                    <!--########### Campo de Correo #############################################################################-->
+                    <div id="regPath1894">
+                        <div class="ui left icon input">
+                            {{ form.email }}<br> {% for error in form.email.errors %}
+                            <script>
+                                toastr.error('{{ error }}', 'Error al ingresar Correo', {
+                                    "newestOnTop": true,
+                                    "closeButton": true,
+                                    "progressBar": true
+                                })
+                            </script>
+                            {% endfor %}
+                            <i class="at icon"></i>
+                        </div>
+                    </div>
+                    <!--########### Campo nombre de usuario #############################################################################-->
+                    <div id="regRectangle214">
+                        <div class="ui left icon input">
+                            {{ form.userName }} {% for error in form.userName.errors %}
+                            <script>
+                                toastr.error('{{ error }}', 'Error al ingresar Nombre de Usuario', {
+                                    "newestOnTop": true,
+                                    "closeButton": true,
+                                    "progressBar": true
+                                })
+                            </script>
+                            {% endfor %}
+                            <i class="instagram icon"></i>
+                        </div>
+                    </div>
+                    <!--########### Campo identificacion #############################################################################-->
+                    <div id="regPath18932">
+                        <div class="ui left icon input">
+                            {{ form.numDocument }} {% for error in form.numDocument.errors %}
+                            <script>
+                                toastr.error('{{ error }}', 'Error al ingresar Número de Documento', {
+                                    "newestOnTop": true,
+                                    "closeButton": true,
+                                    "progressBar": true
+                                })
+                            </script>
+                            {% endfor %}
+                            <i class="id card icon"></i>
+                        </div>
+                    </div>
+                    <!--########### Campo de telefono celular #############################################################################-->
+                    <div id="regPath1896">
+                        <div class="ui left icon input">
+                            {{ form.telephone }} {% for error in form.telephone.errors %}
+                            <script>
+                                toastr.error('{{ error }}', 'Error al ingresar Teléfono', {
+                                    "newestOnTop": true,
+                                    "closeButton": true,
+                                    "progressBar": true
+                                })
+                            </script>
+                            {% endfor %}
+                            <i class="mobile alternate icon"></i>
+                        </div>
+                    </div>
+                    <!--########### Campo de Contraseña #############################################################################-->
+                    <div id="regPath1897">
+                        <div class="ui left icon input">
+                            {{ form.password }}<br> {% for error in form.password.errors %}
+                            <script>
+                                toastr.error('{{ error }}', 'Error al ingresar Contraseña', {
+                                    "newestOnTop": true,
+                                    "closeButton": true,
+                                    "progressBar": true
+                                })
+                            </script>
+                            {% endfor %}
+                            <i class="key icon"></i>
+                        </div>
+                    </div>
+                    <!--########### Campo de Confirmar contraseña #############################################################################-->
+                    <div id="regRectangle21">
+                        <div class="ui left icon input">
+                            {{ form.password2 }} {% for error in form.password2.errors %}
+                            <script>
+                                toastr.error('{{ error }}', 'Error al ingresar Confirmar Contraseña', {
+                                    "newestOnTop": true,
+                                    "closeButton": true,
+                                    "progressBar": true
+                                })
+                            </script>
+                            {% endfor %}
+                            <i class="key icon"></i>
+                        </div>
+                    </div>
+                    <!--########### Boton Registrarse #############################################################################-->
+                    <div id="regRectangle212">
+                        <!--<button class="ui inverted secondary button">REGISTRARSE</button>-->
+                        {{ form.submit(class='ui inverted secondary button') }}
+                    </div>
+                </form>
+        
+        <!--<div id="regREGISTRARSE">
             <p style="font-family:Roboto;color:#EFB810;font-size: 16px">REGISTRARSE</p>
-        </div>
+        </div>-->
         <div id="regREGSTRATEAHORA">
             <p style="font-family:Roboto;color:black;font-size: 42px"><strong>¡REGISTRATE AHORA!</strong></p>
         </div>
@@ -34,137 +162,9 @@
         </div>
         <!--########### Boton Iniciar Sesion #############################################################################-->
 
-        <form action="" method="POST" novalidate>
-            {{ form.hidden_tag() }}
-            <!--########### Campo de nombre #############################################################################-->
-            <div id="regPath1893">
-                <div class="ui left icon input">
-                    {{ form.name(size=64) }} {% for error in form.name.errors %}
-                    <script>
-                        toastr.error('{{ error }}', 'Error al ingresar Nombre', {
-                            "newestOnTop": true,
-                            "closeButton": true,
-                            "progressBar": true
-                        })
-                    </script>
-                    {% endfor %}
-                    <i class="user icon"></i>
-                </div>
-            </div>
-            <!--########### Campo Apellido #############################################################################-->
-            <div id="regRectangle213">
-                <div class="ui left icon input">
-                    {{ form.lastName }} {% for error in form.lastName.errors %}
-                    <script>
-                        toastr.error('{{ error }}', 'Error al ingresar Apellido', {
-                            "newestOnTop": true,
-                            "closeButton": true,
-                            "progressBar": true
-                        })
-                    </script>
-                    {% endfor %}
-                    <i class="user secret icon"></i>
-                </div>
-            </div>
-            <!--########### Campo de Correo #############################################################################-->
-            <div id="regPath1894">
-                <div class="ui left icon input">
-                    {{ form.email }}<br> {% for error in form.email.errors %}
-                    <script>
-                        toastr.error('{{ error }}', 'Error al ingresar Correo', {
-                            "newestOnTop": true,
-                            "closeButton": true,
-                            "progressBar": true
-                        })
-                    </script>
-                    {% endfor %}
-                    <i class="at icon"></i>
-                </div>
-            </div>
-            <!--########### Campo nombre de usuario #############################################################################-->
-            <div id="regRectangle214">
-                <div class="ui left icon input">
-                    {{ form.userName }} {% for error in form.userName.errors %}
-                    <script>
-                        toastr.error('{{ error }}', 'Error al ingresar Nombre de Usuario', {
-                            "newestOnTop": true,
-                            "closeButton": true,
-                            "progressBar": true
-                        })
-                    </script>
-                    {% endfor %}
-                    <i class="instagram icon"></i>
-                </div>
-            </div>
-            <!--########### Campo identificacion #############################################################################-->
-            <div id="regPath18932">
-                <div class="ui left icon input">
-                    {{ form.numDocument }} {% for error in form.numDocument.errors %}
-                    <script>
-                        toastr.error('{{ error }}', 'Error al ingresar Número de Documento', {
-                            "newestOnTop": true,
-                            "closeButton": true,
-                            "progressBar": true
-                        })
-                    </script>
-                    {% endfor %}
-                    <i class="id card icon"></i>
-                </div>
-            </div>
-            <!--########### Campo de telefono celular #############################################################################-->
-            <div id="regPath1896">
-                <div class="ui left icon input">
-                    {{ form.telephone }} {% for error in form.telephone.errors %}
-                    <script>
-                        toastr.error('{{ error }}', 'Error al ingresar Teléfono', {
-                            "newestOnTop": true,
-                            "closeButton": true,
-                            "progressBar": true
-                        })
-                    </script>
-                    {% endfor %}
-                    <i class="mobile alternate icon"></i>
-                </div>
-            </div>
-            <!--########### Campo de Contraseña #############################################################################-->
-            <div id="regPath1897">
-                <div class="ui left icon input">
-                    {{ form.password }}<br> {% for error in form.password.errors %}
-                    <script>
-                        toastr.error('{{ error }}', 'Error al ingresar Contraseña', {
-                            "newestOnTop": true,
-                            "closeButton": true,
-                            "progressBar": true
-                        })
-                    </script>
-                    {% endfor %}
-                    <i class="key icon"></i>
-                </div>
-            </div>
-            <!--########### Campo de Confirmar contraseña #############################################################################-->
-            <div id="regRectangle21">
-                <div class="ui left icon input">
-                    {{ form.password2 }} {% for error in form.password2.errors %}
-                    <script>
-                        toastr.error('{{ error }}', 'Error al ingresar Confirmar Contraseña', {
-                            "newestOnTop": true,
-                            "closeButton": true,
-                            "progressBar": true
-                        })
-                    </script>
-                    {% endfor %}
-                    <i class="key icon"></i>
-                </div>
-            </div>
-            <!--########### Boton Registrarse #############################################################################-->
-            <div id="regRectangle212">
-                <!--<button class="ui inverted secondary button">REGISTRARSE</button>-->
-                {{ form.submit(class='ui inverted secondary button') }}
-            </div>
-        </form>
-    </div>
+
+    <!--</div>-->
     <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.4.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='popper.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='toastr.min.js') }}"></script>
-</body>
 {% endblock %}

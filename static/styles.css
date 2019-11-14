@@ -66,7 +66,7 @@
 
 .instagramProfile {
     left: -248px;
-    top: 31px;
+    top: 13px;
     position: absolute;
     width: 845px;
     height: 128px;
@@ -75,7 +75,7 @@
 
 .lateralTinder {
     background: #1c1d1f;
-    position: absolute;
+    position: fixed;
     top: 91px;
     width: 343px;
     height: 100%;
@@ -209,7 +209,7 @@
 
 #pJuanitaPerez {
     left: 53px;
-    top: 203px;
+    top: 183px;
     position: absolute;
     width: 272px;
     height: 24px;
@@ -227,7 +227,7 @@
 
 #pjuanitarequiml {
     left: 53px;
-    top: 326px;
+    top: 306px;
     position: absolute;
     width: 272px;
     height: 27px;
@@ -236,7 +236,7 @@
 
 #player_57302118294 {
     left: 53px;
-    top: 387px;
+    top: 367px;
     position: absolute;
     width: 272px;
     height: 19px;
@@ -245,7 +245,7 @@
 
 #pIngdeRequisitos {
     left: 53px;
-    top: 263px;
+    top: 243px;
     position: absolute;
     width: 272px;
     height: 25px;
@@ -254,7 +254,7 @@
 
 #pGroup2764 {
     left: 863px;
-    top: 406px;
+    top: 467px;
     position: absolute;
     width: 339px;
     height: 136px;
@@ -263,7 +263,7 @@
 
 #pSeparator {
     left: 12px;
-    top: 174px;
+    top: 154px;
     position: absolute;
     width: 325px;
     height: 6px;
@@ -325,7 +325,7 @@
 
 #pSeparator2 {
     left: 12px;
-    top: 235px;
+    top: 215px;
     position: absolute;
     width: 325px;
     height: 6px;
@@ -334,7 +334,7 @@
 
 #pSeparator3 {
     left: 12px;
-    top: 296px;
+    top: 276px;
     position: absolute;
     width: 325px;
     height: 6px;
@@ -343,7 +343,7 @@
 
 #pSeparator4 {
     left: 12px;
-    top: 360px;
+    top: 340px;
     position: absolute;
     width: 325px;
     height: 6px;
@@ -352,7 +352,7 @@
 
 #pSeparator5 {
     left: 12px;
-    top: 417px;
+    top: 397px;
     position: absolute;
     width: 325px;
     height: 6px;
@@ -361,7 +361,7 @@
 
 #pRectangle21 {
     left: 54px;
-    top: 462px;
+    top: 436px;
     position: absolute;
     width: 241px;
     height: 55px;
@@ -370,7 +370,7 @@
 
 #pRectangle212 {
     left: 78px;
-    top: 533px;
+    top: 496px;
     position: absolute;
     width: 193px;
     height: 57px;
@@ -389,7 +389,7 @@
 
 #pBIENVENIDOXAVIHERNAN {
     left: 432px;
-    top: 82px;
+    top: 152px;
     position: absolute;
     width: 628px;
     height: 30px;
@@ -398,7 +398,7 @@
 
 #pCapa2 {
     left: 1097px;
-    top: 7px;
+    top: 86px;
     position: absolute;
     width: 155px;
     height: 191px;
@@ -416,7 +416,7 @@
 
 #player_25 {
     left: 465px;
-    top: 207px;
+    top: 297px;
     position: absolute;
     width: 339px;
     height: 136px;
@@ -425,7 +425,7 @@
 
 #player_27 {
     left: 863px;
-    top: 207px;
+    top: 297px;
     position: absolute;
     width: 339px;
     height: 135px;
@@ -434,7 +434,7 @@
 
 #player_29 {
     left: 465px;
-    top: 406px;
+    top: 467px;
     position: absolute;
     width: 339px;
     height: 136px;
@@ -464,25 +464,25 @@
 
 #logImagendefondocolor {
     left: 0px;
-    top: 0px;
-    position: absolute;
-    width: 792px;
-    height: 723px;
+    top: 82px;
+    position: fixed;
+    width: 100%;
+    height: 100%;
     z-index: 2;
 }
 
 #logImagendeFondonegro {
     left: 0px;
-    top: 0px;
-    position: absolute;
-    width: 792px;
-    height: 723px;
+    top: 82px;
+    position: fixed;
+    width: 100%;
+    height: 100%;
     z-index: 3;
 }
 
 #logBIENVENIDOSARESVIT {
     left: 187px;
-    top: 69px;
+    top: 116px;
     position: absolute;
     width: 418px;
     height: 27px;
@@ -491,7 +491,7 @@
 
 #logRectangle18 {
     left: 91px;
-    top: 566px;
+    top: 563px;
     position: absolute;
     width: 281px;
     height: 56px;
@@ -500,7 +500,7 @@
 
 #logLamejorformadeRealiz {
     left: 93px;
-    top: 475px;
+    top: 481px;
     position: absolute;
     width: 592px;
     height: 21px;
@@ -509,7 +509,7 @@
 
 #logRectangle182 {
     left: 429px;
-    top: 566px;
+    top: 563px;
     position: absolute;
     width: 281px;
     height: 56px;
@@ -518,7 +518,7 @@
 
 #loglayer_11 {
     left: 396px;
-    top: 574px;
+    top: 571px;
     position: absolute;
     width: 11px;
     height: 16px;
@@ -526,8 +526,8 @@
 }
 
 #logINICIARSESIN {
-    left: 622px;
-    top: 35px;
+    left: 652px;
+    top: 105px;
     position: absolute;
     width: 120px;
     height: 18px;
@@ -545,7 +545,7 @@
 
 #logRectangle21 {
     left: 849px;
-    top: 282px;
+    top: 362px;
     position: absolute;
     width: 419px;
     height: 56px;
@@ -554,7 +554,7 @@
 
 #campoRecuperarCo {
     left: 849px;
-    top: 320px;
+    top: 390px;
     position: absolute;
     width: 419px;
     height: 56px;
@@ -563,7 +563,7 @@
 
 #logRectangle212 {
     left: 849px;
-    top: 354px;
+    top: 433px;
     position: absolute;
     width: 419px;
     height: 56px;
@@ -572,7 +572,7 @@
 
 #logRectangle213 {
     left: 849px;
-    top: 444px;
+    top: 504px;
     position: absolute;
     width: 419px;
     height: 57px;
@@ -581,7 +581,7 @@
 
 #logOlvidastetuContrasea {
     left: 893px;
-    top: 675px;
+    top: 585px;
     position: absolute;
     width: 316px;
     height: 18px;
@@ -590,7 +590,7 @@
 
 #logLogoBlanco {
     left: 281px;
-    top: 141px;
+    top: 179px;
     position: absolute;
     width: 231px;
     height: 285px;
@@ -599,7 +599,7 @@
 
 #logLogonegro {
     left: 980px;
-    top: 26px;
+    top: 106px;
     position: absolute;
     width: 187px;
     height: 230px;
@@ -620,16 +620,16 @@
 
 #regFondoColor {
     left: 0px;
-    top: 0px;
-    position: absolute;
-    width: 1313px;
-    height: 724px;
+    top: 82px;
+    position: fixed;
+    width: auto;
+    height: 100%;
     z-index: 1;
 }
 
 #regPath1894 {
     left: 592px;
-    top: 284px;
+    top: 300px;
     position: absolute;
     width: 303px;
     height: 56px;
@@ -638,7 +638,7 @@
 
 #regPath1893 {
     left: 592px;
-    top: 213px;
+    top: 245px;
     position: absolute;
     width: 303px;
     height: 56px;
@@ -647,7 +647,7 @@
 
 #regPath1897 {
     left: 592px;
-    top: 426px;
+    top: 410px;
     position: absolute;
     width: 610px;
     height: 56px;
@@ -665,7 +665,7 @@
 
 #regRectangle21 {
     left: 592px;
-    top: 496px;
+    top: 465px;
     position: absolute;
     width: 610px;
     height: 56px;
@@ -674,16 +674,16 @@
 
 #regFondoNegro {
     left: 0px;
-    top: 0px;
-    position: absolute;
-    width: 549px;
-    height: 724px;
+    top: 82px;
+    position: fixed;
+    width: auto;
+    height: 100%;
     z-index: 17;
 }
 
 #regREGISTRARSE {
     left: 426px;
-    top: 20px;
+    top: 91px;
     position: absolute;
     width: 104px;
     height: 13px;
@@ -692,7 +692,7 @@
 
 #regREGSTRATEAHORA {
     left: 602px;
-    top: 93px;
+    top: 142px;
     position: absolute;
     width: 431px;
     height: 45px;
@@ -701,7 +701,7 @@
 
 #regBIENVENIDOSA {
     left: 142px;
-    top: 81px;
+    top: 105px;
     position: absolute;
     width: 278px;
     height: 25px;
@@ -718,8 +718,8 @@
 }
 
 #regRectangle18 {
-    left: 116px;
-    top: 586px;
+    left: 136px;
+    top: 556px;
     position: absolute;
     width: 281px;
     height: 56px;
@@ -728,7 +728,7 @@
 
 #regYatienesunaCuenta {
     left: 593px;
-    top: 663px;
+    top: 577px;
     position: absolute;
     width: 287px;
     height: 16px;
@@ -737,7 +737,7 @@
 
 #regRectangle212 {
     left: 592px;
-    top: 567px;
+    top: 520px;
     position: absolute;
     width: 610px;
     height: 56px;
@@ -746,7 +746,7 @@
 
 #regRectangle213 {
     left: 905px;
-    top: 212px;
+    top: 245px;
     position: absolute;
     width: 304px;
     height: 56px;
@@ -755,7 +755,7 @@
 
 #regLogoBlanco {
     left: 160px;
-    top: 142px;
+    top: 162px;
     position: absolute;
     width: 230px;
     height: 286px;
@@ -773,7 +773,7 @@
 
 #regRectangle214 {
     left: 905px;
-    top: 284px;
+    top: 300px;
     position: absolute;
     width: 304px;
     height: 56px;
@@ -782,7 +782,7 @@
 
 #regLogoNegro {
     left: 1078px;
-    top: 22px;
+    top: 92px;
     position: absolute;
     width: 143px;
     height: 177px;
