@@ -46,7 +46,8 @@
         <script type="text/javascript" src="{{ url_for('static', filename='toastr.min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='jquery.instagramFeed.min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='jquery.scrollTo.js') }}"></script>
-    
+    <div id="padre">
+        <div id="hijo">
     
     <header class="App-header">
         {% if session.has_key('PK_IdUser') %}
@@ -86,6 +87,9 @@
 
     {% block content %}{% endblock %} 
 
+</div>
+</div>
+
     {% with messages = get_flashed_messages(with_categories=True) %} 
         {% if messages %} 
             {% for category, message in messages %}
@@ -103,5 +107,27 @@
         $(document).ready(menu.ready);
     </script>
 
+    <script>
+        $(document).ready(function(){
+
+
+            var width = document.getElementById('hijo').offsetWidth;
+                        var height = document.getElementById('hijo').offsetHeight;
+                        var windowWidth = $(document).outerWidth();
+                        var windowHeight = $(document).outerHeight();
+                        var r = 1;
+                        r = Math.min(windowWidth / width, windowHeight / height)
+            
+                        $('#hijo').css({
+                            '-webkit-transform': 'scale(' + r + ')',
+                            '-moz-transform': 'scale(' + r + ')',
+                            '-ms-transform': 'scale(' + r + ')',
+                            '-o-transform': 'scale(' + r + ')',
+                            'transform': 'scale(' + r + ')'
+                        });
+            
+            });
+    </script>
+    
 </body>
 </html>
