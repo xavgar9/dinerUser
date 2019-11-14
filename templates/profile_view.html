@@ -91,14 +91,14 @@
                         <div class="field">
                             <label>Nombre</label>
                             <div class="ui left icon input">
-                                <input type="text" name="nombre" value="{{tmp2.firstName}} {{tmp2.firstName}}" required>
+                                <input type="text" name="nombre" value="{{tmp2.firstName}} {{tmp2.secondName}}" required>
                                 <i class="user icon"></i>
                             </div>
                         </div>
                         <div class="field">
                             <label>Apellido</label>
                             <div class="ui left icon input">
-                                <input type="text" name="apellido" value="{{tmp2.firstLastName}} {{tmp2.firstLastName}}" required>
+                                <input type="text" name="apellido" value="{{tmp2.firstLastName}} {{tmp2.secondLastName}}" required>
                                 <i class="user secret icon"></i>
                             </div>
                         </div>
@@ -200,7 +200,7 @@
         <div class="header">Cambiar Contraseña</div>
         <div class="content">
             <div class="ui form">
-                <form action="/cambiarContrasenaa" method="POST">
+                <form action="/cambiarContrasena" method="POST">
                     <div class="field">
                         <label>Contraseña Actual</label>
                         <div class="ui left icon input">
