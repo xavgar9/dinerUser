@@ -32,6 +32,7 @@
         .ui.bottom.attached.segment {
             height: 540px;
         }
+        
     </style>
     <script type="text/javascript" src="{{ url_for('static', filename='test.js') }}"></script>
 
@@ -48,25 +49,37 @@
     
     
     <header class="App-header">
+        {% if session.has_key('PK_IdUser') %}
         <div class="Menu">
             <img src="{{ url_for('static', filename='images/LogoBlanco1.png') }}" class="App-logo" alt="logo" />
             <div class="ui inverted segment">
                 <div class="ui inverted pointing secondary menu">
-                    <a class="item" href="{{ url_for('Index') }}">Inicio</a>
-                    {% if session.has_key('PK_IdUser') %}
                     <a class="item" href="{{ url_for('profile') }}">Mi Perfil</a>
                     <a class="item" href="{{ url_for('tinder') }}">Buscar Reservas Públicas</a>
                     <a class="item" onclick="window.location.href='http://181.50.100.167:4001/Principal/?id={{ session['PK_IdUser'] }}?pass=1239?ciudad=2';">Buscar Restaurantes</a>
-                    <a class="item" href="{{ url_for('logout') }}">Cerrar Sesión</a>
-                    {% else %}
-                    <a class="item" href="{{ url_for('login') }}">Iniciar Sesión</a>
-                    <a class="item" href="{{ url_for('signup') }}">Registrarse</a>
-                    <a class="item" href="{{ url_for('forgot') }}">Olvidé Contraseña</a>
-                    {% endif %}
                 </div>
             </div>
         </div>
-
+        <div class="UserInformation">
+            Bienvenido <br> {{session["firstName"]}}
+        </div>
+        <div class="LogOut">
+            <button onclick="window.location.href='{{ url_for('logout') }}';" class="circular ui icon button">
+                <i class="icon log out"></i>
+              </button>
+        </div>
+        {% else %}
+        <div class="Menu">
+            <img src="{{ url_for('static', filename='images/LogoBlanco1.png') }}" class="App-logo" alt="logo" />
+            <div class="ui inverted segment">
+                <div class="ui inverted pointing secondary menu">
+                    <a class="item" href="{{ url_for('login') }}">Iniciar Sesión</a>
+                    <a class="item" href="{{ url_for('signup') }}">Registrarse</a>
+                    <a class="item" href="{{ url_for('forgot') }}">Olvidé Contraseña</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
     </header>
     <div class="decorBar"></div>
 

@@ -5,6 +5,7 @@
     padding-bottom: 15px;
 }
 
+
 .Menu {
     display: flex;
     flex-direction: row;
@@ -17,17 +18,20 @@
 
 .LogOut {
     margin-Top: 20px;
-    margin-left: 20px;
+    margin-left: 0px;
     float: right;
     align-Content: center;
+    margin-right: 15px;
 }
 
 .UserInformation {
     flex-direction: column;
     margin-top: 18px;
     display: flex;
-    color: white;
+    color:white;
     text-align: center;
+    margin-left: auto;
+    margin-right: 25px;
 }
 
 .App-header {
