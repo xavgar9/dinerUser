@@ -225,7 +225,7 @@ select verifyEmail('micorreoprueba@outlook.com');
 /*Procedimiento que crea un usuario en la tabla User*/
 
 delimiter $$
-Create procedure addUser(IN idUs int, tipo INT,IN usuario varchar(20) ,IN contrasena varchar(20),IN correo varchar(30))
+Create procedure addUser(IN idUs int, tipo INT,IN usuario varchar(50) ,IN contrasena varchar(150),IN correo varchar(30))
 BEGIN
     if validarNickname(usuario) = 0 then
       if verifyEmail(correo) = 0 then
@@ -244,7 +244,7 @@ delimiter ;
 /*Procedimiento que crea un usuario-comensal en la tabla DinerUser*/
 
 delimiter $$
-Create procedure add_dinerUser(IN idDiUser int, IN userNick varchar(20), IN cedula INT,IN nombre char(15),IN segundoNombre char(15) ,IN apellido char(15),IN segundoApellido char(15),IN direccion char(30), IN telefono bigint, IN pago varchar(30), IN infoProf varchar(200), IN instUser varchar(40) )
+Create procedure add_dinerUser(IN idDiUser int, IN userNick varchar(50), IN cedula INT,IN nombre char(50),IN segundoNombre char(50) ,IN apellido char(50),IN segundoApellido char(50),IN direccion char(50), IN telefono bigint, IN pago varchar(50), IN infoProf varchar(200), IN instUser varchar(40) )
 BEGIN
   declare idUsuario int;
   set idUsuario = getUserIdByNick(userNick);
