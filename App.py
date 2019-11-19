@@ -1,5 +1,5 @@
-IP="127.0.0.1:3000"
-#IP="159.65.58.193:3000"
+#IP="127.0.0.1:3000"
+IP="159.65.58.193:3000"
 """
 historialReservas = [["Cheers Pizza","Calle 10 #36-12","15/12/2020","08:30 p.m.","Manuel Turizo"],
                     ["American Pizza","Carrera 56 #43-09","15/12/2020","08:30 p.m.","Gabriela Ortiz"],
@@ -632,10 +632,10 @@ def login():
             url="http://181.50.100.167:4000/login?email="+str(email)+"&password="+str(password)
             #5dc9f2fd91aa3d00a3555d69
 
-            session["PK_IdUser"]=1
-            session["PK_IdDiner"]=1
+            #session["PK_IdUser"]=1
+            #session["PK_IdDiner"]=1
 
-            """
+            #"""
             response=requests.post(url, params=None)
             #pri("Llorelo", response.text)
             
@@ -718,7 +718,7 @@ def login():
                 flash("El usuario o contrasena no estan correctos", "error")
                 print("+++login 2", e)                   
         ##############################################################################
-            """
+            #"""
 
 
     return render_template('login_form.html', form=form)
