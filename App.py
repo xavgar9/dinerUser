@@ -18,10 +18,14 @@ hReservasActuales = [["Cheers Pizza","cheerspizza","Calle 10 #36-12","15/12/2020
                     ["American Pizza","americanpizzakw","Carrera 56 #43-09","15/12/2020","08:30 p.m.","www.google.com","2","No","2"],
                     ["Mr. Wings","misterwings","Carrera 12a #26-32","20/12/2020","06:30 p.m.","www.google.com","3","No","3"]]
 """
+
+
 lista1 = []
 lista2 = []
 
 lista3 = []
+
+lista4 = []
 
 hReservasActuales=[]
 historialReservas=[]
@@ -76,7 +80,9 @@ login_manager.init_app(app)
 ##########################################################################################################
 
 
-
+def printArray(a):
+    for i in a: print(i)
+    print(" ")
 
 ##########################################################################################################
 ##########################################################################################################
@@ -323,12 +329,11 @@ def bringUserData():
         flash("bringUserData base de datos Meza", "error")
         ans=0
     return ans
+    #return redirect(url_for('login'))
 
-
-    return redirect(url_for('login'))
 def bringRecordReservation():
     global historialReservas
-    url="http://"+"181.50.100.167:8000"+"/api/getReservationsRecordByUserId/"+str(session["PK_IdDiner"])
+    url="http://"+"159.65.58.193:8000"+"/api/getReservationsRecordByUserId/"+str(session["PK_IdDiner"])
     #pri("....Record",session["PK_IdDiner"])
     historialReservas=list()
     try:
@@ -368,8 +373,8 @@ def bringRecordReservation():
     except Exception as e:
         print("+++profile ", e)
 
-def bringAllResvervation():
-    url="http://181.50.100.167:8000"+"/api/getPublicReservationsByUserId/"+str(session["PK_IdDiner"])
+def bringAllReservation():
+    url="http://159.65.58.193:8000/api/getPublicReservationsByUserId/"+str(session["PK_IdDiner"])
     lista1=list()
     usrName=None; usrLastName=None; UsrEmail=None; telephone=None; usrIg=None;
     resName=None; ResIg=None; resAddress=None; date=None; hour=None; status=None;
@@ -383,7 +388,7 @@ def bringAllResvervation():
                 res_final=[len(data)]    #Final reservation with rest name
                 for reservation in data:
                     idRestaurant=reservation["FK_idRestaurant"]
-                    url="http://"+"181.50.100.167:5000"+"/getRestaurant/"+str(idRestaurant)
+                    url="http://181.50.100.167:5000/getRestaurant/"+str(idRestaurant)
                     restaurant=requests.get(url, params=None, timeout=5)
                     if restaurant.status_code==200:
                         restaurant=restaurant.json()
@@ -391,15 +396,21 @@ def bringAllResvervation():
                             restaurant=restaurant["Content"]
                             restaurant = restaurant[0]
                             cur=mySQL.connection.cursor()
+                            #print("#", restaurant)
+                            #print("$", reservation)
+                            #print("%", reservation["FK_reservationCreator"])
                             cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(str(reservation["FK_reservationCreator"])))
-                            data=cur.fetchall(); data=data[0]
+                            data=cur.fetchall()
+                            #print("->", data)
+                            data=data[0]
                             cur.close()
                             #print(reservation)
                             #print(restaurant)
-                            #print(data)
+                            #print("<-", data)
+                            pk_id=data[0]
                             usrName=data[3]+" "+data[4]
                             usrLastName=data[5]
-                            UsrEmail="email@email.com"
+                            UsrEmail="prueba@gmail.com"
                             telephone=data[8]
                             usrIg=data[11]                  
                             resName=restaurant["name"]
@@ -410,21 +421,25 @@ def bringAllResvervation():
                             status="Pendiente"
                             #availableChairs=reservation["availableChairs"]
                             idReservation=reservation["PK_idReservation"]
-                            lista1.append([usrName, usrLastName, UsrEmail, telephone, usrIg, resName, ResIg, resAddress, date, hour, status, idReservation])
+                            lista1.append([usrName, usrLastName, UsrEmail, telephone, usrIg ,usrIg, resName, ResIg, resAddress, date, hour, ResIg, status, idReservation, pk_id])
+                            #["0 nombre","1 apellido","2 email","3 telefono","4 usuario","5 instagramPerfil",
+                            #"6 restaurante","7 instagramRestaurante","8 direccion","9 fecha","10 hora",
+                            #"11 URL Restaurante","12 estado (Pendiente siempre)","13 Sillas"]
+                            #print(lista1)                        
                         else:
-                            flash("bringAllResvervation Response 2 el API de CRISTIAN 1", "error")    
+                            flash("bringAllReservation Response 2 el API de CRISTIAN 1", "error")    
                     else:
-                        flash("bringAllResvervation Fallo el API de CRISTIAN 1", "error")   
+                        flash("bringAllReservation Fallo el API de CRISTIAN 1", "error")   
             else:
-                flash("bringAllResvervation Response 2 el API de LAURA 1", "error")    
+                flash("bringAllReservation Response 2 el API de LAURA 1", "error")    
         else:
-            flash("bringAllResvervation API de LAURA 1", "error")
+            flash("bringAllReservation API de LAURA 1", "error")
     except Exception as e:
-        print("Erda", e)
+        print("bringAllReservation", e)
     #pri("bring lista1 ", lista1)
     """
     reservations=list()
-    url="http://"+"181.50.100.167:8000"+"/api/getReservationsRecordByUserId/"+str(session["PK_IdDiner"]) 
+    url="http://"+"159.65.58.193:8000"+"/api/getReservationsRecordByUserId/"+str(session["PK_IdDiner"]) 
     print("bring", url)
     #me trae TODAS las reservas publicas
     try:
@@ -461,10 +476,11 @@ def bringAllResvervation():
         print("+++profile ", e)
     return reservations
     """
+    return lista1
         
 def bringPrivateSelf():
     privateSelf=list() 
-    url="http://181.50.100.167:8000/api/getActiveReservationsByUserIdAndType/"+str(session["PK_IdDiner"])+"/0/" #esta url cambia por la de Laura
+    url="http://159.65.58.193:8000/api/getActiveReservationsByUserIdAndType/"+str(session["PK_IdDiner"])+"/0/" #esta url cambia por la de Laura
     # 0 privada, 1 publica
     try:
         response=requests.get(url, params=None, timeout=5)
@@ -505,7 +521,7 @@ def bringPrivateSelf():
 
 def bringPublicSelf():
     publicSelf=list()
-    url="http://181.50.100.167:8000/api/getActiveReservationsByUserIdAndType/"+str(session["PK_IdDiner"])+"/1/" #esta url cambia por la de Laura
+    url="http://159.65.58.193:8000/api/getActiveReservationsByUserIdAndType/"+str(session["PK_IdDiner"])+"/1/" #esta url cambia por la de Laura
     try:
         response=requests.get(url, params=None, timeout=5)
         if response.status_code==200:
@@ -605,7 +621,7 @@ def login():
             #pri(password)
             h = hashlib.sha1()
             h.update(password)
-            pas=h    
+            pas=h
             pas=str(pas.hexdigest())
             password=pas
             #user=getUser("", "", "", "", "",password)
@@ -615,6 +631,11 @@ def login():
             #url="http://181.50.100.167:4000/addUser?userName="+str(userName)+"&email="+str(email)+"&password="+password+"&userType=1"
             url="http://181.50.100.167:4000/login?email="+str(email)+"&password="+str(password)
             #5dc9f2fd91aa3d00a3555d69
+
+            session["PK_IdUser"]=1
+            session["PK_IdDiner"]=1
+
+            """
             response=requests.post(url, params=None)
             #pri("Llorelo", response.text)
             
@@ -628,15 +649,15 @@ def login():
                     userType=response["content"]["userType"]
                     #pri("Hola", response["content"])
                     try:
-                        """
-                        print(len(password), password)
-                        cur=mySQL.connection.cursor()
-                        cur.callproc('login', [email, password])                                        
-                        data=cur.fetchall()
-                        data=data[0][0]
-                        cur.close()
-                        print(data)
-                        """
+                        
+                        #print(len(password), password)
+                        #cur=mySQL.connection.cursor()
+                        #cur.callproc('login', [email, password])                                        
+                        #data=cur.fetchall()
+                        #data=data[0][0]
+                        #cur.close()
+                        #print(data)
+                    
                         #pri("VALIDO LOGIN")
                         #ans=bringUserData()
                         
@@ -697,6 +718,8 @@ def login():
                 flash("El usuario o contrasena no estan correctos", "error")
                 print("+++login 2", e)                   
         ##############################################################################
+            """
+
 
     return render_template('login_form.html', form=form)
 
@@ -826,7 +849,7 @@ def profile():
         ##########################################################################################################################
         #############################################LISTAR RESERVAS PUBLICAS########################################################
         ##########################################################################################################################
-        #bringAllResvervation()
+        #bringAllReservation()
         #print("PUBLICAS")
         #for res in lista1:
         #    print(res)
@@ -851,20 +874,106 @@ def profile():
 
 @app.route('/tinder', methods=['GET', 'POST'])
 def tinder():
-    global lista1
+    global lista1, lista2
     ok=False
     #session["PK_IdDiner"]=1
     #lista1=[]
-    try:
-        print(session["PK_IdDiner"])
+    try:    
+        a=(session["PK_IdDiner"])
     except KeyError:
         ok=True
     if ok:
         return redirect(url_for('login'))
     else:
-        bringAllResvervation()
+        #print(lista1)
+        lista1=bringAllReservation()
+        lista2=list()
+        #print(lista1)
+        url="http://159.65.58.193:8000/api/getPostulatedReservationsByUserId/"+str(session["PK_IdDiner"])
+        tmp=requests.get(url, params=None, timeout=5)
+        if tmp.status_code==200:
+            tmp=tmp.json()
+            print(200)
+            if tmp["Response"]==2:
+                print("Response 2")
+                reservation=tmp["Content"]
+                todos=bringAllReservation()
+                for res in reservation:
+                    idReservation=res["PK_idReservation"]
+                    idRestaurant=res["FK_idRestaurant"]
+                    idCreator=res["FK_reservationCreator"]
+                    status=res["status"]
+                    date=res["reservationDate"]
+                    hour=res["reservationHour"]
+                    if status==1:
+                        status="Pendiente"
+                    elif status==2:
+                        stauts="Aceptado"
+                    else:
+                        status="Rechazado"
+                    usrName=None; usrLastName=None; UsrEmail=None; telephone=None; usrIg=None;
+                    resName=None; ResIg=None; resAddress=None; status=None;
+                    availableChairs=None; idReservation=None
+                    try:
+                        url="http://181.50.100.167:5000/getRestaurant/"+str(idRestaurant)
+                        restaurant=requests.get(url, params=None, timeout=5)
+                        if restaurant.status_code==200:
+                            restaurant=restaurant.json()
+                            if restaurant["Response"]==2:
+                                restaurant=restaurant["Content"]
+                                restaurant = restaurant[0]
+                                cur=mySQL.connection.cursor()
+                                cur.execute('SELECT * FROM DinerUser WHERE PK_idDiner = {0}'.format(str(idCreator)))
+                                data=cur.fetchall()
+                                data=data[0]
+                                print(restaurant)
+                                print(data)
+                                cur.close()
+                                pk_id=data[0]
+                                usrName=data[3]+" "+data[4]
+                                usrLastName=data[5]
+                                UsrEmail="prueba@gmail.com"
+                                telephone=data[8]
+                                usrIg=data[11]                  
+                                resName=restaurant["name"]
+                                ResIg=restaurant["email"]
+                                print("HOLAAAAAA")
+                                resAddress=restaurant["address"]
+                                #availableChairs=reservation["availableChairs"]
+                                print("QQQQQQQQQQ")
+                                lista2.append([usrName, usrLastName, UsrEmail, telephone, usrIg ,usrIg, resName, ResIg, resAddress, date, hour, ResIg, status, idReservation, pk_id])
+                                #["0 nombre","1 apellido","2 email","3 telefono","4 usuario","5 instagramPerfil",
+                                #"6 restaurante","7 instagramRestaurante","8 direccion","9 fecha","10 hora",
+                                #"11 URL Restaurante","12 estado (Pendiente siempre)","13 Sillas"]
+                                #print(lista1)                        
+                            else:
+                                flash("bringAllPostulation Response 2 el API de CRISTIAN 1", "error")    
+                        else:
+                            flash("bringAllPostulation Fallo el API de CRISTIAN 1", "error")   
+                    except Exception as e:
+                        print("bringAllPostulation", e)
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+            else:
+                flash("Response=1 lista2 API Laura", "error")
+        else:
+            flash("Code 500 Lista2 API Laura", "error")
+        print(lista2)           
+                    #lista1.append([usrName, usrLastName, UsrEmail, telephone, usrIg ,usrIg, resName, ResIg, resAddress, date, hour, ResIg, status, idReservation, pk_id])
+
         """
-        url="http://"+"181.50.100.167:8000"+"/api/getPublicReservationsWithPaging/666" #esta url cambia por la de Laura
+        url="http://"+"159.65.58.193:8000"+"/api/getPublicReservationsWithPaging/666" #esta url cambia por la de Laura
         #me trae mis reservas publicas y privadas que no no han pasado
         #type: 0 privadas, 1 publicas
         lista1=list()
@@ -919,7 +1028,7 @@ def tinder():
         except Exception as e:
             print("Erda", e)
         print(lista1)"""
-        return render_template("tinder.html",lista1=lista1)
+        return render_template("tinder.html",lista1=lista1, lista2=lista2)
 
 
 
@@ -935,13 +1044,17 @@ def loadDinerUser(id):
 @app.route('/logout')
 def logout():
     idUser=session["PK_IdUser"]
+    session.clear()
     url="http://181.50.100.167:4000/logout?id="+str(idUser)
-    response=requests.post(url, params=None, timeout=5)
-    if response.status_code==200:
-        session.clear()
-        flash("Sesion cerrada Correctamente", "success")
-    else:
-        flash("Error al cerrar sesion", "error")
+    try:
+        response=requests.post(url, params=None, timeout=5)
+        if response.status_code==200:
+            session.clear()
+            flash("Sesion cerrada Correctamente", "success")
+        else:
+            flash("Error al cerrar sesion", "error")
+    except: 
+        flash("logout LAVERDE Error al cerrar sesion", "error")
     
     return redirect(url_for('login'))  #redirect
 
@@ -963,16 +1076,103 @@ def botonMembresia():
     return redirect(url_for('profile'))
 
 
-@app.route('/botonCheckReserva')
-def botonCheckReserva():
-    #lista2.append(lista1[0])
-    #lista1.pop(0)
-    return "nothing"
 
-@app.route('/botonEquisReserva')
-def botonEquisReserva():
-    lista1.pop(0)
-    return "nothing"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
+#**************************************************************************
+#
+@app.route('/listarPostulantes')
+def listarPostulantes():
+    #idReserva=
+    try:
+        url="http://159.65.58.193:8000/api/getPostulatesByReservationId/"+str(idReserva)
+        response=requests.get(url, params=None, timeout=5)
+        if response.status_code==200:
+            response=response.json()
+            #pri("res", response)
+            if response["Response"]==2:
+                data=response["Content"]
+                idUser=data[0]
+                status=data[1]
+                for user in data:
+                    cur=mySQL.connection.cursor()
+                    cur.execute('SELECT * FROM DinerUser WHERE FK_idUser = {0}'.format(idUser))
+                    usr=cur.fetchall()                   
+                    cur.close()
+                    if len(usr)!=0:
+                        usr=usr[0]
+                        if len(usr)!=0:
+                            session["PK_IdUser"]=usr[0]
+                            session["PK_IdDiner"]=usr[1]
+                            session["numDocument"]=usr[2]
+                            session["firstName"]=usr[3]
+                            session["secondName"]=usr[4]
+                            session["firstLastName"]=usr[5]
+                            session["secondLastName"]=usr[6]                                
+                            session["address"]=usr[7]
+                            session["telephone"]=usr[8]
+                            session["infoProfile"]=usr[10]    
+                            session["igUser"]=usr[11]
+
+    except:
+        pass
+
+
+@app.route('/botonAceptarPersona')
+def botonAceptarPersona():
+    """
+    se acepta una persona que quiso aplicar a mi reserva.
+    Necesito el id del restaurante (res_id),
+    necesito el id de la persona   (usr_id) y 
+    necesito el status de persona  (status)
+    status:
+        0 -> pendiente
+        1 -> aceptado
+        1 -> rechazado
+    """
+
+    url="http://159.65.58.193:8000/api/updatePostulatedByReservationIdAndUserId/"+res_id+"/"+usr_id+"/"+status
+    response=requests.post(url, params=None, timeout=5)
+    if response.status_code==200:
+        response=response.json()
+        if response["response"]==2:
+            if response["content"]==0:
+                flash("No se pudo realizar la operacion solicitada", "error")
+            elif response["content"]==1:
+                flash("No hay sillas disponibles", "error")
+            elif response["content"]==2:
+                flash("Solicitud actualizada", "success")
+            else:
+                flash("Ya has rechazado a esta persona, lo sentimos", "error")
+        else:
+            flash("botonAceparPersona error API Laura 1", "error")
+    else:
+        flash("botonAceparPersona error API Laura 2", "error")
+
 
 
 @app.route('/botonCancelarReserva', methods=["GET","POST"])
@@ -989,6 +1189,102 @@ def botonCancelarReserva():
     return redirect(url_for('tinder'))
 
 
+@app.route('/botonCheckReserva')
+def botonCheckReserva():
+    print("INICIO")
+    printArray(lista1)
+    print("----------")
+    printArray(lista2)
+    print("############")
+    lista2.append(lista1[0])
+    reservation=lista1.pop(0)
+    printArray(lista1)
+    print("----------")
+    printArray(lista2)
+    print(reservation)
+    res_id=str(reservation[13])
+    #["0 nombre","1 apellido","2 email","3 telefono","4 usuario","5 instagramPerfil",
+    #"6 restaurante","7 instagramRestaurante","8 direccion","9 fecha","10 hora",
+    #"11 URL Restaurante","12 estado (Pendiente siempre)","13 Sillas"]
+    url="http://159.65.58.193:8000/api/addPostulatedByReservationIdAndUserId/"+res_id+"/"+str(session["PK_IdDiner"])
+    print("URL:", url)
+    response=requests.post(url, params=None, timeout=5)
+    if response.status_code==200:
+        response=response.json()
+        print("api 200")
+        if response["Response"]==2:
+            print("Response 2")
+            if response["Content"]==1:
+                print("Content 1")
+                flash("Solicitud enviada correctamente", "success")
+            else:
+                print("Content 2")
+                flash("Ya has enviado esta solicitud", "warning")
+        else:
+            print("Response 1")
+            flash("botonCheckReserva error API Laura 1", "error")
+    else:
+        print("api error")
+        flash("botonCheckReserva error API Laura 2", "error")
+    print("FINAL")
+    return redirect(url_for('profile'))
+
+
+@app.route('/botonEquisReserva')
+def botonEquisReserva():
+    try:
+        lista1.pop(0)
+    except:
+        print("vacia")
+    return "nothing"
+
+
+@app.route('/botonEliminarReserva', methods=["GET","POST"])
+def botonEliminarReserva():
+    #id_si = str(request.form.get('si'))
+    # Me imagino que se puede traer de ahi...
+    id_reserva="algo"
+    url="http://159.65.58.193:8000/api/deleteReservationByReservationId/"+id_reserva
+    response=requests.post(url, params=None)
+    if response.status_code==200:
+        flash("Reserva eliminada correctamente", "success")
+    else:
+        flash("botonEliminarReserva error API Laura 2", "error")
+    return redirect(url_for('profile'))
+
+
+
+
+
+
+#
+#**************************************************************************
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @app.route('/botonPonerReservaPublica', methods=["GET","POST"])
 def botonPonerReservaPublica():
     global hReservasActuales
@@ -996,7 +1292,7 @@ def botonPonerReservaPublica():
         id_si = str(request.form.get('si'))
         id_no = str(request.form.get('no'))
         i=0
-        #http://181.50.100.167:8000/api/updateReservationTypeByReservationId/idReserva
+        #http://159.65.58.193:8000/api/updateReservationTypeByReservationId/idReserva
 
         #print("---> hReservaAcuales",len(hReservasActuales))
         #print("--->", id_si)
@@ -1010,22 +1306,21 @@ def botonPonerReservaPublica():
                 hReservasActuales[i][6] = "si"
                 id_reserva=str(hReservasActuales[i][7])
                 #print("SIIIIIIII", id_reserva)
-                url="http://181.50.100.167:8000/api/updateReservationTypeByReservationId/"+id_reserva
+                url="http://159.65.58.193:8000/api/updateReservationTypeByReservationId/"+id_reserva
                 response=requests.post(url, params=None)
                 lista3.append(hReservasActuales[i])
             if hReservasActuales[i][7] == id_no and hReservasActuales[i][6] =="si":
                 #print("NOOOOOOOO")
                 hReservasActuales[i][6] = "no"
                 id_reserva=str(hReservasActuales[i][7])
-                url="http://181.50.100.167:8000/api/updateReservationTypeByReservationId/"+id_reserva
+                url="http://159.65.58.193:8000/api/updateReservationTypeByReservationId/"+id_reserva
                 response=requests.post(url, params=None)
                 j=0
                 while j in range(len(lista3)):
                     if lista3[j][7]==id_no:
                         lista3.pop(j)
                     j+=1
-            i+=1
-        
+            i+=1        
     return redirect(url_for('profile'))
 
 
