@@ -362,13 +362,17 @@ def bringRecordReservation():
                             individual.append(str(restaurant["personInCharge"]))
                             historialReservas.append(individual)
                         else:
-                            flash("bringRecordReservation Response API de Cristian:2", "error")
+                            #flash("bringRecordReservation Response API de Cristian:2", "error")
+                            pass
                     else:
-                        flash("bringRecordReservation Fallo el API de Cristian", "error")                            
+                        #flash("bringRecordReservation Fallo el API de Cristian", "error")                            
+                        pass
             else:
-                flash("bringRecordReservation Response API de LAURA", "error")
+                #flash("bringRecordReservation Response API de LAURA", "error")
+                pass
         else:
-            flash("bringRecordReservation Fallo el API de LAURA", "error")
+            #flash("bringRecordReservation Fallo el API de LAURA", "error")
+            pass
     except Exception as e:
         print("+++profile ", e)
 
@@ -430,9 +434,11 @@ def bringAllReservation():
                     else:
                         flash("bringAllReservation Fallo el API de CRISTIAN 1", "error")   
             else:
-                flash("bringAllReservation Response 2 el API de LAURA 1", "error")    
+                #flash("bringAllReservation Response 2 el API de LAURA 1", "error")    
+                pass
         else:
-            flash("bringAllReservation API de LAURA 1", "error")
+            #flash("bringAllReservation API de LAURA 1", "error")
+            pass
     except Exception as e:
         print("bringAllReservation", e)
     #pri("bring lista1 ", lista1)
@@ -551,9 +557,11 @@ def bringPublicSelf():
                     else:
                         flash("bringPublicSelf Fallo el API de Cristian", "error")                            
             else:
-                flash("bringPublicSelf Fallo el API de LAURA", "error")
+                pass
+                #flash("bringPublicSelf Fallo el API de LAURA", "error")
         else:
-            flash("bringPublicSelf API de LAURA error", "error")
+            #flash("bringPublicSelf API de LAURA error", "error")
+            pass
     except Exception as e:
         print("+++profile publicas ", e)
     return publicSelf
@@ -968,9 +976,11 @@ def tinder():
 
 
             else:
-                flash("Response=1 lista2 API Laura", "error")
+                #flash("Response=1 lista2 API Laura", "error")
+                pass
         else:
-            flash("Code 500 Lista2 API Laura", "error")
+            #flash("Code 500 Lista2 API Laura", "error")
+            pass
         print(lista2)           
                     #lista1.append([usrName, usrLastName, UsrEmail, telephone, usrIg ,usrIg, resName, ResIg, resAddress, date, hour, ResIg, status, idReservation, pk_id])
 
@@ -1080,9 +1090,11 @@ def tinder():
                 else:
                     print("No tiene reservas publicas")
             else:
-                flash("listarPostulantes response 1 API Laura", "error")
+                #flash("listarPostulantes response 1 API Laura", "error")
+                pass
         else:
-            flash("listarPostulantes error 1 API Laura", "error")
+            #flash("listarPostulantes error 1 API Laura", "error")
+            pass
         
         #print(lista5_dict)
         #flash(lista2,"success")
@@ -1205,9 +1217,11 @@ def listarPostulantes():
             else:
                 print("No tiene reservas publicas")
         else:
-            flash("listarPostulantes response 1 API Laura", "error")
+            pass
+            #flash("listarPostulantes response 1 API Laura", "error")
     else:
-        flash("listarPostulantes error 1 API Laura", "error")
+        pass
+        #flash("listarPostulantes error 1 API Laura", "error")
     
     #print(lista5_dict)
     for key in lista5_dict:
@@ -1243,9 +1257,11 @@ def botonAceptarPersona():
             else:
                 flash("Ya has rechazado a esta persona, lo sentimos", "error")
         else:
-            flash("botonAceparPersona error API Laura 1", "error")
+            #flash("botonAceparPersona error API Laura 1", "error")
+            pass
     else:
-        flash("botonAceparPersona error API Laura 2", "error")
+        #flash("botonAceparPersona error API Laura 2", "error")
+        pass
 
 
 
@@ -1304,10 +1320,12 @@ def botonCheckReserva():
                 flash("Ya has enviado esta solicitud", "warning")
         else:
             print("Response 1")
-            flash("botonCheckReserva error API Laura 1", "error")
+            #flash("botonCheckReserva error API Laura 1", "error")
+            pass
     else:
         print("api error")
-        flash("botonCheckReserva error API Laura 2", "error")
+        #flash("botonCheckReserva error API Laura 2", "error")
+        pass
     print("FINAL")
     return redirect(url_for('profile'))
 
@@ -1331,7 +1349,8 @@ def botonEliminarReserva():
     if response.status_code==200:
         flash("Reserva eliminada correctamente", "success")
     else:
-        flash("botonEliminarReserva error API Laura 2", "error")
+        pass
+        #flash("botonEliminarReserva error API Laura 2", "error")
     return redirect(url_for('profile'))
 
 @app.route('/botonEditarReserva')
