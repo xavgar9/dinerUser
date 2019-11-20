@@ -607,12 +607,22 @@ def login():
     session["infoProfile"]="Hola"    
     session["igUser"]="williamaguirrezapata"
     """
+    logged=False
+    url="http://181.50.100.167:4000/validateSession?id="+str(session["PK_IdDiner"])
+    tmp=requests.get(url, params=None, timeout=5)
+    if tmp.status_code==200:
+        tmp=tmp.json()
+        if tmp["response"]==2:
+            logged=True
+        else:
+            logged=False
+
     next_page = request.args.get('next')
     try:
         print(session["PK_IdDiner"])
     except KeyError:
         ok=True
-    if not ok:
+    if not ok and logged:
         return redirect(url_for('profile'))
     else:
         #pri("Inicio")
@@ -730,11 +740,21 @@ def login():
 def signup():
     form = SignupForm()
     ok=False
+    logged=False
+    url="http://181.50.100.167:4000/validateSession?id="+str(session["PK_IdDiner"])
+    tmp=requests.get(url, params=None, timeout=5)
+    if tmp.status_code==200:
+        tmp=tmp.json()
+        if tmp["response"]==2:
+            logged=True
+        else:
+            logged=False
+
     try:
         print(session["PK_IdDiner"])
     except KeyError:
         ok=True
-    if not ok:
+    if not ok and logged:
         return redirect(url_for('profile'))
     else:
         if form.validate_on_submit():
@@ -846,7 +866,7 @@ def profile():
         print(session["PK_IdDiner"])
     except KeyError:
         ok=True
-    if ok and logged:
+    if ok and not(logged):
         return redirect(url_for('login'))   #redirect
     else:
         bringUserData()
@@ -900,12 +920,11 @@ def tinder():
             logged=True
         else:
             logged=False
-
     try:    
         a=(session["PK_IdDiner"])
     except KeyError:
         ok=True
-    if ok and logged:
+    if ok and not(logged):
         return redirect(url_for('login'))
     else:
         #print(lista1)
