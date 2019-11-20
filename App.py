@@ -707,7 +707,7 @@ def login():
                             elif userType==2:
                                 return redirect('http://181.50.100.167:3000/?id='+str(session["PK_IdUser"]))
                             else:
-                                return redirect('http://181.50.100.167:4001/Principal/?id='+str(session["PK_IdUser"])+'?pass='+str(password)+'?ciudad=2')
+                                return redirect('http://181.50.100.167:4001/Principal/?id='+str(session["PK_IdUser"])+'?pass='+str(password)+'?ciudad=1')
 
 
                                                     ########### Tinder ##########################################################
@@ -831,11 +831,22 @@ def signup():
 def profile():
     global hReservasActuales, historialReservas, lista1
     ok=False
+
+    logged=False
+    url="http://181.50.100.167:4000/validateSession?id="+str(session["PK_IdDiner"])
+    tmp=requests.get(url, params=None, timeout=5)
+    if tmp.status_code==200:
+        tmp=tmp.json()
+        if tmp["response"]==2:
+            logged=True
+        else:
+            logged=False
+                
     try:
         print(session["PK_IdDiner"])
     except KeyError:
         ok=True
-    if ok:
+    if ok and logged:
         return redirect(url_for('login'))   #redirect
     else:
         bringUserData()
@@ -880,11 +891,21 @@ def tinder():
     ok=False
     #session["PK_IdDiner"]=1
     #lista1=[]
+    logged=False
+    url="http://181.50.100.167:4000/validateSession?id="+str(session["PK_IdDiner"])
+    tmp=requests.get(url, params=None, timeout=5)
+    if tmp.status_code==200:
+        tmp=tmp.json()
+        if tmp["response"]==2:
+            logged=True
+        else:
+            logged=False
+
     try:    
         a=(session["PK_IdDiner"])
     except KeyError:
         ok=True
-    if ok:
+    if ok and logged:
         return redirect(url_for('login'))
     else:
         #print(lista1)
