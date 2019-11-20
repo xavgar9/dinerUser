@@ -73,7 +73,7 @@
     </div>
     
     <div id="pGroup2764">
-        <button onclick="window.location.href='http://181.50.100.167:4001/Principal/?id={{ session['PK_IdUser'] }}?pass=1239?ciudad=2';" class="ui inverted secondary button w">BUSCAR RESTAURANTES</button>
+        <button onclick="window.location.href='http://181.50.100.167:4001/Principal/?id={{ session['PK_IdUser'] }}?pass=1239?ciudad=1';" class="ui inverted secondary button w">BUSCAR RESTAURANTES</button>
     </div>
     <div id="player_27">
         <button onclick="$('.ui.modal.historyReservas').modal('show');" class="ui inverted secondary button w">HISTORIAL DE RESERVAS</button>
@@ -355,6 +355,7 @@
                 <thead>
                     <tr>
                         <th style="text-align: center;">¿Activar Reserva Pública?</th>
+                        <th style="text-align: center;">Editar o Eliminar</th>
                         <th style="text-align: center;">Restaurante</th>
                         <th style="text-align: center;">Dirección</th>
                         <th style="text-align: center;">Fecha</th>
@@ -366,12 +367,15 @@
                 <tbody>
                     {% for elemento in hReservasActuales %}
                     <tr>
-
                         <td style="text-align: center;">
                             <form action="/botonPonerReservaPublica" method="POST">
                                 <button class="ui green approve button" type="submit" name="si" value="{{elemento[7]}}">Si</button>
                                 <button class="ui red approve button" type="submit" name="no" value="{{elemento[7]}}">No</button>
                             </form>
+                        </td>
+                        <td style="text-align: center;">
+                            <button onclick="window.location.href='http://159.65.58.193:8000/api/updateReservation/{{ elemento[7] }}';" class="ui green approve button">Editar</button>
+                            <button onclick="window.location.href='http://159.65.58.193:8000/api/deleteReservationByReservationId/{{ elemento[7] }}';" class="ui red approve button">Eliminar</button>
                         </td>
                         <td style="text-align: center;">{{elemento[0]}}</td>
                         <td style="text-align: center;">{{elemento[2]}}</td>
