@@ -1040,8 +1040,9 @@ def tinder():
         "firstLastname":"lo","secondLastname":"lo","igUser":"playboy_col","nameRest":"lo sabroso y lo buenisimo",
         "igRest":"laura.mosquera7"]
         """
-        #url="http://159.65.58.193:8000/api/getPostulatesByUserId/"+str(session["PK_IdDiner"])
-        url="http://159.65.58.193:8000/api/getPostulatesByUserId/"+str(10)
+        lista5=[]
+        url="http://159.65.58.193:8000/api/getPostulatesByUserId/"+str(session["PK_IdDiner"])
+        #url="http://159.65.58.193:8000/api/getPostulatesByUserId/"+str(10)
         tmp=requests.get(url, params=None, timeout=5)
         if tmp.status_code==200:
             tmp=tmp.json()
@@ -1070,6 +1071,8 @@ def tinder():
                             lista5_dict[pk_res]=arroz
                         else:
                             lista5_dict[pk_res]=[tmp]
+                    for key in lista5_dict:
+                        lista5.append(lista5_dict[key])
                         
                 else:
                     print("No tiene reservas publicas")
@@ -1079,9 +1082,8 @@ def tinder():
             flash("listarPostulantes error 1 API Laura", "error")
         
         #print(lista5_dict)
-        for key in lista5_dict:
-            lista5.append(lista5_dict[key])
-        
+        flash(lista1,"success")
+
         return render_template("tinder.html",lista1=lista1, lista2=lista2, lista5=lista5)
 
 
@@ -1168,7 +1170,7 @@ def listarPostulantes():
     "igRest":"laura.mosquera7"]
     """
     #url="http://159.65.58.193:8000/api/getPostulatesByUserId/"+str(session["PK_IdDiner"])
-    url="http://159.65.58.193:8000/api/getPostulatesByUserId/"+str(10)
+    url="http://159.65.58.193:8000/api/getPostulatesByUserId/"+str()
     tmp=requests.get(url, params=None, timeout=5)
     if tmp.status_code==200:
         tmp=tmp.json()
