@@ -86,20 +86,20 @@
     </center>
 </div>
 <div class="iconInfo">
-    <button onclick="$('.ui.modal.infoPerfil').modal('show');" class="massive circular ui icon button">
+    <button onclick="$('.ui.modal.infoPerfil').modal('show');" class="massive circular ui yellow icon button" style="text-shadow: -4px 3px 3px #000;">
         <i class="icon info circle"></i>
     </button>
 </div>
 <div class="iconCheck">
     <a href=# id=test>
-        <button onclick="mensaje()" class="massive circular ui icon button">
+        <button onclick="mensaje()" class="massive circular ui green icon button" style="text-shadow: -4px 3px 3px #000;">
             <i class="icon check"></i>
         </button>
     </a>
 </div>
 <div class="iconX">
     <a href="#" id=test1>
-        <button onclick="mensaje()" class="massive circular ui icon button">
+        <button onclick="mensaje()" class="massive circular ui red icon button" style="text-shadow: -4px 3px 3px #000;">
             <i class="icon x icon"></i>
         </button>
     </a>
@@ -220,7 +220,7 @@
                 $(window).on('load', function() {
                     $.instagramFeed({
                         'username': '{{elemento[7]}}',
-                        'container': "#restaurante{{elemento[14]}}",
+                        'container': "#restaurante{{elemento[14]}}{{elemento[9]}}",
                         'display_profile': true,
                         'display_biography': false,
                         'display_gallery': false,
@@ -232,7 +232,7 @@
                     });
                     $.instagramFeed({
                         'username': '{{elemento[5]}}',
-                        'container': "#perfil{{elemento[14]}}",
+                        'container': "#perfil{{elemento[14]}}{{elemento[9]}}",
                         'display_profile': true,
                         'display_biography': false,
                         'display_gallery': false,
@@ -244,7 +244,7 @@
                     });
                     $.instagramFeed({
                         'username': '{{elemento[5]}}',
-                        'container': "#galeriaMasInfo{{elemento[14]}}",
+                        'container': "#galeriaMasInfo{{elemento[14]}}{{elemento[9]}}",
                         'display_profile': false,
                         'display_biography': false,
                         'display_gallery': true,
@@ -256,7 +256,7 @@
                     });
                     $.instagramFeed({
                         'username': '{{elemento[7]}}',
-                        'container': "#restauranteMasInfo{{elemento[14]}}",
+                        'container': "#restauranteMasInfo{{elemento[14]}}{{elemento[9]}}",
                         'display_profile': true,
                         'display_biography': false,
                         'display_gallery': false,
@@ -268,7 +268,7 @@
                     });
                     $.instagramFeed({
                         'username': '{{elemento[5]}}',
-                        'container': "#perfilMasInfo{{elemento[14]}}",
+                        'container': "#perfilMasInfo{{elemento[14]}}{{elemento[9]}}",
                         'display_profile': true,
                         'display_biography': false,
                         'display_gallery': false,
@@ -283,10 +283,10 @@
         </script>
         <div id="misSolicitudesPanel" class="misReservasPanel">
             <div class="iconInstaMini">
-                <div id="restaurante{{elemento[14]}}" class="restaurante{{elemento[14]}}"></div>
+                <div id="restaurante{{elemento[14]}}{{elemento[9]}}" class="restaurante{{elemento[14]}}{{elemento[9]}}"></div>
             </div>
             <div class="iconInstaMini1">
-                <div id="perfil{{elemento[14]}}" class="perfil{{elemento[14]}}"> </div>
+                <div id="perfil{{elemento[14]}}{{elemento[9]}}" class="perfil{{elemento[14]}}{{elemento[9]}}"> </div>
             </div>
             <div class="textoPanelNom">
                 <p style="font-family:Roboto;color:white;font-size: 19px">
@@ -314,7 +314,7 @@
                     <div class="content">
                         <div class="ui grid">
                             <div class="six wide column">
-                                <div id="restauranteMasInfo{{elemento[14]}}" class="restauranteMasInfo{{elemento[14]}}"> </div>
+                                <div id="restauranteMasInfo{{elemento[14]}}{{elemento[9]}}" class="restauranteMasInfo{{elemento[14]}}{{elemento[9]}}"> </div>
                                 <center>
                                     <p style="font-family:Roboto;color:black;font-size: 30px"><strong>{{elemento[6]}}</strong></p>
                                 </center>
@@ -328,7 +328,7 @@
                                     <!--<i class="utensils icon"></i>
                                     <strong>Disponibilidad: </strong>{{elemento[13]}} Silla(s)-->
                                 </p>
-                                <div id="perfilMasInfo{{elemento[14]}}" class="perfilMasInfo{{elemento[14]}}"> </div>
+                                <div id="perfilMasInfo{{elemento[14]}}{{elemento[9]}}" class="perfilMasInfo{{elemento[14]}}{{elemento[9]}}"> </div>
                                 <center>
                                     <p style="font-family:Roboto;color:black;font-size: 30px"><strong>{{elemento[0]}} {{elemento[1]}}</strong></p>
                                 </center>
@@ -344,7 +344,7 @@
                                 </p>
                             </div>
                             <div class="ten wide column">
-                                <div id="galeriaMasInfo{{elemento[14]}}" class="galeriaMasInfo{{elemento[14]}}"></div>
+                                <div id="galeriaMasInfo{{elemento[14]}}{{elemento[9]}}" class="galeriaMasInfo{{elemento[14]}}{{elemento[9]}}"></div>
                             </div>
                         </div>
                     </div>
@@ -498,7 +498,7 @@
             <div class="textoPanelFecha">
                 <p style="font-family:Roboto;color:white;font-size: 12px">
                     <i class="instagram icon"></i><strong>Instagram:</strong> 
-                    <a href="https://www.instagram.com/{{lista1[0][4]}}" target="_blank">{{elemento1[6]}}</a>
+                    <a href="https://www.instagram.com/{{elemento1[6]}}" target="_blank">{{elemento1[6]}}</a>
                 </p>
             </div>
             <div class="textoPanelEstado">
