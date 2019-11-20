@@ -444,6 +444,42 @@
                         'items_per_row': 1,
                         'margin': 1
                     });
+                    $.instagramFeed({
+                        'username': '{{elemento1[6]}}',
+                        'container': "#galeriaMasinfoinsta{{elemento1[0]}}{{elemento1[1]}}",
+                        'display_profile': false,
+                        'display_biography': false,
+                        'display_gallery': true,
+                        'callback': null,
+                        'styling': true,
+                        'items': 12,
+                        'items_per_row': 4,
+                        'margin': 0.5
+                    });
+                    $.instagramFeed({
+                        'username': '{{elemento1[8]}}',
+                        'container': "#perfilesmasinfoinsta{{elemento1[0]}}{{elemento1[1]}}",
+                        'display_profile': true,
+                        'display_biography': false,
+                        'display_gallery': false,
+                        'callback': null,
+                        'styling': true,
+                        'items': 0,
+                        'items_per_row': 1,
+                        'margin': 1
+                    });
+                    $.instagramFeed({
+                        'username': '{{elemento1[6]}}',
+                        'container': "#restMasinfoinsta{{elemento1[0]}}{{elemento1[1]}}",
+                        'display_profile': true,
+                        'display_biography': false,
+                        'display_gallery': false,
+                        'callback': null,
+                        'styling': true,
+                        'items': 0,
+                        'items_per_row': 1,
+                        'margin': 1
+                    });
                 });
             })(jQuery);
         </script>
@@ -465,6 +501,59 @@
                     <a href="https://www.instagram.com/{{lista1[0][4]}}" target="_blank">{{elemento1[6]}}</a>
                 </p>
             </div>
+            <div class="textoPanelEstado">
+                <p style="font-family:Roboto;color:white;font-size: 12px">
+                    <i class="zoom-in icon"></i>
+                    <a onclick="$('.ui.modal.masInfoinsta{{elemento1[0]}}{{elemento1[1]}}').modal('show');">...Más info</a>
+                </p>
+            </div>
+            <!--##################### Modal popup Info del perfil ###########################################################################-->
+            <div class="ui container">
+                <div class="ui modal masInfoinsta{{elemento1[0]}}{{elemento1[1]}}">
+                    <i class="close icon"></i>
+                    <div class="header">Usuario: {{elemento1[4]}} {{elemento1[5]}}</div>
+                    <div class="content">
+                        <div class="ui grid">
+                            <div class="six wide column">
+                                <div id="perfilesmasinfoinsta{{elemento1[0]}}{{elemento1[1]}}" class="restMasinfoinsta{{elemento1[0]}}{{elemento1[1]}}"> </div>
+                                <center>
+                                    <p style="font-family:Roboto;color:black;font-size: 30px"><strong>{{elemento1[7]}}</strong></p>
+                                </center>
+                                <p style="font-family:Roboto;color:black;font-size: 16px">
+                                    <i class="calendar alternate outline icon"></i>
+                                    <strong>Fecha: </strong>{{elemento1[3]}}<br>
+                                    <i class="clock icon"></i>
+                                    <strong>Hora: </strong>{{elemento1[2]}}<br>
+                                    <!--<i class="utensils icon"></i>
+                                    <strong>Disponibilidad: </strong>{{elemento[13]}} Silla(s)-->
+                                </p>
+                                <div id="restMasinfoinsta{{elemento1[0]}}{{elemento1[1]}}" class="restMasinfoinsta{{elemento1[0]}}{{elemento1[1]}}"> </div>
+                                <center>
+                                    <p style="font-family:Roboto;color:black;font-size: 30px"><strong>{{elemento1[4]}} {{elemento1[5]}}</strong></p>
+                                </center>
+                                <p style="font-family:Roboto;color:black;font-size: 16px">
+                                    <!--<i class="envelope outline icon"></i>
+                                    <strong>Email: </strong><a href="mailto:{{elemento[2]}}">{{elemento[2]}}</a><br>
+                                    <i class="tty icon"></i>
+                                    <strong>Teléfono: </strong><a href="tel:+57{{elemento[3]}}">{{elemento[3]}}</a><br>
+                                    <i class="user circle icon"></i>
+                                    <strong>Usuario: </strong>{{elemento[4]}}<br>-->
+                                    <i class="instagram icon"></i>
+                                    <strong>Instagram: </strong><a href="https://www.instagram.com/{{elemento1[6]}}" target="_blank">{{elemento1[6]}}</a>
+                                </p>
+                            </div>
+                            <div class="ten wide column">
+                                <div id="galeriaMasinfoinsta{{elemento1[0]}}{{elemento1[1]}}" class="galeriaMasinfoinsta{{elemento1[0]}}{{elemento1[1]}}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <div onclick="$('.ui.mini.modal.confirmarBorrado{{elemento[5]}}').modal('show');" class="ui red approve button">¿Deseas CANCELAR la solicitud</div>
+                        <div class="ui green approve button">Aceptar</div>
+                    </div>
+                </div>
+            </div>
+        
         </div>
         {% endfor %} 
         {% endfor %} {% else %}

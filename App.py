@@ -1082,7 +1082,6 @@ def tinder():
             flash("listarPostulantes error 1 API Laura", "error")
         
         #print(lista5_dict)
-        flash(lista5,"success")
 
         return render_template("tinder.html",lista1=lista1, lista2=lista2, lista5=lista5)
 
