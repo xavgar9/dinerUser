@@ -1,5 +1,5 @@
-#IP="127.0.0.1:3000"
-IP="159.65.58.193:3000"
+IP="127.0.0.1:3000"
+#IP="159.65.58.193:3000"
 """
 historialReservas = [["Cheers Pizza","Calle 10 #36-12","15/12/2020","08:30 p.m.","Manuel Turizo"],
                     ["American Pizza","Carrera 56 #43-09","15/12/2020","08:30 p.m.","Gabriela Ortiz"],
@@ -26,6 +26,8 @@ lista2 = []
 lista3 = []
 
 lista4 = []
+
+lista5 = [] #Tiene los postulantes a mis reservas publicas
 
 hReservasActuales=[]
 historialReservas=[]
@@ -874,7 +876,7 @@ def profile():
 
 @app.route('/tinder', methods=['GET', 'POST'])
 def tinder():
-    global lista1, lista2
+    global lista1, lista2,  lista5
     ok=False
     #session["PK_IdDiner"]=1
     #lista1=[]
@@ -1028,7 +1030,62 @@ def tinder():
         except Exception as e:
             print("Erda", e)
         print(lista1)"""
-        return render_template("tinder.html",lista1=lista1, lista2=lista2)
+
+
+
+
+
+        #Lista 5, son todos los postulantes a mis reservas publicas
+
+        """
+        ["PK_idReservation":1,"FK_idDinerU":6,"reservationHour":"23:00","reservationDate":"2019-11-11",
+        "FK_idRestaurant":1,"status":1,"firstname":"Veronica","secondname":"Linda",
+        "firstLastname":"lo","secondLastname":"lo","igUser":"playboy_col","nameRest":"lo sabroso y lo buenisimo",
+        "igRest":"laura.mosquera7"]
+        """
+        #url="http://159.65.58.193:8000/api/getPostulatesByUserId/"+str(session["PK_IdDiner"])
+        url="http://159.65.58.193:8000/api/getPostulatesByUserId/"+str(10)
+        tmp=requests.get(url, params=None, timeout=5)
+        if tmp.status_code==200:
+            tmp=tmp.json()
+            print(200)
+            if tmp["Response"]==2:
+                print("Response 2")
+                reservation=tmp["Content"]
+                if len(reservation)!=0:
+                    lista5_dict=dict()
+                    for res in reservation:
+                        tmp=[]
+                        tmp.append(res["PK_idReservation"]); pk_res=res["PK_idReservation"]
+                        tmp.append(res["FK_idDinerU"])
+                        tmp.append(res["reservationHour"])
+                        tmp.append(res["reservationDate"])
+                        name=str(res["firstname"])+" "+res["secondname"]
+                        lastName=str(res["firstLastname"])+" "+res["secondLastname"]
+                        tmp.append(name)
+                        tmp.append(lastName)
+                        tmp.append(res["igUser"])
+                        tmp.append(res["nameRest"])
+                        tmp.append(res["igRest"])
+                        if pk_res in lista5_dict:
+                            arroz=lista5_dict[pk_res]
+                            arroz.append(tmp)
+                            lista5_dict[pk_res]=arroz
+                        else:
+                            lista5_dict[pk_res]=[tmp]
+                        
+                else:
+                    print("No tiene reservas publicas")
+            else:
+                flash("listarPostulantes response 1 API Laura", "error")
+        else:
+            flash("listarPostulantes error 1 API Laura", "error")
+        
+        #print(lista5_dict)
+        for key in lista5_dict:
+            lista5.append(lista5_dict[key])
+        
+        return render_template("tinder.html",lista1=lista1, lista2=lista2, lista5=lista5)
 
 
 
@@ -1107,39 +1164,55 @@ def botonMembresia():
 #
 @app.route('/listarPostulantes')
 def listarPostulantes():
-    #idReserva=
-    try:
-        url="http://159.65.58.193:8000/api/getPostulatesByReservationId/"+str(idReserva)
-        response=requests.get(url, params=None, timeout=5)
-        if response.status_code==200:
-            response=response.json()
-            #pri("res", response)
-            if response["Response"]==2:
-                data=response["Content"]
-                idUser=data[0]
-                status=data[1]
-                for user in data:
-                    cur=mySQL.connection.cursor()
-                    cur.execute('SELECT * FROM DinerUser WHERE FK_idUser = {0}'.format(idUser))
-                    usr=cur.fetchall()                   
-                    cur.close()
-                    if len(usr)!=0:
-                        usr=usr[0]
-                        if len(usr)!=0:
-                            session["PK_IdUser"]=usr[0]
-                            session["PK_IdDiner"]=usr[1]
-                            session["numDocument"]=usr[2]
-                            session["firstName"]=usr[3]
-                            session["secondName"]=usr[4]
-                            session["firstLastName"]=usr[5]
-                            session["secondLastName"]=usr[6]                                
-                            session["address"]=usr[7]
-                            session["telephone"]=usr[8]
-                            session["infoProfile"]=usr[10]    
-                            session["igUser"]=usr[11]
+    """
+    ["PK_idReservation":1,"FK_idDinerU":6,"reservationHour":"23:00","reservationDate":"2019-11-11",
+    "FK_idRestaurant":1,"status":1,"firstname":"Veronica","secondname":"Linda",
+    "firstLastname":"lo","secondLastname":"lo","igUser":"playboy_col","nameRest":"lo sabroso y lo buenisimo",
+    "igRest":"laura.mosquera7"]
+    """
+    #url="http://159.65.58.193:8000/api/getPostulatesByUserId/"+str(session["PK_IdDiner"])
+    url="http://159.65.58.193:8000/api/getPostulatesByUserId/"+str(10)
+    tmp=requests.get(url, params=None, timeout=5)
+    if tmp.status_code==200:
+        tmp=tmp.json()
+        print(200)
+        if tmp["Response"]==2:
+            print("Response 2")
+            reservation=tmp["Content"]
+            if len(reservation)!=0:
+                lista5_dict=dict()
+                for res in reservation:
+                    tmp=[]
+                    tmp.append(res["PK_idReservation"]); pk_res=res["PK_idReservation"]
+                    tmp.append(res["FK_idDinerU"])
+                    tmp.append(res["reservationHour"])
+                    tmp.append(res["reservationDate"])
+                    name=str(res["firstname"])+" "+res["secondname"]
+                    lastName=str(res["firstLastname"])+" "+res["secondLastname"]
+                    tmp.append(name)
+                    tmp.append(lastName)
+                    tmp.append(res["igUser"])
+                    tmp.append(res["nameRest"])
+                    tmp.append(res["igRest"])
+                    if pk_res in lista5_dict:
+                        arroz=lista5_dict[pk_res]
+                        arroz.append(tmp)
+                        lista5_dict[pk_res]=arroz
+                    else:
+                        lista5_dict[pk_res]=[tmp]
+                    
+            else:
+                print("No tiene reservas publicas")
+        else:
+            flash("listarPostulantes response 1 API Laura", "error")
+    else:
+        flash("listarPostulantes error 1 API Laura", "error")
+    
+    #print(lista5_dict)
+    for key in lista5_dict:
+        lista5.append(lista5_dict[key])
+    return jsonify(lista5)
 
-    except:
-        pass
 
 
 @app.route('/botonAceptarPersona')
@@ -1252,10 +1325,16 @@ def botonEliminarReserva():
         flash("botonEliminarReserva error API Laura 2", "error")
     return redirect(url_for('profile'))
 
-
-
-
-
+@app.route('/botonEditarReserva')
+def botonEditarReserva():
+    #http://159.65.58.193:8000/api/updateReservation/{idRes}
+    """
+    Esto me imagino que lo podes hacer en Front, solo es poner el id de la
+    reserva que se quiere editar
+    """
+    idReservation=10
+    url="http://159.65.58.193:8000/api/updateReservation/"+str(idReservation)
+    return redirect(url)
 
 #
 #**************************************************************************
