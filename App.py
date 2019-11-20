@@ -566,7 +566,7 @@ def Index():
         #pri("INDEX")
         #print(session)
         pass
-    return render_template('index.html')
+    return redirect(url_for('login'))
 
     
 @app.route('/deleteDinerUserById/<string:id>')
@@ -1082,7 +1082,7 @@ def tinder():
             flash("listarPostulantes error 1 API Laura", "error")
         
         #print(lista5_dict)
-
+        #flash(lista1,"success")
         return render_template("tinder.html",lista1=lista1, lista2=lista2, lista5=lista5)
 
 
