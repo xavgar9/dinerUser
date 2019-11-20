@@ -654,6 +654,10 @@ def login():
                     PK_IdUser=response["content"]["id"]
                     userName=response["content"]["userName"]
                     userType=response["content"]["userType"]
+                    if userType==2:
+                        return redirect('http://181.50.100.167:3000/?id='+str(session["PK_IdUser"]))
+                    elif userType==3:
+                        return redirect('http://181.50.100.167:4001/Principal/?id='+str(session["PK_IdUser"])+'?pass='+str(password)+'?ciudad=2')
                     #pri("Hola", response["content"])
                     try:
                         
@@ -709,10 +713,7 @@ def login():
                             #userType=3
                             if userType==1:
                                 next_page = url_for('profile')
-                            elif userType==2:
-                                return redirect('http://181.50.100.167:3000/?id='+str(session["PK_IdUser"]))
-                            else:
-                                return redirect('http://181.50.100.167:4001/Principal/?id='+str(session["PK_IdUser"])+'?pass='+str(password)+'?ciudad=2')
+                            
 
 
                                                     ########### Tinder ##########################################################
