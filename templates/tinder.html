@@ -504,7 +504,7 @@
             <div class="textoPanelEstado">
                 <p style="font-family:Roboto;color:white;font-size: 12px">
                     <i class="zoom-in icon"></i>
-                    <a onclick="$('.ui.modal.masInfoinsta{{elemento1[0]}}{{elemento1[1]}}').modal('show');">...Más info</a>
+                    <a onclick="$('.ui.modal.masInfoinsta{{elemento1[0]}}{{elemento1[1]}}').modal('show');">¿Aceptar? ó ¿Rechazar?</a>
                 </p>
             </div>
             <!--##################### Modal popup Info del perfil ###########################################################################-->
@@ -548,12 +548,46 @@
                         </div>
                     </div>
                     <div class="actions">
-                        <div onclick="$('.ui.mini.modal.confirmarBorrado{{elemento[5]}}').modal('show');" class="ui red approve button">¿Deseas CANCELAR la solicitud</div>
-                        <div class="ui green approve button">Aceptar</div>
+                        <div onclick="$('.ui.mini.modal.confirmarRechazado{{elemento1[0]}}{{elemento1[1]}}').modal('show');" class="ui red approve button">Rechazar Solicitud</div>
+                        <div onclick="$('.ui.mini.modal.confirmarAceptado{{elemento1[0]}}{{elemento1[1]}}').modal('show');" class="ui green approve button">Aceptar Solicitud</div>
+                        <div class="ui yellow approve button">Salir</div>
                     </div>
                 </div>
             </div>
-        
+            <div class="ui container">
+                <div class="ui mini modal confirmarAceptado{{elemento1[0]}}{{elemento1[1]}}">
+                    <i class="close icon"></i>
+                    <div class="header">Aceptar Solicitud</div>
+                    <div class="content">
+                        <p>¿Deseas ACEPTAR la solicitud de {{elemento1[4]}}?</p>
+                    </div>
+                    <div class="actions">
+                        <form action="/botonCancelarReserva" method="POST">
+                            <button class="ui green approve button" type="submit" name="delete" value="{{elemento[2]}}">
+                                    Si
+                                </button>
+                            <div class="ui red approve button">No</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="ui container">
+                <div class="ui mini modal confirmarRechazado{{elemento1[0]}}{{elemento1[1]}}">
+                    <i class="close icon"></i>
+                    <div class="header">Rechazar Solicitud</div>
+                    <div class="content">
+                        <p>¿Deseas RECHAZAR la solicitud de {{elemento1[4]}}?</p>
+                    </div>
+                    <div class="actions">
+                        <form action="/botonCancelarReserva" method="POST">
+                            <button class="ui green approve button" type="submit" name="delete" value="{{elemento[2]}}">
+                                    Si
+                                </button>
+                            <div class="ui red approve button">No</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
         {% endfor %} 
         {% endfor %} {% else %}
