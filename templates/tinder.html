@@ -349,13 +349,13 @@
                         </div>
                     </div>
                     <div class="actions">
-                        <div onclick="$('.ui.mini.modal.confirmarBorrado{{elemento[5]}}').modal('show');" class="ui red approve button">¿Deseas CANCELAR la solicitud con {{elemento[0]}}?</div>
+                        <div onclick="$('.ui.mini.modal.confirmarBorrado{{elemento[13]}}').modal('show');" class="ui red approve button">¿Deseas CANCELAR la solicitud con {{elemento[0]}}?</div>
                         <div class="ui green approve button">Aceptar</div>
                     </div>
                 </div>
             </div>
             <div class="ui container">
-                <div class="ui mini modal confirmarBorrado{{elemento[5]}}">
+                <div class="ui mini modal confirmarBorrado{{elemento[13]}}">
                     <i class="close icon"></i>
                     <div class="header">Cancelar Solicitud</div>
                     <div class="content">
@@ -363,7 +363,7 @@
                     </div>
                     <div class="actions">
                         <form action="/botonCancelarReserva" method="POST">
-                            <button class="ui green approve button" type="submit" name="delete" value="{{elemento[2]}}">
+                            <button class="ui green approve button" type="submit" name="delete" value="{{elemento[13]}}">
                                     Si
                                 </button>
                             <div class="ui red approve button">No</div>
@@ -504,7 +504,7 @@
             <div class="textoPanelEstado">
                 <p style="font-family:Roboto;color:white;font-size: 12px">
                     <i class="zoom-in icon"></i>
-                    <a onclick="$('.ui.modal.masInfoinsta{{elemento1[0]}}{{elemento1[1]}}').modal('show');">¿Aceptar? ó ¿Rechazar?</a>
+                    <a onclick="$('.ui.modal.masInfoinsta{{elemento1[0]}}{{elemento1[1]}}').modal('show');">...Más info</a>
                 </p>
             </div>
             <!--##################### Modal popup Info del perfil ###########################################################################-->
@@ -548,9 +548,9 @@
                         </div>
                     </div>
                     <div class="actions">
-                        <div onclick="$('.ui.mini.modal.confirmarRechazado{{elemento1[0]}}{{elemento1[1]}}').modal('show');" class="ui red approve button">Rechazar Solicitud</div>
-                        <div onclick="$('.ui.mini.modal.confirmarAceptado{{elemento1[0]}}{{elemento1[1]}}').modal('show');" class="ui green approve button">Aceptar Solicitud</div>
-                        <div class="ui yellow approve button">Salir</div>
+                        <!--<div onclick="$('.ui.mini.modal.confirmarRechazado{{elemento1[0]}}{{elemento1[1]}}').modal('show');" class="ui red approve button">Rechazar Solicitud</div>
+                        <div onclick="$('.ui.mini.modal.confirmarAceptado{{elemento1[0]}}{{elemento1[1]}}').modal('show');" class="ui green approve button">Aceptar Solicitud</div>-->
+                        <div class="ui green approve button">Aceptar</div>
                     </div>
                 </div>
             </div>

@@ -901,18 +901,21 @@ def tinder():
                     idReservation=res["PK_idReservation"]
                     idRestaurant=res["FK_idRestaurant"]
                     idCreator=res["FK_reservationCreator"]
-                    status=res["status"]
-                    date=res["reservationDate"]
-                    hour=res["reservationHour"]
+                    status="Aceptado"
+                    """
+                    status=int(res["status"])
                     if status==1:
                         status="Pendiente"
                     elif status==2:
-                        stauts="Aceptado"
+                        status="Aceptado"
                     else:
                         status="Rechazado"
+                    """
+                    date=res["reservationDate"]
+                    hour=res["reservationHour"]
                     usrName=None; usrLastName=None; UsrEmail=None; telephone=None; usrIg=None;
-                    resName=None; ResIg=None; resAddress=None; status=None;
-                    availableChairs=None; idReservation=None
+                    resName=None; ResIg=None; resAddress=None;
+                    availableChairs=None
                     try:
                         url="http://181.50.100.167:5000/getRestaurant/"+str(idRestaurant)
                         restaurant=requests.get(url, params=None, timeout=5)
@@ -1082,7 +1085,7 @@ def tinder():
             flash("listarPostulantes error 1 API Laura", "error")
         
         #print(lista5_dict)
-        #flash(lista2,"success")
+        flash(lista2,"success")
         return render_template("tinder.html",lista1=lista1, lista2=lista2, lista5=lista5)
 
 
@@ -1249,14 +1252,22 @@ def botonAceptarPersona():
 @app.route('/botonCancelarReserva', methods=["GET","POST"])
 def botonCancelarReserva():    
     if request.method == 'POST':
-        post_id = request.form.get('delete')
-        i=0
+        id_reserva = request.form.get('delete')
         """
         while i in range(len(lista2)):
             if lista2[i][2] == post_id:
                 lista2.pop(i)
             i+=1
         """
+        #id_si = str(request.form.get('si'))
+        # Me imagino que se puede traer de ahi...
+        url="http://159.65.58.193:8000/api/deleteReservationByReservationId/"+id_reserva
+        response=requests.post(url, params=None)
+        if response.status_code==200:
+            flash("Reserva eliminada correctamente", "success")
+        else:
+            flash("botonEliminarReserva error API Laura 2", "error")
+    
     return redirect(url_for('tinder'))
 
 
