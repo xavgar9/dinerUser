@@ -406,7 +406,7 @@
                 <div id="restaurante{{elemento[0][0]}}{{elemento[0][1]}}" class="restaurante{{elemento[0][0]}}{{elemento[0][1]}}"></div>
             </div>
             <div class="iconInstaMini1">
-                <div id="restaurante{{elemento[8]}}{{elemento[1]}}" class="restaurante{{elemento[8]}}{{elemento[1]}}"> </div>
+                <div id="nperfiles{{elemento[0][0]}}{{elemento[0][1]}}" class="perfiles{{elemento[0][0]}}{{elemento[0][1]}}"> </div>
             </div>
             <div class="textoPanelNom">
                 <p style="font-family:Roboto;color:white;font-size: 19px">
@@ -428,6 +428,45 @@
             </div>
             -->
         </div>
+        {% for elemento1 in elemento %}
+        <script>
+            (function($) {
+                $(window).on('load', function() {
+                    $.instagramFeed({
+                        'username': '{{elemento1[6]}}',
+                        'container': "#perfiles{{elemento1[0]}}{{elemento1[1]}}",
+                        'display_profile': true,
+                        'display_biography': false,
+                        'display_gallery': false,
+                        'callback': null,
+                        'styling': true,
+                        'items': 0,
+                        'items_per_row': 1,
+                        'margin': 1
+                    });
+                });
+            })(jQuery);
+        </script>
+        <div id="misSolicitudesPanel" class="misReservasPanel">
+            <div class="iconInstaMini">
+                <div id="nrestaurante{{elemento[0][0]}}{{elemento[0][1]}}" class="restaurante{{elemento[0][0]}}{{elemento[0][1]}}"></div>
+            </div>
+            <div class="iconInstaMini1">
+                <div id="perfiles{{elemento1[0]}}{{elemento1[1]}}" class="perfiles{{elemento1[0]}}{{elemento1[1]}}"> </div>
+            </div>
+            <div class="textoPanelNom">
+                <p style="font-family:Roboto;color:white;font-size: 19px">
+                    {{elemento1[4]}}
+                </p>
+            </div>
+            <div class="textoPanelFecha">
+                <p style="font-family:Roboto;color:white;font-size: 12px">
+                    <i class="instagram icon"></i><strong>Instagram:</strong> 
+                    <a href="https://www.instagram.com/{{lista1[0][4]}}" target="_blank">{{elemento1[6]}}</a>
+                </p>
+            </div>
+        </div>
+        {% endfor %} 
         {% endfor %} {% else %}
         <center>
             <p style="font-family:Roboto;color:white;font-size: 16px">Sin Reservas Publicas Actualmente</p>
